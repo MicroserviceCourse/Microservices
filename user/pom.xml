@@ -77,7 +77,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-openfeign-core</artifactId>
+		</dependency>
 	</dependencies>
+
 
 	<!-- ✅ Thêm BOM để xác định phiên bản Spring Cloud -->
 	<dependencyManagement>
@@ -86,6 +91,14 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>2023.0.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- ✅ Thêm dependency OpenFeign -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2023.0.1</version> <!-- phù hợp với Spring Boot 3.1.x -->
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
