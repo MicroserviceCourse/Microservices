@@ -1,4 +1,4 @@
-package org.example.authservice.service.impl;
+package org.example.authservice.service;
 
 import org.example.authservice.dto.AccountDTO;
 

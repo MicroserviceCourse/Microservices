@@ -6,14 +6,13 @@ import org.example.authservice.config.JwtService;
 import org.example.authservice.dto.*;
 import org.example.authservice.entity.Account;
 import org.example.authservice.exception.ExceptionResponse;
-import org.example.authservice.service.impl.AccountService;
+import org.example.authservice.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 

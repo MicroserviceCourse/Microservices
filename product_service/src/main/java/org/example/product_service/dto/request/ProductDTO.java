@@ -1,0 +1,18 @@
+package org.example.product_service.dto.request;
+
+import lombok.Data;
+
+
+import java.util.List;
+
+@Data
+public class ProductDTO {
+    private int id;
+    private String ten_san_pham;
+    private int gia;
+    private String moTa;
+    private int id_danh_muc;
+    private String mainImage;
+    private List<String>subImages;
+
+}

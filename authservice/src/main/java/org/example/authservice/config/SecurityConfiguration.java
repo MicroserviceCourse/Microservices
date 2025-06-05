@@ -1,6 +1,6 @@
 package org.example.authservice.config;
 
-import org.example.authservice.service.impl.AccountService;
+import org.example.authservice.service.AccountService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
