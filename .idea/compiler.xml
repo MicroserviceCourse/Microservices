@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="authservice" />
-        <module name="user" />
         <module name="product_service" />
       </profile>
       <profile name="Annotation profile for eureka-server" enabled="true">
@@ -26,12 +25,14 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="api-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="categories-service" target="23" />
+      <module name="user" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

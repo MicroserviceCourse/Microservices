@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Account implements UserDetails {
+public class Account  implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_account",nullable = false)
@@ -29,12 +29,7 @@ public class Account implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
-    public String getPassword() {
-        return "";
+        return List.of(() -> "ROLE_" + role.getRoleName());
     }
 
     @Override
@@ -44,23 +39,22 @@ public class Account implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
-
 
 }
