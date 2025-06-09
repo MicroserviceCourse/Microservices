@@ -28,9 +28,13 @@ public class Product {
     private String moTa;
     @Column(name = "main_image")
     private String mainImage;
-    @Basic
-    @Column(name = "id_danh_muc")
-    private int id_danh_muc;
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ProductImage>images=new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category>categories=new ArrayList<>();
 }

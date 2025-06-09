@@ -1,9 +1,11 @@
 package org.example.product_service.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.example.product_service.Repository.CategoryRepository;
 import org.example.product_service.Repository.ProductImageRepository;
 import org.example.product_service.Repository.ProductRepository;
 import org.example.product_service.dto.request.ProductDTO;
+import org.example.product_service.entity.Category;
 import org.example.product_service.entity.Product;
 import org.example.product_service.entity.ProductImage;
 import org.example.product_service.exception.ErrorHandler;
@@ -17,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +31,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductImageRepository productImageRepository;
     @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
     private GenericService genericService;
 
     @Override
@@ -34,7 +40,15 @@ public class ProductServiceImpl implements ProductService {
         try {
             Product productEntity = new Product();
             productEntity.setGia(product.getGia());
-            productEntity.setId_danh_muc(product.getId_danh_muc());
+            if(product.getId_danh_muc()!=null && !product.getId_danh_muc().isEmpty()) {
+                List<Category>categories=new ArrayList<>();
+                for (Integer idDanhMuc : product.getId_danh_muc()) {
+                    Category category=categoryRepository.findById(idDanhMuc)
+                            .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục với id: " + idDanhMuc));
+                    categories.add(category);
+                }
+                productEntity.setCategories(categories);
+            }
             productEntity.setMoTa(product.getMoTa());
             productEntity.setTen_san_pham(product.getTen_san_pham());
             if (mainImage != null && !mainImage.isEmpty()) {
@@ -76,7 +90,15 @@ public class ProductServiceImpl implements ProductService {
             Product productEntity = productRepository.findById(id)
                     .orElseThrow(() -> new ErrorHandler(HttpStatus.NOT_FOUND, "Không tìm thấy sản phẩm với id = " + id));
             productEntity.setGia(product.getGia());
-            productEntity.setId_danh_muc(product.getId_danh_muc());
+            if(product.getId_danh_muc()!=null && !product.getId_danh_muc().isEmpty()) {
+                List<Category>categories=new ArrayList<>();
+                for (Integer idDanhMuc : product.getId_danh_muc()) {
+                    Category category=categoryRepository.findById(idDanhMuc)
+                            .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục với id: " + idDanhMuc));
+                    categories.add(category);
+                }
+                productEntity.setCategories(categories);
+            }
             productEntity.setMoTa(product.getMoTa());
             productEntity.setTen_san_pham(product.getTen_san_pham());
             if (mainImage != null && !mainImage.isEmpty()) {
@@ -124,7 +146,13 @@ public class ProductServiceImpl implements ProductService {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(product.getId());
         productDTO.setGia(product.getGia());
-        productDTO.setId_danh_muc(product.getId_danh_muc());
+        if(product.getCategories()!=null){
+            List<Integer>CateList=product.getCategories()
+                    .stream()
+                    .map(Category::getId)
+                    .collect(Collectors.toList());
+                productDTO.setId_danh_muc(CateList);
+        }
         productDTO.setMoTa(product.getMoTa());
         productDTO.setTen_san_pham(product.getTen_san_pham());
         productDTO.setMainImage("/api"+product.getMainImage());
