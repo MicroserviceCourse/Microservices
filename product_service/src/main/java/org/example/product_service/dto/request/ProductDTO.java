@@ -11,7 +11,7 @@ public class ProductDTO {
     private String ten_san_pham;
     private int gia;
     private String moTa;
-    private int id_danh_muc;
+    private List<Integer> id_danh_muc;
     private String mainImage;
     private List<String>subImages;
 
