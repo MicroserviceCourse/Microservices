@@ -155,14 +155,14 @@ public class ProductServiceImpl implements ProductService {
         }
         productDTO.setMoTa(product.getMoTa());
         productDTO.setTen_san_pham(product.getTen_san_pham());
-        productDTO.setMainImage("/api"+product.getMainImage());
+        productDTO.setHinhChing("/api"+product.getMainImage());
         List<String> subImagePaths = product.getImages()
                 .stream()
                 .map(image -> "/api" + image.getImageUrl())
                 .toList();
 
 
-        productDTO.setSubImages(subImagePaths);
+        productDTO.setHinhAnhPhu(subImagePaths);
         return productDTO;
     }
 

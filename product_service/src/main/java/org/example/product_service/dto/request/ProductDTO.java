@@ -12,7 +12,7 @@ public class ProductDTO {
     private int gia;
     private String moTa;
     private List<Integer> id_danh_muc;
-    private String mainImage;
-    private List<String>subImages;
+    private String HinhChing;
+    private List<String>HinhAnhPhu;
 
 }
