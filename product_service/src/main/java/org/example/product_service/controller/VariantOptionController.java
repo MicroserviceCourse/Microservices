@@ -33,7 +33,15 @@ public class VariantOptionController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
         }
     }
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?>delete(@PathVariable int id) {
+        try {
+            variantOptionService.deleteVariantOptionById(id);
+            return ResponseEntity.ok(new RequestResponse("Variant Option deleted successfully"));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
+        }
+    }
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody VariantOptionDTO variantOptionDTO) {
         try {

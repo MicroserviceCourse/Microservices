@@ -184,4 +184,10 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException("Không thể xóa sản phẩm");
         }
     }
+
+    @Override
+    public Product getProductById(int id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+    }
 }

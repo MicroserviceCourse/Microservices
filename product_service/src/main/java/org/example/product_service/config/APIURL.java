@@ -5,8 +5,13 @@ public class APIURL {
             "/api/category/all",
             "/api/product/all",
             "/api/product-variant/all",
+            "/api/product-variant/{id}",
             "/api/tag/all",
+            "/api/product/{id}",
+            "/api/category/{id}",
             "/api/variant/all",
+            "/api/variant/{id}",
+            "/api/tag/{id}",
     };
     public static final String[] URL_ADMIN_POST = {
             "/api/category/create",
@@ -29,5 +34,6 @@ public class APIURL {
             "/api/product-variant/delete/{id}",
             "/api/tag/delete/{id}",
             "/api/variant/delete/{id}",
+            "/api/product-variant/delete/{id}",
     };
 }

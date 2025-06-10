@@ -80,7 +80,17 @@ public class ProductController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(image);
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<?>findById(@PathVariable("id") int id){
+        try {
+            Product product=productService.getProductById(id);
+            ProductDTO productDTO=productService.todo(product);
+            return ResponseEntity.ok(new RequestResponse(productDTO,"lấy thông tin product"));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ExceptionResponse("Lỗi khi lấy  san pham:" + e.getMessage()));
+        }
+    }
     @GetMapping("/all")
     public ResponseEntity<?>getAll(@RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "10") int size){
