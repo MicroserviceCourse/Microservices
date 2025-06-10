@@ -46,9 +46,9 @@ public class ProductController {
         }
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@ModelAttribute ProductDTO productDTO, @PathVariable("id") int id, @RequestParam(value = "main", required = false) MultipartFile file, @RequestParam("subImage") List<MultipartFile> subImage) {
+    public ResponseEntity<?> update(@ModelAttribute ProductDTO productDTO, @PathVariable("id") int id, @RequestParam(value = "main", required = false) MultipartFile main, @RequestParam(value = "subImage",required = false) List<MultipartFile> subImage) {
         try {
-            productService.updateProduct(id,productDTO, file, subImage);
+            productService.updateProduct(id,productDTO, main, subImage);
             return ResponseEntity.ok(new RequestResponse("Product updated successfully"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
