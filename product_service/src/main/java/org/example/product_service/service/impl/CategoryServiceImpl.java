@@ -65,4 +65,16 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findById(id)
                 .orElseThrow(()->new ErrorHandler(HttpStatus.NOT_FOUND,"Không tìm thấy danh mục"));
     }
+
+    @Override
+    public void deleteCategoryById(int id) {
+        try {
+            if(!categoryRepository.existsById(id)) {
+                throw new Exception("Không tìm thấy danh mục sản phẩm với id:" + id);
+            }
+            categoryRepository.deleteById(id);
+        }catch (Exception e) {
+            throw new RuntimeException("Không thể xóa danh mục sản phẩm");
+        }
+    }
 }

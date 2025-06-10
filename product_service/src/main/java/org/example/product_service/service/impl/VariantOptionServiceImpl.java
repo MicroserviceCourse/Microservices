@@ -67,4 +67,16 @@ public class VariantOptionServiceImpl implements VariantOptionService {
         variantOptionDTO.setType(variantOption.getType());
         return variantOptionDTO;
     }
+
+    @Override
+    public void deleteVariantOptionById(int id) {
+        try {
+            if (!varionOptionRepository.existsById(id)) {
+                throw new RuntimeException("không thể xóa variant option với id:" + id);
+            }
+            varionOptionRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Không thể xóa variant option");
+        }
+    }
 }

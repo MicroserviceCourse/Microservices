@@ -1,5 +1,6 @@
 package org.example.product_service.controller;
 
+
 import lombok.RequiredArgsConstructor;
 import org.example.product_service.dto.RequestResponse;
 import org.example.product_service.dto.request.CategoryDTO;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/category")
+
 @RequiredArgsConstructor
 public class CategoryController {
     @Autowired
@@ -42,6 +44,15 @@ public class CategoryController {
             return ResponseEntity.status(e.getStatus()).body(new RequestResponse(e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
+        }
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?>deleteById(@PathVariable int id) {
+        try {
+                categoryService.deleteCategoryById(id);
+                return ResponseEntity.ok(new RequestResponse("Xóa danh mục sản phẩm thành công"));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse("Lỗi khi xóa danh mục: "+e.getMessage()));
         }
     }
 

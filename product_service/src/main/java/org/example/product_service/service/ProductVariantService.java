@@ -10,4 +10,5 @@ public interface ProductVariantService {
     Page<ProductVariant>getAll(int page, int size);
     ProductVariant findById(int id);
     ProductVariantDTO todo(ProductVariant productVariant);
+    void deleteProductVariantById(int id);
 }

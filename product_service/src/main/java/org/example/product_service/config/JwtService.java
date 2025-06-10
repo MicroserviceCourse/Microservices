@@ -1,14 +1,15 @@
-package org.example.authservice.config;
+package org.example.product_service.config;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.Jwts;
+
 import java.security.Key;
-import io.jsonwebtoken.io.Decoders;
 import java.util.Date;
-import io.jsonwebtoken.security.Keys;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +37,11 @@ public class JwtService {
     }
 
     public String extractUsername(String token) {
-        return extractAllClaims(token).getSubject();
+        try {
+            return extractAllClaims(token).getSubject();
+        }catch (Exception e) {
+            return null;
+        }
     }
 
     public Date extractExpiration(String token) {

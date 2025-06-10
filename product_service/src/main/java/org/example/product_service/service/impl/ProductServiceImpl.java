@@ -165,4 +165,16 @@ public class ProductServiceImpl implements ProductService {
         productDTO.setSubImages(subImagePaths);
         return productDTO;
     }
+
+    @Override
+    public void deleteProductById(int id) {
+        try {
+            if(!productRepository.existsById(id)) {
+                throw new RuntimeException("Không tìm thấy sản phẩm với id :"+id);
+            }
+            productRepository.deleteById(id);
+        }catch (Exception e){
+            throw new RuntimeException("Không thể xóa sản phẩm");
+        }
+    }
 }

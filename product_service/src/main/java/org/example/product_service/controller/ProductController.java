@@ -36,6 +36,15 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
         }
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?>deleteById(@PathVariable("id")int id){
+        try {
+            productService.deleteProductById(id);
+            return ResponseEntity.ok(new RequestResponse("Xóa sản phẩm thành công"));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RequestResponse("Lỗi khi xóa sản phẩm :"+e.getMessage()));
+        }
+    }
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@ModelAttribute ProductDTO productDTO, @PathVariable("id") int id, @RequestParam(value = "main", required = false) MultipartFile file, @RequestParam("subImage") List<MultipartFile> subImage) {
         try {
