@@ -34,7 +34,8 @@ public class ProductServiceImpl implements ProductService {
     private CategoryRepository categoryRepository;
     @Autowired
     private GenericService genericService;
-
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
     @Override
     public Product createProduct(ProductDTO product, MultipartFile mainImage, List<MultipartFile> subImages) {
         try {
@@ -77,7 +78,13 @@ public class ProductServiceImpl implements ProductService {
                     }
                 }
             }
-
+            String payload = String.format(
+                    "{\"id\":%d,\"ten_san_pham\":\"%s\",\"gia\":%d}",
+                    productEntity.getId(),
+                    productEntity.getTen_san_pham(),
+                    productEntity.getGia()
+            );
+            kafkaProducerService.sendProductCreatedMessage(payload);
             return productEntity;
         } catch (Exception e) {
             throw new RuntimeException("Không thể thêm sản phẩm");
