@@ -46,9 +46,9 @@ public class ProductController {
         }
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@ModelAttribute ProductDTO productDTO, @PathVariable("id") int id, @RequestParam(value = "main", required = false) MultipartFile file, @RequestParam("subImage") List<MultipartFile> subImage) {
+    public ResponseEntity<?> update(@ModelAttribute ProductDTO productDTO, @PathVariable("id") int id, @RequestParam(value = "main", required = false) MultipartFile main, @RequestParam(value = "subImage",required = false) List<MultipartFile> subImage) {
         try {
-            productService.updateProduct(id,productDTO, file, subImage);
+            productService.updateProduct(id,productDTO, main, subImage);
             return ResponseEntity.ok(new RequestResponse("Product updated successfully"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
@@ -80,7 +80,17 @@ public class ProductController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(image);
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<?>findById(@PathVariable("id") int id){
+        try {
+            Product product=productService.getProductById(id);
+            ProductDTO productDTO=productService.todo(product);
+            return ResponseEntity.ok(new RequestResponse(productDTO,"lấy thông tin product"));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ExceptionResponse("Lỗi khi lấy  san pham:" + e.getMessage()));
+        }
+    }
     @GetMapping("/all")
     public ResponseEntity<?>getAll(@RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "10") int size){

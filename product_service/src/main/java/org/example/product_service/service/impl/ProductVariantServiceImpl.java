@@ -62,7 +62,7 @@ public class ProductVariantServiceImpl implements ProductVariantService {
                 ProductVariant productVariant1 = productVariant.get();
                 productVariant1.setSku(productVariantDTO.getSku());
                 productVariant1.setGia(productVariantDTO.getGia());
-                Product product = productRepository.findById(productVariant1.getId())
+                Product product = productRepository.findById(productVariantDTO.getIdProduct())
                         .orElseThrow(() -> new RuntimeException("Product not found"));
                 productVariant1.setProduct(product);
                 if (productVariantDTO.getIdOptions() != null && !productVariantDTO.getIdOptions().isEmpty()) {
