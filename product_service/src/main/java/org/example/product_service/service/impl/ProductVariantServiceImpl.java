@@ -113,4 +113,16 @@ public class ProductVariantServiceImpl implements ProductVariantService {
         }
         return productVariantDTO;
     }
+
+    @Override
+    public void deleteProductVariantById(int id) {
+        try {
+            if(!productVariantRepository.existsById(id)) {
+                throw new Exception("Không tìm thấy product variant với id:"+id);
+            }
+            productVariantRepository.deleteById(id);
+        }catch (Exception e) {
+            throw new RuntimeException("không thể xóa product variant");
+        }
+    }
 }

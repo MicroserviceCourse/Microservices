@@ -46,6 +46,16 @@ public class ProductVariantController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        try {
+            productVariantService.deleteProductVariantById(id);
+            return ResponseEntity.ok(new RequestResponse("Product Variant xóa thành công"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Lỗi khi xóa product variant:" + e.getMessage()));
+        }
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "10") int size) {

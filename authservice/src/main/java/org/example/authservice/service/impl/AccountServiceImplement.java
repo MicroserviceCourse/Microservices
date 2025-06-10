@@ -14,7 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+
 @Service
 public class AccountServiceImplement implements AccountService {
     @Autowired
@@ -28,18 +30,32 @@ public class AccountServiceImplement implements AccountService {
     @Override
     public void save(AccountDTO account) {
         try {
-            Account account1=new Account();
+            Account account1 = new Account();
             account1.setEmail(account.getEmail());
             account1.setPassword(passwordEncoder.encode(account.getPassword()));
-            Role role=roleRepository.findById(account.getIdRole())
+            Role role = roleRepository.findById(account.getIdRole())
                     .orElseThrow(() -> new ErrorHandler(HttpStatus.BAD_REQUEST, "Role not found"));
             account1.setRole(role);
             accountRepository.save(account1);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public Account findByEmail(String email) {
+        Optional<Account> account = accountRepository.findByEmail(email);
+        if (account.isPresent()) {
+            return account.get();
+        } else {
+            throw new ErrorHandler(HttpStatus.NOT_FOUND, "Account not found");
+        }
+    }
+
+    @Override
+    public String getRolesForUser(Account account) {
+        return account.getRole().getRoleName();
+    }
 
 
     @Override

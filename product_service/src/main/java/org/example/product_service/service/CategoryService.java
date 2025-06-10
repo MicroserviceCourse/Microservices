@@ -10,4 +10,5 @@ public interface CategoryService {
     Page<Category>findAll(int page, int size);
     CategoryDTO todo(Category category);
     Category findById(int id);
+    void deleteCategoryById(int id);
 }

@@ -12,4 +12,5 @@ public interface ProductService {
     Product updateProduct(int id, ProductDTO product, MultipartFile mainImage, List<MultipartFile>subImages);
     Page<Product>getAll(int page, int size);
     ProductDTO todo(Product product);
+    void deleteProductById(int id);
 }

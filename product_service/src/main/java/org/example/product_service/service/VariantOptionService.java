@@ -10,4 +10,5 @@ public interface VariantOptionService {
     Page<VariantOption> findAll(int page, int size);
     VariantOption findById(int id);
     VariantOptionDTO todo(VariantOption variantOption);
+    void deleteVariantOptionById(int id);
 }
