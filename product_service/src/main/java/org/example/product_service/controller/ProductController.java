@@ -27,9 +27,9 @@ public class ProductController {
     private  ProductService productService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@ModelAttribute ProductDTO productDTO, @RequestParam(value = "main", required = false) MultipartFile file, @RequestParam("subImage") List<MultipartFile> subImage) {
+    public ResponseEntity<?> create(@ModelAttribute ProductDTO productDTO, @RequestParam(value = "main", required = false) MultipartFile main, @RequestParam(value = "subImage",required = false) List<MultipartFile> subImage) {
         try {
-            productService.createProduct(productDTO, file, subImage);
+            productService.createProduct(productDTO, main, subImage);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new RequestResponse("Product created successfully"));
         } catch (Exception e) {
