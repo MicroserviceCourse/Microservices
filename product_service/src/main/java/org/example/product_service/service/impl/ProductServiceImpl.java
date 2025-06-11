@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.product_service.Repository.CategoryRepository;
 import org.example.product_service.Repository.ProductImageRepository;
 import org.example.product_service.Repository.ProductRepository;
+import org.example.product_service.client.FileServiceClient;
 import org.example.product_service.dto.request.ProductDTO;
 import org.example.product_service.entity.Category;
 import org.example.product_service.entity.Product;
@@ -36,6 +37,9 @@ public class ProductServiceImpl implements ProductService {
     private GenericService genericService;
     @Autowired
     private KafkaProducerService kafkaProducerService;
+    @Autowired
+    private FileServiceClient fileServiceClient;
+
     @Override
     public Product createProduct(ProductDTO product, MultipartFile mainImage, List<MultipartFile> subImages) {
         try {
@@ -54,9 +58,9 @@ public class ProductServiceImpl implements ProductService {
             productEntity.setTen_san_pham(product.getTen_san_pham());
             if (mainImage != null && !mainImage.isEmpty()) {
                 try {
-                    String filePath = genericService.saveFile(mainImage, "product/main/");
+                    String filePath = fileServiceClient.uploadFile(mainImage, "product/main/");
                     productEntity.setMainImage(filePath);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, "Lỗi khi lưu hình ảnh: " + e.getMessage());
                 }
             }
@@ -65,14 +69,14 @@ public class ProductServiceImpl implements ProductService {
                 for (MultipartFile subImage : subImages) {
                     if (!subImage.isEmpty()) {
                         try {
-                            String subImagePath = genericService.saveFile(subImage, "product/sub/");
+                            String subImagePath = fileServiceClient.uploadFile(subImage, "product/sub/");
 
                             ProductImage productImage = new ProductImage();
                             productImage.setProduct(productEntity); // Gán FK
                             productImage.setImageUrl(subImagePath);
 
                             productImageRepository.save(productImage);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, "Lỗi khi lưu ảnh phụ: " + e.getMessage());
                         }
                     }
