@@ -1,4 +1,4 @@
-package org.example.product_service.service.impl;
+package org.example.product_service.service.kafka.Producer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
