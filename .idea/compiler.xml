@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="File_Service" />
         <module name="authservice" />
         <module name="product_service" />
       </profile>
@@ -29,7 +30,6 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="api-gateway" />
-        <module name="File_Service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
