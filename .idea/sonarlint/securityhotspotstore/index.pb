@@ -37,8 +37,6 @@ Pauthservice/src/main/java/org/example/authservice/controller/UserController.jav
 ^product_service/src/main/java/org/example/product_service/service/impl/ProductServiceImpl.java,a\f\af2a6dcd95e1b4b406b6acb0204e5c1698437983
 ‹
 [product_service/src/main/java/org/example/product_service/controller/ProductController.java,6\5\65eddd312725a0e607a27ddda0fae4a223b62da1
-€
-Pauthservice/src/main/java/org/example/authservice/service/impl/EmailService.java,4\1\41b5deb49f93cf17c5a1a612d1e5538b33de3c5f
 {
 Kauthservice/src/main/java/org/example/authservice/service/EmailService.java,0\4\04b07d9e2380c53e2b409acf55bae6724f71fc7b
 ‰
@@ -47,8 +45,6 @@ Yauthservice/src/main/java/org/example/authservice/service/impl/EmailServiceImpl
 Xauthservice/src/main/java/org/example/authservice/service/impl/UserServiceImplement.java,b\0\b06788484a6249b61a5194706a156d7ed92a91ee
 x
 Hauthservice/src/main/java/org/example/authservice/dto/TokenWithRole.java,6\5\65de50a4fca0e846c55439f2f7c94d6a7b200b00
-~
-Nauthservice/src/main/java/org/example/authservice/dto/request/CodeRequest.java,2\a\2ae8d294d65779abef6accf814b841c094143e74
 }
 Mauthservice/src/main/java/org/example/authservice/dto/request/AccountDTO.java,8\d\8dbbaff81adf08a939d6cf3dc83b32733cf5387b
 @

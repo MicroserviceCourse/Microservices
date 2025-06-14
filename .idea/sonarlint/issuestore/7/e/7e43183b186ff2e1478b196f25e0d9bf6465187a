@@ -1,8 +1,6 @@
 
 ”	java:S117›"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼ŞàÀ8´ÊÔéö2J$5591f8ea-3a18-4f04-8c7e-1037796b29dd
 ”	java:S117·"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ãƒ¾ş8´ÊÔéö2J$c55ab02c-e1b5-481b-8f9b-c97196f70d4b
-r
-java:S3655/"PCall "account1.isPresent()" or "!account1.isEmpty()" before accessing the value.(¦½ğÇÿÿÿÿÿ8í³Öéö2
 	java:S112-"FDefine and throw a dedicated exception instead of using a generic one.(ÎÎÿøÿÿÿÿ8¶ÊÔéö2J$ed2fd124-ce35-49d4-946a-804e4048b497
 	java:S112O"FDefine and throw a dedicated exception instead of using a generic one.(úœÖÒûÿÿÿÿ8¶ÊÔéö2J$4f51dd89-9ca7-42ac-bf18-4e740b3544ec
 ˆ	java:S112U"FDefine and throw a dedicated exception instead of using a generic one.(Æª»Í8¶ÊÔéö2J$7a91e628-88b2-4c99-b7de-201ef8388d2a
