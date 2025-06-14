@@ -1,7 +1,4 @@
 
-ç	java:S116"RRename this field "JWT_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç˛ÚÈJ$5cda14c5-abf9-4fd8-92bf-d5aaba39ad23
-ó	java:S116"\Rename this field "MINUTE_EXPIRATION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(∂œ®îJ$726b25d9-4f1d-4f88-8c99-dbc7c3bc10d9
-ì	java:S116"YRename this field "JWT_EXPIRATION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(∞Ì¢J$237bb003-f803-4118-a29a-5198cefeecb7
 ]
 java:S1170"!Make this final field static too.(ç˛ÚÈJ$3010f370-42c0-43ea-a592-ee0400182745
 ]

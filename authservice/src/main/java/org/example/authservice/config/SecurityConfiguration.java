@@ -1,6 +1,7 @@
 package org.example.authservice.config;
 
 import org.example.authservice.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -42,6 +43,9 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         this.jwtFilter = jwtFilter;
     }
 
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -53,11 +57,17 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                                 .requestMatchers(HttpMethod.POST, APIURL.URL_ANONYMOUS_POST).permitAll()
                                 .requestMatchers(HttpMethod.GET, APIURL.URL_ANONYMOUS_GET).permitAll()
                                 .requestMatchers(HttpMethod.POST, APIURL.URL_USER_POST).permitAll()
+                                .requestMatchers(HttpMethod.GET, APIURL.URL_USER_GET).permitAll()
                                 .requestMatchers(HttpMethod.PUT, APIURL.URL_USER_PUT).hasRole("USER")
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.oauth2Login(oauth2 -> oauth2
+                .successHandler(oAuth2LoginSuccessHandler)
+                .failureUrl("/auth/login?error=true")
+        );
 
         return http.build();
     }

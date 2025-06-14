@@ -1,22 +1,22 @@
 
-”	java:S117›"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼ŞàÀ8´ÊÔéö2J$5591f8ea-3a18-4f04-8c7e-1037796b29dd
-”	java:S117·"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ãƒ¾ş8´ÊÔéö2J$c55ab02c-e1b5-481b-8f9b-c97196f70d4b
-	java:S112-"FDefine and throw a dedicated exception instead of using a generic one.(ÎÎÿøÿÿÿÿ8¶ÊÔéö2J$ed2fd124-ce35-49d4-946a-804e4048b497
-	java:S112O"FDefine and throw a dedicated exception instead of using a generic one.(úœÖÒûÿÿÿÿ8¶ÊÔéö2J$4f51dd89-9ca7-42ac-bf18-4e740b3544ec
-ˆ	java:S112U"FDefine and throw a dedicated exception instead of using a generic one.(Æª»Í8¶ÊÔéö2J$7a91e628-88b2-4c99-b7de-201ef8388d2a
-ˆ	java:S112Y"FDefine and throw a dedicated exception instead of using a generic one.(¯É‘Ê8¶ÊÔéö2J$6c8d51cb-f1cc-4a05-83d6-b1fb565b7174
-	java:S112™"FDefine and throw a dedicated exception instead of using a generic one.(ŒÌâçúÿÿÿÿ8¶ÊÔéö2J$394b8855-15ca-46e8-85ba-ceb1e78c1874
-	java:S112¡"FDefine and throw a dedicated exception instead of using a generic one.(¹êìõıÿÿÿÿ8¶ÊÔéö2J$0afb52c6-8ccf-4f29-8020-5e1b146660fc
-‰	java:S112»"FDefine and throw a dedicated exception instead of using a generic one.(õšü‰8¶ÊÔéö2J$0d05ff98-9d9e-404a-9742-afc68dbe62cf
-‰	java:S112¿"FDefine and throw a dedicated exception instead of using a generic one.(¹ı“æ8¶ÊÔéö2J$fe359a39-03bf-4ecb-8093-736f6b5f2b42
-	java:S112Ä"FDefine and throw a dedicated exception instead of using a generic one.(óÄÃşÿÿÿÿ8¶ÊÔéö2J$732949fb-e848-4b46-91fa-9143bd216185
-‰	java:S112Ì"FDefine and throw a dedicated exception instead of using a generic one.(ÇÒò©8¶ÊÔéö2J$f6c15b28-3750-4d01-b2c1-6a866af12ae8
+”	java:S117›"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼ŞàÀ8Şµïö2J$4fb3c681-1f46-4e07-a098-07a9e0882b31
+”	java:S117·"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ãƒ¾ş8ŸŞµïö2J$6458cc76-d861-4223-801e-fefed8b13c53
+	java:S112-"FDefine and throw a dedicated exception instead of using a generic one.(ÎÎÿøÿÿÿÿ8¡Şµïö2J$2fabc017-8174-4aa4-85bb-da94bd3aa969
+	java:S112O"FDefine and throw a dedicated exception instead of using a generic one.(úœÖÒûÿÿÿÿ8¡Şµïö2J$b8b935ad-8164-4d47-8475-4fdc93a207d6
+ˆ	java:S112U"FDefine and throw a dedicated exception instead of using a generic one.(Æª»Í8¡Şµïö2J$f453e87b-46f0-46f5-aee1-3def7e46f853
+ˆ	java:S112Y"FDefine and throw a dedicated exception instead of using a generic one.(¯É‘Ê8¡Şµïö2J$d140c668-83f5-4998-a050-00cb0be1bc74
+	java:S112™"FDefine and throw a dedicated exception instead of using a generic one.(ŒÌâçúÿÿÿÿ8¢Şµïö2J$27ad8d8d-4135-478e-939b-e786f7c57190
+	java:S112¡"FDefine and throw a dedicated exception instead of using a generic one.(¹êìõıÿÿÿÿ8¢Şµïö2J$fcc96004-8333-4989-9037-84184fa1a987
+‰	java:S112»"FDefine and throw a dedicated exception instead of using a generic one.(õšü‰8¢Şµïö2J$f6363e38-8520-4d10-bc20-99fb80389bdc
+‰	java:S112¿"FDefine and throw a dedicated exception instead of using a generic one.(¹ı“æ8¢Şµïö2J$a4690792-cea6-4b67-90bd-7d8d916fc6bc
+	java:S112Ä"FDefine and throw a dedicated exception instead of using a generic one.(óÄÃşÿÿÿÿ8¢Şµïö2J$47b22b8b-7efc-482d-8e79-26909d503f33
+‰	java:S112Ì"FDefine and throw a dedicated exception instead of using a generic one.(ÇÒò©8¢Şµïö2J$5230b36f-ae85-4c1b-bae0-15bda5e506cb
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¸ÊÔéö2J$7623c453-8fa9-471c-ba25-d9753a702f74
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¦Şµïö2J$cb50f8ef-294a-4ca8-8c36-7073e211de2f
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¸ÊÔéö2J$a87498b0-a7cc-4945-8f82-763b8ef39f03
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8§Şµïö2J$f746359a-5cb0-47fa-889a-184a30db6367
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¸ÊÔéö2J$6ef9a623-f6bf-40ac-a2bf-08a69e9d0ec3
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8§Şµïö2J$68f01be5-b998-4e82-bab3-710478efe60e
 …
-java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞ8¸ÊÔéö2J$760d9df9-b830-4410-aa9e-213f536e5af1
-~	java:S125e"<This block of commented-out lines of code should be removed.(²û»Ú8ÂÊÔéö2J$b9b7e952-6f29-4ba1-9f59-c6cc06ab843e
+java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞ8§Şµïö2J$118b27a1-acff-479d-ad4f-26035e98540b
+~	java:S125e"<This block of commented-out lines of code should be removed.(²û»Ú8¹Şµïö2J$4ae20601-5271-4746-ba85-4c9a9aab60cf

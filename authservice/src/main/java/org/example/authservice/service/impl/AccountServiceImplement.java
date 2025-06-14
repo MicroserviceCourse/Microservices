@@ -44,27 +44,27 @@ public class AccountServiceImplement implements AccountService {
             if (account1.isPresent() && account1.get().is_Active()) {
                 throw new RuntimeException("Email đã tồn tại");
             }
-            accountRepository.deleteById(account1.get().getId());
-            genericService genericService = new genericService();
-            genericService.validatePassword(loginDTO.getPassword());
+                accountRepository.deleteById(account1.get().getId());
+                genericService genericService = new genericService();
+                genericService.validatePassword(loginDTO.getPassword());
 
-            int code = emailService.generateCode();
+                int code = emailService.generateCode();
 
-            emailService.Sendmail("cunnconn01@gmail.com", loginDTO.getEmail(),
-                    "Mã xác thực tài khoản của bạn là: " + code, "XÁC MINH TÀI KHOẢN");
+                emailService.Sendmail("cunnconn01@gmail.com", loginDTO.getEmail(),
+                        "Mã xác thực tài khoản của bạn là: " + code, "XÁC MINH TÀI KHOẢN");
 
-            LocalDateTime now = LocalDateTime.now();
-            Role role = roleRepository.findByRoleName(Role.RoleUser.USER);
+                LocalDateTime now = LocalDateTime.now();
+                Role role = roleRepository.findByRoleName(Role.RoleUser.USER);
 
-
-            Account account = new Account();
-            account.setRole(role);
-            account.setEmail(loginDTO.getEmail());
-            account.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
-            account.setAuthCode(String.valueOf(code));
-            account.setExpirationTimeRegistry(now);
-            account.set_Active(false);
-            accountRepository.save(account);
+                Account account = new Account();
+                account.setRole(role);
+                account.setEmail(loginDTO.getEmail());
+                account.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
+                account.setAuthCode(String.valueOf(code));
+                account.setExpirationTimeRegistry(now);
+                account.set_Active(false);
+                account.setProvider(Account.Provider.LOCAL);
+                accountRepository.save(account);
         } catch (Exception e) {
             throw new ErrorHandler(HttpStatus.BAD_REQUEST, e.getMessage());
         }

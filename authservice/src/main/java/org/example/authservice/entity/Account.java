@@ -30,6 +30,8 @@ public class Account  implements UserDetails{
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    private Provider provider;
+
     @OneToOne
     private User user;
 
@@ -75,4 +77,7 @@ public class Account  implements UserDetails{
         return true;
     }
 
+    public enum Provider {
+        LOCAL, GOOGLE
+    }
 }
