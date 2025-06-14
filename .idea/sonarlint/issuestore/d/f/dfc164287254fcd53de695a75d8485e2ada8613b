@@ -1,0 +1,25 @@
+
+]
+java:S1170"!Make this final field static too.(şòéJ$3010f370-42c0-43ea-a592-ee0400182745
+]
+java:S1170"!Make this final field static too.(¶Ï¨”J$cb875fab-aa26-4fb6-a47b-00fcff070397
+r
+java:S1874"1Remove this use of "setClaims"; it is deprecated.(æõíûúÿÿÿÿJ$5b5bce34-cebf-489d-966a-380b25488b5e
+s
+java:S1874 "2Remove this use of "setSubject"; it is deprecated.(¥¥ıÿÿÿÿJ$53420cef-cc70-47be-b681-5615ced07488
+o
+java:S1874!"3Remove this use of "setIssuedAt"; it is deprecated.(øÔ÷òJ$dae0e7e7-71f5-495c-b02d-d2c02f4a6f27
+q
+java:S1874""5Remove this use of "setExpiration"; it is deprecated.(Ø”ØóJ$f697009b-3830-481b-8df4-8a7e17f65fb6
+k
+java:S1874#"0Remove this use of "signWith"; it is deprecated.(ñ¥SJ$5b9d8e25-883e-4a57-9a2f-1b13b66a5c43
+u
+java:S1874#":Remove this use of "SignatureAlgorithm"; it is deprecated.(ñ¥SJ$81227bab-b99d-43e6-bdf8-e4a8248bf9ec
+u
+java:S1874#":Remove this use of "SignatureAlgorithm"; it is deprecated.(ñ¥SJ$1556f487-2ec5-40e9-b610-1facc867fe60
+q
+java:S18746"5Remove this use of "setSigningKey"; it is deprecated.(Ô™ğ‡J$9f962f3c-f1ca-40ee-aa56-2ecdf0bddee7
+w
+java:S18748"6Remove this use of "parseClaimsJws"; it is deprecated.(ëÙ–ºıÿÿÿÿJ$83919dd2-95b4-4c3c-993c-7b6b0f9f9474
+k
+java:S18749"/Remove this use of "getBody"; it is deprecated.(ÊÄ¿ÌJ$3023da93-a174-4f9a-b3ac-05f4f59cf5b9
