@@ -5,10 +5,15 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;
+
 import java.security.Key;
+
 import io.jsonwebtoken.io.Decoders;
+
 import java.util.Date;
+
 import io.jsonwebtoken.security.Keys;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +24,9 @@ public class JwtService {
     private final long MINUTE_EXPIRATION = 60;
     private final long JWT_EXPIRATION = 1000 * 60 * MINUTE_EXPIRATION;
 
-    public String generateToken(String username) {
+    public String generateToken(String username, String role) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("role", "ROLE_" + role);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)

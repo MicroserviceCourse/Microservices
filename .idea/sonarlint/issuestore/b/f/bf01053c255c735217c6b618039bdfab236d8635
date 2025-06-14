@@ -1,0 +1,11 @@
+
+
+java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8ï”Öçö2
+œ
+java:S1128"zRemove this unused import 'org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter'.(ÔÁˆ”úÿÿÿÿ8ñ”Öçö2
+
+java:S1128"dRemove this unused import 'org.springframework.security.web.authentication.AuthenticationConverter'.(–Šì¥8ó”Öçö2
+T
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8ô”Öçö2
+j
+java:S1068#".Remove this unused "jwtService" private field.(ïşº¯J$4a225f74-ae9b-41b6-b6ce-4997d9bc86ff

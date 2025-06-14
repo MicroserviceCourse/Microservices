@@ -6,12 +6,15 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@Table(name = "account")
 public class Account  implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -27,6 +30,21 @@ public class Account  implements UserDetails{
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    @OneToOne
+    private User user;
+
+    private String authCode;
+    // dùng để lưu code lúc đăng kí tài khoản hoặc lúc reset password, là null nếu đăng kí hoặc đổi mật khẩu thành công
+
+    private LocalDateTime expirationTimeResetPass;
+
+    private LocalDateTime expirationTimeRegistry;
+
+    private int userRequestAttemptCount = 0;
+    // dùng để lưu số lần yêu cầu xác thực đăng kí tài khoản hoặc yêu cầu đổi mật khẩu
+
+    private boolean is_Active;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(() -> "ROLE_" + role.getRoleName());
@@ -34,7 +52,7 @@ public class Account  implements UserDetails{
 
     @Override
     public String getUsername() {
-        return "";
+        return email;
     }
 
     @Override
