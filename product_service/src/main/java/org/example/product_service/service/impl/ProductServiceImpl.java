@@ -36,6 +36,9 @@ public class ProductServiceImpl implements ProductService {
     private CategoryRepository categoryRepository;
     @Autowired
     private GenericService genericService;
+    public String findProductNameById(int id){
+        return productRepository.findById(id).get().getTen_san_pham();
+    }
     @Autowired
     private KafkaProducerService kafkaProducerService;
 
@@ -60,6 +63,9 @@ public class ProductServiceImpl implements ProductService {
             productEntity.setTen_san_pham(product.getTen_san_pham());
             if (mainImage != null && !mainImage.isEmpty()) {
                 try {
+                    String filePath = genericService.saveFile(mainImage, "product/main/");
+                    productEntity.setMainImage(filePath);
+                } catch (IOException e) {
                     String filePath = fileServiceClient.uploadFile(mainImage, "product/main/");
                     productEntity.setMainImage(filePath);
                 } catch (Exception e) {

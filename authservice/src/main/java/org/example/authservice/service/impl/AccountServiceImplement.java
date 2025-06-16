@@ -1,5 +1,13 @@
 package org.example.authservice.service.impl;
 
+import org.example.authservice.dto.AccountDTO;
+import org.example.authservice.entity.Account;
+import org.example.authservice.entity.Role;
+import org.example.authservice.exception.ErrorHandler;
+import org.example.authservice.repository.AccountRepository;
+import org.example.authservice.repository.RoleRepository;
+import org.example.authservice.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.example.authservice.dto.request.AuthCodeRequest;
 import org.example.authservice.dto.request.LoginDTO;
 import org.example.authservice.entity.Account;
@@ -18,6 +26,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;

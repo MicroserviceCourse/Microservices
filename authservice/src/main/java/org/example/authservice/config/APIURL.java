@@ -1,22 +1,23 @@
-package org.example.authservice.config;
+    package org.example.authservice.config;
 
-public class APIURL {
-    public static final String[] URL_ANONYMOUS_GET = {
+    public class APIURL {
+        public static final String[] URL_ANONYMOUS_GET = {
             "/api/account/users",
-            "/api/account/role",
-    };
-    public static final String[] URL_ANONYMOUS_POST = {
-            "/api/account/login",
-            "/api/account/register",
-    };
-    public static final String[] URL_ANONYMOUS_PUT = {
+                "/api/account/role",
+            "/api/account/id"
+        };
+        public static final String[] URL_ANONYMOUS_POST = {
+                "/api/account/login",
+                "/api/account/register",
+        };
+        public static final String[] URL_ANONYMOUS_PUT = {
 
-    };
-    public static final String[] URL_ANONYMOUS_DELETE = {
+        };
+        public static final String[] URL_ANONYMOUS_DELETE = {
 
-    };
-
-    public static final String[] URL_USER_GET = {
+        };
+    
+      public static final String[] URL_USER_GET = {
             "/login/oauth2/code/google",
             "/login/oauth2/**",
             "/login",
@@ -33,4 +34,4 @@ public class APIURL {
             "/api/user/update/**",
 
     };
-}
+    }
