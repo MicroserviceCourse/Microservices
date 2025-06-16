@@ -27,8 +27,8 @@ public class PayPayController {
                     request.getMethod(),
                     request.getIntent(),
                     request.getDescription(),
-                    "http://localhost:4040/api/pay-pal/cancel",
-                    "http://localhost:4040/api/pay-pal/success"
+                    "http://localhost:8089/api/pay-pal/cancel",
+                    "http://localhost:8089/api/pay-pal/success"
             );
             for (Links link : payment.getLinks()) {
                 if (link.getRel().equals("approval_url")) {

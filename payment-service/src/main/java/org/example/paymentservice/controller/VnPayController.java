@@ -1,7 +1,7 @@
 package org.example.paymentservice.controller;
 
 import org.example.paymentservice.dto.RequestResponse;
-import org.example.paymentservice.dto.request.VietQRRequest;
+
 import org.example.paymentservice.exception.ExceptionResponse;
 import org.example.paymentservice.service.VnpayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @RestController
@@ -19,25 +17,7 @@ public class VnPayController {
     @Autowired
     private VnpayService vnpayService;
 
-    @PostMapping("/vietqr")
-    public ResponseEntity<?> generateQR(@RequestBody VietQRRequest request) {
-        if (!"970448".equals(request.getAcqId())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new RequestResponse("Chỉ hỗ trợ tài khoản OCB (acqId = 970448)", "error"));
-        }
 
-        String qrImageUrl = String.format(
-                "https://img.vietqr.io/image/%s-%s-print.png?accountName=%s&amount=%d&addInfo=%s",
-                request.getAcqId(),
-                request.getAccountNo(),
-                URLEncoder.encode(request.getAccountName(), StandardCharsets.UTF_8),
-                request.getAmount(),
-                URLEncoder.encode(request.getAddInfo(), StandardCharsets.UTF_8)
-        );
-
-        return ResponseEntity.ok(new RequestResponse(qrImageUrl));
-    }
 
     // 👉 VNPay Payment Endpoint
     @GetMapping("/create-payment")
