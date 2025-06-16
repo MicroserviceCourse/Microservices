@@ -1,5 +1,2 @@
 
-e
-java:S1128"CRemove this unused import 'org.example.authservice.dto.AccountDTO'.(öµøòúÿÿÿÿ8åóçãö2
-l
-java:S1128	"+Remove this unused import 'java.util.List'.(Õë±ÄøÿÿÿÿJ$e0805c00-1db3-4ee3-a4bb-c739020c9a3e
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘Ğ™ó8Ê•ş½÷2

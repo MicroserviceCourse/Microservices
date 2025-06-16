@@ -75,7 +75,7 @@ Lauthservice/src/main/java/org/example/authservice/service/Oauth2Service.java,9
 Zauthservice/src/main/java/org/example/authservice/service/impl/Oauth2ServiceImplement.java,3\e\3e6623ca4c125b8d4159a4b6d16d6a341c6b63fa
 ‡
 Wauthservice/src/main/java/org/example/authservice/config/OAuth2LoginSuccessHandler.java,c\2\c26b1ab52f26c7ac8328adf1267b1d4367ce9248
-x
-Hauthservice/src/main/java/org/example/authservice/entity/OAuth2User.java,9\b\9b8b23f52a6a4f76be679f8a80171c8b6948e55a
 ‚
 Rauthservice/src/main/java/org/example/authservice/dto/response/Oauth2Response.java,0\b\0b18196176ae942584eb8c6b317de2cc0a77ea08
+ƒ
+Sauthservice/src/main/java/org/example/authservice/dto/response/UserInfResponse.java,2\f\2f95a7da1f751318e8b38141d2f9e6479555d18f
