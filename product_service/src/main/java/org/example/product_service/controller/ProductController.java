@@ -36,6 +36,15 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
         }
     }
+    @GetMapping("/getName/{id}")
+     public ResponseEntity<?>findNameById(@PathVariable int id){
+        try {
+            
+            return ResponseEntity.ok(productService.findProductNameById(id));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RequestResponse("Lỗi khi xóa sản phẩm :"+e.getMessage()));
+        }
+    }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?>deleteById(@PathVariable("id")int id){
         try {

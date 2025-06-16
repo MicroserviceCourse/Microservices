@@ -1,6 +1,8 @@
 version: '3.8'
 
 services:
+<<<<<<< HEAD
+=======
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
@@ -27,28 +29,43 @@ services:
     networks:
       - shared-network
 
+>>>>>>> 4a8fa49793573d7098133076dfaf873dc10154c5
   mysql-db:
     image: mysql:8
     container_name: mysql_db
     restart: unless-stopped
+<<<<<<< HEAD
+=======
     ports:
       - "5555:3306"
+>>>>>>> 4a8fa49793573d7098133076dfaf873dc10154c5
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: Eccommer
       MYSQL_USER: Eccommer
       MYSQL_PASSWORD: 123456
+<<<<<<< HEAD
+    ports:
+      - "3306:3306"
+=======
+>>>>>>> 4a8fa49793573d7098133076dfaf873dc10154c5
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
       - shared-network
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4a8fa49793573d7098133076dfaf873dc10154c5
 volumes:
   mysql_data:
 
 networks:
   shared-network:
     driver: bridge
+<<<<<<< HEAD
+=======
 #121321311231131
 #123123as
 #12
+>>>>>>> 4a8fa49793573d7098133076dfaf873dc10154c5
