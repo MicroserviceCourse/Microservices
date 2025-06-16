@@ -3,6 +3,7 @@ package org.example.authservice.generic;
 import org.example.authservice.exception.ErrorHandler;
 import org.passay.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;

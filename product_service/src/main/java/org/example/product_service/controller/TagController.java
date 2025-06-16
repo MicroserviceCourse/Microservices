@@ -44,7 +44,7 @@ public class TagController {
         }
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable int id) {
         try {
             tagService.deleteTagById(id);

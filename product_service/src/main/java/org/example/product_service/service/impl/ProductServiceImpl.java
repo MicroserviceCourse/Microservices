@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.product_service.Repository.CategoryRepository;
 import org.example.product_service.Repository.ProductImageRepository;
 import org.example.product_service.Repository.ProductRepository;
+import org.example.product_service.client.FileServiceClient;
 import org.example.product_service.dto.request.ProductDTO;
 import org.example.product_service.entity.Category;
 import org.example.product_service.entity.Product;
@@ -11,6 +12,7 @@ import org.example.product_service.entity.ProductImage;
 import org.example.product_service.exception.ErrorHandler;
 import org.example.product_service.generic.GenericService;
 import org.example.product_service.service.ProductService;
+import org.example.product_service.service.kafka.Producer.KafkaProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,6 +39,12 @@ public class ProductServiceImpl implements ProductService {
     public String findProductNameById(int id){
         return productRepository.findById(id).get().getTen_san_pham();
     }
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
+
+    @Autowired
+    private FileServiceClient fileServiceClient;
+
     @Override
     public Product createProduct(ProductDTO product, MultipartFile mainImage, List<MultipartFile> subImages) {
         try {
@@ -58,6 +66,9 @@ public class ProductServiceImpl implements ProductService {
                     String filePath = genericService.saveFile(mainImage, "product/main/");
                     productEntity.setMainImage(filePath);
                 } catch (IOException e) {
+                    String filePath = fileServiceClient.uploadFile(mainImage, "product/main/");
+                    productEntity.setMainImage(filePath);
+                } catch (Exception e) {
                     throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, "Lỗi khi lưu hình ảnh: " + e.getMessage());
                 }
             }
@@ -66,20 +77,26 @@ public class ProductServiceImpl implements ProductService {
                 for (MultipartFile subImage : subImages) {
                     if (!subImage.isEmpty()) {
                         try {
-                            String subImagePath = genericService.saveFile(subImage, "product/sub/");
+                            String subImagePath = fileServiceClient.uploadFile(subImage, "product/sub/");
 
                             ProductImage productImage = new ProductImage();
                             productImage.setProduct(productEntity); // Gán FK
                             productImage.setImageUrl(subImagePath);
 
                             productImageRepository.save(productImage);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, "Lỗi khi lưu ảnh phụ: " + e.getMessage());
                         }
                     }
                 }
             }
-
+            String payload = String.format(
+                    "{\"id\":%d,\"ten_san_pham\":\"%s\",\"gia\":%d}",
+                    productEntity.getId(),
+                    productEntity.getTen_san_pham(),
+                    productEntity.getGia()
+            );
+            kafkaProducerService.sendProductCreatedMessage(payload);
             return productEntity;
         } catch (Exception e) {
             throw new RuntimeException("Không thể thêm sản phẩm");
@@ -157,14 +174,14 @@ public class ProductServiceImpl implements ProductService {
         }
         productDTO.setMoTa(product.getMoTa());
         productDTO.setTen_san_pham(product.getTen_san_pham());
-        productDTO.setMainImage("/api"+product.getMainImage());
+        productDTO.setHinhChing("/api/file"+product.getMainImage());
         List<String> subImagePaths = product.getImages()
                 .stream()
-                .map(image -> "/api" + image.getImageUrl())
+                .map(image -> "/api/file" + image.getImageUrl())
                 .toList();
 
 
-        productDTO.setSubImages(subImagePaths);
+        productDTO.setHinhAnhPhu(subImagePaths);
         return productDTO;
     }
 
@@ -178,5 +195,11 @@ public class ProductServiceImpl implements ProductService {
         }catch (Exception e){
             throw new RuntimeException("Không thể xóa sản phẩm");
         }
+    }
+
+    @Override
+    public Product getProductById(int id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 }

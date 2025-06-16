@@ -1,0 +1,30 @@
+
+’	java:S117£"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±æõüÿÿÿÿJ$be78c588-4730-4aac-b4e3-6f54d8d3f947
+v
+java:S1141>"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿJ$478cd3c8-411d-4fa6-acb2-5608e4458552
+v
+java:S1141I"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿJ$194d09c3-01b7-43b0-83f5-ee336681c5e6
+v
+java:S1141v"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿJ$904f6b01-73ac-4ae9-a451-c76aec52fa63
+w
+java:S1141„"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿJ$0bea9129-2ee9-4be3-98c3-ac7d7b56a1bf
+	java:S112`"FDefine and throw a dedicated exception instead of using a generic one.(×¼úéJ$00922df1-e734-4ccb-865b-0cae72e0268c
+‚	java:S112”"FDefine and throw a dedicated exception instead of using a generic one.(×¼úéJ$af02470b-38d2-4c2b-95e9-9350a4562b9f
+‡	java:S112º"FDefine and throw a dedicated exception instead of using a generic one.(®’çöùÿÿÿÿJ$d93f4a97-3b6d-4ab9-863d-2e9a3a43d1ca
+‡	java:S112¾"FDefine and throw a dedicated exception instead of using a generic one.(á†­½úÿÿÿÿJ$b37c6d68-7524-4fe2-a2c7-2a1697f29e26
+~
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$937ab3a5-afe7-43d3-a82e-ffea5c72b16b
+~
+java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞJ$a7e1b653-e748-444b-908b-b8bfc7363894
+~
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞJ$0b7bd241-7c6d-4080-a1f3-a1a78a6e70ce
+~
+java:S6813%"BRemove this field injection and use constructor injection instead.(êæÄŞJ$70ab1f9a-3e03-45af-9609-49e1070a5c45
+~
+java:S6813'"BRemove this field injection and use constructor injection instead.(êæÄŞJ$af3f3ccb-ce0e-4d4b-8b82-99b92abbddcc
+~
+java:S6813*"BRemove this field injection and use constructor injection instead.(êæÄŞJ$816911c6-9a41-40ae-bf1c-5f4963948e78
+“
+java:S3776."RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(°÷ŠÿÿÿÿÿÿJ$aeaca25f-9044-42cc-8fab-d76425b1ee76
+
+java:S3776e"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(Œî¶‡J$4124ef8c-b14e-41c1-b89d-81e6d268b1f6

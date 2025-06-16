@@ -14,4 +14,5 @@ public interface ProductService {
     ProductDTO todo(Product product);
     void deleteProductById(int id);
     public String findProductNameById(int id);
+    Product getProductById(int id);
 }
