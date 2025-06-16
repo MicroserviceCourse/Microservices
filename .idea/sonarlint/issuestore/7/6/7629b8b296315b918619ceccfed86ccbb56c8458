@@ -1,25 +1,24 @@
 
-”	java:S117…"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ûİ¸¢8¬–ºéö2J$53f480ab-7ccc-4570-8bce-4bd210c7f547
-	java:S112]"FDefine and throw a dedicated exception instead of using a generic one.(¬·æÛùÿÿÿÿ8¦˜Àéö2J$b9e1e90f-ba28-4a77-b78c-327240561e5f
+	java:S112^"FDefine and throw a dedicated exception instead of using a generic one.(¬·æÛùÿÿÿÿ8üÈÂ÷2J$c8f7bd55-7a13-4f26-a125-5b6803ed11f6
 œ
-java:S1192-"TDefine a constant instead of duplicating this literal "An error occurred: " 6 times.(’’¬ıÿÿÿÿ8®–ºéö2J$f2521fac-4188-4198-aabc-a8a6c2bda9d0
+java:S1192."TDefine a constant instead of duplicating this literal "An error occurred: " 6 times.(’’¬ıÿÿÿÿ8‚üÈÂ÷2J$1097d6a1-2dc2-4a62-834a-fd3a546d8d42
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¯–ºéö2J$78a09bfa-2ce0-4c5c-acd4-0e1f348a7a7e
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ƒüÈÂ÷2J$52f348f8-c971-49b6-823e-36ee5cd4b3e2
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¯–ºéö2J$f3de2912-d3bc-4633-9d35-040692cdceb3
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ8ƒüÈÂ÷2J$a0f084ba-3ed6-46d4-946b-b5ea951ee939
 …
-java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞ8¯–ºéö2J$e4a26379-bed8-4ee8-94a4-3ef0290b00ac
+java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞ8ƒüÈÂ÷2J$77b527b8-f5b2-4e8d-ae88-2f1bebbbd095
 …
-java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8¯–ºéö2J$560c610a-e274-4565-bf09-16ef0c8a507f
+java:S6813$"BRemove this field injection and use constructor injection instead.(êæÄŞ8ƒüÈÂ÷2J$df39abfa-6ffb-4703-94e2-17780f482bb7
 n
-java:S1452'"&Remove usage of generic wildcard type.(àÙ¨ñøÿÿÿÿ8²–ºéö2J$fbd1c1f3-a640-44da-8b3c-c6d65c9a2711
+java:S1452("&Remove usage of generic wildcard type.(àÙ¨ñøÿÿÿÿ8†üÈÂ÷2J$b7a97a83-d251-4129-b938-ceda9acb4782
 n
-java:S14522"&Remove usage of generic wildcard type.(Éş÷ùÿÿÿÿ8³–ºéö2J$9e357cd3-e306-49ab-ba51-6984e8277477
+java:S14523"&Remove usage of generic wildcard type.(Éş÷ùÿÿÿÿ8‡üÈÂ÷2J$461bda73-c584-4c42-9bb5-e93817aee61d
 i
-java:S1452>"&Remove usage of generic wildcard type.(ş¶¥æ8´–ºéö2J$5f024aba-d605-469b-8844-a3ffa61dbaaf
+java:S1452?"&Remove usage of generic wildcard type.(ş¶¥æ8ˆüÈÂ÷2J$992ceed4-5ef2-4392-a659-f9e0e79bf1c5
 n
-java:S1452Q"&Remove usage of generic wildcard type.(Ş¯ºóùÿÿÿÿ8µ–ºéö2J$888c1fce-a3f1-44fa-bc5f-8ebd29527e3f
+java:S1452R"&Remove usage of generic wildcard type.(Ş¯ºóùÿÿÿÿ8‰üÈÂ÷2J$3dd1d705-4a4b-4fed-9990-65caa2ee1594
 h
-java:S1452x"&Remove usage of generic wildcard type.(’Ï‚8·–ºéö2J$4041bf57-d7d9-4f78-859d-2251394eb863
-o
-java:S1452„"&Remove usage of generic wildcard type.(øŒ²Êşÿÿÿÿ8·–ºéö2J$5105711b-d5bf-41a9-979e-23bc0ef64ccc
+java:S1452y"&Remove usage of generic wildcard type.(’Ï‚8ŒüÈÂ÷2J$c16254ce-bda1-4c62-b7a6-c169aed177a9
+j
+java:S1452…"&Remove usage of generic wildcard type.(¥ÑË‘8üÈÂ÷2J$8fb4b1f9-74c9-4764-bc02-ed0b8de272ef

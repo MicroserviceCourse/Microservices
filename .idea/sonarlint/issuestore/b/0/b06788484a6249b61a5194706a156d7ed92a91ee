@@ -1,9 +1,15 @@
 
-~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$906ec62c-b681-4c40-a3ef-524149e4d16d
-~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$4ad30f4b-ef9f-423c-a710-cac1898c0156
-Œ
-java:S1128"KRemove this unused import 'org.example.authservice.exception.ErrorHandler'.(³º÷ üÿÿÿÿJ$bf64adee-2543-44a8-ac09-5a32e7b9d890
-
-java:S1128"@Remove this unused import 'org.springframework.http.HttpStatus'.(íŸ¤ŠúÿÿÿÿJ$7bc0879b-c4d1-49e0-a38c-9e676e14c705
+	java:S112,"FDefine and throw a dedicated exception instead of using a generic one.(¹—Ö°ÿÿÿÿÿ8ó‡½¿÷2J$bd2b42f2-d0c7-47d7-ae2b-61dd188e8668
+ˆ	java:S1120"FDefine and throw a dedicated exception instead of using a generic one.(öÄ–­8ç«Æ¿÷2J$6f8b3844-ef58-4450-b0b3-54b467fc913e
+…
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8õ‡½¿÷2J$978dadea-a9d5-47b3-af64-dd8aeef29a29
+…
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8õ‡½¿÷2J$b3377823-f0b5-404f-a4dc-6fdf373e2948
+…
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8õ‡½¿÷2J$09e7770d-f986-4090-8d8d-d5abc149eace
+…
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8õ‡½¿÷2J$3535bd7c-3ec9-473f-bb33-b948210cb794
+“
+java:S1128"KRemove this unused import 'org.example.authservice.exception.ErrorHandler'.(³º÷ üÿÿÿÿ8ô«Æ¿÷2J$3da84ab0-41d8-42e8-bff8-fc6a4547c3f5
+ˆ
+java:S1128"@Remove this unused import 'org.springframework.http.HttpStatus'.(íŸ¤Šúÿÿÿÿ8ô«Æ¿÷2J$2b7f1322-a663-4051-9425-14bdd6b4e4d6

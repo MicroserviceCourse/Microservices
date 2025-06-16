@@ -7,6 +7,7 @@ import org.example.authservice.dto.*;
 import org.example.authservice.dto.request.AccountDTO;
 import org.example.authservice.dto.request.AuthCodeRequest;
 import org.example.authservice.dto.request.LoginDTO;
+import org.example.authservice.dto.request.ResetPassRequest;
 import org.example.authservice.dto.response.RequestResponse;
 import org.example.authservice.entity.Account;
 import org.example.authservice.exception.ExceptionResponse;
@@ -129,11 +130,10 @@ public class AccountController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(
-            @RequestParam String reset_key, @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPassRequest resetPassRequest) {
 
         try {
-            accountService.resetPassword(reset_key, loginDTO);
+            accountService.resetPassword(resetPassRequest);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new RequestResponse("Đổi mật khẩu thành công"));
 

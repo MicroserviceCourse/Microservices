@@ -28,4 +28,15 @@ public class UserController {
         }
     }
 
+    @GetMapping(value = "my-inf")
+    public ResponseEntity<?> getMyInf(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new RequestResponse(userService.getInf()));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ExceptionResponse("An error occured: "+ e.getMessage()));
+        }
+    }
+
 }

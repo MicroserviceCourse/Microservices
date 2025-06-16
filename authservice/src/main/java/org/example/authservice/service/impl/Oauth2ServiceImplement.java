@@ -5,8 +5,12 @@ import org.example.authservice.config.JwtService;
 import org.example.authservice.dto.response.Oauth2Response;
 import org.example.authservice.entity.Account;
 import org.example.authservice.entity.Role;
+import org.example.authservice.entity.User;
+import org.example.authservice.entity.enu.Provider;
+import org.example.authservice.entity.enu.RoleUser;
 import org.example.authservice.repository.AccountRepository;
 import org.example.authservice.repository.RoleRepository;
+import org.example.authservice.repository.UserRepository;
 import org.example.authservice.service.Oauth2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -24,6 +28,8 @@ public class Oauth2ServiceImplement implements Oauth2Service {
     private JwtService jwtService;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Oauth2Response Oauth2Login(OAuth2User oAuth2User) {
@@ -38,13 +44,16 @@ public class Oauth2ServiceImplement implements Oauth2Service {
             return oauth2Response;
         } else {
             Account account1 = new Account();
-            Role role = roleRepository.findByRoleName(Role.RoleUser.USER);
+            Role role = roleRepository.findByRoleName(RoleUser.USER);
+            User user = new User();
+            userRepository.save(user);
+            account1.setUser(user);
             account1.setRole(role);
             account1.setEmail(email);
-            account1.setProvider(Account.Provider.GOOGLE);
+            account1.setProvider(Provider.GOOGLE);
             account1.set_Active(true);
             accountRepository.save(account1);
-            String tokenKey = jwtService.generateToken(email, account.get().getRole().getRoleName().toString());
+            String tokenKey = jwtService.generateToken(email,account1.getRole().getRoleName().toString());
 
             oauth2Response.setToken(tokenKey);
             oauth2Response.setRole(account1.getRole().getRoleName());

@@ -1,15 +1,19 @@
 
-_
-java:S6813."BRemove this field injection and use constructor injection instead.(êæÄŞ8õºı½÷2
+…
+java:S6813."BRemove this field injection and use constructor injection instead.(êæÄŞ8õºı½÷2J$67095049-4f41-4cb5-8272-6e2fd38c8f90
+…
+java:S68130"BRemove this field injection and use constructor injection instead.(êæÄŞ8‹——À÷2J$7c4c9532-f913-4012-8528-49f1317d40c9
 ¢
-java:S3305/"ZInject this field value directly into "securityFilterChain", the only method that uses it.(ä÷›¨úÿÿÿÿ8Öœ®ïö2J$a69d2c31-41b5-445c-b1ad-fc6845ed1ed7
-
-java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8öºı½÷2
-œ
-java:S1128"zRemove this unused import 'org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter'.(ÔÁˆ”úÿÿÿÿ8÷ºı½÷2
-
-java:S1128"dRemove this unused import 'org.springframework.security.web.authentication.AuthenticationConverter'.(–Šì¥8‘»ı½÷2
-T
-java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8“»ı½÷2
+java:S33051"ZInject this field value directly into "securityFilterChain", the only method that uses it.(‡”ıØÿÿÿÿÿ8‰ÅÅÀ÷2J$69c8b1a6-1ccf-4849-a004-fbd20376822f
+¢
+java:S3305/"ZInject this field value directly into "securityFilterChain", the only method that uses it.(ä÷›¨úÿÿÿÿ8Öœ®ïö2J$c63b273a-3c53-42c7-b6e9-faf79fe3bbea
+§
+java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8Éœ°À÷2J$d4420a7c-6421-4d44-8de3-2c25605844d4
+Â
+java:S1128"zRemove this unused import 'org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter'.(ÔÁˆ”úÿÿÿÿ8Éœ°À÷2J$154bf99e-e7c1-44fe-aefe-e05ed8e51f48
+§
+java:S1128"dRemove this unused import 'org.springframework.security.web.authentication.AuthenticationConverter'.(–Šì¥8Éœ°À÷2J$783be197-1b43-412b-8502-698e0680cfed
+z
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8Éœ°À÷2J$99ef6789-7056-4c78-bca6-7837fb04d9b4
 q
-java:S1068$".Remove this unused "jwtService" private field.(ïşº¯8åÁŠîö2J$b1c443b5-77cc-4e83-8d50-8ebe4c37d850
+java:S1068$".Remove this unused "jwtService" private field.(ïşº¯8åÁŠîö2J$fa55d0c7-5f1e-4f7a-babf-9a0c73af6148
