@@ -32,8 +32,12 @@ public class Oauth2ServiceImplement implements Oauth2Service {
     private UserRepository userRepository;
 
     @Override
-    public Oauth2Response Oauth2Login(OAuth2User oAuth2User) {
+    public Oauth2Response Oauth2Login(OAuth2User oAuth2User, String provider) {
+
+        System.out.print("aaaaaaaaaaaaaaaaaaaaaaaaaaa" + provider);
+
         String email = oAuth2User.getAttribute("email");
+        String username = oAuth2User.getAttribute("name");
         Oauth2Response oauth2Response = new Oauth2Response();
 
         Optional<Account> account = accountRepository.findByEmail(email);
@@ -45,12 +49,19 @@ public class Oauth2ServiceImplement implements Oauth2Service {
         } else {
             Account account1 = new Account();
             Role role = roleRepository.findByRoleName(RoleUser.USER);
+
             User user = new User();
+            user.setUserName(username);
             userRepository.save(user);
+
             account1.setUser(user);
             account1.setRole(role);
             account1.setEmail(email);
-            account1.setProvider(Provider.GOOGLE);
+            if (provider.equals("facebook")) {
+                account1.setProvider(Provider.FACEBOOK);
+            }else if (provider.equals("google")){
+                account1.setProvider((Provider.GOOGLE));
+            }
             account1.set_Active(true);
             accountRepository.save(account1);
             String tokenKey = jwtService.generateToken(email,account1.getRole().getRoleName().toString());

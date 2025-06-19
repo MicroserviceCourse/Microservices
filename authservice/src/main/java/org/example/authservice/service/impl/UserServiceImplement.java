@@ -32,7 +32,7 @@ public class UserServiceImplement implements UserService {
     private AccountMapper accountMapper;
 
     @Override
-    public UserResponse updateUser(int id, UserRequest userRequest) {
+    public UserResponse updateUser(UserRequest userRequest) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentEmail = authentication.getName();
@@ -40,15 +40,8 @@ public class UserServiceImplement implements UserService {
         Account account = accountRepository.findByEmail(currentEmail)
                 .orElseThrow(() -> new RuntimeException("Người dùng không hợp lệ"));
 
-        if (!userRepository.existsById(id)) {
-            throw new RuntimeException("Không tìm thấy thông tin người dùng này");
-        }
-
-        if (account.getUser().getId() != id){
-            throw new RuntimeException("Bạn không có quyền chỉnh sữa tài khoản này!");
-        }
         User user = userMapper.toUser(userRequest);
-        user.setId(id);
+        user.setId(account.getUser().getId());
         return userMapper.toUserResponse(userRepository.save(user));
     }
 

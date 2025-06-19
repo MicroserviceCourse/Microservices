@@ -6,7 +6,7 @@ import org.example.authservice.dto.response.UserInfResponse;
 import org.example.authservice.dto.response.UserResponse;
 
 public interface UserService {
-    UserResponse updateUser(int id, UserRequest userRequest);
+    UserResponse updateUser(UserRequest userRequest);
 
     UserInfResponse getInf();
 }

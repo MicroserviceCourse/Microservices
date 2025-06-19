@@ -46,40 +46,49 @@ public class AccountServiceImplement implements AccountService {
     private UserRepository userRepository;
 
     @Override
-    @Async
     public void save(LoginDTO loginDTO) {
         try {
+            LocalDateTime now = LocalDateTime.now();
             Optional<Account> account1 = accountRepository.findByEmail(loginDTO.getEmail());
+            int code = emailService.generateCode();
             if (account1.isPresent()) {
                 if (account1.get().is_Active()) {
                     throw new RuntimeException("Email đã tồn tại");
-                }else {
-                    accountRepository.deleteById(account1.get().getId());
+
+                } else if (now.isAfter(account1.get().getExpirationTimeRegistry()) &&
+                        now.isBefore(account1.get().getExpirationTimeRegistry().plusMinutes(1))) {
+                    throw new RuntimeException("Vui lòng đợi một phút sau để yêu cầu lại!");
+
+                } else if (now.isAfter(account1.get().getExpirationTimeRegistry().plusMinutes(1))) {
+                    account1.get().setAuthCode(String.valueOf(code));
+                    account1.get().setExpirationTimeRegistry(now);
+                    accountRepository.save(account1.get());
+                    emailService.Sendmail("cunnconn01@gmail.com", loginDTO.getEmail(),
+                            String.valueOf(code), "XÁC MINH TÀI KHOẢN", "email_template");
                 }
+            } else {
+                genericService genericService = new genericService();
+                genericService.validatePassword(loginDTO.getPassword());
+
+                emailService.Sendmail("cunnconn01@gmail.com", loginDTO.getEmail(),
+                        String.valueOf(code), "XÁC MINH TÀI KHOẢN", "email_template");
+
+                Role role = roleRepository.findByRoleName(RoleUser.USER);
+                User user = new User();
+                userRepository.save(user);
+
+                Account account = new Account();
+                account.setUser(user);
+                account.setRole(role);
+                account.setEmail(loginDTO.getEmail());
+                account.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
+                account.setAuthCode(String.valueOf(code));
+                account.setExpirationTimeRegistry(now);
+                account.set_Active(false);
+                account.setProvider(Provider.LOCAL);
+                accountRepository.save(account);
             }
-            genericService genericService = new genericService();
-            genericService.validatePassword(loginDTO.getPassword());
 
-            int code = emailService.generateCode();
-
-            emailService.Sendmail("cunnconn01@gmail.com", loginDTO.getEmail(),
-                    "Mã xác thực tài khoản của bạn là: " + code, "XÁC MINH TÀI KHOẢN");
-
-            LocalDateTime now = LocalDateTime.now();
-            Role role = roleRepository.findByRoleName(RoleUser.USER);
-            User user = new User();
-            userRepository.save(user);
-
-            Account account = new Account();
-            account.setUser(user);
-            account.setRole(role);
-            account.setEmail(loginDTO.getEmail());
-            account.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
-            account.setAuthCode(String.valueOf(code));
-            account.setExpirationTimeRegistry(now);
-            account.set_Active(false);
-            account.setProvider(Provider.LOCAL);
-            accountRepository.save(account);
         } catch (Exception e) {
             throw new ErrorHandler(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -166,7 +175,7 @@ public class AccountServiceImplement implements AccountService {
             String resetLink = linkResetPass + "/reset-password?" + "&reset_key=" + reset_key;
 
             emailService.Sendmail("cunnconn01@gmail.com", email,
-                    "Nhấn vào đây để đặt lại mật khẩu của bạn: " + resetLink, "KHÔI PHỤC MẬT KHẨU");
+                    resetLink, "KHÔI PHỤC MẬT KHẨU", "reset_password_template");
 
         } catch (Exception e) {
             throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());

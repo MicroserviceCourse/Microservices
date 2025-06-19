@@ -31,6 +31,7 @@ public class Account  implements UserDetails{
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
     private Provider provider;
 
     @OneToOne

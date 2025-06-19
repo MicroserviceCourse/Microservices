@@ -16,10 +16,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable int id, @RequestBody UserRequest userRequest){
+    @PutMapping(value = "/update-inf")
+    public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest){
         try{
-            userService.updateUser(id, userRequest);
+            userService.updateUser(userRequest);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new RequestResponse("Cập nhật thông tin người dùng thành công"));
         }catch (Exception e){

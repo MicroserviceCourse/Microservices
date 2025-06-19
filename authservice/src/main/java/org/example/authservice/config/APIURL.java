@@ -8,6 +8,7 @@ public class APIURL {
     public static final String[] URL_ANONYMOUS_POST = {
             "/api/account/login",
             "/api/account/register",
+            "/api/account/refresh-token"
     };
     public static final String[] URL_ANONYMOUS_PUT = {
 

@@ -4,10 +4,7 @@ import com.netflix.discovery.converters.Auto;
 import lombok.RequiredArgsConstructor;
 import org.example.authservice.config.JwtService;
 import org.example.authservice.dto.*;
-import org.example.authservice.dto.request.AccountDTO;
-import org.example.authservice.dto.request.AuthCodeRequest;
-import org.example.authservice.dto.request.LoginDTO;
-import org.example.authservice.dto.request.ResetPassRequest;
+import org.example.authservice.dto.request.*;
 import org.example.authservice.dto.response.RequestResponse;
 import org.example.authservice.entity.Account;
 import org.example.authservice.exception.ExceptionResponse;
@@ -137,6 +134,17 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new RequestResponse("Đổi mật khẩu thành công"));
 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ExceptionResponse("An error occurred: " + e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "refresh-token")
+    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new RequestResponse(jwtService.refreshToken(refreshTokenRequest.getExpiredToken())));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ExceptionResponse("An error occurred: " + e.getMessage()));
