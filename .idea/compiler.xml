@@ -11,12 +11,14 @@
         <module name="File_Service" />
         <module name="payment-service" />
         <module name="product_service" />
+        <module name="search_service" />
       </profile>
       <profile name="Annotation profile for eureka-server" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
         <module name="eureka-server" />
@@ -62,6 +64,7 @@
       <module name="eureka-server" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="product_service" options="-parameters" />
+      <module name="search_service" options="-parameters" />
       <module name="user" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
