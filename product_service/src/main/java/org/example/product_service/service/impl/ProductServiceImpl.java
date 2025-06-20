@@ -88,7 +88,11 @@ public class ProductServiceImpl implements ProductService {
                     }
                 }
             }
-
+            product.setId(productEntity.getId());
+            String tenDanhMuc = productEntity.getCategories().stream()
+                    .map(Category::getTenDanhMuc) // hoặc Category::getName nếu tên khác
+                    .collect(Collectors.joining(", "));
+            product.setDanhMuc(tenDanhMuc);
             kafkaTemplate.send(TOPIC, product);
             return productEntity;
         } catch (Exception e) {

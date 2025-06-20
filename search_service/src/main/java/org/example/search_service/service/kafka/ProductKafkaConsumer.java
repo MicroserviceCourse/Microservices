@@ -19,7 +19,7 @@ public class ProductKafkaConsumer {
                 productDTO.getTenSanPham(),
                 productDTO.getMoTa(),
                 productDTO.getGia(),
-                productDTO.getDanhmuc()
+                productDTO.getDanhMuc()
         );
         productElasticRepository.save(doc);
     }

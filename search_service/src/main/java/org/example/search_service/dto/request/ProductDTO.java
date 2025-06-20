@@ -14,9 +14,11 @@ public class ProductDTO {
     private String tenSanPham;
     private int gia;
     private String moTa;
-    private String danhmuc;
+    private List<Integer> id_danh_muc;
     private String mainImage;
+    private String danhMuc;
     private List<String>subImages;
     private String HinhChing;
     private List<String>HinhAnhPhu;
+
 }
