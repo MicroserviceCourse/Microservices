@@ -18,7 +18,7 @@ public class Product {
     private int id;
     @Basic
     @Column(name = "ten_san_pham")
-    private String ten_san_pham;
+    private String tenSanPham;
     @Basic
     @Column(name = "gia")
     private int gia;
