@@ -43,15 +43,7 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(e.getMessage()));
         }
     }
-    @GetMapping("/findById")
-    public ResponseEntity<?> findById(@ModelAttribute MyCompositeKey key){
-        try{
-            return ResponseEntity.ok(new RequestResponse(service.findById(key)));
-        }
-        catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(e.getMessage()));
-        }
-    }
+   
     @GetMapping("/yourCart")
     public ResponseEntity<?> yourCart(HttpServletRequest request,Pageable pageable){
         try{
@@ -61,13 +53,6 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(e.getMessage()));
         }
     }
-    @GetMapping("/findAll")
-    public ResponseEntity<?> findAll(Pageable pageable){
-        try{
-            return ResponseEntity.ok(new RequestResponse(service.findAll(pageable)));
-        }
-        catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(e.getMessage()));
-        }
-    }
+    
+  
 }

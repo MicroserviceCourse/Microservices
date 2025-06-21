@@ -11,7 +11,6 @@ public class APIURL {
     };
     
     public static final String[]URL_ADMIN_GET={
-            "/api/cart/findAll",
-            "/api/cart/findById"
+           
     };
 }
