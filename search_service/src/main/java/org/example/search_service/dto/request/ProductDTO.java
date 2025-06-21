@@ -1,9 +1,8 @@
-package org.example.product_service.dto.request;
+package org.example.search_service.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import java.util.List;
 
