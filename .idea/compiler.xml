@@ -36,24 +36,15 @@
         </processorPath>
         <module name="authservice" />
       </profile>
-      <profile name="Annotation profile for api-gateway" enabled="true">
+      <profile name="Annotation profile for chat-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="api-gateway" />
-      </profile>
-      <profile name="Annotation profile for banner_service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
         </processorPath>
+        <module name="api-gateway" />
+        <module name="chat-service" />
         <module name="banner_service" />
       </profile>
     </annotationProcessing>
@@ -71,6 +62,7 @@
       <module name="authservice" options="-parameters" />
       <module name="banner_service" options="-parameters" />
       <module name="categories-service" options="-parameters" />
+      <module name="chat-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
