@@ -36,7 +36,7 @@
         </processorPath>
         <module name="authservice" />
       </profile>
-      <profile name="Annotation profile for chat-service" enabled="true">
+      <profile name="Annotation profile for inventory-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -44,6 +44,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
         </processorPath>
         <module name="api-gateway" />
+        <module name="inventory-service" />
         <module name="banner_service" />
       </profile>
     </annotationProcessing>
@@ -66,6 +67,7 @@
       <module name="config-server" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="inventory-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="product_service" options="-parameters" />
       <module name="product_service (1)" options="-parameters" />
