@@ -20,7 +20,6 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
         <module name="eureka-server" />
       </profile>
@@ -36,7 +35,7 @@
         </processorPath>
         <module name="authservice" />
       </profile>
-      <profile name="Annotation profile for inventory-service" enabled="true">
+      <profile name="Annotation profile for rating-review-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -45,6 +44,7 @@
         </processorPath>
         <module name="api-gateway" />
         <module name="inventory-service" />
+        <module name="rating-review-service" />
         <module name="banner_service" />
       </profile>
     </annotationProcessing>
@@ -71,6 +71,7 @@
       <module name="payment-service" options="-parameters" />
       <module name="product_service" options="-parameters" />
       <module name="product_service (1)" options="-parameters" />
+      <module name="rating-review-service" options="-parameters" />
       <module name="search_service" options="-parameters" />
       <module name="user" options="-parameters" />
       <module name="user-service" options="-parameters" />

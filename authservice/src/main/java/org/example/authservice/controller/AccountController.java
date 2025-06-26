@@ -10,7 +10,6 @@ import com.netflix.discovery.converters.Auto;
 import lombok.RequiredArgsConstructor;
 import org.example.authservice.config.JwtService;
 import org.example.authservice.dto.*;
-import org.example.authservice.dto.request.AccountDTO;
 import org.example.authservice.dto.request.AuthCodeRequest;
 import org.example.authservice.dto.request.LoginDTO;
 import org.example.authservice.dto.response.RequestResponse;
@@ -102,7 +101,17 @@ public class AccountController {
                     .body(new ExceptionResponse("An error occurred: " + e.getMessage()));
         }
     }
-
+    @GetMapping("/me")
+    public ResponseEntity<?>getMyInfo(@RequestHeader("Authorization")String authHeader) {
+        try {
+            Account account=accountService.getAccountFromToken(authHeader);
+            AccountDTO accountDTO=accountService.todo(account);
+            return ResponseEntity.ok(new RequestResponse(accountDTO,"lấy account Theo token thành công"));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ExceptionResponse("An error occurred: " + e.getMessage()));
+        }
+    }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
         try {
