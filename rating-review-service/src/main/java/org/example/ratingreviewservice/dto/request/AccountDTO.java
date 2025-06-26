@@ -1,10 +1,12 @@
-package org.example.authservice.dto;
-import lombok.*;
+package org.example.ratingreviewservice.dto.request;
+
+import lombok.Data;
+
 @Data
 public class AccountDTO {
+    private int id;
     private String email;
     private String password;
     private int idRole;
-    private int id;
     private String role;
 }

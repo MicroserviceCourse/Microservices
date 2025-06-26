@@ -4,7 +4,8 @@
         public static final String[] URL_ANONYMOUS_GET = {
             "/api/account/users",
                 "/api/account/role",
-            "/api/account/id"
+            "/api/account/id",
+                "/api/account/me"
         };
         public static final String[] URL_ANONYMOUS_POST = {
                 "/api/account/login",
