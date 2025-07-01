@@ -1,5 +1,6 @@
 package org.example.authservice.service;
 
+import org.example.authservice.dto.AccountDTO;
 import org.example.authservice.dto.request.AuthCodeRequest;
 import org.example.authservice.dto.request.LoginDTO;
 import org.example.authservice.dto.request.ResetPassRequest;
@@ -14,7 +15,8 @@ public interface AccountService extends UserDetailsService {
 
     Account findByEmail(String email);
     String getRolesForUser(Account account);
-
+    Account getAccountFromToken(String token);
+    AccountDTO todo(Account account);
     void generateResetPasswordUrl(String email);
 
     void resetPassword(ResetPassRequest resetPassRequest);

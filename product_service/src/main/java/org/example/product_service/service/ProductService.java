@@ -13,5 +13,6 @@ public interface ProductService {
     Page<Product>getAll(int page, int size);
     ProductDTO todo(Product product);
     void deleteProductById(int id);
+    public String findProductNameById(int id);
     Product getProductById(int id);
 }

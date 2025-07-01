@@ -1,10 +1,17 @@
 package org.example.authservice.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.example.authservice.config.JwtService;
+import org.example.authservice.dto.*;
+import org.example.authservice.entity.Account;
+import org.example.authservice.exception.ExceptionResponse;
+import org.example.authservice.service.AccountService;
 import com.netflix.discovery.converters.Auto;
 import lombok.RequiredArgsConstructor;
 import org.example.authservice.config.JwtService;
 import org.example.authservice.dto.*;
-import org.example.authservice.dto.request.*;
+import org.example.authservice.dto.request.AuthCodeRequest;
+import org.example.authservice.dto.request.LoginDTO;
 import org.example.authservice.dto.response.RequestResponse;
 import org.example.authservice.entity.Account;
 import org.example.authservice.exception.ExceptionResponse;
@@ -19,13 +26,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/account")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class AccountController {
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private  AuthenticationManager authenticationManager;
     @Autowired
     private JwtService jwtService;
     @Autowired
@@ -74,7 +83,35 @@ public class AccountController {
                     .body(new ExceptionResponse("An error occurred: " + e.getMessage()));
         }
     }
+     @GetMapping("/id")
+    public ResponseEntity<?>getUserId(@RequestParam("email")String email) {
+        try {
+            Account account = accountService.findByEmail(email);
+            if (account == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ExceptionResponse("User not found"));
+            }
 
+            // Get the single role of the account
+            int id = account.getId();
+
+            return ResponseEntity.ok(id);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ExceptionResponse("An error occurred: " + e.getMessage()));
+        }
+    }
+    @GetMapping("/me")
+    public ResponseEntity<?>getMyInfo(@RequestHeader("Authorization")String authHeader) {
+        try {
+            Account account=accountService.getAccountFromToken(authHeader);
+            AccountDTO accountDTO=accountService.todo(account);
+            return ResponseEntity.ok(new RequestResponse(accountDTO,"lấy account Theo token thành công"));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ExceptionResponse("An error occurred: " + e.getMessage()));
+        }
+    }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
         try {
@@ -104,7 +141,8 @@ public class AccountController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ExceptionResponse("Invalid username or password"));
             }
-        } catch (UsernameNotFoundException e) {
+        }
+         catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ExceptionResponse("Username not found"));
         } catch (Exception e) {

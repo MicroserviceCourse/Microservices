@@ -12,11 +12,11 @@ import org.example.product_service.entity.ProductImage;
 import org.example.product_service.exception.ErrorHandler;
 import org.example.product_service.generic.GenericService;
 import org.example.product_service.service.ProductService;
-import org.example.product_service.service.kafka.Producer.KafkaProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,10 +34,13 @@ public class ProductServiceImpl implements ProductService {
     private ProductImageRepository productImageRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
     @Autowired
-    private GenericService genericService;
-    @Autowired
-    private KafkaProducerService kafkaProducerService;
+    private KafkaTemplate<String, Object> kafkaTemplate;
+    private static final String TOPIC = "product-topic";
+    public String findProductNameById(int id){
+        return productRepository.findById(id).get().getTenSanPham();
+    }
 
     @Autowired
     private FileServiceClient fileServiceClient;
@@ -57,16 +60,17 @@ public class ProductServiceImpl implements ProductService {
                 productEntity.setCategories(categories);
             }
             productEntity.setMoTa(product.getMoTa());
-            productEntity.setTen_san_pham(product.getTen_san_pham());
+            productEntity.setTenSanPham(product.getTenSanPham());
             if (mainImage != null && !mainImage.isEmpty()) {
                 try {
                     String filePath = fileServiceClient.uploadFile(mainImage, "product/main/");
                     productEntity.setMainImage(filePath);
+
                 } catch (Exception e) {
                     throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, "Lỗi khi lưu hình ảnh: " + e.getMessage());
                 }
             }
-            productRepository.save(productEntity);
+            productEntity = productRepository.save(productEntity);
             if (subImages != null && !subImages.isEmpty()) {
                 for (MultipartFile subImage : subImages) {
                     if (!subImage.isEmpty()) {
@@ -84,13 +88,12 @@ public class ProductServiceImpl implements ProductService {
                     }
                 }
             }
-            String payload = String.format(
-                    "{\"id\":%d,\"ten_san_pham\":\"%s\",\"gia\":%d}",
-                    productEntity.getId(),
-                    productEntity.getTen_san_pham(),
-                    productEntity.getGia()
-            );
-            kafkaProducerService.sendProductCreatedMessage(payload);
+            product.setId(productEntity.getId());
+            String tenDanhMuc = productEntity.getCategories().stream()
+                    .map(Category::getTenDanhMuc) // hoặc Category::getName nếu tên khác
+                    .collect(Collectors.joining(", "));
+            product.setDanhMuc(tenDanhMuc);
+            kafkaTemplate.send(TOPIC, product);
             return productEntity;
         } catch (Exception e) {
             throw new RuntimeException("Không thể thêm sản phẩm");
@@ -113,31 +116,23 @@ public class ProductServiceImpl implements ProductService {
                 productEntity.setCategories(categories);
             }
             productEntity.setMoTa(product.getMoTa());
-            productEntity.setTen_san_pham(product.getTen_san_pham());
-            if (mainImage != null && !mainImage.isEmpty()) {
-                try {
-                    String mainImagePath = genericService.saveFile(mainImage, "/product/main");
-                    productEntity.setMainImage(mainImagePath);
-                } catch (IOException e) {
-                    throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, "Lỗi khi lưu hình ảnh chính: " + e.getMessage());
-                }
-            }
+            productEntity.setTenSanPham(product.getTenSanPham());
+            String mainImagePath = fileServiceClient.uploadFile(mainImage, "/product/main");
+            productEntity.setMainImage(mainImagePath);
             productEntity.getImages().clear();
             if (subImages != null && !subImages.isEmpty()) {
-
-
                 // ✅ Thêm ảnh phụ mới
                 for (MultipartFile subImage : subImages) {
                     if (!subImage.isEmpty()) {
                         try {
-                            String subImagePath = genericService.saveFile(subImage, "/product/sub");
+                            String subImagePath = fileServiceClient.uploadFile(subImage, "/product/sub");
 
                             ProductImage image = new ProductImage();
                             image.setProduct(productEntity); // thiết lập liên kết hai chiều
                             image.setImageUrl(subImagePath);
 
                             productEntity.getImages().add(image);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, "Lỗi khi lưu ảnh phụ: " + e.getMessage());
                         }
                     }
@@ -167,7 +162,7 @@ public class ProductServiceImpl implements ProductService {
                 productDTO.setId_danh_muc(CateList);
         }
         productDTO.setMoTa(product.getMoTa());
-        productDTO.setTen_san_pham(product.getTen_san_pham());
+        productDTO.setTenSanPham(product.getTenSanPham());
         productDTO.setHinhChing("/api/file"+product.getMainImage());
         List<String> subImagePaths = product.getImages()
                 .stream()

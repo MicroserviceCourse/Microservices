@@ -1,5 +1,14 @@
 package org.example.authservice.service.impl;
 
+import org.example.authservice.config.JwtService;
+import org.example.authservice.dto.AccountDTO;
+import org.example.authservice.entity.Account;
+import org.example.authservice.entity.Role;
+import org.example.authservice.exception.ErrorHandler;
+import org.example.authservice.repository.AccountRepository;
+import org.example.authservice.repository.RoleRepository;
+import org.example.authservice.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.example.authservice.dto.request.AuthCodeRequest;
 import org.example.authservice.dto.request.LoginDTO;
 import org.example.authservice.dto.request.ResetPassRequest;
@@ -24,6 +33,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,6 +43,8 @@ import java.util.UUID;
 public class AccountServiceImplement implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private JwtService jwtService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -134,6 +147,30 @@ public class AccountServiceImplement implements AccountService {
     @Override
     public String getRolesForUser(Account account) {
         return account.getRole().getRoleName().toString();
+    }
+
+    @Override
+    public Account getAccountFromToken(String token) {
+        try {
+            if (token.startsWith("Bearer ")) {
+                token = token.substring(7);
+            }
+            String username=jwtService.extractUsername(token);
+            return accountRepository.findByEmail(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
+        }catch (Exception e) {
+            throw new RuntimeException("Invalid token",e);
+        }
+    }
+
+    @Override
+    public AccountDTO todo(Account account) {
+        AccountDTO accountDTO = new AccountDTO();
+        accountDTO.setEmail(account.getEmail());
+        accountDTO.setRole(account.getRole().getRoleName().toString());
+        accountDTO.setIdRole(account.getRole().getId_role());
+        accountDTO.setId(account.getId());
+        return accountDTO;
     }
 
 

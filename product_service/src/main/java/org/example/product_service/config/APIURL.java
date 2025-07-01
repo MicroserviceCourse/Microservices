@@ -4,6 +4,7 @@ public class APIURL {
     public static final String[] URL_ANONYMOUS_GET = {
             "/api/category/all",
             "/api/product/all",
+            "/api/product/getName/{id}",
             "/api/product-variant/all",
             "/api/product-variant/{id}",
             "/api/tag/all",
@@ -16,6 +17,7 @@ public class APIURL {
     public static final String[] URL_ADMIN_POST = {
             "/api/category/create",
             "/api/product/create",
+
             "/api/product-variant/create",
             "/api/tag/create",
             "/api/variant/create",
