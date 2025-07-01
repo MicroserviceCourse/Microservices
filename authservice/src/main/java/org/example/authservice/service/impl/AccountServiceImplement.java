@@ -11,17 +11,23 @@ import org.example.authservice.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.example.authservice.dto.request.AuthCodeRequest;
 import org.example.authservice.dto.request.LoginDTO;
+import org.example.authservice.dto.request.ResetPassRequest;
 import org.example.authservice.entity.Account;
 import org.example.authservice.entity.Role;
+import org.example.authservice.entity.User;
+import org.example.authservice.entity.enu.Provider;
+import org.example.authservice.entity.enu.RoleUser;
 import org.example.authservice.exception.ErrorHandler;
 import org.example.authservice.generic.genericService;
 import org.example.authservice.repository.AccountRepository;
 import org.example.authservice.repository.RoleRepository;
+import org.example.authservice.repository.UserRepository;
 import org.example.authservice.service.AccountService;
 import org.example.authservice.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,35 +55,53 @@ public class AccountServiceImplement implements AccountService {
 
     @Value("${link.reset.password}")
     private String linkResetPass;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public void save(LoginDTO loginDTO) {
         try {
+            LocalDateTime now = LocalDateTime.now();
             Optional<Account> account1 = accountRepository.findByEmail(loginDTO.getEmail());
-            if (account1.isPresent() && account1.get().is_Active()) {
-                throw new RuntimeException("Email đã tồn tại");
-            }
-                accountRepository.deleteById(account1.get().getId());
+            int code = emailService.generateCode();
+            if (account1.isPresent()) {
+                if (account1.get().is_Active()) {
+                    throw new RuntimeException("Email đã tồn tại");
+
+                } else if (now.isAfter(account1.get().getExpirationTimeRegistry()) &&
+                        now.isBefore(account1.get().getExpirationTimeRegistry().plusMinutes(1))) {
+                    throw new RuntimeException("Vui lòng đợi một phút sau để yêu cầu lại!");
+
+                } else if (now.isAfter(account1.get().getExpirationTimeRegistry().plusMinutes(1))) {
+                    account1.get().setAuthCode(String.valueOf(code));
+                    account1.get().setExpirationTimeRegistry(now);
+                    accountRepository.save(account1.get());
+                    emailService.Sendmail("cunnconn01@gmail.com", loginDTO.getEmail(),
+                            String.valueOf(code), "XÁC MINH TÀI KHOẢN", "email_template");
+                }
+            } else {
                 genericService genericService = new genericService();
                 genericService.validatePassword(loginDTO.getPassword());
 
-                int code = emailService.generateCode();
-
                 emailService.Sendmail("cunnconn01@gmail.com", loginDTO.getEmail(),
-                        "Mã xác thực tài khoản của bạn là: " + code, "XÁC MINH TÀI KHOẢN");
+                        String.valueOf(code), "XÁC MINH TÀI KHOẢN", "email_template");
 
-                LocalDateTime now = LocalDateTime.now();
-                Role role = roleRepository.findByRoleName(Role.RoleUser.USER);
+                Role role = roleRepository.findByRoleName(RoleUser.USER);
+                User user = new User();
+                userRepository.save(user);
 
                 Account account = new Account();
+                account.setUser(user);
                 account.setRole(role);
                 account.setEmail(loginDTO.getEmail());
                 account.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
                 account.setAuthCode(String.valueOf(code));
                 account.setExpirationTimeRegistry(now);
                 account.set_Active(false);
-                account.setProvider(Account.Provider.LOCAL);
+                account.setProvider(Provider.LOCAL);
                 accountRepository.save(account);
+            }
+
         } catch (Exception e) {
             throw new ErrorHandler(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -109,27 +133,6 @@ public class AccountServiceImplement implements AccountService {
             throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
-
-//    @Override
-//    public void save(LoginDTO account) {
-//        try {
-//            if (accountRepository.findByEmail(account.getEmail()).isPresent()) {
-//                throw new RuntimeException("Email đã tồn tại");
-//            }
-//            genericService genericService = new genericService();
-//            genericService.validatePassword(account.getPassword());
-//
-//            Account account1 = new Account();
-//            account1.setEmail(account.getEmail());
-//            account1.setPassword(passwordEncoder.encode(account.getPassword()));
-//            Role role = roleRepository.findByRoleName(Role.RoleUser.USER);
-//            account1.setRole(role);
-//            account1.setRole(role);
-//            accountRepository.save(account1);
-//        } catch (Exception e) {
-//            throw new ErrorHandler(HttpStatus.BAD_REQUEST, e.getMessage());
-//        }
-//    }
 
     @Override
     public Account findByEmail(String email) {
@@ -201,6 +204,7 @@ public class AccountServiceImplement implements AccountService {
                     account.get().setUserRequestAttemptCount(0);
                 }
             }
+
             account.get().setExpirationTimeResetPass(now);
             account.get().setAuthCode(reset_key);
             account.get().setUserRequestAttemptCount(account.get().getUserRequestAttemptCount() + 1);
@@ -208,7 +212,7 @@ public class AccountServiceImplement implements AccountService {
             String resetLink = linkResetPass + "/reset-password?" + "&reset_key=" + reset_key;
 
             emailService.Sendmail("cunnconn01@gmail.com", email,
-                    "Nhấn vào đây để đặt lại mật khẩu của bạn: " + resetLink, "KHÔI PHỤC MẬT KHẨU");
+                    resetLink, "KHÔI PHỤC MẬT KHẨU", "reset_password_template");
 
         } catch (Exception e) {
             throw new ErrorHandler(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
@@ -217,30 +221,30 @@ public class AccountServiceImplement implements AccountService {
 
     //đặt lại mật khẩu
     @Override
-    public void resetPassword(String reset_key, LoginDTO loginDTO) {
+    public void resetPassword(ResetPassRequest resetPassRequest) {
         try {
-            Optional<Account> account = accountRepository.findByEmail(loginDTO.getEmail());
+            Optional<Account> account = accountRepository.findByEmail(resetPassRequest.getEmail());
             if (account.isEmpty()) {
                 throw new RuntimeException("Tài khoản không tồn tại!");
             }
 
-            if (!account.get().getAuthCode().equals(reset_key)) {
+            if (!account.get().getAuthCode().equals(resetPassRequest.getResetKey())) {
                 throw new RuntimeException("Không thể xác minh vui lòng thử lại");
             }
 
-            String newPassword = loginDTO.getPassword();
+            String newPassword = resetPassRequest.getNewPassword();
             if (passwordEncoder.matches(newPassword, account.get().getPassword())) {
                 throw new RuntimeException("Mật khẩu mới không thể trùng với mật khẩu cũ");
             }
 
             genericService genericService = new genericService();
-            genericService.validatePassword(loginDTO.getPassword());
+            genericService.validatePassword(resetPassRequest.getNewPassword());
 
             LocalDateTime now = LocalDateTime.now();
             if (now.isAfter(account.get().getExpirationTimeResetPass().plusMinutes(2))) {
                 throw new RuntimeException("Đã hết thời gian đặt lại mật khẩu, vui lòng thử lại!");
             }
-            account.get().setAuthCode(null);
+//            account.get().setAuthCode(null);
             account.get().setUserRequestAttemptCount(0);
             account.get().setPassword(passwordEncoder.encode(newPassword));
             accountRepository.save(account.get());

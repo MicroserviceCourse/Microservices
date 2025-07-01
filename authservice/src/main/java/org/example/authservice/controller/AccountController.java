@@ -165,14 +165,24 @@ public class AccountController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(
-            @RequestParam String reset_key, @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPassRequest resetPassRequest) {
 
         try {
-            accountService.resetPassword(reset_key, loginDTO);
+            accountService.resetPassword(resetPassRequest);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new RequestResponse("Đổi mật khẩu thành công"));
 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ExceptionResponse("An error occurred: " + e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "refresh-token")
+    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new RequestResponse(jwtService.refreshToken(refreshTokenRequest.getExpiredToken())));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ExceptionResponse("An error occurred: " + e.getMessage()));

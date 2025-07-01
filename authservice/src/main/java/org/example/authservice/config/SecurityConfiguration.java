@@ -48,6 +48,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+    @Autowired
+    private OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -69,7 +71,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
         http.oauth2Login(oauth2 -> oauth2
                 .successHandler(oAuth2LoginSuccessHandler)
-                .failureUrl("/auth/login?error=true")
+                .failureHandler(oAuth2LoginFailureHandler)
         );
 
         return http.build();
