@@ -34,7 +34,7 @@ public class ReviewController {
             Page<Review>reviewPage=reviewService.getAll(page,size);
             Page<ReviewDTO>dtoPage=reviewPage.map(reviewService::todo);
             PageResponse<ReviewDTO>response=new PageResponse<>(dtoPage);
-            return ResponseEntity.ok(new RequestResponse<>(dtoPage,"lấy rating thành công"));
+            return ResponseEntity.ok(new RequestResponse<>(response,"lấy rating thành công"));
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse<>("Đã xảy ra lỗi hệ thống"));
         }

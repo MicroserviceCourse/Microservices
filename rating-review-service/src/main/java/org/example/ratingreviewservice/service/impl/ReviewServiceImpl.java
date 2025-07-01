@@ -1,5 +1,6 @@
 package org.example.ratingreviewservice.service.impl;
 
+import feign.FeignException;
 import org.example.ratingreviewservice.client.AuthServiceClient;
 import org.example.ratingreviewservice.client.ProductServiceClient;
 import org.example.ratingreviewservice.dto.RequestResponse;
@@ -27,8 +28,13 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Review createReview(String token, ReviewDTO reviewDTO) {
        try {
-           RequestResponse<AccountDTO> response = authServiceClient.getMyInfo(  token);
+           RequestResponse<AccountDTO> response = authServiceClient.getMyInfo(token);
            AccountDTO account = response.getData();
+           try {
+            productServiceClient.getProduct(reviewDTO.getProductId());
+           }catch (FeignException.NotFound e){
+               throw new RuntimeException("Sản phẩm Không tồn tại");
+           }
             Review review= Review.builder()
                     .comment(reviewDTO.getComment())
                     .createdAt(Instant.now())
