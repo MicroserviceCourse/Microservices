@@ -20,7 +20,7 @@ public class InventoryController {
     public ResponseEntity<?>isInStock(@PathVariable int idProduct) {
         try {
             InventoryResponse inventoryResponse=inventoryService.checkStock(idProduct);
-            return ResponseEntity.ok(new RequestResponse(inventoryResponse,"Lấy hàng tồn kho thành công"));
+            return ResponseEntity.ok(new RequestResponse<>(inventoryResponse,"Lấy hàng tồn kho thành công"));
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
         }
