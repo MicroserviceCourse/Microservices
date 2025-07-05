@@ -10,6 +10,7 @@ import org.example.cartservice.dto.request.CartItemDTO;
 import org.example.cartservice.dto.request.ProductDTO;
 import org.example.cartservice.entity.Cart;
 import org.example.cartservice.entity.CartItem;
+import org.example.cartservice.repository.CartItemRepository;
 import org.example.cartservice.repository.CartRepository;
 import org.example.cartservice.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class CartServiceImpl implements CartService {
     private ProductServiceClient productService;
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
     @Override
     public Cart createCart(String token, CartDTO cartDTO) {
@@ -153,5 +156,20 @@ public class CartServiceImpl implements CartService {
         }
         cartDTO.setCartItems(cartItemDTOList);
         return cartDTO;
+    }
+
+    @Override
+    public CartItem getCartByUserIdAndProductId(String token, int productId) {
+        AccountDTO user = authServiceClient.getMyInfo(token).getData();
+        return cartItemRepository.findCartItemByUserIdAndProductId(user.getId(), productId);
+    }
+
+    @Override
+    public CartItemDTO todoCartItem(CartItem cart) {
+        CartItemDTO cartItemDTO = new CartItemDTO();
+        cartItemDTO.setId(cart.getId());
+        cartItemDTO.setQuantity(cart.getQuantity());
+        cartItemDTO.setPrice(cart.getPrice());
+        return cartItemDTO;
     }
 }
