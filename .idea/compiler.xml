@@ -8,20 +8,24 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
-        <module name="File_Service" />
+        <module name="cart-service" />
         <module name="payment-service" />
+        <module name="inventory-service" />
+        <module name="api-gateway" />
+        <module name="File_Service" />
         <module name="product_service" />
+        <module name="eureka-server" />
         <module name="search_service" />
+        <module name="banner_service" />
       </profile>
-      <profile name="Annotation profile for eureka-server" enabled="true">
+      <profile name="Annotation profile for statistic_service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
-        <module name="eureka-server" />
+        <module name="statistic_service" />
       </profile>
       <profile name="Annotation profile for authservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -35,17 +39,15 @@
         </processorPath>
         <module name="authservice" />
       </profile>
-      <profile name="Annotation profile for inventory-service" enabled="true">
+      <profile name="Annotation profile for rating-review-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.2/mapstruct-processor-1.6.2.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.6.2/mapstruct-1.6.2.jar" />
         </processorPath>
-        <module name="api-gateway" />
-        <module name="cart-service" />
-        <module name="inventory-service" />
-        <module name="banner_service" />
         <module name="rating-review-service" />
       </profile>
     </annotationProcessing>
@@ -60,22 +62,23 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="File_Service" options="-parameters" />
-      <module name="api-gateway" options="-parameters" />
+      <module name="File_Service" options="" />
+      <module name="api-gateway" options="" />
       <module name="authservice" options="-parameters" />
-      <module name="banner_service" options="-parameters" />
-      <module name="cart-service" options="-parameters" />
+      <module name="banner_service" options="" />
+      <module name="cart-service" options="" />
       <module name="categories-service" options="-parameters" />
       <module name="chat-service" options="-parameters" />
-      <module name="config-server" options="-parameters" />
+      <module name="config-server" options="" />
       <module name="demo" options="-parameters" />
-      <module name="eureka-server" options="-parameters" />
-      <module name="inventory-service" options="-parameters" />
-      <module name="payment-service" options="-parameters" />
-      <module name="product_service" options="-parameters" />
+      <module name="eureka-server" options="" />
+      <module name="inventory-service" options="" />
+      <module name="payment-service" options="" />
+      <module name="product_service" options="" />
       <module name="product_service (1)" options="-parameters" />
       <module name="rating-review-service" options="-parameters" />
-      <module name="search_service" options="-parameters" />
+      <module name="search_service" options="" />
+      <module name="statistic_service" options="-parameters" />
       <module name="user" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>

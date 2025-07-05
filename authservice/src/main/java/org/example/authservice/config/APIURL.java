@@ -11,7 +11,7 @@
             "/api/account/refresh-token"
     };
 
-        };
+
         public static final String[] URL_ANONYMOUS_DELETE = {
 
         };

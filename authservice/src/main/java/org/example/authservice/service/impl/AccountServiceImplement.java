@@ -155,11 +155,11 @@ public class AccountServiceImplement implements AccountService {
             if (token.startsWith("Bearer ")) {
                 token = token.substring(7);
             }
-            String username=jwtService.extractUsername(token);
+            String username = jwtService.extractUsername(token);
             return accountRepository.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
-        }catch (Exception e) {
-            throw new RuntimeException("Invalid token",e);
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid token", e);
         }
     }
 
@@ -196,10 +196,8 @@ public class AccountServiceImplement implements AccountService {
 
             LocalDateTime now = LocalDateTime.now();
             if (account.get().getExpirationTimeResetPass() != null) {
-                if (now.isBefore(account.get().getExpirationTimeResetPass().plusMinutes(10))) {
-                    if (account.get().getUserRequestAttemptCount() >= 5) {
-                        throw new RuntimeException("Đã quá số lượt yêu cầu, vui lòng thử lại sau :");
-                    }
+                if (now.isBefore(account.get().getExpirationTimeResetPass().plusMinutes(1))) {
+                    throw new RuntimeException("vui lòng thử lại sau 60s");
                 } else {
                     account.get().setUserRequestAttemptCount(0);
                 }
@@ -207,7 +205,6 @@ public class AccountServiceImplement implements AccountService {
 
             account.get().setExpirationTimeResetPass(now);
             account.get().setAuthCode(reset_key);
-            account.get().setUserRequestAttemptCount(account.get().getUserRequestAttemptCount() + 1);
             accountRepository.save(account.get());
             String resetLink = linkResetPass + "/reset-password?" + "&reset_key=" + reset_key;
 
@@ -227,25 +224,20 @@ public class AccountServiceImplement implements AccountService {
             if (account.isEmpty()) {
                 throw new RuntimeException("Tài khoản không tồn tại!");
             }
-
             if (!account.get().getAuthCode().equals(resetPassRequest.getResetKey())) {
                 throw new RuntimeException("Không thể xác minh vui lòng thử lại");
             }
-
             String newPassword = resetPassRequest.getNewPassword();
             if (passwordEncoder.matches(newPassword, account.get().getPassword())) {
                 throw new RuntimeException("Mật khẩu mới không thể trùng với mật khẩu cũ");
             }
-
             genericService genericService = new genericService();
             genericService.validatePassword(resetPassRequest.getNewPassword());
-
             LocalDateTime now = LocalDateTime.now();
             if (now.isAfter(account.get().getExpirationTimeResetPass().plusMinutes(2))) {
                 throw new RuntimeException("Đã hết thời gian đặt lại mật khẩu, vui lòng thử lại!");
             }
-//            account.get().setAuthCode(null);
-            account.get().setUserRequestAttemptCount(0);
+            account.get().setAuthCode(null);
             account.get().setPassword(passwordEncoder.encode(newPassword));
             accountRepository.save(account.get());
         } catch (Exception e) {

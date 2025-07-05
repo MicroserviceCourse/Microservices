@@ -1,5 +1,6 @@
-package org.example.authservice.exception;
-import lombok.*;
+package org.example.ratingreviewservice.exception;
+
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
