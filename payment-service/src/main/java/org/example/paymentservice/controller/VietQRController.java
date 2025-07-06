@@ -7,10 +7,7 @@ import org.example.paymentservice.dto.request.CartDTO;
 import org.example.paymentservice.dto.request.VietQRRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +30,7 @@ public class VietQRController {
                     URLEncoder.encode(request.getAddInfo(), StandardCharsets.UTF_8)
             );
 
-            return ResponseEntity.ok(new RequestResponse(qrImageUrl, "Tạo QR thanh toán"));
+            return ResponseEntity.ok(new RequestResponse<>(qrImageUrl, "Tạo QR thanh toán"));
         }catch (FeignException e){
             throw new RuntimeException("Không thể xem product");
         }
