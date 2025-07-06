@@ -1,7 +1,7 @@
-    package org.example.authservice.config;
+package org.example.authservice.config;
 
-    public class APIURL {
-        public static final String[] URL_ANONYMOUS_GET = {
+public class APIURL {
+    public static final String[] URL_ANONYMOUS_GET = {
             "/api/account/users",
             "/api/account/role",
     };
@@ -10,13 +10,11 @@
             "/api/account/register",
             "/api/account/refresh-token"
     };
+    public static final String[] URL_ANONYMOUS_DELETE = {
 
-        };
-        public static final String[] URL_ANONYMOUS_DELETE = {
+    };
 
-        };
-    
-      public static final String[] URL_USER_GET = {
+    public static final String[] URL_USER_GET = {
             "/login/oauth2/code/google",
             "/login/oauth2/**",
             "/login",
@@ -33,4 +31,4 @@
             "/api/user/update/**",
 
     };
-    }
+}

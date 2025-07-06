@@ -34,6 +34,10 @@ public class InventoryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse(e.getMessage()));
         }
     }
+    @GetMapping("/has-sufficient-stock")
+    public boolean hasSufficientStock(@RequestParam int productId,@RequestParam int quantity) {
+       return inventoryService.hasSufficientStock(productId,quantity);
+    }
     @PostMapping("/restore")
     public ResponseEntity<?> restoreInventory(@RequestBody InventoryRequest inventoryRequest) {
         try {

@@ -32,20 +32,33 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
         </processorPath>
         <module name="authservice" />
       </profile>
-      <profile name="Annotation profile for inventory-service" enabled="true">
+      <profile name="Annotation profile for order-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="api-gateway" />
+        <module name="order-service" />
+      </profile>
+      <profile name="Annotation profile for rating-review-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
         </processorPath>
-        <module name="api-gateway" />
+        <module name="cms_service" />
         <module name="cart-service" />
         <module name="inventory-service" />
-        <module name="banner_service" />
         <module name="rating-review-service" />
       </profile>
     </annotationProcessing>
@@ -54,6 +67,7 @@
       <module name="chat-service" target="17" />
       <module name="demo" target="21" />
       <module name="product_service (1)" target="17" />
+      <module name="shipping_service" target="17" />
       <module name="user" target="17" />
       <module name="user-service" target="21" />
     </bytecodeTargetLevel>
@@ -63,19 +77,21 @@
       <module name="File_Service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="authservice" options="-parameters" />
-      <module name="banner_service" options="-parameters" />
       <module name="cart-service" options="-parameters" />
       <module name="categories-service" options="-parameters" />
       <module name="chat-service" options="-parameters" />
+      <module name="cms_service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
+      <module name="order-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="product_service" options="-parameters" />
       <module name="product_service (1)" options="-parameters" />
       <module name="rating-review-service" options="-parameters" />
       <module name="search_service" options="-parameters" />
+      <module name="shipping_service" options="-parameters" />
       <module name="user" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
