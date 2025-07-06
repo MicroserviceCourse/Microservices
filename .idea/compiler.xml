@@ -13,16 +13,6 @@
         <module name="product_service" />
         <module name="search_service" />
       </profile>
-      <profile name="Annotation profile for eureka-server" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-        </processorPath>
-        <module name="eureka-server" />
-      </profile>
       <profile name="Annotation profile for authservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -32,12 +22,45 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
+        </processorPath>
+        <module name="authservice" />
+      </profile>
+      <profile name="Annotation profile for api-gateway" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="api-gateway" />
+      </profile>
+      <profile name="Annotation profile for eureka-server" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="eureka-server" />
+      </profile>
+      <profile name="Annotation profile for shipping_service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
-        <module name="authservice" />
+        <module name="api-gateway" />
+        <module name="shipping_service" />
+        <module name="banner_service" />
       </profile>
       <profile name="Annotation profile for order-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -50,6 +73,7 @@
         <module name="order-service" />
       </profile>
       <profile name="Annotation profile for rating-review-service" enabled="true">
+      <profile name="Annotation profile for rating-review-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -60,13 +84,14 @@
         <module name="cart-service" />
         <module name="inventory-service" />
         <module name="rating-review-service" />
+        <module name="rating-review-service" />
+        <module name="banner_service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="categories-service" target="23" />
       <module name="chat-service" target="17" />
       <module name="demo" target="21" />
-      <module name="product_service (1)" target="17" />
       <module name="shipping_service" target="17" />
       <module name="user" target="17" />
       <module name="user-service" target="21" />
@@ -77,6 +102,7 @@
       <module name="File_Service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="authservice" options="-parameters" />
+      <module name="banner_service" options="-parameters" />
       <module name="cart-service" options="-parameters" />
       <module name="categories-service" options="-parameters" />
       <module name="chat-service" options="-parameters" />
@@ -88,7 +114,6 @@
       <module name="order-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="product_service" options="-parameters" />
-      <module name="product_service (1)" options="-parameters" />
       <module name="rating-review-service" options="-parameters" />
       <module name="search_service" options="-parameters" />
       <module name="shipping_service" options="-parameters" />
