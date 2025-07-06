@@ -11,21 +11,11 @@
         <module name="cart-service" />
         <module name="payment-service" />
         <module name="inventory-service" />
-        <module name="api-gateway" />
         <module name="File_Service" />
         <module name="product_service" />
         <module name="eureka-server" />
         <module name="search_service" />
         <module name="banner_service" />
-      </profile>
-      <profile name="Annotation profile for statistic_service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="statistic_service" />
       </profile>
       <profile name="Annotation profile for authservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -50,6 +40,24 @@
         </processorPath>
         <module name="rating-review-service" />
       </profile>
+      <profile name="Annotation profile for api-gateway" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="api-gateway" />
+      </profile>
+      <profile name="Annotation profile for statistic_service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+        </processorPath>
+        <module name="statistic-service" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="categories-service" target="23" />
@@ -63,7 +71,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="File_Service" options="" />
-      <module name="api-gateway" options="" />
+      <module name="api-gateway" options="-parameters" />
       <module name="authservice" options="-parameters" />
       <module name="banner_service" options="" />
       <module name="cart-service" options="" />
@@ -78,7 +86,7 @@
       <module name="product_service (1)" options="-parameters" />
       <module name="rating-review-service" options="-parameters" />
       <module name="search_service" options="" />
-      <module name="statistic_service" options="-parameters" />
+      <module name="statistic-service" options="-parameters" />
       <module name="user" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
