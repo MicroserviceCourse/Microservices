@@ -59,4 +59,11 @@ public class InventoryServiceImpl implements InventoryService {
         inventory.setUpdatedAt(Instant.now());
         inventoryRepository.save(inventory);
     }
+
+    @Override
+    public boolean hasSufficientStock(int productId, int quantity) {
+        Inventory inventory=inventoryRepository.findByProductId(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        return inventory.getQuantity() >= quantity;
+    }
 }

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface CartItemRepository extends IRepository<CartItem,Integer> {
-    @Query("select * from CartItem a where a.cart.userId = :userId and a.productId = :productId")
+    @Query("select a from CartItem a where a.cart.userId = :userId and a.productId = :productId")
     CartItem findCartItemByUserIdAndProductId(Integer userId, Integer productId);
 }

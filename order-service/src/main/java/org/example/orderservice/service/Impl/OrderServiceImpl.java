@@ -3,11 +3,9 @@ package org.example.orderservice.service.Impl;
 import feign.FeignException;
 import org.example.orderservice.client.AuthServiceClient;
 import org.example.orderservice.client.CartServiceClient;
+import org.example.orderservice.client.InventoryClient;
 import org.example.orderservice.dto.RequestResponse;
-import org.example.orderservice.dto.request.AccountDTO;
-import org.example.orderservice.dto.request.CartItemDTO;
-import org.example.orderservice.dto.request.OrderDTO;
-import org.example.orderservice.dto.request.OrderItemDTO;
+import org.example.orderservice.dto.request.*;
 import org.example.orderservice.entity.Order;
 import org.example.orderservice.entity.OrderItem;
 import org.example.orderservice.repository.OrderRepository;
@@ -25,6 +23,8 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private InventoryClient inventoryClient;
     @Autowired
     private AuthServiceClient authServiceClient;
     @Autowired
@@ -53,7 +53,14 @@ public class OrderServiceImpl implements OrderService {
                 }
             }
             order.setItems(orderItems);
-            return orderRepository.save(order);
+            Order savedOrder = orderRepository.save(order);
+            for (OrderItem orderItem : savedOrder.getItems()) {
+                InventoryRequest inventoryRequest = new InventoryRequest();
+                inventoryRequest.setProductId(orderItem.getProductId());
+                inventoryRequest.setQuantity(orderItem.getQuantity());
+                inventoryClient.updateInventory(inventoryRequest);
+            }
+            return order;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

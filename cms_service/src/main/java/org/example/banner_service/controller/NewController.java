@@ -20,7 +20,7 @@ public class NewController {
     private NewService newService;
 
     @PostMapping("create")
-    public ResponseEntity<?> create(@RequestBody NewDTO newDTO, @RequestParam(value = "file", required = false) MultipartFile file) {
+    public ResponseEntity<?> create(@ModelAttribute NewDTO newDTO, @RequestParam(value = "file", required = false) MultipartFile file) {
         try {
             newService.createNew(file, newDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -31,7 +31,7 @@ public class NewController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody NewDTO newDTO, @RequestParam(value = "file", required = false) MultipartFile file) {
+    public ResponseEntity<?> update(@PathVariable("id") int id, @ModelAttribute NewDTO newDTO, @RequestParam(value = "file", required = false) MultipartFile file) {
         try {
             newService.updateNew(id, newDTO, file);
             return ResponseEntity.ok(new RequestResponse("Cập nhật tin tức thành công"));
