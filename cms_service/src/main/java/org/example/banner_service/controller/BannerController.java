@@ -29,7 +29,7 @@ public class BannerController {
         try {
             bannerService.createBanner(bannerDTO, file);
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new RequestResponse("Banner created successfully"));
+                    .body(new RequestResponse("Blog created successfully"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
         }
@@ -39,7 +39,7 @@ public class BannerController {
     public ResponseEntity<?> update(@ModelAttribute BannerDTO bannerDTO, @PathVariable("id") int id, @RequestParam(value = "file", required = false) MultipartFile file) {
         try {
             bannerService.updateBanner(id, bannerDTO, file);
-            return ResponseEntity.ok(new RequestResponse("Banner updated successfully"));
+            return ResponseEntity.ok(new RequestResponse("Blog updated successfully"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RequestResponse("Đã xảy ra lỗi hệ thống"));
         }

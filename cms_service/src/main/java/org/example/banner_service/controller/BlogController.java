@@ -22,7 +22,7 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody BlogDTO blogDTO, @RequestParam(value = "file", required = false) MultipartFile file) {
+    public ResponseEntity<?> create(@ModelAttribute BlogDTO blogDTO, @RequestParam(value = "file", required = false) MultipartFile file) {
         try {
             blogService.create(file, blogDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -58,7 +58,7 @@ public class BlogController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody BlogDTO blogDTO, @RequestParam(value = "file", required = false) MultipartFile file) {
+    public ResponseEntity<?> update(@PathVariable("id") int id, @ModelAttribute BlogDTO blogDTO, @RequestParam(value = "file", required = false) MultipartFile file) {
         try {
             blogService.update(id, file, blogDTO);
             return ResponseEntity.ok(new RequestResponse("Banner updated successfully"));
