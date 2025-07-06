@@ -5,5 +5,6 @@ public class AccountDTO {
     private String email;
     private String password;
     private int idRole;
+    private int id;
     private String role;
 }

@@ -2,6 +2,7 @@ package org.example.authservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.authservice.entity.enu.RoleUser;
 
 import java.util.List;
 
@@ -20,7 +21,4 @@ public class Role {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<Account> accounts;
 
-    public enum RoleUser {
-        USER, ADMIN
-    }
 }

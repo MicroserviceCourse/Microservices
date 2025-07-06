@@ -3,6 +3,7 @@ package org.example.authservice.entity;
 import jakarta.persistence.*;
 
 import lombok.*;
+import org.example.authservice.entity.enu.Provider;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -31,6 +32,7 @@ public class Account  implements UserDetails{
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
     private Provider provider;
 
     @OneToOne
@@ -78,7 +80,5 @@ public class Account  implements UserDetails{
         return true;
     }
 
-    public enum Provider {
-        LOCAL, GOOGLE
-    }
+
 }

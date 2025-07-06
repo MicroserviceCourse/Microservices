@@ -10,7 +10,6 @@
         <module name="config-server" />
         <module name="File_Service" />
         <module name="payment-service" />
-        <module name="product_service (1)" />
         <module name="product_service" />
         <module name="search_service" />
       </profile>
@@ -44,14 +43,17 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
         </processorPath>
         <module name="api-gateway" />
+        <module name="cart-service" />
         <module name="inventory-service" />
         <module name="banner_service" />
+        <module name="rating-review-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="categories-service" target="23" />
       <module name="chat-service" target="17" />
       <module name="demo" target="21" />
+      <module name="product_service (1)" target="17" />
       <module name="user" target="17" />
       <module name="user-service" target="21" />
     </bytecodeTargetLevel>
@@ -62,6 +64,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="authservice" options="-parameters" />
       <module name="banner_service" options="-parameters" />
+      <module name="cart-service" options="-parameters" />
       <module name="categories-service" options="-parameters" />
       <module name="chat-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
@@ -71,6 +74,7 @@
       <module name="payment-service" options="-parameters" />
       <module name="product_service" options="-parameters" />
       <module name="product_service (1)" options="-parameters" />
+      <module name="rating-review-service" options="-parameters" />
       <module name="search_service" options="-parameters" />
       <module name="user" options="-parameters" />
       <module name="user-service" options="-parameters" />

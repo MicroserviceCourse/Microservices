@@ -20,10 +20,13 @@
         <option value="$PROJECT_DIR$/banner_service/pom.xml" />
         <option value="$PROJECT_DIR$/chat-service/pom.xml" />
         <option value="$PROJECT_DIR$/inventory-service/pom.xml" />
+        <option value="$PROJECT_DIR$/rating-review-service/pom.xml" />
+        <option value="$PROJECT_DIR$/cart-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/cartservice/pom.xml" />
         <option value="$PROJECT_DIR$/chat-service/pom.xml" />
         <option value="$PROJECT_DIR$/user/pom.xml" />
       </set>

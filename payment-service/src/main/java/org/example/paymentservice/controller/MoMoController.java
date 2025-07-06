@@ -21,7 +21,7 @@ public class MoMoController {
     public ResponseEntity<?> create(@RequestBody MoMoPaymentRequest request) {
         try {
             String payUrl = moMoService.createPayment(request);
-            return ResponseEntity.ok(new RequestResponse(payUrl, "Tạo thanh toán momo thành công"));
+            return ResponseEntity.ok(new RequestResponse<>(payUrl, "Tạo thanh toán momo thành công"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse("Lỗi tạo thanh toán MoMo: " + e.getMessage()));
         }
@@ -29,11 +29,11 @@ public class MoMoController {
 
     @GetMapping("/return")
     public ResponseEntity<?> momoReturn(@RequestParam Map<String, String> params) {
-        return ResponseEntity.ok(new RequestResponse("Thanh toán thành công"));
+        return ResponseEntity.ok(new RequestResponse<>("Thanh toán thành công"));
     }
 
     @GetMapping("/notify")
     public ResponseEntity<?> momoNotify(@RequestParam Map<String, String> params) {
-        return ResponseEntity.ok(new RequestResponse("Thanh toán hoàn tất"));
+        return ResponseEntity.ok(new RequestResponse<>("Thanh toán hoàn tất"));
     }
 }
