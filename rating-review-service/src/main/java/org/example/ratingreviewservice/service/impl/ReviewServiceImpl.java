@@ -69,6 +69,11 @@ public class ReviewServiceImpl implements ReviewService {
                 throw new ErrorHandler(HttpStatus.BAD_REQUEST, "Lỗi ProductService: " + e.contentUTF8());
             }
         }
+        Boolean hasPurchased = (Boolean) orderServiceClient.hasUserPurchasedProduct(account.getId(), reviewDTO.getProductId()).getData();
+        if (!hasPurchased) {
+            throw new ErrorHandler(HttpStatus.BAD_REQUEST, "Bạn chưa mua sản phẩm này, không thể đánh giá");
+        }
+
         Review review = Review.builder()
                 .comment(reviewDTO.getComment())
                 .createdAt(Instant.now())
@@ -90,7 +95,7 @@ public class ReviewServiceImpl implements ReviewService {
         review.setImages(reviewImages);
 
         Review newReview = reviewRepository.save(review);
-        kafkaTemplate.send("review-topic", newReview);
+     //   kafkaTemplate.send("review-topic", newReview);
 
         return newReview;
     }

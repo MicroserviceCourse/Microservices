@@ -2,8 +2,10 @@ package org.example.statistic_service.controller;
 
 import com.netflix.discovery.converters.Auto;
 import org.apache.catalina.User;
+import org.example.statistic_service.client.OrderClient;
 import org.example.statistic_service.client.UserClient;
 import org.example.statistic_service.dto.RequestResponse;
+import org.example.statistic_service.dto.StatisticOrderRequest;
 import org.example.statistic_service.dto.StatisticUserRequest;
 import org.example.statistic_service.dto.StatisticUserResponse;
 import org.example.statistic_service.exception.ExceptionResponse;
@@ -22,12 +24,42 @@ public class StatisticController {
     @Autowired
     private UserClient userClient;
 
+    @Autowired
+    private OrderClient orderClient;
+
     @PostMapping(value = "/statistic-user")
-    public ResponseEntity<?> statisticUser(@RequestBody StatisticUserRequest request) {
+    public ResponseEntity<?> statisticUser( @RequestParam String label,
+            @RequestBody StatisticUserRequest request) {
         try {
             return ResponseEntity
                     .ok()
-                    .body(userClient.getUserStatistic(request));
+                    .body(userClient.getUserStatistic(label,request));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ExceptionResponse("Đã xảy ra lỗi: " + e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "/statistic-order", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<?> statisticUser(@RequestParam String label, @RequestParam String orderStatus,
+                                    @RequestBody StatisticOrderRequest statisticUserRequest) {
+        try {
+            return ResponseEntity
+                    .ok()
+                    .body(orderClient.statisticOrder(label,orderStatus,statisticUserRequest).getBody());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ExceptionResponse("Đã xảy ra lỗi: " + e.getMessage()));
+        }
+    }
+
+    @PostMapping("/top5-products")
+    ResponseEntity<?> getTop5BestSellingProducts(@RequestParam int top,
+                                                 @RequestBody StatisticOrderRequest statisticOrderRequest){
+        try {
+            return ResponseEntity
+                    .ok()
+                    .body(orderClient.getTop5BestSellingProducts(top, statisticOrderRequest).getBody());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ExceptionResponse("Đã xảy ra lỗi: " + e.getMessage()));

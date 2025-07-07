@@ -2,6 +2,7 @@ package org.example.cartservice.service.impl;
 
 import feign.FeignException;
 import org.example.cartservice.client.AuthServiceClient;
+import org.example.cartservice.client.InventoryClient;
 import org.example.cartservice.client.ProductServiceClient;
 import org.example.cartservice.dto.RequestResponse;
 import org.example.cartservice.dto.request.AccountDTO;
@@ -10,6 +11,7 @@ import org.example.cartservice.dto.request.CartItemDTO;
 import org.example.cartservice.dto.request.ProductDTO;
 import org.example.cartservice.entity.Cart;
 import org.example.cartservice.entity.CartItem;
+import org.example.cartservice.repository.CartItemRepository;
 import org.example.cartservice.repository.CartRepository;
 import org.example.cartservice.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +31,13 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private AuthServiceClient authServiceClient;
     @Autowired
+    private InventoryClient inventoryClient;
+    @Autowired
     private ProductServiceClient productService;
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
     @Override
     public Cart createCart(String token, CartDTO cartDTO) {
@@ -45,6 +51,12 @@ public class CartServiceImpl implements CartService {
             Double totalPrice = 0.0;
             List<CartItem> cartItems = new ArrayList<CartItem>();
             for (CartItemDTO cartItemDTO : cartDTO.getCartItems()) {
+                int productId = cartItemDTO.getId();
+                int quantity = cartItemDTO.getQuantity();
+                boolean isAvailable = inventoryClient.hasSufficientStock(productId, quantity);
+                if (!isAvailable) {
+                    throw new RuntimeException("Sản phẩm ID " + productId + " không đủ tồn kho");
+                }
                 try {
                     RequestResponse<ProductDTO> productDTORequestResponse = productService.getProduct(cartItemDTO.getId());
                     ProductDTO productDTO = productDTORequestResponse.getData();
@@ -79,6 +91,12 @@ public class CartServiceImpl implements CartService {
                     .collect(Collectors.toMap(CartItem::getProductId, Function.identity()));
             double totalPrice = 0.0;
             for (CartItemDTO cartItemDTO : cartDTO.getCartItems()) {
+                int productId = cartItemDTO.getId();
+                int quantity = cartItemDTO.getQuantity();
+                boolean isAvailable = inventoryClient.hasSufficientStock(productId, quantity);
+                if (!isAvailable) {
+                    throw new RuntimeException("Sản phẩm ID " + productId + " không đủ tồn kho");
+                }
                 ProductDTO productDTO = productService.getProduct(cartItemDTO.getId()).getData();
                 if (currentTimes.containsKey(productDTO.getId())) {
                     CartItem existing = currentTimes.get(productDTO.getId());
@@ -144,7 +162,7 @@ public class CartServiceImpl implements CartService {
         List<CartItemDTO> cartItemDTOList = new ArrayList<>();
         for (CartItem cartItem : cart.getItems()) {
             CartItemDTO cartItemDTO = new CartItemDTO();
-            ProductDTO productDTO = productService.getProduct(cartItem.getId()).getData();
+            ProductDTO productDTO = productService.getProduct(cartItem.getProductId()).getData();
             cartItemDTO.setId(cartItem.getProductId());
             cartItemDTO.setQuantity(cartItem.getQuantity());
             cartItemDTO.setPrice(cartItem.getPrice());
@@ -153,5 +171,20 @@ public class CartServiceImpl implements CartService {
         }
         cartDTO.setCartItems(cartItemDTOList);
         return cartDTO;
+    }
+
+    @Override
+    public CartItem getCartByUserIdAndProductId(String token, int productId) {
+        AccountDTO user = authServiceClient.getMyInfo(token).getData();
+        return cartItemRepository.findCartItemByUserIdAndProductId(user.getId(), productId);
+    }
+
+    @Override
+    public CartItemDTO todoCartItem(CartItem cart) {
+        CartItemDTO cartItemDTO = new CartItemDTO();
+        cartItemDTO.setId(cart.getId());
+        cartItemDTO.setQuantity(cart.getQuantity());
+        cartItemDTO.setPrice(cart.getPrice());
+        return cartItemDTO;
     }
 }
