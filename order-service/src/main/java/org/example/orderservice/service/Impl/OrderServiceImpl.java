@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order createOrder(String token, OrderDTO orderDTO) {
         try {
-            AccountDTO accountDTO = authServiceClient.getMyInfo(token).getData();
+            AccountDTO accountDTO = (AccountDTO) authServiceClient.getMyInfo(token).getData();
             Order order = new Order();
             order.setOrderStatus(orderDTO.getStatus());
             order.setShippingFee(orderDTO.getShippingFee());
@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
             for (OrderItemDTO orderItemDTO : orderDTO.getOrderItems()) {
                 try {
                     RequestResponse<CartItemDTO> cartItemDTORequestResponse = cartServiceClient.getCart(token, orderItemDTO.getProductId());
-                    CartItemDTO cartItemDTO = cartItemDTORequestResponse.getData();
+                    CartItemDTO cartItemDTO = (CartItemDTO) cartItemDTORequestResponse.getData();
                     OrderItem orderItem = new OrderItem();
                     orderItem.setProductId(cartItemDTO.getId());
                     orderItem.setQuantity(cartItemDTO.getQuantity());

@@ -1,6 +1,6 @@
 package org.example.orderservice.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -9,7 +9,10 @@ import java.time.LocalDateTime;
  * Mặc định, phản hồi có trạng thái "success".
  */
 @Data
-public class RequestResponse<T>{
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public class RequestResponse<S> {
 
     /**
      * Trạng thái phản hồi, mặc định là "success".
@@ -29,7 +32,7 @@ public class RequestResponse<T>{
     /**
      * Dữ liệu phản hồi có thể chứa đối tượng bất kỳ.
      */
-    private T data;
+    private Object data;
 
     /**
      * Constructor nhận cả dữ liệu và thông điệp.
@@ -37,7 +40,7 @@ public class RequestResponse<T>{
      * @param data    Dữ liệu phản hồi.
      * @param message Thông điệp phản hồi.
      */
-    public RequestResponse(T data, String message) {
+    public RequestResponse(Object data, String message) {
         this.timestamp = LocalDateTime.now().toString();
         this.message = message;
         this.data = data;
@@ -48,7 +51,7 @@ public class RequestResponse<T>{
      *
      * @param data Dữ liệu phản hồi.
      */
-    public RequestResponse(T data) {
+    public RequestResponse(Object data) {
         this(data, null);
     }
 
@@ -62,4 +65,9 @@ public class RequestResponse<T>{
         this.message = message;
         this.data = null;
     }
+
+    public Object getData() {
+        return data;
+    }
+
 }

@@ -9,6 +9,7 @@ public class ExceptionResponse {
     private String timestamp; // Thời gian xảy ra lỗi
     private String message;
     private Integer code;
+
     public ExceptionResponse(String message, Integer code) {
         this.timestamp = LocalDateTime.now().toString();
         this.message = message;
