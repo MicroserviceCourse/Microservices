@@ -4,7 +4,8 @@ public class APIURL {
     public static final String[] URL_ANONYMOUS_GET = {
             "/api/account/users",
             "/api/account/role",
-            "/api/user/statistic-user"
+            "/api/user/statistic-user",
+            "/api/account/me"
     };
     public static final String[] URL_ANONYMOUS_POST = {
             "/api/account/login",
