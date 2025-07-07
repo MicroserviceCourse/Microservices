@@ -5,7 +5,8 @@ public class APIURL {
         "/api/cart/create",
     };
     public static final String[]URL_USER_GET={
-        "/api/cart/myCart"
+        "/api/cart/myCart",
+            "/api/cart/getCartByUserIdAndProductId/{productId}"
     };
     public static final String[]URL_USER_DELETE={
         "/api/cart/removeItem/{id}"

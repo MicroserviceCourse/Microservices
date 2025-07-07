@@ -29,15 +29,27 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
 
-//    @PostMapping("/create")
-//    public ResponseEntity<?> create(@RequestHeader("Authorization") String authHeader, @RequestBody OrderDTO orderDTO) {
-//        try {
-//            orderService.createOrder(authHeader, orderDTO);
-//            return ResponseEntity.ok(new RequestResponse<>("Tạo đơn hàng thành công"));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//        }
-//    }
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@RequestHeader("Authorization") String authHeader, @RequestBody OrderDTO orderDTO) {
+        try {
+            orderService.createOrder(authHeader, orderDTO);
+            return ResponseEntity.ok(new RequestResponse<>("Tạo đơn hàng thành công"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+    @GetMapping("/getByUser")
+    public ResponseEntity<?>getByUser(@RequestHeader("Authorization") String authHeader,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        try {
+            Page<Order>orders=orderService.getByUserId(authHeader, page, size);
+            Page<OrderDTO>dtoPage=orders.map(orderService::getOrder);
+            PageResponse<OrderDTO>response=new PageResponse<>(dtoPage);
+            return ResponseEntity.ok(new RequestResponse<>(response,"Lấy danh sách đơn hang theo user"));
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
     @GetMapping("/all")
     public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {

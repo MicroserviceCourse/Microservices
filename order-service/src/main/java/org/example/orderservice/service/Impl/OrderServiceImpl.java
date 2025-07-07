@@ -33,26 +33,31 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order createOrder(String token, OrderDTO orderDTO) {
         try {
-            AccountDTO accountDTO = (AccountDTO) authServiceClient.getMyInfo(token).getData();
+            RequestResponse<AccountDTO>getMyinfo= authServiceClient.getMyInfo(token);
+            AccountDTO accountDTO=(AccountDTO) getMyinfo.getData();
             Order order = new Order();
             order.setOrderStatus(orderDTO.getStatus());
             order.setShippingFee(orderDTO.getShippingFee());
             order.setUserId(accountDTO.getId());
             List<OrderItem> orderItems = new ArrayList<OrderItem>();
+            BigDecimal totalAmount=new BigDecimal(0);
             for (OrderItemDTO orderItemDTO : orderDTO.getOrderItems()) {
                 try {
                     RequestResponse<CartItemDTO> cartItemDTORequestResponse = cartServiceClient.getCart(token, orderItemDTO.getProductId());
                     CartItemDTO cartItemDTO = (CartItemDTO) cartItemDTORequestResponse.getData();
                     OrderItem orderItem = new OrderItem();
                     orderItem.setProductId(cartItemDTO.getId());
+                    orderItem.setOrder(order);
                     orderItem.setQuantity(cartItemDTO.getQuantity());
                     orderItem.setTotalPrice(BigDecimal.valueOf(cartItemDTO.getPrice() * cartItemDTO.getQuantity()));
                     orderItems.add(orderItem);
+                    totalAmount=totalAmount.add(BigDecimal.valueOf(cartItemDTO.getPrice() * cartItemDTO.getQuantity()));
                 } catch (FeignException.NotFound e) {
                     throw new RuntimeException("Order item not found");
                 }
             }
             order.setItems(orderItems);
+            order.setTotalAmount(totalAmount);
             Order savedOrder = orderRepository.save(order);
             for (OrderItem orderItem : savedOrder.getItems()) {
                 InventoryRequest inventoryRequest = new InventoryRequest();
@@ -78,6 +83,9 @@ public class OrderServiceImpl implements OrderService {
         orderDTO.setStatus(order.getOrderStatus());
         orderDTO.setShippingFee(order.getShippingFee());
         orderDTO.setUserId(order.getUserId());
+        orderDTO.setTotalAmount(order.getTotalAmount());
+        orderDTO.setOrderItems(new ArrayList<>());
+
         for (OrderItem orderItem : order.getItems()) {
             OrderItemDTO orderItemDTO = new OrderItemDTO();
             orderItemDTO.setId(orderItem.getId());
@@ -87,7 +95,14 @@ public class OrderServiceImpl implements OrderService {
             orderItemDTO.setTotalPrice(orderItem.getTotalPrice());
             orderDTO.getOrderItems().add(orderItemDTO);
         }
-        orderDTO.setOrderItems(orderDTO.getOrderItems());
+
         return orderDTO;
+    }
+
+    @Override
+    public Page<Order> getByUserId(String token, int page, int size) {
+        RequestResponse<AccountDTO>getMyinfo= authServiceClient.getMyInfo(token);
+        AccountDTO accountDTO=(AccountDTO) getMyinfo.getData();
+        return orderRepository.findByUserId(accountDTO.getId(), PageRequest.of(page, size));
     }
 }

@@ -10,4 +10,5 @@ public interface OrderService {
     Order createOrder(String token,OrderDTO orderDTO);
     Page<Order> getAll(int page, int size);
     OrderDTO getOrder(Order order);
+    Page<Order>getByUserId(String token, int page, int size);
 }

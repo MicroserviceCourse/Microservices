@@ -2,6 +2,8 @@ package org.example.orderservice.repository;
 
 import org.example.orderservice.entity.Order;
 import org.example.orderservice.generic.IRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -82,5 +84,6 @@ public interface OrderRepository extends IRepository<Order,Integer> {
             @Param("timeEnd") LocalDateTime timeEnd,
             @Param("top") int top
     );
-
+    @Query("SELECT o FROM Order o WHERE o.userId = :userId")
+    Page<Order> findByUserId(@Param("userId") int userId, Pageable pageable);
 }

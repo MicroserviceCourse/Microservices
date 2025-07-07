@@ -1,4 +1,4 @@
-package org.example.inventoryservice.config;
+package org.example.orderservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +24,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                                .requestMatchers(HttpMethod.POST,APIURL.URL_ADMIN_POST).hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET,APIURL.URL_ADMIN_GET).hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST,APIURL.URL_USER_POST).hasRole("USER")
+                                .requestMatchers(HttpMethod.GET,APIURL.URL_USER_GET).hasRole("USER")
                                 .requestMatchers(HttpMethod.GET,APIURL.URL_ANONYMOUS_GET).permitAll()
                                 .requestMatchers(HttpMethod.POST,APIURL.URL_ANONYMOUS_POST).permitAll()
 

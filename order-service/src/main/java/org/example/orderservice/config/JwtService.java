@@ -1,4 +1,4 @@
-package org.example.inventoryservice.config;
+package org.example.orderservice.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

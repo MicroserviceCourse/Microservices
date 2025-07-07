@@ -4,15 +4,13 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+
 /**
  * Lớp DTO dùng để chuẩn hóa phản hồi API.
  * Mặc định, phản hồi có trạng thái "success".
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-public class RequestResponse<S> {
+public class RequestResponse<T>{
 
     /**
      * Trạng thái phản hồi, mặc định là "success".
@@ -32,7 +30,7 @@ public class RequestResponse<S> {
     /**
      * Dữ liệu phản hồi có thể chứa đối tượng bất kỳ.
      */
-    private Object data;
+    private T data;
 
     /**
      * Constructor nhận cả dữ liệu và thông điệp.
@@ -40,7 +38,7 @@ public class RequestResponse<S> {
      * @param data    Dữ liệu phản hồi.
      * @param message Thông điệp phản hồi.
      */
-    public RequestResponse(Object data, String message) {
+    public RequestResponse(T data, String message) {
         this.timestamp = LocalDateTime.now().toString();
         this.message = message;
         this.data = data;
@@ -51,7 +49,7 @@ public class RequestResponse<S> {
      *
      * @param data Dữ liệu phản hồi.
      */
-    public RequestResponse(Object data) {
+    public RequestResponse(T data) {
         this(data, null);
     }
 
@@ -65,9 +63,4 @@ public class RequestResponse<S> {
         this.message = message;
         this.data = null;
     }
-
-    public Object getData() {
-        return data;
-    }
-
 }
