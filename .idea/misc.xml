@@ -33,6 +33,7 @@
       <set>
         <option value="$PROJECT_DIR$/cartservice/pom.xml" />
         <option value="$PROJECT_DIR$/chat-service/pom.xml" />
+        <option value="$PROJECT_DIR$/shipping-service/pom.xml" />
         <option value="$PROJECT_DIR$/user/pom.xml" />
       </set>
     </option>

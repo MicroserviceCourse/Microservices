@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/File_Service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/authservice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/banner_service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cart-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cms_service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config-server/src/main/java" charset="UTF-8" />
@@ -15,6 +16,7 @@
     <file url="file://$PROJECT_DIR$/product_service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rating-review-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/search_service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/statistic-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping_service/shipping_service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user/src/main/java" charset="UTF-8" />
   </component>
 </project>
