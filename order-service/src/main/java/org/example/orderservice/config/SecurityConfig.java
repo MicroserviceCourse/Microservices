@@ -18,14 +18,20 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain( HttpSecurity http) throws Exception {
         http
+
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers(HttpMethod.POST,APIURL.URL_USER_POST).hasRole("USER")
+                                .requestMatchers(HttpMethod.GET,APIURL.URL_USER_GET).hasRole("USER")
+                                .requestMatchers(HttpMethod.GET,APIURL.URL_ANONYMOUS_GET).permitAll()
+                                .requestMatchers(HttpMethod.POST,APIURL.URL_ANONYMOUS_POST).permitAll()
+
                                 .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

@@ -38,6 +38,8 @@ public class Account  implements UserDetails{
     @OneToOne
     private User user;
 
+    private LocalDateTime createdAt = LocalDateTime.now();
+
     private String authCode;
     // dùng để lưu code lúc đăng kí tài khoản hoặc lúc reset password, là null nếu đăng kí hoặc đổi mật khẩu thành công
 
