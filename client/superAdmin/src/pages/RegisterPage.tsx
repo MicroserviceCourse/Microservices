@@ -8,8 +8,8 @@ const RegisterPage = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+    <div className="flex items-center justify-center min-h-screen bg-[#f2f7fb]">
+      <div className="bg-white  rounded-2xl p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
           Create your account
         </h2>
