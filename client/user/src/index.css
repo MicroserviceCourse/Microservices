@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: Poppins, sans-serif;
+}
+
+@layer utilities {
+    .bg-fixed {
+        background-attachment: fixed;
+    }
+    .animate-fade-slide {
+        animation: fadeSlide 0.5s ease-in-out;
+      }
+    @keyframes fadeSlide {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+}
+
+@font-face {
+    font-family: 'Quentin';
+    src: url('/fonts/Quentin.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
