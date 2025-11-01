@@ -3,19 +3,26 @@ import MainLayout from "./layout/MainLayout"
 import Home from "./pages/Home"
 import CreateCategory from "./pages/category/CreateCategory"
 import CategoryList from "./pages/category/CategoryList"
+import LoginPage from "./pages/LoginPage"
+import RegisterPage from "./pages/RegisterPage"
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/createCategory" element={<CreateCategory/>}/>
-            <Route path="category" element={<CategoryList/>}/>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+       <BrowserRouter>
+      <Routes>
+        {/* Trang đăng nhập */}
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage/>}/>
+
+        {/* Trang dashboard với layout chính */}
+        <Route path="/dashboard" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="createCategory" element={<CreateCategory />} />
+          <Route path="category" element={<CategoryList />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
