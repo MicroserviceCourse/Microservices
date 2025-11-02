@@ -15,12 +15,9 @@ public class Permission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @Size(max = 100)
-    @NotNull
-    @Column(name = "module", nullable = false, length = 100)
-    private String module;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "module_id", nullable = false)
+    private Module module;
     @Size(max = 100)
     @NotNull
     @Column(name = "permission_key", nullable = false, length = 100)
