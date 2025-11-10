@@ -12,8 +12,7 @@ public class AuthSecurityConfig {
     private final AuthService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthSecurityConfig(AuthService userDetailsService,
-                              PasswordEncoder passwordEncoder) {
+    public AuthSecurityConfig(AuthService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }

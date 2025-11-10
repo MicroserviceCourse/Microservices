@@ -5,6 +5,8 @@ import CreateCategory from "./pages/category/CreateCategory"
 import CategoryList from "./pages/category/CategoryList"
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
+import ModuleList from "./pages/module/ModuleList"
+import PermissionList from "./pages/permission/PermissionList"
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="createCategory" element={<CreateCategory />} />
           <Route path="category" element={<CategoryList />} />
+          <Route path="modules" element={<ModuleList/>}/>
+          <Route path="modules/:id/permissions" element={<PermissionList/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

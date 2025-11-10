@@ -1,47 +1,39 @@
-import { FileText, Grid, Layers, Package, ShoppingCart } from "lucide-react";
+import { Layers, LayoutGrid,  Settings,  Shield,  Users } from "lucide-react";
 
 export const SideBarItems = [
-    {
-        title: "Main Home",
-        items: [
-            {
-                name: 'Dashboard',
-                icon: Grid,
-                children: [
-                    "Home 01",
-                    "Home 02",
-                    "Home 03",
-                    "Home 04",
-                    "Home Boxed",
-                    "Home Menu Icon Hover",
-                    "Home Menu Icon Default",
-                ]
-            }
-        ]
-    },
-    {
-        title: 'ALL PAGE',
-        items: [
-            {
-                name: 'Eccommerce',
-                icon: ShoppingCart,
-                children: ['Product List', 'Add Product', 'Product Detail']
-            },
-            {
-                name: 'Category',
-                icon: Layers,
-                children: ["Category List", "Add Category"],
-            },
-            {
-                name: "Attributes",
-                icon: Package,
-                children: ["Color", "Size", "Material"],
-            },
-            {
-                name: "Order",
-                icon: FileText,
-                children: ["Order List", "Order Detail"],
-            }
-        ]
-    }
+  {
+    title:"SYSTEM MANAGEMENT",
+    items:[
+      {
+        name:"Dashboard",
+        icon:LayoutGrid,
+        path:"/dashboard/dashboard"
+      },
+      {
+        name:"User Management",
+        icon: Users,
+        path: "/dashboard/users",
+      },
+      {
+        name: "Role & Permissions",
+        icon: Shield,
+        path: "/dashboard/roles",
+      },
+      {
+        name:"Module Management",
+        icon:Layers,
+        path:"/dashboard/modules",
+        children: [
+          { name: "Module List", path: "/dashboard/modules" },
+          { name: "Add Module", path: "/dashboard/modules/create" },
+          { name: "Assign Permission", path: "/dashboard/modules/assign" },
+        ],
+      },
+      {
+        name: "System Settings",
+        icon: Settings,
+        path: "/dashboard/settings",
+      },
+    ]
+  }
 ]

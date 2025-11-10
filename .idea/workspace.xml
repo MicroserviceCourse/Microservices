@@ -5,637 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85540db4-c907-4673-a630-aa8739a35986" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/0/00ee9b24b180217933d4eaf234718b9842312158" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/4/04b07d9e2380c53e2b409acf55bae6724f71fc7b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/8/08a2c17bb77a43079183143bdf3c4eea8f3f170f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/b/0b18196176ae942584eb8c6b317de2cc0a77ea08" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/c/0c922aa051f593ccec3546c862625c95ca63d0bc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/1/11b1f6c220c229121d8f977187082a3ac910ca9e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/6/16bcf51801b2dfb5e892f3abaa98cde218c5f40d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/7/17b33119d852215787e9868d4ee3a88d3073c54e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/8/18f7e0f5f048a047195628bd3d88afde1b1121e1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/9/19cad7b41ca7339efbd3c6404c1bc95e57a10758" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/b/1bc03d57e55bb5cbef022946fcd0a156c7e54098" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/3/235bce56b65f03ea9c18d6419c6307242c67cc6f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/f/2f95a7da1f751318e8b38141d2f9e6479555d18f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/1/315170a2a7501b459c4342962c038749458f281a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/3/3354f752ecb19704d4eb95209056252480b576d8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/7/371145d7f7852abd19f8e95c01ff02c316344132" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/391b26356c08eaed6dc4588645beab60066aa9f7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/e/3e6623ca4c125b8d4159a4b6d16d6a341c6b63fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/44b6786c177dc2f6cacb70b9d75ab9aeea21075c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/44f288cf0b9e750ae0f3ad92343530e4908e2577" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/8/48d7364bff1ee3ad87a0ae92f59c1dbdb81e4656" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/d/4d0a9651e55eb14b09caeedf5b5b68f4b1af1a23" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/5/559d7c759cf92d19a812f64a2a22432d812e4d38" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5b0a98bd239c14c9931fbe944b1d834594cf25c1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/5/65de50a4fca0e846c55439f2f7c94d6a7b200b00" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/5/65eddd312725a0e607a27ddda0fae4a223b62da1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6c0fc0a9a2d3970b4925d5b56d752c74dc0263d0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/70d811722451924c58afddc58a68e10cbd94f0b6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/6/7629b8b296315b918619ceccfed86ccbb56c8458" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7bcc265e9992d2b2960c616504c02bebcbc83115" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/e/7e30fad8cf1759d6955492b39bc1ce34b66a9b66" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/e/7e43183b186ff2e1478b196f25e0d9bf6465187a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/8/88dd7893622ac27d4fdd3d1037450f98c91af418" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/c/8cbbcd4f6d6f322a65c2978759eace5c6b6f24ec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/d/8dbbaff81adf08a939d6cf3dc83b32733cf5387b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/0/90094c911b2f0ccadf6eefc3e9189608de23ffb0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/e/9e28c03728e690244526ca81de18681b326caca0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/e/9eb3086b6412c81c9ecedbfb45e089a81159787d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/f/9f71463c64c2274d5ea9384dd0c9de5c6011fe25" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/1/a1cf17c59e8c7a118943f57571296c64a27d50bd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/f/af2a6dcd95e1b4b406b6acb0204e5c1698437983" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/0/b06788484a6249b61a5194706a156d7ed92a91ee" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/1/b133cc801a220eea0b5a27b9402de12204425438" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/4/b42fa2aa44a2d95fdc0c8ffc14f0113139f94380" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf01053c255c735217c6b618039bdfab236d8635" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/2/c26b1ab52f26c7ac8328adf1267b1d4367ce9248" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/5/c5d711fcab58571fc913a9f8408f05572a35e211" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/7/c77bf3bbf033316f15b1d546eccab1a8f4b77303" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d2601fcd6eb0fbf414931d8557e54899ae5c64db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/8/d89e7da3367a7a4ee62778b42b4e1c8bed89b001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/dbc7d2db0c5daaff8e3cafc054a65e6fcce6f516" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/f/dfc164287254fcd53de695a75d8485e2ada8613b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/0/e0cef1ab827be6aa9f4270af6017331431ca9397" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5f215bea23e43e14a7984968ae2a6454dae5064" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/9/f93b3cc1991a47f2d55e237f20c2c05a7b324e78" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/a/fa7d82d29c5463f45067fa4c2ef2a54a826cb687" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/0/00ee9b24b180217933d4eaf234718b9842312158" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/4/04b07d9e2380c53e2b409acf55bae6724f71fc7b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/8/08a2c17bb77a43079183143bdf3c4eea8f3f170f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/b/0b18196176ae942584eb8c6b317de2cc0a77ea08" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/c/0c922aa051f593ccec3546c862625c95ca63d0bc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/1/11b1f6c220c229121d8f977187082a3ac910ca9e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/6/16bcf51801b2dfb5e892f3abaa98cde218c5f40d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/7/17b33119d852215787e9868d4ee3a88d3073c54e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/8/18f7e0f5f048a047195628bd3d88afde1b1121e1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/9/19cad7b41ca7339efbd3c6404c1bc95e57a10758" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/b/1bc03d57e55bb5cbef022946fcd0a156c7e54098" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/2/3/235bce56b65f03ea9c18d6419c6307242c67cc6f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/2/f/2f95a7da1f751318e8b38141d2f9e6479555d18f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/1/315170a2a7501b459c4342962c038749458f281a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/3/3354f752ecb19704d4eb95209056252480b576d8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/7/371145d7f7852abd19f8e95c01ff02c316344132" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/9/391b26356c08eaed6dc4588645beab60066aa9f7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/e/3e6623ca4c125b8d4159a4b6d16d6a341c6b63fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/4/44b6786c177dc2f6cacb70b9d75ab9aeea21075c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/4/44f288cf0b9e750ae0f3ad92343530e4908e2577" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/8/48d7364bff1ee3ad87a0ae92f59c1dbdb81e4656" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/d/4d0a9651e55eb14b09caeedf5b5b68f4b1af1a23" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/5/559d7c759cf92d19a812f64a2a22432d812e4d38" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/b/5b0a98bd239c14c9931fbe944b1d834594cf25c1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/5/65de50a4fca0e846c55439f2f7c94d6a7b200b00" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/5/65eddd312725a0e607a27ddda0fae4a223b62da1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/c/6c0fc0a9a2d3970b4925d5b56d752c74dc0263d0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/0/70d811722451924c58afddc58a68e10cbd94f0b6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/6/7629b8b296315b918619ceccfed86ccbb56c8458" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/b/7bcc265e9992d2b2960c616504c02bebcbc83115" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/e/7e30fad8cf1759d6955492b39bc1ce34b66a9b66" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/e/7e43183b186ff2e1478b196f25e0d9bf6465187a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/8/88dd7893622ac27d4fdd3d1037450f98c91af418" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/c/8cbbcd4f6d6f322a65c2978759eace5c6b6f24ec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/d/8dbbaff81adf08a939d6cf3dc83b32733cf5387b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/0/90094c911b2f0ccadf6eefc3e9189608de23ffb0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/e/9e28c03728e690244526ca81de18681b326caca0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/e/9eb3086b6412c81c9ecedbfb45e089a81159787d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/f/9f71463c64c2274d5ea9384dd0c9de5c6011fe25" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/a/1/a1cf17c59e8c7a118943f57571296c64a27d50bd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/a/f/af2a6dcd95e1b4b406b6acb0204e5c1698437983" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/0/b06788484a6249b61a5194706a156d7ed92a91ee" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/1/b133cc801a220eea0b5a27b9402de12204425438" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/4/b42fa2aa44a2d95fdc0c8ffc14f0113139f94380" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/f/bf01053c255c735217c6b618039bdfab236d8635" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/c/2/c26b1ab52f26c7ac8328adf1267b1d4367ce9248" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/c/5/c5d711fcab58571fc913a9f8408f05572a35e211" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/c/7/c77bf3bbf033316f15b1d546eccab1a8f4b77303" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/2/d2601fcd6eb0fbf414931d8557e54899ae5c64db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/8/d89e7da3367a7a4ee62778b42b4e1c8bed89b001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/b/dbc7d2db0c5daaff8e3cafc054a65e6fcce6f516" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/f/dfc164287254fcd53de695a75d8485e2ada8613b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/0/e0cef1ab827be6aa9f4270af6017331431ca9397" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/5/e5f215bea23e43e14a7984968ae2a6454dae5064" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/9/f93b3cc1991a47f2d55e237f20c2c05a7b324e78" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/a/fa7d82d29c5463f45067fa4c2ef2a54a826cb687" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/FileServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/controller/FileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/dto/CustomMultipartFile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/dto/request/FileUploadRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/dto/request/FileUploadResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/exception/ErrorHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/service/GeneralService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/java/org/example/file_service/service/kafka/KafkaConsumerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/banner/ricky-2131549808.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/blog/ricky-2014887241.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/main/chungnhan_97266.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/main/moderno-2338177441-600x336.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/main/moderno-2338441644-600x336.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/main/ricky-2106332879-600x929.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/main/ricky-2125700451-600x929.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/main/th (1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/main/vna.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/sub/chungnhan_91004.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/sub/chungnhan_97266.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/sub/moderno-0139665883.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/sub/moderno-2338177441-600x336.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/sub/moderno-2338441644-600x336.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/product/sub/moderno-2607419203-600x336.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/review/1696703137_Laptop Asus VivoBook Go 14 E1404FA-NK177W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/review/Laptop ASUS TUF Gaming F15 FX506HC-HN144W.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/review/iPhone XS 256GB.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/main/resources/static/review/phai-anh1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/File_Service/src/test/java/org/example/file_service/FileServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/example/apigateway/ApiGatewayApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/test/java/org/example/apigateway/ApiGatewayApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/AuthserviceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/config/APIURL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/config/JwtFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/config/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/config/OAuth2LoginFailureHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/config/OAuth2LoginSuccessHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/config/SecurityConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/controller/AccountController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/AccountDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/LoginDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/TokenWithRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/UserRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/request/AccountDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/request/AuthCodeRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/request/LoginDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/request/RefreshTokenRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/request/ResetPassRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/request/StatisticUserRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/request/UserRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/response/Oauth2Response.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/response/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/response/StatisticUserResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/response/UserInfResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/response/UserResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/dto/response/UserStatisticResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/entity/Account.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/entity/InvalidateToken.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/entity/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/entity/enu/Provider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/entity/enu/RoleUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/exception/ErrorHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/generic/IRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/generic/genericService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/mapper/AccountMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/mapper/UserMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/repository/AccountRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/repository/InvalidateTokenrepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/repository/RoleRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/service/AccountService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/service/EmailService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/service/Oauth2Service.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/service/impl/AccountServiceImplement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/service/impl/EmailServiceImplement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/service/impl/Oauth2ServiceImplement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/java/org/example/authservice/service/impl/UserServiceImplement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/resources/templates/email_template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/main/resources/templates/reset_password_template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/src/test/java/org/example/authservice/AuthserviceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/BannerServiceApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/client/AuthServiceClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/client/FileServiceClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/config/APIURL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/config/JwtAuthorizationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/config/JwtService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/config/SecurityConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/controller/BannerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/dto/BannerDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/dto/RequestResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/dto/response/PageResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/entity/Banner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/exception/ErrorHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/exception/ExceptionResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/generic/GenericService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/generic/IRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/repository/BannerRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/service/BannerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/classes/org/example/banner_service/service/Impl/BannerServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_service/target/test-classes/org/example/banner_service/BannerServiceApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/CartServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/client/AuthServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/client/InventoryClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/client/ProductServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/config/APIURL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/config/JwtAuthorizationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/config/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/controller/CartController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/dto/request/AccountDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/dto/request/CartDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/dto/request/CartItemDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/dto/request/ProductDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/dto/response/PageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/entity/Cart.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/entity/CartItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/exception/ErrorHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/generic/IRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/repository/CartItemRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/repository/CartRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/service/CartService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/java/org/example/cartservice/service/impl/CartServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/test/java/org/example/cartservice/CartServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/CartserviceApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/client/AuthServiceClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/client/ProductServiceClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/config/APIURL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/config/JwtAuthorizationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/config/JwtService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/config/SecurityConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/controller/CartController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/dto/CartDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/dto/RequestResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/entity/Cart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/entity/MyCompositeKey.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/exception/ExceptionResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/repository/CartRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/service/CartService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/classes/com/example/cartservice/service/impl/CartServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartservice/target/test-classes/com/example/cartservice/CartserviceApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/BannerServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/Enum/BlogStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/Enum/NewsStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/client/AuthServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/client/FileServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/config/APIURL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/config/JwtAuthorizationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/config/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/controller/BannerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/controller/BlogController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/controller/NewController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/dto/request/BannerDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/dto/request/BlogDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/dto/request/NewDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/dto/response/PageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/entity/Banner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/entity/Blog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/entity/CategoryNews.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/entity/New.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/exception/ErrorHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/generic/GenericService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/generic/IRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/repository/BannerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/repository/BlogRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/repository/CategoryNewRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/repository/NewRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/service/BannerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/service/BlogService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/service/Impl/BannerServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/service/Impl/BlogServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/service/Impl/NewServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/java/org/example/banner_service/service/NewService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_service/src/test/java/org/example/banner_service/BannerServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/java/org/example/configserver/ConfigServerApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/test/java/org/example/configserver/ConfigServerApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/src/main/java/org/example/eurekaserver/EurekaServerApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/src/test/java/org/example/eurekaserver/EurekaServerApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/InventoryServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/client/AuthServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/client/ProductServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/config/APIURL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/config/JwtAuthorizationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/config/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/controller/InventoryController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/dto/request/InventoryRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/dto/request/ProductDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/dto/response/InventoryResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/entity/Inventory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/generic/IRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/repositories/InventoryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/service/InventoryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/example/inventoryservice/service/impl/InventoryServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/test/java/org/example/inventoryservice/InventoryServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/api-gateway.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/authservice.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/cart-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/cms-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/file-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/inventory-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/order-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/payment-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/product-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/rating-review-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/search_service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/shipping-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/statistic-service.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local-config/user.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/Enum/OrderStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/Enum/PaymentMethod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/Enum/PaymentStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/OrderServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/client/AuthServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/client/CartServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/client/InventoryClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/config/APIURL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/config/JwtAuthorizationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/config/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/controller/OrderController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/request/AccountDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/request/CartItemDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/request/FindOrderRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/request/InventoryRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/request/OrderDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/request/OrderItemDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/request/StatisticOrderRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/response/OrderResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/response/OrderStatisticResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/response/PageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/dto/response/TopProductResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/entity/Order.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/entity/OrderItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/entity/OrderPayment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/exception/ErrorHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/generic/IRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/repository/OrderRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/service/Impl/OrderServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/example/orderservice/service/OrderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/test/java/org/example/orderservice/OrderServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/PaymentServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/client/AuthServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/client/CartServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/config/JwtAuthorizationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/config/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/config/MoMoConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/config/PayPalConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/config/VnPayConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/controller/MoMoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/controller/PayPayController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/controller/VietQRController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/controller/VnPayController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/dto/request/CartDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/dto/request/CartItemDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/dto/request/MoMoPaymentRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/dto/request/PaypalPaymentRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/dto/request/VietQRRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/service/MoMoService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/service/PaypalService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/service/VnpayService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/service/impl/MoMoServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/service/impl/PaypalServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/java/org/example/paymentservice/service/impl/VnPayServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/src/test/java/org/example/paymentservice/PaymentServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/hs_err_pid19024.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/hs_err_pid25888.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/replay_pid19024.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/replay_pid25888.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/ProductServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/Repository/CategoryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/Repository/ProductImageRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/Repository/ProductRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/Repository/ProductVariantRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/Repository/TagRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/Repository/VarionOptionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/client/AuthServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/client/FileServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/config/APIURL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/config/JwtAuthorizationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/config/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/config/KafkaProducerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/controller/CategoryController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/controller/ProductController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/controller/ProductVariantController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/controller/TagController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/controller/VariantOptionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/request/CategoryDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/request/FileUploadRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/request/FileUploadResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/request/ProductDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/request/ProductVariantDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/request/TagDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/request/VariantOptionDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/dto/response/PageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/entity/Category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/entity/Product.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/entity/ProductImage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/entity/ProductVariant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/entity/Tag.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/entity/VariantOption.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/exception/ErrorHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/generic/GenericService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/generic/IRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/CategoryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/ProductService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/ProductVariantService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/TagService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/VariantOptionService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/impl/CategoryServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/impl/ProductServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/impl/ProductVariantServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/impl/TagServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/java/org/example/product_service/service/impl/VariantOptionServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/main/752ab089-6651-4c9f-a664-b97cf1789438.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/main/moderno-2338177441-600x336.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/main/moderno-2338441644-600x336.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/main/ricky-2106332879-600x929.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/main/th (1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/main/vna.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/sub/752ab089-6651-4c9f-a664-b97cf1789438.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/sub/chinh_sach2_54cf69074f1d45d0addb88db675db35e_1024x1024.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/sub/ricky-2130614752-145x145.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/sub/ricky-2132323454-145x145.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/sub/th (1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/main/resources/static/product/sub/vna.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product_service/src/test/java/org/example/product_service/ProductServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/RatingReviewServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/client/AuthServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/client/FileServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/client/OrderServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/client/ProductServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/config/KafkaProducerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/controller/ReviewController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/dto/request/AccountDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/dto/request/ProductDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/dto/request/ReviewDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/dto/response/ReviewImageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/dto/response/ReviewResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/entity/Review.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/entity/ReviewImage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/exception/ErrorHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/generic/IRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/mapper/ReviewImageMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/mapper/ReviewMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/repository/ReviewRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/service/ReviewService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/java/org/example/ratingreviewservice/service/impl/ReviewServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating-review-service/src/test/java/org/example/ratingreviewservice/RatingReviewServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/SearchServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/client/ProductServiceClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/config/KafkaConsumerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/config/RedisConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/controller/AutoCompleteController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/dto/request/ProductDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/dto/response/PageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/entity/ProductDocument.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/repository/ProductElasticRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/java/org/example/search_service/service/kafka/ProductKafkaConsumer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_service/src/test/java/org/example/search_service/SearchServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/src/main/java/com/phucnghia/ShippingServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/src/test/java/com/phucnghia/ShippingServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/target/classes/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shipping_service/shipping_service/target/classes/com/phucnghia/ShippingServiceApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/StatisticServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/client/OrderClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/client/UserClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/controller/StatisticController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/dto/RequestResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/dto/StatisticOrderRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/dto/StatisticUserRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/dto/StatisticUserResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/exception/ErrorHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/java/org/example/statistic_service/exception/ExceptionResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/main/resources/bootstrap.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistic-service/src/test/java/org/example/statistic_service/StatisticServiceApplicationTests.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/config/OpenApiConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/controller/ModuleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/dto/request/ModuleRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/mapper/ModuleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/repository/ModuleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/service/ModuleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/service/impl/ModuleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/common-security/src/main/java/org/example/commonsecurity/RsqlConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/common-security/src/main/java/org/example/commonsecurity/SecurityUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/common-utils/src/main/java/org/example/commonutils/api/PageResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/common-utils/src/main/java/org/example/commonutils/util/SearchHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/src/components/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/src/components/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/src/components/ui/TableUI.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/src/components/ui/TableUI.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/src/data/SidebarItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/src/data/SidebarItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/src/layout/MainLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/src/layout/MainLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/src/pages/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/src/pages/LoginPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/superAdmin/src/types/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/superAdmin/src/types/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/authservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/authservice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/config/AuthSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/config/AuthSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/entity/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/entity/Module.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/common-security/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/common-security/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/common-security/src/main/java/org/example/commonsecurity/APIURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/common-security/src/main/java/org/example/commonsecurity/APIURL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/common-security/src/main/java/org/example/commonsecurity/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/common-security/src/main/java/org/example/commonsecurity/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/common-utils/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/common-utils/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -706,6 +104,7 @@
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.AuthserviceApplication.executor&quot;: &quot;Run&quot;,
@@ -778,7 +177,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.OrderServiceApplication">
+  <component name="RunManager" selected="Spring Boot.AuthserviceApplication">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.apigateway.ApiGatewayApplication" />
@@ -793,37 +192,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BannerServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="cms_service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.banner_service.BannerServiceApplication" />
+    <configuration name="CommonSecurityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="common-security" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.commonsecurity.CommonSecurityApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CartServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="cart-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.cartservice.CartServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CartserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="product_service (1)" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.cartservice.CartserviceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CategoriesServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="categories-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.phucnghia.categories_service.CategoriesServiceApplication" />
+    <configuration name="CommonUtilsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="common-utils" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.commonutils.CommonUtilsApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="config-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.configserver.ConfigServerApplication" />
       <method v="2">
@@ -837,89 +220,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="File_Service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.file_service.FileServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InventoryServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="inventory-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.inventoryservice.InventoryServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="order-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.orderservice.OrderServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="payment-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.paymentservice.PaymentServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Product" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ALTERNATIVE_JRE_PATH" value="23" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <module name="product_service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.product_service.ProductServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RatingReviewServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="rating-review-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.ratingreviewservice.RatingReviewServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SearchServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="search_service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.search_service.SearchServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ShippingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="shipping_service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.shipping_service.ShippingServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="user" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.phucnghia.user.UserApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
+      <item itemvalue="Spring Boot.CommonSecurityApplication" />
+      <item itemvalue="Spring Boot.CommonUtilsApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.AuthserviceApplication" />
-      <item itemvalue="Spring Boot.BannerServiceApplication" />
-      <item itemvalue="Spring Boot.CartServiceApplication" />
-      <item itemvalue="Spring Boot.CartserviceApplication" />
-      <item itemvalue="Spring Boot.CategoriesServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
-      <item itemvalue="Spring Boot.FileServiceApplication" />
-      <item itemvalue="Spring Boot.InventoryServiceApplication" />
-      <item itemvalue="Spring Boot.OrderServiceApplication" />
-      <item itemvalue="Spring Boot.PaymentServiceApplication" />
-      <item itemvalue="Spring Boot.Product" />
-      <item itemvalue="Spring Boot.RatingReviewServiceApplication" />
-      <item itemvalue="Spring Boot.SearchServiceApplication" />
-      <item itemvalue="Spring Boot.ShippingServiceApplication" />
-      <item itemvalue="Spring Boot.UserApplication" />
     </list>
   </component>
   <component name="SharedIndexes">
@@ -1057,6 +364,8 @@
       <workItem from="1760758564201" duration="129000" />
       <workItem from="1761116614725" duration="77000" />
       <workItem from="1761716036369" duration="22000" />
+      <workItem from="1762325689828" duration="265000" />
+      <workItem from="1762503365192" duration="44000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <option name="closed" value="true" />
