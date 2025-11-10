@@ -5,5 +5,9 @@ public class APIURL {
             "/api/account/register",
             "/api/account/login",
             "/api/account/refresh",
+
+    };
+    public static final String[] URL_SUPERADMIN_POST= {
+            "/api/modules/create",
     };
 }
