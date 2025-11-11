@@ -41,6 +41,14 @@ export type Module = {
     createdAt: string;
     updatedAt: string;
 }
+export type Role = {
+    id:string;
+    code:string;
+    name:string;
+    description:string;
+    createdAt:string;
+    updatedAt:string;
+}
 export type GetAllOptions = {
     page?: number;
     size?: number;
@@ -80,6 +88,12 @@ export interface PermissionFormModalProps{
 export interface UpdatePermissionFormModalProps extends PermissionFormModalProps {
     permissionData: any;
 }
+export interface UpdateRoleFormModalProps{
+    isOpen:boolean;
+    onClose:()=>void;
+    onSubmit:()=>void;
+    roleData:any;
+}
 export interface UpdateModuleFormModalProps extends ModuleFormModalProps {
     moduleData: any;
 }
@@ -98,6 +112,9 @@ export type ActionPermissionProps ={
     onActive?:()=>void;
     onDeactive?:()=>void;
     size?:number;
+}
+export type ActionRoleProps ={
+    onEdit:()=>void;
 }
 export type ActionModuleProps = {
     status: any,

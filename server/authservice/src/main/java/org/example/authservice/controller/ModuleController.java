@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class ModuleController {
     @Autowired
     private ModuleService  moduleService;
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ApiResponse<Void>>create(@RequestBody ModuleRequest module){
         try {
             moduleService.create(module);
@@ -27,7 +27,7 @@ public class ModuleController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.error(e.getMessage()));
         }
     }
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<ApiResponse<PageResponse<ModuleResponse>>>getAll(@RequestParam(defaultValue = "1") int page,
                                                                            @RequestParam(defaultValue = "5") int size,
                                                                            @RequestParam(defaultValue = "id,desc") String sort,
@@ -51,7 +51,7 @@ public class ModuleController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.error(e.getMessage()));
         }
     }
-    @PatchMapping("/updateStatus/{id}")
+    @PatchMapping("/{id}/status")
     public ResponseEntity<ApiResponse<Void>>updateStatus(@PathVariable Long id,@RequestParam Boolean status){
         try {
             moduleService.updateStatus(id,status);

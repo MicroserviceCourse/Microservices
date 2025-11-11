@@ -11,19 +11,19 @@ export const getAllPermission = async (options: GetAllOptions = {}) => {
         searchValue,
         all = false,
     } = options;
-    const resp = await Http.get("/api/permissions/all",{
+    const resp = await Http.get("/api/permissions",{
         params: { page, size, sort, filter, searchField, searchValue, all },
     })
     return resp.data;
 }
 export const createPermission=async(permission:any)=>{
-    return await Http.post("/api/permissions/create",permission);
+    return await Http.post("/api/permissions",permission);
 }
 export const updatePermission=async(id:number,permission:any)=>{
-    return await Http.put(`/api/permissions/update/${id}`,permission);
+    return await Http.put(`/api/permissions/${id}`,permission);
 }
 export const updateStatus=async(id:number,status:boolean)=>{
-    return await Http.patch(`/api/permissions/updateStatus/${id}`,null,{
+    return await Http.patch(`/api/permissions/${id}/status`,null,{
         params:{status}
     })
 }
