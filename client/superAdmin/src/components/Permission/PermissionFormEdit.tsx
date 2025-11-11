@@ -33,7 +33,7 @@ const PermissionFormEdit=({
         try{
             const response=await updatePermission(permissionData.id,formData);
             showAlert({
-                title: response?.data?.message || "Permission created successfully.",
+                title: response?.data?.message || "Permission updated successfully.",
                 type: "success",
                 autoClose: 3000,
             });
@@ -47,7 +47,7 @@ const PermissionFormEdit=({
             showAlert({
                 title:
                     err?.response?.data?.message ||
-                    "Failed to create Permission. Please try again.",
+                    "Failed to update Permission. Please try again.",
                 type: "error",
                 autoClose: 4000,
             });

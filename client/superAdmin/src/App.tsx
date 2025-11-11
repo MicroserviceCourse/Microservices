@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import ModuleList from "./pages/module/ModuleList"
 import PermissionList from "./pages/permission/PermissionList"
+import RoleList from "./pages/Role/RoleList"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="createCategory" element={<CreateCategory />} />
           <Route path="category" element={<CategoryList />} />
           <Route path="modules" element={<ModuleList/>}/>
+          <Route path="roles" element={<RoleList/>}/>
           <Route path="modules/:id/permissions" element={<PermissionList/>}/>
         </Route>
       </Routes>

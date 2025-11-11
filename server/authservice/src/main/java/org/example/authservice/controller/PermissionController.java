@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class PermissionController {
     private final PermissionService permissionService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ApiResponse<Void>> create(@RequestBody PermissionRequest request) {
         try {
             permissionService.create(request);
@@ -28,7 +28,7 @@ public class PermissionController {
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> update(@PathVariable Long id, @RequestBody PermissionRequest request) {
         try {
             permissionService.update(id, request);
@@ -39,7 +39,7 @@ public class PermissionController {
         }
     }
 
-    @PatchMapping("updateStatus/{id}")
+    @PatchMapping("/{id}/status")
     public ResponseEntity<ApiResponse<Void>> updateStatus(@PathVariable Long id, @RequestParam Boolean status) {
         try {
             permissionService.updateStatus(id, status);
@@ -50,7 +50,7 @@ public class PermissionController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<ApiResponse<PageResponse<PermissionResponse>>> getAll(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size,
