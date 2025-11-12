@@ -19,3 +19,7 @@ export const getListRole=async(options:GetAllOptions={})=>{
 export const updateRole=async(id:number,data:any)=>{
   return await Http.put(`/api/roles/${id}`,data);
 }
+export const getRolePermissions=async(roleId:number)=>{
+  return await Http.get(`/api/roles/${roleId}/permissions`);
+
+}

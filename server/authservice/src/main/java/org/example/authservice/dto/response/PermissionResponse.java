@@ -15,6 +15,7 @@ public class PermissionResponse {
     private String code;
     private String moduleName;
     private Long moduleId;
+    private String description;
     private String permissionKey;
     private Boolean isActive;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")
