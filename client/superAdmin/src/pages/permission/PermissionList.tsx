@@ -118,6 +118,15 @@ const handleInActive = async (row: any) => {
         { header: "Code", accessor: "code", sortable: true },
         { header: "key", accessor: "permissionKey", sortable: true },
         {
+          header: "Description",
+          accessor: "description",
+          render: (value: string) => (
+            <span className="text-sm text-gray-600 line-clamp-1">
+              {value || "-"}
+            </span>
+          ),
+        },
+        {
             header: "status",
             accessor: "isActive",
             render: (value: boolean) => (

@@ -28,6 +28,7 @@ export type Permission = {
     moduleName: string;
     moduleId: number;
     permissionKey: string;
+    description:string;
     isActive: boolean;
     createdAt: string;
     updatedAt: string;
@@ -114,7 +115,8 @@ export type ActionPermissionProps ={
     size?:number;
 }
 export type ActionRoleProps ={
-    onEdit:()=>void;
+    onEdit?: () => void;
+    onViewPermission?: () => void;
 }
 export type ActionModuleProps = {
     status: any,
@@ -154,3 +156,18 @@ export type SortState = {
     accessor: string;
     direction: "asc" | "desc";
 };
+export interface PermissionItem{
+    id:string;
+    permissionKey:string;
+    checked:boolean;
+    description?: string;
+}
+export interface PermissionGroup{
+    module:string;
+    permissions:PermissionItem[];
+}
+export interface RolePermissionPopupProps{
+    roleId:number;
+    roleName:string;
+    onClose:()=>void;
+}

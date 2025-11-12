@@ -4,6 +4,7 @@ import { getListRole } from "../../service/api/Role";
 import TableUI from "../../components/ui/TableUI";
 import RoleActionMenu from "../../components/Role/RoleActionMenu";
 import RoleFormEdit from "../../components/Role/RoleFormEdit";
+import RolePermissionGroupPopup from "../../components/Role/RolePermissionGroupPopup";
 
 const RoleList = () => {
     const [roles, setRoles] = useState<Role[]>([]);
@@ -15,6 +16,7 @@ const RoleList = () => {
     const [sort, setSort] = useState<SortState | null>(null);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [selectedRole, setSelectedRole] = useState<Role | null>(null);
+    const [showPermissionPopup, setShowPermissionPopup] = useState(false);
     const fetchData = async (param?: {
         search?: string;
         page?: number;
@@ -47,6 +49,11 @@ const RoleList = () => {
             setLoading(false);
         }
     }
+    const handleViewPermission = (row: Role) => {
+        setSelectedRole(row);
+        setShowPermissionPopup(true);
+      };
+    
     const handleEdit = (row: Role) => {
         setShowUpdateModal(true);
         setSelectedRole(row);
@@ -138,7 +145,7 @@ const RoleList = () => {
                 renderActions={(row) => (
                     <RoleActionMenu
                         onEdit={() => handleEdit(row)}
-
+                        onViewPermission={() => handleViewPermission(row)}
                     />
                 )}
             />
@@ -148,6 +155,14 @@ const RoleList = () => {
                 onSubmit={fetchData}
                 roleData={selectedRole}
             />
+              {showPermissionPopup && selectedRole && (
+        <RolePermissionGroupPopup
+        key={selectedRole.id}   
+          roleId={Number(selectedRole.id)}
+          roleName={selectedRole.name}
+          onClose={() => setShowPermissionPopup(false)}
+        />
+      )}
         </div>
     )
 }

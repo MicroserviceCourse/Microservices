@@ -10,10 +10,11 @@ const PermissionFormCreate = ({
     onSubmit,
     idModule
 }: PermissionFormModalProps) => {
-    const [loading,setLoading]=useState(false)
+    const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         permissionKey: "",
-        idModule: idModule
+        idModule: idModule,
+        description: ""
     });
     const handleChange = (field: string, value: string | boolean) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
@@ -32,7 +33,8 @@ const PermissionFormCreate = ({
             onClose();
             setFormData({
                 permissionKey: "",
-                idModule: idModule
+                idModule: idModule,
+                description: ""
             });
         } catch (err: any) {
             showAlert({
@@ -42,7 +44,7 @@ const PermissionFormCreate = ({
                 type: "error",
                 autoClose: 4000,
             });
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
@@ -68,6 +70,20 @@ const PermissionFormCreate = ({
                         placeholder="Enter key"
                         className="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
                     />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-600 mb-1">
+                        description
+                    </label>
+                    <textarea
+                    value={formData.description}
+                    onChange={(e)=>handleChange("description",e.target.value)}
+                    rows={3}
+                     placeholder="Clearly describe this module's permissions"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+
+                    </textarea>
                 </div>
             </div>
         </ModalForm>

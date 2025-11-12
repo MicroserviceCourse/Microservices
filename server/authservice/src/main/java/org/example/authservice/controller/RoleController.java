@@ -2,6 +2,7 @@ package org.example.authservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.authservice.dto.request.RoleRequest;
+import org.example.authservice.dto.response.PermissionGroupDto;
 import org.example.authservice.entity.Role;
 import org.example.authservice.service.RoleService;
 import org.example.commonutils.api.ApiResponse;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -35,12 +38,25 @@ public class RoleController {
                     .body(ApiResponse.error(e.getMessage()));
         }
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<Void>>update(@PathVariable Long id, @RequestBody RoleRequest roleRequest) {
+    public ResponseEntity<ApiResponse<Void>> update(@PathVariable Long id, @RequestBody RoleRequest roleRequest) {
         try {
             roleService.update(id, roleRequest);
             return ResponseEntity.ok(ApiResponse.success("role updated successfully"));
-        }catch (Exception e){
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error(e.getMessage()));
+        }
+    }
+
+    @GetMapping("/{roleId}/permissions")
+    public ResponseEntity<ApiResponse<List<PermissionGroupDto>>> getRolePermissions(
+            @PathVariable Long roleId
+    ) {
+        try {
+            return ResponseEntity.ok(ApiResponse.success(roleService.getRolePermissions(roleId)));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ApiResponse.error(e.getMessage()));
         }

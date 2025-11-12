@@ -1,14 +1,15 @@
-package org.example.authservice.dto.request;
+package org.example.authservice.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class PermissionRequest {
-    private Long idModule;
+@AllArgsConstructor
+public class PermissionItemDto {
+    private Long id;
     private String permissionKey;
     private String description;
+    boolean checked;
 }

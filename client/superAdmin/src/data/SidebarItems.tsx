@@ -15,19 +15,16 @@ export const SideBarItems = [
         path: "/dashboard/users",
       },
       {
-        name: "Role & Permissions",
+ 
+        name: "Roles & Permissions",
         icon: Shield,
-        path: "/dashboard/roles",
+        path: "/dashboard/roles",     
       },
       {
-        name:"Module Management",
-        icon:Layers,
-        path:"/dashboard/modules",
-        children: [
-          { name: "Module List", path: "/dashboard/modules" },
-          { name: "Add Module", path: "/dashboard/modules/create" },
-          { name: "Assign Permission", path: "/dashboard/modules/assign" },
-        ],
+       
+        name: "Modules & Permissions",
+        icon: Layers,
+        path: "/dashboard/modules",    
       },
       {
         name: "System Settings",
