@@ -37,7 +37,7 @@ public interface PermissionAssignMapper extends CommonMapper {
                 .collect(Collectors.toSet());
         Map<String, List<PermissionItemDto>> grouped = allPermissions.stream()
                 .collect(Collectors.groupingBy(
-                        p -> p.getModule().getName(),      
+                        p -> p.getModule().getName(),
                         Collectors.mapping(
                                 p -> toPermissionItemDto(p, assignedIds),
                                 Collectors.toList()
