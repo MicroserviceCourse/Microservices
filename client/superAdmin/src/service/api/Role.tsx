@@ -23,3 +23,7 @@ export const getRolePermissions=async(roleId:number)=>{
   return await Http.get(`/api/roles/${roleId}/permissions`);
 
 }
+export const assignRolePermissions=async(roleId:number,permissionIds:number[])=>{
+  return await Http.post(`/api/roles/${roleId}/assign`,permissionIds);
+
+}
