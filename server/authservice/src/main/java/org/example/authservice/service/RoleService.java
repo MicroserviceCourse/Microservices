@@ -13,4 +13,6 @@ public interface RoleService {
     void update(Long id, RoleRequest request);
 
     List<PermissionGroupDto> getRolePermissions(Long roleId);
+
+    void assignPermissionsToRole(Long roleId, List<Long> permissionIds);
 }

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import Select from "react-select";
-import { getRolePermissions } from "../../service/api/Role";
+import { assignRolePermissions, getRolePermissions } from "../../service/api/Role";
 import type { PermissionGroup, RolePermissionPopupProps } from "../../types";
 import { useAlert } from "../alert-context";
 
@@ -155,20 +155,27 @@ const RolePermissionGroupPopup = ({
       ? moduleOptions[0]
       : moduleOptions.find((opt) => opt.value === selectedModule) ||
       moduleOptions[0];
+  const getCheckedPermissionIds = () => {
+    return groups.flatMap((g) =>
+      g.permissions.filter((p) => p.checked).map((p) => Number(p.id))
+    );
+  };
 
   const handleSave = async () => {
     try {
       setSaving(true);
-      // TODO: call API updateRolePermissions(roleId, groups) nếu cần
+      const checkedIds = getCheckedPermissionIds();
+      const response = await assignRolePermissions(roleId, checkedIds);
       showAlert({
-        title: "Permissions updated successfully",
+        title: response?.data?.message || "role assigned successfully.",
         type: "success",
+        autoClose: 3000,
       });
       onClose();
     } catch (e) {
-      console.error("Failed to save permissions", e);
+      console.error("Failed to assign permissions", e);
       showAlert({
-        title: "Failed to update permissions",
+        title: "Failed to assign permissions",
         type: "error",
       });
     } finally {
@@ -309,14 +316,14 @@ const RolePermissionGroupPopup = ({
                               handleTogglePermission(group.module, perm.id)
                             }
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${perm.checked
-                                ? "bg-[#1a73e8]"
-                                : "bg-gray-300"
+                              ? "bg-[#1a73e8]"
+                              : "bg-gray-300"
                               }`}
                           >
                             <span
                               className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-md transition-transform ${perm.checked
-                                  ? "translate-x-5"
-                                  : "translate-x-1"
+                                ? "translate-x-5"
+                                : "translate-x-1"
                                 }`}
                             />
                           </button>

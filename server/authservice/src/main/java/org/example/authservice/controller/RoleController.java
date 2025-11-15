@@ -61,4 +61,14 @@ public class RoleController {
                     .body(ApiResponse.error(e.getMessage()));
         }
     }
+    @PostMapping("/{roleId}/assign")
+    public ResponseEntity<ApiResponse<Void>>assignRole(@PathVariable Long roleId,@RequestBody List<Long> permissionIds) {
+        try {
+            roleService.assignPermissionsToRole(roleId, permissionIds);
+            return ResponseEntity.ok(ApiResponse.success("role assigned successfully"));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error(e.getMessage()));
+        }
+    }
 }
