@@ -4,31 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85540db4-c907-4673-a630-aa8739a35986" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/config/BlogSecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/controller/CategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/controller/TagController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/dto/request/CategoryRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/dto/request/PostRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/dto/request/TagRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/dto/response/CategoryResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/dto/response/TagDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/mapper/CategoryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/mapper/TagMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/repository/CategoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/repository/TagRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/service/CategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/service/TagService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/service/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/blogservice/src/main/java/org/example/blogservice/service/impl/TagServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/local-config/blogservice.properties" afterDir="false" />
+    <list default="true" id="85540db4-c907-4673-a630-aa8739a35986" name="Changes" comment="update backend blogservice by nghia">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/authservice/src/test/java/org/example/authservice/AuthserviceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/common-security/src/main/java/org/example/commonsecurity/APIURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/common-security/src/main/java/org/example/commonsecurity/APIURL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/common-security/src/test/java/org/example/commonsecurity/CommonSecurityApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/common-utils/src/test/java/org/example/commonutils/CommonUtilsApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/config-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/config-server/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/local-config/api-gateway.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/local-config/api-gateway.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +95,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.AuthserviceApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.BannerServiceApplication.executor&quot;: &quot;Run&quot;,
@@ -148,7 +126,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -316,8 +294,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AuthserviceApplication" />
         <item itemvalue="Application.ApiGatewayApplication" />
+        <item itemvalue="Application.AuthserviceApplication" />
         <item itemvalue="Application.ConfigServerApplication" />
         <item itemvalue="Application.EurekaServerApplication" />
         <item itemvalue="Application.CommonUtilsApplication" />
@@ -830,7 +808,23 @@
       <option name="project" value="LOCAL" />
       <updated>1751903755217</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="update backend blogservice by nghia">
+      <option name="closed" value="true" />
+      <created>1763478931705</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1763478931705</updated>
+    </task>
+    <task id="LOCAL-00049" summary="update backend blogservice by nghia">
+      <option name="closed" value="true" />
+      <created>1763594627251</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1763594627251</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -870,7 +864,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="PhongTran" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -918,7 +912,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="update backend blogservice by nghia" />
+    <option name="LAST_COMMIT_MESSAGE" value="update backend blogservice by nghia" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
