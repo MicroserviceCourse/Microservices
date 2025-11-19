@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -32,33 +33,33 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponse create(PostRequest request) {
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new NoSuchElementException("Category not found: " + request.getCategoryId()));
 
-        List<Tag> tags = request.getTagIds() == null
+        List<Tag> tags = request.getTagIds() == null || request.getTagIds().isEmpty()
                 ? List.of()
                 : tagRepository.findAllById(request.getTagIds());
 
-        Post post = Post.builder()
-                .title(request.getTitle())
-                .content(request.getContent())
-                .thumbnailUrl(request.getThumbnailUrl())
-                .metaTitle(request.getMetaTitle())
-                .metaDescription(request.getMetaDescription())
-                .category(category)
-                .tags(tags)
-                .published(Boolean.TRUE.equals(request.getPublished()))
-                .publishedAt(Boolean.TRUE.equals(request.getPublished()) ? LocalDateTime.now() : null)
-                .build();
+        // 💡 MapStruct map các field cơ bản
+        Post post = postMapper.toEntity(request);
+        post.setCategory(category);
+        post.setTags(tags);
 
-        // TODO: generate slug if needed
-        // post.setSlug(slugGenerator.generate(post.getTitle()));
+        boolean publish = Boolean.TRUE.equals(request.getPublished());
+        post.setPublished(publish);
+        if (publish) {
+            post.setPublishedAt(LocalDateTime.now());
+        }
+
+        // TODO: generate slug nếu cần
+        // post.setSlug(slugUtils.toSlug(post.getTitle()));
 
         post = postRepository.save(post);
         return postMapper.toResponse(post);
     }
 
+    // PostServiceImpl.java
     @Override
-    public PostResponse update(Long id, PostRequest request) {
+    public void update(Long id, PostRequest request) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Post not found"));
 
@@ -69,11 +70,9 @@ public class PostServiceImpl implements PostService {
                 ? List.of()
                 : tagRepository.findAllById(request.getTagIds());
 
-        post.setTitle(request.getTitle());
-        post.setContent(request.getContent());
-        post.setThumbnailUrl(request.getThumbnailUrl());
-        post.setMetaTitle(request.getMetaTitle());
-        post.setMetaDescription(request.getMetaDescription());
+        // dùng mapper để map field từ request vào entity
+        postMapper.update(post, request);
+
         post.setCategory(category);
         post.setTags(tags);
 
@@ -83,14 +82,14 @@ public class PostServiceImpl implements PostService {
             post.setPublishedAt(LocalDateTime.now());
         }
 
-        post = postRepository.save(post);
-        return postMapper.toResponse(post);
+        postRepository.save(post);
     }
+
 
     @Override
     public void delete(Long id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new NoSuchElementException("Post not found: " + id));
         postRepository.delete(post);
     }
 
@@ -98,7 +97,7 @@ public class PostServiceImpl implements PostService {
     @Transactional(readOnly = true)
     public PostResponse getById(Long id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new NoSuchElementException("Post not found: " + id));
         return postMapper.toResponse(post);
     }
 

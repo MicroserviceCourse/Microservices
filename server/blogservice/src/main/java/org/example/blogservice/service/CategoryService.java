@@ -15,5 +15,5 @@ public interface CategoryService {
 
     CategoryResponse getById(Long id);
 
-    Page<CategoryResponse> getPage(Pageable pageable);
+    Page<CategoryResponse> getPage(int page, int size, String search, String sort);
 }

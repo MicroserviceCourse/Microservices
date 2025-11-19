@@ -47,10 +47,13 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<ApiResponse<PageResponse<CategoryResponse>>> getPage(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String sort
     ) {
-        Page<CategoryResponse> resultPage = categoryService.getPage(PageRequest.of(page, size));
+        Page<CategoryResponse> resultPage = categoryService.getPage(page, size, search, sort);
         PageResponse<CategoryResponse> body = new PageResponse<>(resultPage);
         return ResponseEntity.ok(ApiResponse.success(body));
     }
+
 }

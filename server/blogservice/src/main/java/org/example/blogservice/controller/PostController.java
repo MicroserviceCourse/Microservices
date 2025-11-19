@@ -25,11 +25,12 @@ public class PostController {
         return ResponseEntity.ok(ApiResponse.success(data));
     }
 
+    // PostController.java
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<PostResponse>> update(@PathVariable Long id,
-                                                            @Valid @RequestBody PostRequest request) {
-        PostResponse data = postService.update(id, request);
-        return ResponseEntity.ok(ApiResponse.success(data));
+    public ResponseEntity<ApiResponse<Void>> update(@PathVariable Long id,
+                                                    @Valid @RequestBody PostRequest request) {
+        postService.update(id, request);
+        return ResponseEntity.ok(ApiResponse.success(null));   // hoặc noContent() nếu muốn 204
     }
 
     @DeleteMapping("/{id}")

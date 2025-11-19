@@ -9,7 +9,7 @@ public interface PostService {
 
     PostResponse create(PostRequest request);
 
-    PostResponse update(Long id, PostRequest request);
+    void update(Long id, PostRequest request);
 
     void delete(Long id);
 
