@@ -171,3 +171,66 @@ export interface RolePermissionPopupProps{
     roleName:string;
     onClose:()=>void;
 }
+
+export interface ApiResponse<T> {
+  data: T;
+  message?: string;
+  status?: number;
+}
+
+export interface PageResponse<T> {
+  content: T[];
+  pageNumber: number;
+  pageSize: number;
+  totalElements: number;
+  totalPages: number;
+  last: boolean;
+}
+
+/* ================== BLOG: CATEGORY ================== */
+
+export interface CategoryDto {
+  id: number;
+  name: string;
+  slug: string;
+  description?: string;
+}
+
+export interface CategoryQuery {
+  page?: number;
+  size?: number;
+  search?: string;
+  sort?: string; // vd: "id,desc"
+}
+
+/* ================== BLOG: TAG ================== */
+
+export interface TagDto {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+/* ================== BLOG: POST ================== */
+
+export interface PostDto {
+  id: number;
+  title: string;
+  content: string;
+  slug: string;
+  thumbnailUrl?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  published: boolean;
+  publishedAt?: string;
+
+  categoryId: number;
+  categoryName: string;
+  tags: TagDto[];
+}
+
+export interface BlogCategoryForm {
+  name: string;
+  slug: string;        // user nhập hoặc pick từ gợi ý
+  description: string;
+}
