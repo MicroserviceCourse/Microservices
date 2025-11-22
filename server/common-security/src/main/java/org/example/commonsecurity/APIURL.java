@@ -8,6 +8,6 @@ public class APIURL {
 
     };
     public static final String[] URL_SUPERADMIN_POST= {
-            "/api/modules/create",
+            "/api/modules",
     };
 }

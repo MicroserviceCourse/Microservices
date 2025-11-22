@@ -1,12 +1,9 @@
-import axios from 'axios';
-import type {  InternalAxiosRequestConfig } from 'axios';
+import axios from "axios";
+import type { InternalAxiosRequestConfig } from "axios";
+import { BASE_API } from "../../setting/constant/app";
+import { getTokens } from "../../util/auth";
 
-import { BASE_API } from '../../setting/constant/app';
-import { getTokens } from '../../util/auth';
-
-
-// ✅ Mở rộng AxiosRequestConfig để thêm field skipAuth
-declare module 'axios' {
+declare module "axios" {
   export interface AxiosRequestConfig {
     skipAuth?: boolean;
   }
@@ -21,9 +18,9 @@ Http.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = getTokens()?.accessToken;
 
-    if (!config.skipAuth && token && token !== 'undefined') {
-      if (config.headers && typeof config.headers.set === 'function') {
-        config.headers.set('Authorization', `Bearer ${token}`);
+    if (!config.skipAuth && token && token !== "undefined") {
+      if (config.headers && typeof config.headers.set === "function") {
+        config.headers.set("Authorization", `Bearer ${token}`);
       }
     }
 
@@ -32,19 +29,17 @@ Http.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// ✅ Interceptor cho response
 Http.interceptors.response.use(
   (response) => response,
   (error) => {
     if (
       error.response?.status === 401 &&
-      (error.response.data === 'Token has expired' ||
-        error.response.data === 'Invalid JWT token')
+      (error.response.data === "Token has expired" ||
+        error.response.data === "Invalid JWT token")
     ) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+      localStorage.removeItem("token");
+      window.location.href = "/login";
     }
-
     return Promise.reject(error);
   }
 );
