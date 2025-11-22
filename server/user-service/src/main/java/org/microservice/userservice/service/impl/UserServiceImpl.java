@@ -33,4 +33,10 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(ex);
         }
     }
+
+    @Override
+    public User getUserByAuthId(Long authId) {
+        return userRepository.findByAuthId(authId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 }

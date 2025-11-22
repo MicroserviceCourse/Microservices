@@ -1,24 +1,24 @@
 package org.example.authservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.authservice.dto.request.AuthRegisterRequest;
 import org.example.authservice.dto.request.LoginRequest;
+import org.example.authservice.dto.response.AuthUserResponse;
+import org.example.authservice.dto.response.RelationModeFilterRequest;
 import org.example.authservice.dto.response.TokenResponse;
 import org.example.authservice.entity.AuthUser;
-import org.example.authservice.entity.AuthUserRole;
 import org.example.authservice.entity.Role;
 import org.example.authservice.service.AuthService;
 import org.example.commonsecurity.JwtService;
 import org.example.commonutils.api.ApiResponse;
+import org.example.commonutils.api.PageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -66,5 +66,68 @@ public class AuthController {
                     .body(ApiResponse.error("Invalid email or password"));
         }
 
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<ApiResponse<Void>> register(@RequestBody AuthRegisterRequest request) {
+        try {
+            authService.register(request);
+            return ResponseEntity.ok(
+                    ApiResponse.success("register successfully")
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error("register failed"));
+        }
+    }
+    @GetMapping
+    public ResponseEntity<ApiResponse<PageResponse<AuthUserResponse>>>getAll(@RequestParam(defaultValue = "1") int page,
+                                                                             @RequestParam(defaultValue = "5") int size,
+                                                                             @RequestParam(defaultValue = "id,desc") String sort,
+                                                                             @RequestParam(required = false) String filter,
+                                                                             @RequestParam(required = false) String searchField,
+                                                                             @RequestParam(required = false) String searchValue,@RequestParam(required = false) boolean all,
+                                                                             @RequestParam(required = false) String relation,
+                                                                             @RequestParam(required = false) String nested,
+                                                                             @RequestParam(required = false) String field,
+                                                                             @RequestParam(required = false) List<Long> values,
+                                                                             @RequestParam(required = false, defaultValue = "NOT_IN") String mode){
+        try {
+            RelationModeFilterRequest filterNotIn = null;
+
+            if (relation != null && nested != null && field != null && values != null) {
+                filterNotIn = new RelationModeFilterRequest();
+                filterNotIn.setRelation(relation);
+                filterNotIn.setNested(nested);
+                filterNotIn.setField(field);
+                filterNotIn.setValues(values);
+                filterNotIn.setMode(mode);
+            }
+
+            return ResponseEntity.ok(ApiResponse.success(
+                    new PageResponse<>(authService.getAll(page,size,sort,searchField,searchValue,filter,all,filterNotIn))));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error("getAll failed"));
+        }
+    }
+    @GetMapping("/{id}/roles")
+    public ResponseEntity<ApiResponse<List<Role>>> getRoles(@PathVariable Long id){
+        try {
+            return ResponseEntity.ok(ApiResponse.success(authService.getUserRoles(id)));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error("getRoles failed"));
+        }
+    }
+    @PostMapping("/{userId}/assign")
+    public ResponseEntity<ApiResponse<Void>>assignUser(@PathVariable Long userId, @RequestBody List<Long> roleIds){
+        try {
+            authService.assignUsersToRole(userId, roleIds);
+            return ResponseEntity.ok(ApiResponse.success("assign users successfully"));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error("assign user failed"));
+        }
     }
 }

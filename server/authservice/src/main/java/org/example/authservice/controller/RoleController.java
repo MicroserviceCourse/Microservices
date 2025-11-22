@@ -32,7 +32,7 @@ public class RoleController {
             @RequestParam(required = false) boolean all
     ) {
         try {
-            return ResponseEntity.ok(ApiResponse.success(new PageResponse<>(roleService.getAll(page, size, sort, filter, searchField, searchValue, all))));
+            return ResponseEntity.ok(ApiResponse.success(new PageResponse<>(roleService.getAll(page, size,sort,searchField,searchValue,filter,all))));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ApiResponse.error(e.getMessage()));

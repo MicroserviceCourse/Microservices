@@ -6,7 +6,6 @@ import { assignRolePermissions, getRolePermissions } from "../../service/api/Rol
 import type { PermissionGroup, RolePermissionPopupProps } from "../../types";
 import { useAlert } from "../alert-context";
 
-// Backdrop fade in/out
 const backdropVariants: Variants = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
