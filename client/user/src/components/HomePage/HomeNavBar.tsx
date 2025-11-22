@@ -1,6 +1,7 @@
 import React from "react";
 import { FiChevronLeft, FiChevronRight, FiSearch, FiShoppingBag } from "react-icons/fi";
 import { BsGrid3X3Gap } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const HomeNavBar = () => {
   return (
@@ -17,7 +18,9 @@ const HomeNavBar = () => {
           <li>Home</li>
           <li>Pages</li>
           <li>Shop</li>
-          <li>Blog</li>
+          <li>
+              <Link to="/blog">Blog</Link>
+          </li>
           <li>Lookbook</li>
           <li>Elements</li>
         </ul>
