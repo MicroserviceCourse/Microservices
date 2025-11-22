@@ -21,6 +21,7 @@ public class BlogSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         // Swagger / actuator
                         .requestMatchers(
@@ -34,9 +35,9 @@ public class BlogSecurityConfig {
 
                         // Cho phép đọc blog public
                         .requestMatchers(HttpMethod.GET,
-                                "/api/v1/posts/**",
-                                "/api/v1/categories/**",
-                                "/api/v1/tags/**"
+                                "/api/posts/**",
+                                "/api/categories/**",
+                                "/api/tags/**"
                         ).permitAll()
 
                         // Các thao tác còn lại yêu cầu auth (JWT)

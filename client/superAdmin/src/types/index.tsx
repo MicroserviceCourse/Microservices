@@ -234,3 +234,61 @@ export interface BlogCategoryForm {
   slug: string;        // user nhập hoặc pick từ gợi ý
   description: string;
 }
+
+/* ================== BLOG: TAG ================== */
+
+export interface TagDto {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface BlogTagForm {
+  name: string;
+  slug: string;
+}
+export interface TagQuery {
+  page?: number;
+  size?: number;
+}
+
+export interface PostDto {
+  id: number;
+  title: string;
+  content: string;
+  slug: string;
+  thumbnailUrl?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  published: boolean;
+  publishedAt?: string;
+
+  categoryId: number;
+  categoryName: string;
+  tags: TagDto[];
+}
+
+export interface PostQuery {
+  page?: number;
+  size?: number;
+}
+
+export interface BlogPostForm {
+  title: string;
+  content: string;
+  slug: string;
+  thumbnailUrl?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  published: boolean;
+
+  categoryId: number;
+  tagIds: number[];
+}
+
+/* giữ nguyên BlogCategoryForm phía dưới nếu đã có */
+export interface BlogCategoryForm {
+  name: string;
+  slug: string;        // user nhập hoặc pick từ gợi ý
+  description: string;
+}

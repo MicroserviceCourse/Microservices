@@ -9,7 +9,7 @@ public interface CategoryService {
 
     CategoryResponse create(CategoryRequest request);
 
-    CategoryResponse update(Long id, CategoryRequest request);
+    void update(Long id, CategoryRequest request);
 
     void delete(Long id);
 

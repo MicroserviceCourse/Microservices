@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/tags")
+@RequestMapping("/api/tags")
 @RequiredArgsConstructor
 public class TagController {
 
@@ -26,10 +26,10 @@ public class TagController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<TagDto>> update(@PathVariable Long id,
+    public ResponseEntity<ApiResponse<Void>> update(@PathVariable Long id,
                                                       @Valid @RequestBody TagRequest request) {
-        TagDto data = tagService.update(id, request);
-        return ResponseEntity.ok(ApiResponse.success(data));
+        tagService.update(id, request);
+        return ResponseEntity.ok(ApiResponse.success(null));
     }
 
     @DeleteMapping("/{id}")

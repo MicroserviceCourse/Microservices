@@ -25,7 +25,7 @@ public class OpenApiConfig {
         return GroupedOpenApi.builder()
                 .group("blog-v1")
                 .packagesToScan("/home/phuc-nghia/Desktop/Microservices/server/blogservice/src/main/java/org/example/blogservice/controller")
-                .pathsToMatch("/api/v1/**")
+                .pathsToMatch("/api/**")
                 .build();
     }
 }

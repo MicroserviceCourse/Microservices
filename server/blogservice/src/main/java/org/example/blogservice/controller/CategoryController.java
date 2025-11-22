@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/categories")
+@RequestMapping("/api/categories")
 @RequiredArgsConstructor
 public class CategoryController {
 
@@ -26,10 +26,10 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<CategoryResponse>> update(@PathVariable Long id,
+    public ResponseEntity<ApiResponse<Void>> update(@PathVariable Long id,
                                                                 @Valid @RequestBody CategoryRequest request) {
-        CategoryResponse data = categoryService.update(id, request);
-        return ResponseEntity.ok(ApiResponse.success(data));
+        categoryService.update(id, request);
+        return ResponseEntity.ok(ApiResponse.success(null));
     }
 
     @DeleteMapping("/{id}")

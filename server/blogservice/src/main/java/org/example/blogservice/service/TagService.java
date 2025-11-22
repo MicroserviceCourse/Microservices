@@ -9,7 +9,7 @@ public interface TagService {
 
     TagDto create(TagRequest request);
 
-    TagDto update(Long id, TagRequest request);
+    void update(Long id, TagRequest request);
 
     void delete(Long id);
 

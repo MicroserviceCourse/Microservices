@@ -29,13 +29,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponse update(Long id, CategoryRequest request) {
+    public void update(Long id, CategoryRequest request) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Category not found: " + id));
 
         categoryMapper.update(category, request);
-        return categoryMapper.toResponse(categoryRepository.save(category));
+        categoryRepository.save(category);
     }
+
 
     @Override
     public void delete(Long id) {

@@ -28,15 +28,14 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public TagDto update(Long id, TagRequest request) {
+    public void update(Long id, TagRequest request) {
         Tag tag = tagRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Tag not found: " + id));
 
-        tagMapper.update(tag, request); // hoặc set field bằng tay
+        tagMapper.update(tag, request);
         tag = tagRepository.save(tag);
-
-        return tagMapper.toResponse(tag);
     }
+
 
     @Override
     public void delete(Long id) {
