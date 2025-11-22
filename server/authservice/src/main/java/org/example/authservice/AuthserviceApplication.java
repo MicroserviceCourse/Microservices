@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication(scanBasePackages = {
         "org.example.authservice",
-        "org.example.commonsecurity"
+        "org.example.commonsecurity",
 })
 @EnableFeignClients
 

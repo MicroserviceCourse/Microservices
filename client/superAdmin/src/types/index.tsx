@@ -1,3 +1,4 @@
+import type { Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 export interface Category {
@@ -28,7 +29,7 @@ export type Permission = {
     moduleName: string;
     moduleId: number;
     permissionKey: string;
-    description:string;
+    description: string;
     isActive: boolean;
     createdAt: string;
     updatedAt: string;
@@ -43,12 +44,12 @@ export type Module = {
     updatedAt: string;
 }
 export type Role = {
-    id:string;
-    code:string;
-    name:string;
-    description:string;
-    createdAt:string;
-    updatedAt:string;
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    createdAt: string;
+    updatedAt: string;
 }
 export type GetAllOptions = {
     page?: number;
@@ -58,7 +59,14 @@ export type GetAllOptions = {
     searchField?: string;
     searchValue?: string
     all?: boolean;
+    relation?: string;   // ví dụ "roles"
+    nested?: string;     // ví dụ "role"
+    field?: string;      // ví dụ "id"
+    values?: number[];   // ví dụ [1]
+    mode?:string
 };
+
+  
 export type TooltipProps = {
     text: string;
     children: ReactNode;
@@ -80,20 +88,20 @@ export interface ModuleFormModalProps {
     onSubmit: () => void;
     loading?: boolean
 }
-export interface PermissionFormModalProps{
-    isOpen:boolean;
-    onClose:()=>void;
-    onSubmit:()=>void;
-    idModule:number;
+export interface PermissionFormModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: () => void;
+    idModule: number;
 }
 export interface UpdatePermissionFormModalProps extends PermissionFormModalProps {
     permissionData: any;
 }
-export interface UpdateRoleFormModalProps{
-    isOpen:boolean;
-    onClose:()=>void;
-    onSubmit:()=>void;
-    roleData:any;
+export interface UpdateRoleFormModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: () => void;
+    roleData: any;
 }
 export interface UpdateModuleFormModalProps extends ModuleFormModalProps {
     moduleData: any;
@@ -107,14 +115,14 @@ export type ActionMenuProps = {
     onViewPermission?: () => void;
     size?: number;
 }
-export type ActionPermissionProps ={
-    status:any,
-    onEdit:()=>void;
-    onActive?:()=>void;
-    onDeactive?:()=>void;
-    size?:number;
+export type ActionPermissionProps = {
+    status: any,
+    onEdit: () => void;
+    onActive?: () => void;
+    onDeactive?: () => void;
+    size?: number;
 }
-export type ActionRoleProps ={
+export type ActionRoleProps = {
     onEdit?: () => void;
     onViewPermission?: () => void;
 }
@@ -125,6 +133,12 @@ export type ActionModuleProps = {
     onDeactive?: () => void;
     onViewPermission?: () => void;
     size?: number;
+}
+export type ActionUserProps = {
+    status: any,
+    onAssignRole: () => void;
+    onActive?: () => void;
+    onDeactive?: () => void;
 }
 export type TableSearchConfig<T> = {
     enabled?: boolean;
@@ -156,20 +170,39 @@ export type SortState = {
     accessor: string;
     direction: "asc" | "desc";
 };
-export interface PermissionItem{
-    id:string;
-    permissionKey:string;
-    checked:boolean;
+export interface PermissionItem {
+    id: string;
+    permissionKey: string;
+    checked: boolean;
     description?: string;
 }
-export interface PermissionGroup{
-    module:string;
-    permissions:PermissionItem[];
+export interface PermissionGroup {
+    module: string;
+    permissions: PermissionItem[];
 }
-export interface RolePermissionPopupProps{
-    roleId:number;
-    roleName:string;
-    onClose:()=>void;
+export interface RolePermissionPopupProps {
+    roleId: number;
+    roleName: string;
+    onClose: () => void;
+}
+export const backdropVariants: Variants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+}
+export const panelVariants: Variants = {
+    initial: { y: 40, opacity: 0 },
+    animate: {
+        y: 0,
+        opacity: 1,
+        transition: { duration: 0.25, ease: "easeOut" },
+    },
+    exit: { y: 40, opacity: 0, transition: { duration: 0.2 } },
+}
+export interface UserAssignRolePopupProps {
+    selectedUser: any;
+    onClose: () => void;
+    onUpdated: () => void
 }
 
 export interface ApiResponse<T> {

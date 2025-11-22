@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage"
 import ModuleList from "./pages/module/ModuleList"
 import PermissionList from "./pages/permission/PermissionList"
 import RoleList from "./pages/Role/RoleList"
+import UserList from "./pages/User/UserList"
 import BlogCategoryList from "./pages/blog/category/CategoryList";
 import BlogCreateCategory from "./pages/blog/category/CreateCategory";
 import BlogTagList from "./pages/blog/tag/BlogTagList";
@@ -33,6 +34,7 @@ function App() {
             <Route path="roles" element={<RoleList />} />
             <Route path="modules/:id/permissions" element={<PermissionList />} />
             <Route path="blog/categories" element={<BlogCategoryList />} />
+              <Route path="users" element={<UserList/>}/>
             <Route path="blog/categories/create" element={<BlogCreateCategory />} />
             <Route path="blog/categories/:id/edit" element={<BlogCreateCategory />} />
             <Route path="blog/tags" element={<BlogTagList />} />
