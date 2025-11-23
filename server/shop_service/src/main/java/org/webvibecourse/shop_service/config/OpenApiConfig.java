@@ -1,4 +1,4 @@
-package org.microservice.userservice.config;
+package org.webvibecourse.shop_service.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -18,16 +18,16 @@ public class OpenApiConfig {
 
         return new OpenAPI()
                 .info(new Info()
-                              .title("user Service")
+                              .title("shop Service")
                               .version("1.0")
-                              .description("This is the user Service API")
+                              .description("This is the shop Service API")
                               .contact(new Contact()
                                                .name("WebVibe")
                                                .email("tranp6648@gmail.com")
                                       )
                      )
                 .addServersItem(new Server()
-                                        .url("http://localhost:8787")
+                                        .url("http://localhost:7777")
                                )
                 .components(new Components()
                                     .addSecuritySchemes(

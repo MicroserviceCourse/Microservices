@@ -17,4 +17,6 @@ public interface AuthService extends UserDetailsService {
     void assignUsersToRole(Long userId, List<Long> roleIds);
 
     List<Role>getUserRoles(Long userId);
+
+    void changeUserStatus(Long userId, Integer status);
 }

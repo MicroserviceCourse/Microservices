@@ -1,11 +1,10 @@
 package org.example.authservice.mapper.common;
-
-import jdk.jfr.Name;
-import org.example.authservice.dto.response.PermissionGroupDto;
-import org.example.authservice.dto.response.PermissionItemDto;
+import org.example.authservice.entity.AuthUserRole;
 import org.example.authservice.entity.Module;
 
 import org.mapstruct.Named;
+
+import java.util.List;
 
 
 public interface CommonMapper {
@@ -16,6 +15,11 @@ public interface CommonMapper {
         module.setId(id);
         return module;
     }
-
-
+    @Named("mapRoles")
+    default List<String> mapRoles(List<AuthUserRole> roles) {
+        if (roles == null) return null;
+        return roles.stream()
+                .map(r -> r.getRole().getName())
+                .toList();
+    }
 }
