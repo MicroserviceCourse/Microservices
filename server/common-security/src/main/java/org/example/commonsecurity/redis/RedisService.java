@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -21,5 +22,11 @@ public class RedisService {
     }
     public boolean exists(String key) {
         return Boolean.TRUE.equals(redisTemplate.hasKey(key));
+    }
+    public void deleteByPrefix(String prefix) {
+        Set<String> keys = redisTemplate.keys(prefix + "*");
+        if (keys != null && !keys.isEmpty()) {
+            redisTemplate.delete(keys);
+        }
     }
 }

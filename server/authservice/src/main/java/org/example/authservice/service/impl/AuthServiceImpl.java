@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthMapper authMapper;
     private final PasswordEncoder passwordEncoder;
     private final ObjectMapper objectMapper;
-    private static final List<String> SEARCH_FIELDS = List.of("code", "name");
+    private static final List<String> SEARCH_FIELDS = List.of("code", "email");
     private final SecurityUtils securityUtils;
     private final RoleRepository roleRepository;
     private final UserClient userClient;
@@ -59,16 +59,12 @@ public class AuthServiceImpl implements AuthService {
     private final RedisService redisService;
 
     @Autowired
-    public AuthServiceImpl(AuthRepository authRepository
-            , JwtService jwtService
-            , AuthMapper authMapper
-            , PasswordEncoder passwordEncoder
-            , SecurityUtils securityUtils
-            , RoleRepository roleRepository
-            , UserClient userClient
-            , AuthUserRoleRepository authUserRoleRepository,
-                           ObjectMapper objectMapper,
-                           RedisService redisService) {
+    public AuthServiceImpl(
+            AuthRepository authRepository, JwtService jwtService, AuthMapper authMapper,
+            PasswordEncoder passwordEncoder, SecurityUtils securityUtils, RoleRepository roleRepository,
+            UserClient userClient, AuthUserRoleRepository authUserRoleRepository, ObjectMapper objectMapper,
+            RedisService redisService
+                          ) {
         this.authRepository = authRepository;
         this.authMapper = authMapper;
         this.jwtService = jwtService;
@@ -93,21 +89,31 @@ public class AuthServiceImpl implements AuthService {
         try {
             AuthUser user = authMapper.toEntity(request, securityUtils.getCurrentUserId());
             user.setPassword(passwordEncoder.encode(request.getPassword()));
+
             AuthUser savedUser = authRepository.save(user);
+
             if (request.getRoleIds() != null) {
+
                 for (Long roleId : request.getRoleIds()) {
-                    Role role = roleRepository.findById(roleId)
-                            .orElseThrow(() -> new UsernameNotFoundException("Role not found"));
+
+                    Role role = roleRepository.findById(roleId).orElseThrow(() -> new UsernameNotFoundException(
+                            "Role not found"));
+
                     AuthUserRole authUserRole = new AuthUserRole();
                     authUserRole.setRole(role);
                     authUserRole.setAuth(savedUser);
                     authUserRole.setAssignedBy(securityUtils.getCurrentUserId().toString());
+
                     authUserRoleRepository.save(authUserRole);
+
                 }
             }
+
             UserProfileRequest userProfileRequest = authMapper.toProfileRequest(request);
             userProfileRequest.setAuthId(savedUser.getId());
+
             userClient.createProfile(userProfileRequest);
+
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e.getMessage());
@@ -115,29 +121,31 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Page<AuthUserResponse> getAll(Integer page, Integer size, String sort, String searchField, String SearchValue, String filter, boolean all
-            , RelationModeFilterRequest relationFilter) {
+    public Page<AuthUserResponse> getAll(
+            Integer page, Integer size, String sort, String searchField, String SearchValue, String filter, boolean all,
+            RelationModeFilterRequest relationFilter
+                                        ) {
         try {
             log.info("start find all auth");
 
             // == CACHE KEY ==
-            String key = RedisKey.ACCOUNT_INFORMATION + "|" +
-                    page + "|" + size + "|" + sort + "|" +
-                    searchField + "|" + SearchValue + "|" +
-                    filter + "|" + (relationFilter != null ? relationFilter.toString() : "");
+            String key = RedisKey.ACCOUNT_INFORMATION + "|" + page + "|" + size + "|" + sort + "|" + searchField +
+                         "|" + SearchValue + "|" + filter + "|" + (
+                    relationFilter != null ? relationFilter.toString() : ""
+            );
 
             // == CHECK CACHE ==
             if (redisService.exists(key)) {
                 Map<String, Object> cache = objectMapper.convertValue(
-                        redisService.get(key),
-                        new TypeReference<Map<String, Object>>() {}
-                );
+                        redisService.get(key), new TypeReference<Map<String, Object>>() {
+                        }
+                                                                     );
 
                 // Lấy content
                 List<AuthUserResponse> content = objectMapper.convertValue(
-                        cache.get("content"),
-                        new TypeReference<List<AuthUserResponse>>() {}
-                );
+                        cache.get("content"), new TypeReference<List<AuthUserResponse>>() {
+                        }
+                                                                          );
 
                 // lấy pageable info
                 Map<String, Object> pageableMap = (Map<String, Object>) cache.get("pageable");
@@ -147,11 +155,7 @@ public class AuthServiceImpl implements AuthService {
 
                 long total = ((Number) cache.get("totalElements")).longValue();
 
-                return new PageImpl<>(
-                        content,
-                        PageRequest.of(pageNumber, pageSize),
-                        total
-                );
+                return new PageImpl<>(content, PageRequest.of(pageNumber, pageSize), total);
 
             }
 
@@ -171,24 +175,21 @@ public class AuthServiceImpl implements AuthService {
 
                 boolean isNotIn = !"IN".equalsIgnoreCase(relationFilter.getMode());
 
-                spec = spec.and(
-                        SearchHelper.relationFieldInOrNotIn(
-                                relationFilter.getRelation(),
-                                relationFilter.getNested(),
-                                relationFilter.getField(),
-                                relationFilter.getValues(),
-                                isNotIn
-                        )
-                );
+                spec = spec.and(SearchHelper.relationFieldInOrNotIn(
+                        relationFilter.getRelation(),
+                        relationFilter.getNested(),
+                        relationFilter.getField(),
+                        relationFilter.getValues(),
+                        isNotIn
+                                                                   ));
             }
             Pageable pageable = all ? Pageable.unpaged() : PageRequest.of(page - 1, size);
 
             Page<AuthUser> pages = authRepository.findAll(spec, pageable);
 
-            // == MAP TO DTO ==
             List<AuthUserResponse> mapped = pages.stream().map(user -> {
-                AuthUserResponse dto = new AuthUserResponse();
-                BeanUtils.copyProperties(user, dto);
+                AuthUserResponse dto = authMapper.toResponse(user);
+
                 try {
                     var profile = userClient.getUserByAuthId(user.getId());
                     if (profile.getData() != null) {
@@ -200,9 +201,20 @@ public class AuthServiceImpl implements AuthService {
                 }
                 return dto;
             }).collect(Collectors.toList());
+            if (SearchValue != null && !SearchValue.isBlank()) {
+                List<AuthUserResponse> filtered = mapped.stream().filter(dto -> matchProfile(dto, SearchValue)).collect(
+                        Collectors.toList());
+                if (!filtered.isEmpty()) {
+                    mapped = filtered;
+                }
+            }
 
-            Page<AuthUserResponse> finalPage =
-                    new PageImpl<>(mapped, pageable, pages.getTotalElements());
+
+            if (sort != null && !sort.isEmpty()) {
+                mapped = sortProfile(mapped, sort);
+            }
+
+            Page<AuthUserResponse> finalPage = new PageImpl<>(mapped, pageable, pages.getTotalElements());
 
             redisService.set(key, finalPage, RedisKey.ACCOUNT_INFORMATION_TTL);
 
@@ -218,20 +230,24 @@ public class AuthServiceImpl implements AuthService {
     public void assignUsersToRole(Long userId, List<Long> roleIds) {
         try {
             log.info("start assign roles for userId {}", userId);
-            AuthUser user = authRepository.findById(userId)
-                    .orElseThrow(() -> new RuntimeException("user not found"));
+
+            AuthUser user = authRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
+
             authUserRoleRepository.deleteByAuthId(userId);
+
             List<Role> roles = roleRepository.findAllById(roleIds);
-            List<AuthUserRole> authUserRoles = roles.stream()
-                    .map(role -> {
-                        AuthUserRole authUserRole = new AuthUserRole();
-                        authUserRole.setAuth(user);
-                        authUserRole.setRole(role);
-                        authUserRole.setAssignedAt(Instant.now());
-                        authUserRole.setAssignedBy(securityUtils.getCurrentUserId().toString());
-                        return authUserRole;
-                    }).toList();
+
+            List<AuthUserRole> authUserRoles = roles.stream().map(role -> {
+                AuthUserRole authUserRole = new AuthUserRole();
+                authUserRole.setAuth(user);
+                authUserRole.setRole(role);
+                authUserRole.setAssignedAt(Instant.now());
+                authUserRole.setAssignedBy(securityUtils.getCurrentUserId().toString());
+                return authUserRole;
+            }).toList();
+
             authUserRoleRepository.saveAll(authUserRoles);
+
         } catch (Exception e) {
             log.info("Cannot assign roles to user {}:{}", userId, e.getMessage());
             throw new RuntimeException("Failed to assign roles to userId " + userId);
@@ -243,16 +259,50 @@ public class AuthServiceImpl implements AuthService {
         return authRepository.findRoleByUserId(userId);
     }
 
-    private boolean matchProfile(AuthUserResponse dto, String field, String value) {
-        return switch (field) {
-            case "fullName" -> dto.getFullName() != null &&
-                    dto.getFullName().toLowerCase().contains(value.toLowerCase());
-            case "gender" -> dto.getGender() != null &&
-                    dto.getGender().toString().equals(value.toLowerCase());
-            case "birthDate" -> dto.getBirthDate() != null &&
-                    dto.getBirthDate().toString().equals(value);
-            default -> true;
-        };
+    @Override
+    public void changeUserStatus(Long userId, Integer status) {
+        try {
+            log.info("start change user status for userId {}", userId);
+
+            AuthUser user = authRepository.getReferenceById(userId);
+            user.setStatus(status);
+            authRepository.save(user);
+
+            redisService.deleteByPrefix(RedisKey.ACCOUNT_INFORMATION);
+
+            log.info("Cache cleared for prefix {}",
+                     RedisKey.ACCOUNT_INFORMATION);
+
+        } catch (Exception e) {
+            log.error("Cannot change user status to {}:{}",
+                      userId, e.getMessage());
+            throw new RuntimeException(
+                    "Failed to change user status to " + userId);
+        }
+    }
+
+    private boolean matchProfile(AuthUserResponse dto, String value) {
+        if (value == null || value.isEmpty())
+            return true;
+
+        String normalized = value.toLowerCase();
+
+        // fullName
+        if (dto.getFullName() != null && dto.getFullName().toLowerCase().contains(normalized)) {
+            return true;
+        }
+
+        // gender (int)
+        if (dto.getGender() != null && dto.getGender().toString().toLowerCase().contains(normalized)) {
+            return true;
+        }
+
+        // birthDate (LocalDate)
+        if (dto.getBirthDate() != null && dto.getBirthDate().toString().contains(value)) {
+            return true;
+        }
+
+        return false;
     }
 
     private List<AuthUserResponse> sortProfile(List<AuthUserResponse> list, String sort) {
@@ -266,21 +316,18 @@ public class AuthServiceImpl implements AuthService {
                 comparator = Comparator.comparing(
                         AuthUserResponse::getFullName,
                         Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)
-                );
+                                                 );
                 break;
 
             case "gender":
-                comparator = Comparator.comparing(
-                        AuthUserResponse::getGender,
-                        Comparator.nullsLast(Integer::compare)
-                );
+                comparator = Comparator.comparing(AuthUserResponse::getGender, Comparator.nullsLast(Integer::compare));
                 break;
 
             case "birthDate":
                 comparator = Comparator.comparing(
                         AuthUserResponse::getBirthDate,
                         Comparator.nullsLast(LocalDate::compareTo)
-                );
+                                                 );
                 break;
 
             default:
