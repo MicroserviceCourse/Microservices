@@ -15,6 +15,8 @@ import BlogTagList from "./pages/blog/tag/BlogTagList";
 import BlogCreateTag from "./pages/blog/tag/BlogCreateTag";
 import BlogPostList from "./pages/blog/post/BlogPostList";
 import BlogCreatePost from "./pages/blog/post/BlogCreatePost";
+import ShopList from "./pages/Shop/ShopList"
+import ShopDetailPage from "./pages/Shop/detail/ShopDetailPage"
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
             <Route path="createCategory" element={<CreateCategory />} />
             <Route path="category" element={<CategoryList />} />
             <Route path="modules" element={<ModuleList />} />
+            <Route path="shops" element={<ShopList/>}/>
+            <Route path="shops/:id" element={<ShopDetailPage/>}/>
             <Route path="roles" element={<RoleList />} />
             <Route path="modules/:id/permissions" element={<PermissionList />} />
             <Route path="blog/categories" element={<BlogCategoryList />} />

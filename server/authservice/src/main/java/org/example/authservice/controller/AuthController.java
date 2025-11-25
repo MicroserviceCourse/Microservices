@@ -81,11 +81,10 @@ public class AuthController {
             @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "id,desc") String sort, @RequestParam(required = false) String filter,
             @RequestParam(required = false) String searchField, @RequestParam(required = false) String searchValue,
-            @RequestParam(required = false) Boolean all, @RequestParam(required = false) String relation,
+            @RequestParam(defaultValue = "false") Boolean all, @RequestParam(required = false) String relation,
             @RequestParam(required = false) String nested, @RequestParam(required = false) String field,
             @RequestParam(required = false) List<Long> values,
-            @RequestParam(required = false, defaultValue = "NOT_IN") String mode
-                                                                             ) {
+            @RequestParam(required = false, defaultValue = "NOT_IN") String mode) {
         try {
             RelationModeFilterRequest filterNotIn = null;
 

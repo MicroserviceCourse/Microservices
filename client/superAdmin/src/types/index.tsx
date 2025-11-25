@@ -63,10 +63,10 @@ export type GetAllOptions = {
     nested?: string;     // ví dụ "role"
     field?: string;      // ví dụ "id"
     values?: number[];   // ví dụ [1]
-    mode?:string
+    mode?: string
 };
 
-  
+
 export type TooltipProps = {
     text: string;
     children: ReactNode;
@@ -164,6 +164,7 @@ export type PaginationProps = {
     currentPage: number;
     totalPages: number;
     onPageChange: (page: number) => void;
+    loading?: boolean;
     disabled?: boolean;
 }
 export type SortState = {
@@ -206,122 +207,200 @@ export interface UserAssignRolePopupProps {
 }
 
 export interface ApiResponse<T> {
-  data: T;
-  message?: string;
-  status?: number;
+    data: T;
+    message?: string;
+    status?: number;
 }
 
 export interface PageResponse<T> {
-  content: T[];
-  pageNumber: number;
-  pageSize: number;
-  totalElements: number;
-  totalPages: number;
-  last: boolean;
+    content: T[];
+    pageNumber: number;
+    pageSize: number;
+    totalElements: number;
+    totalPages: number;
+    last: boolean;
 }
 
 /* ================== BLOG: CATEGORY ================== */
 
 export interface CategoryDto {
-  id: number;
-  name: string;
-  slug: string;
-  description?: string;
+    id: number;
+    name: string;
+    slug: string;
+    description?: string;
 }
 
 export interface CategoryQuery {
-  page?: number;
-  size?: number;
-  search?: string;
-  sort?: string; // vd: "id,desc"
+    page?: number;
+    size?: number;
+    search?: string;
+    sort?: string; // vd: "id,desc"
 }
 
 /* ================== BLOG: TAG ================== */
 
 export interface TagDto {
-  id: number;
-  name: string;
-  slug: string;
+    id: number;
+    name: string;
+    slug: string;
 }
 
 /* ================== BLOG: POST ================== */
 
 export interface PostDto {
-  id: number;
-  title: string;
-  content: string;
-  slug: string;
-  thumbnailUrl?: string;
-  metaTitle?: string;
-  metaDescription?: string;
-  published: boolean;
-  publishedAt?: string;
+    id: number;
+    title: string;
+    content: string;
+    slug: string;
+    thumbnailUrl?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    published: boolean;
+    publishedAt?: string;
 
-  categoryId: number;
-  categoryName: string;
-  tags: TagDto[];
+    categoryId: number;
+    categoryName: string;
+    tags: TagDto[];
 }
 
 export interface BlogCategoryForm {
-  name: string;
-  slug: string;        // user nhập hoặc pick từ gợi ý
-  description: string;
+    name: string;
+    slug: string;        // user nhập hoặc pick từ gợi ý
+    description: string;
 }
 
 /* ================== BLOG: TAG ================== */
 
 export interface TagDto {
-  id: number;
-  name: string;
-  slug: string;
+    id: number;
+    name: string;
+    slug: string;
 }
 
 export interface BlogTagForm {
-  name: string;
-  slug: string;
+    name: string;
+    slug: string;
 }
 export interface TagQuery {
-  page?: number;
-  size?: number;
+    page?: number;
+    size?: number;
 }
 
 export interface PostDto {
-  id: number;
-  title: string;
-  content: string;
-  slug: string;
-  thumbnailUrl?: string;
-  metaTitle?: string;
-  metaDescription?: string;
-  published: boolean;
-  publishedAt?: string;
+    id: number;
+    title: string;
+    content: string;
+    slug: string;
+    thumbnailUrl?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    published: boolean;
+    publishedAt?: string;
 
-  categoryId: number;
-  categoryName: string;
-  tags: TagDto[];
+    categoryId: number;
+    categoryName: string;
+    tags: TagDto[];
 }
 
 export interface PostQuery {
-  page?: number;
-  size?: number;
+    page?: number;
+    size?: number;
 }
 
 export interface BlogPostForm {
-  title: string;
-  content: string;
-  slug: string;
-  thumbnailUrl?: string;
-  metaTitle?: string;
-  metaDescription?: string;
-  published: boolean;
+    title: string;
+    content: string;
+    slug: string;
+    thumbnailUrl?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    published: boolean;
 
-  categoryId: number;
-  tagIds: number[];
+    categoryId: number;
+    tagIds: number[];
 }
 
 /* giữ nguyên BlogCategoryForm phía dưới nếu đã có */
 export interface BlogCategoryForm {
-  name: string;
-  slug: string;        // user nhập hoặc pick từ gợi ý
-  description: string;
+    name: string;
+    slug: string;        // user nhập hoặc pick từ gợi ý
+    description: string;
+}
+export interface ShopActionMenuProps {
+    status: number;
+    loading?:boolean;
+    onApprove?: () => void;
+    onReject?: () => void;
+    onBlock?: () => void;
+    onRestore?: () => void;
+    onViewDetail?: () => void;
+}
+
+export interface ModalReasonProps {
+    title: string;
+    onConfirm: (reason: string) => void;
+    onClose: () => void;
+    loading?: boolean;
+}
+
+export interface ShopDTO {
+    id: number;
+    shopCode: string;
+    shopName: string;
+    owner: string;
+    status: number;
+    createdAt: string;
+    updatedAt: string;
+}
+export interface ShopDetail {
+    id: number;
+    shopCode: string;
+    shopName: string;
+    slug: string;
+    description: string;
+    logoUrl: string;
+    bannerUrl: string;
+    status: number;
+
+    // Owner info
+    ownerId: number;
+    ownerName?: string;
+    ownerEmail?: string;
+    ownerPhone?: string;
+
+    // Timestamp
+    createdAt: string;
+    updatedAt: string;
+
+    // Addresses
+    addresses: ShopAddress[];
+
+    // Status history
+    histories?: ShopHistory[];
+}
+
+export interface ShopAddress {
+    id: number;
+    fullAddress: string;
+    idProvince: number;
+    idDistrict: number;
+    idWard: number;
+    lat: number | null;
+    lng: number | null;
+    isDefault: boolean;
+}
+
+export interface ShopHistory {
+    id: number;
+    previousStatus: number;
+    newStatus: number;
+    reason: string;
+    actionBy: number;
+    actionAt: string;
+}
+export interface ShopDetailTabProps  {
+    shop: ShopDetail;
+}
+export interface HistoryTabProps {
+    shopId:number;
 }

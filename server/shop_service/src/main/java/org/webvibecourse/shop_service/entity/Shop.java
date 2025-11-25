@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -58,4 +59,7 @@ public class Shop {
 
     @Column(name = "updated_by",length = 50)
     private String updatedBy;
+
+    @OneToMany(mappedBy = "shop",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<ShopAddress> addresses;
 }

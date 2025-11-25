@@ -34,7 +34,7 @@ public class ModuleController {
                                                                            @RequestParam(required = false) String filter,
                                                                            @RequestParam(required = false) String searchField,
                                                                            @RequestParam(required = false) String searchValue,
-                                                                           @RequestParam(required = false) boolean all){
+                                                                           @RequestParam(defaultValue = "false") Boolean all){
         try {
             return ResponseEntity.ok(ApiResponse.success(new PageResponse<>(moduleService.findAll(page,size,sort,searchField,searchValue,filter,all))));
         }catch (Exception e){
