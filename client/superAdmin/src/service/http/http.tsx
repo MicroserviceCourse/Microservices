@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { InternalAxiosRequestConfig } from "axios";
-import { BASE_API } from "../../setting/constant/app";
+import { BASE_API } from "../../constant/app";
 import { getTokens } from "../../util/auth";
 
 declare module "axios" {

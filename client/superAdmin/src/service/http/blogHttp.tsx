@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { InternalAxiosRequestConfig } from "axios";
-import { BLOG_API } from "../../setting/constant/app";
+import { BLOG_API } from "../../constant/app";
 import { getTokens } from "../../util/auth";
 
 const BlogHttp = axios.create({

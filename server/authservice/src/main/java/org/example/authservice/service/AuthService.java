@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface AuthService extends UserDetailsService {
+
     void register(AuthRegisterRequest request);
 
     Page<AuthUserResponse>getAll(Integer page, Integer size, String sort, String searchField, String SearchValue, String filter, boolean all, RelationModeFilterRequest filterNotIn);
