@@ -295,4 +295,33 @@ public class ShopServiceImpl implements ShopService {
                 "Restore Shop"
                     );
     }
+    /**
+     * Retrieves the shop information associated with a specific owner (seller).
+     *
+     * <p>This method is typically used by external or foreign services such as the
+     * authentication service during login, in order to determine whether a seller has
+     * already created a shop and to check the current approval status of that shop.</p>
+     *
+     * <p>Features:</p>
+     * <ul>
+     *     <li>Returns {@code null} when the owner has no shop</li>
+     *     <li>Fetches shop data using the owner's user ID</li>
+     *     <li>Converts the {@link Shop} entity into a {@link ShopResponse} DTO</li>
+     *     <li>Lightweight and safe for cross-service communication</li>
+     * </ul>
+     *
+     * @param ownerId the unique ID of the user who owns the shop
+     * @return a {@link ShopResponse} containing the shop's information,
+     *         or {@code null} if no shop exists for the given owner
+     */
+
+    @Override
+    public ShopResponse getShopByOwner(Long ownerId) {
+        Shop shop = shopRepository.findByOwnerId(ownerId)
+                .orElse(null);
+
+        if(shop == null) return null;
+
+        return shopMapper.toResponse(shop);
+    }
 }

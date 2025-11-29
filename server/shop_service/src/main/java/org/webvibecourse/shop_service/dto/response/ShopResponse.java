@@ -1,11 +1,15 @@
 package org.webvibecourse.shop_service.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ShopResponse {
 
     private Long id;

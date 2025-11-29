@@ -1,11 +1,13 @@
 package org.example.authservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.authservice.client.ShopClient;
 import org.example.authservice.dto.request.AuthRegisterRequest;
 import org.example.authservice.dto.request.LoginRequest;
 import org.example.authservice.dto.response.AuthUserResponse;
 import org.example.authservice.dto.response.RelationModeFilterRequest;
 import org.example.authservice.dto.response.TokenResponse;
+import org.example.authservice.dto.response.client.ShopResponse;
 import org.example.authservice.entity.AuthUser;
 import org.example.authservice.entity.Role;
 import org.example.authservice.service.AuthService;
@@ -32,6 +34,8 @@ public class AuthController {
     private AuthService authService;
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private ShopClient shopClient;
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<TokenResponse>> login(@RequestBody LoginRequest loginDTO) {
@@ -45,7 +49,11 @@ public class AuthController {
                 AuthUser account = (AuthUser) authentication.getPrincipal();
                 List<String> roles =
                         account.getRoles().stream().map(authUserRole -> authUserRole.getRole().getName()).toList();
+                ShopResponse shopInfo = null;
 
+                if (roles.contains("SELLER")) {
+                    shopInfo = shopClient.getShopById(account.getId()).getData();
+                }
                 String accessToken = jwtService.generateAccessToken(account.getEmail(), account.getId(), roles);
                 String refreshToken = jwtService.generateRefreshToken(account.getEmail(), account.getId(), roles);
                 long accessTokenExpiryAt = jwtService.getAccessExpiration();
@@ -54,7 +62,8 @@ public class AuthController {
                 return ResponseEntity.ok(ApiResponse.success(new TokenResponse(
                         accessToken, refreshToken,
                         accessTokenExpiryAt,
-                        refreshTokenExpiryAt, extractedRoles
+                        refreshTokenExpiryAt, extractedRoles,
+                        shopInfo
                 )));
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiResponse.error("Invalid email or " +
