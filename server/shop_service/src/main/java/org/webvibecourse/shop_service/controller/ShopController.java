@@ -79,10 +79,21 @@ public class ShopController {
                                         all))
                         ));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<ShopResponse>>getShopById
             (@PathVariable Long id) {
         return ResponseEntity.ok(
                 ApiResponse.success(shopService.getDetailShop(id)));
+    }
+
+    @GetMapping("/internal/owner/{ownerId}")
+    public ResponseEntity<ApiResponse<ShopResponse>> getShopByOwner
+            (
+                    @PathVariable Long ownerId
+            ){
+        ShopResponse shopResponse = shopService.getShopByOwner(ownerId);
+
+        return ResponseEntity.ok(ApiResponse.success(shopResponse));
     }
 }

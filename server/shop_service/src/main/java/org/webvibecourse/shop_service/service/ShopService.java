@@ -26,4 +26,6 @@ public interface ShopService {
 
     void restoreShop(Long id);
 
+    ShopResponse getShopByOwner(Long ownerId);
+
 }
