@@ -11,6 +11,7 @@ const ModalForm = ({
   confirmText = "Save",
   cancelText = "Cancel",
   loading = false,
+  height = "65vh",            
   width = "max-w-lg",
 }: ModalFormProps) => {
   return (
@@ -47,7 +48,7 @@ const ModalForm = ({
             </div>
 
             {/* Form content */}
-            <div className="max-h-[65vh] overflow-y-auto px-1 scrollbar-thin scrollbar-thumb-gray-200">
+            <div className="max-h-[65vh] overflow-y-auto px-1 scrollbar-thin scrollbar-thumb-gray-200  custom-scroll"   style={{ height: height }}>
               {children}
             </div>
 

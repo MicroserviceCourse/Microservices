@@ -12,7 +12,7 @@ public interface SearchHelper {
     static <T> Specification<T> parseSearchToken(String search, List<String> searchFields) {
         return search != null && !search.isBlank() && searchFields != null && !searchFields.isEmpty()
                 ? (Specification) searchFields.stream()
-                .map((field) -> field + "=like='" + search.trim() + "'")
+                .map(field -> field + "=like='" + search.trim() + "'")   // luôn LIKE dạng string
                 .collect(Collectors.collectingAndThen(Collectors.joining(","), RSQLJPASupport::toSpecification))
                 : RSQLJPASupport.toSpecification((String) null);
     }

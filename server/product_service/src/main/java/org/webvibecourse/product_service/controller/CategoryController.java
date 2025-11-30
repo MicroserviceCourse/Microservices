@@ -34,6 +34,12 @@ public class CategoryController {
         return ResponseEntity.ok(ApiResponse.success("Category updated successfully"));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<CategoryResponse>> getCategoryById
+            (@PathVariable Long id) {
+        return ResponseEntity.ok(ApiResponse.success(service.getCategoryById(id)));
+    }
+
     @GetMapping
     public ResponseEntity<ApiResponse<PageResponse<CategoryResponse>>> getCategories
             (
@@ -55,8 +61,7 @@ public class CategoryController {
                                         searchField,
                                         searchValue,
                                         filter,
-                                        all
-                                                     ))));
+                                        all))));
     }
 
     @PatchMapping("/{id}/status")

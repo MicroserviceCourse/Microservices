@@ -25,6 +25,11 @@ public class Category {
     @Schema(description = "Unique identifier of the category.")
     private Long id;
 
+
+    @Schema(description = "Auto-generated category code (e.g., CAT0001).")
+    @Column(unique = true, nullable = false, length = 20)
+    private String code;
+
     @Schema(name = "Category name displayed to users (e.g., “Men’s Fashion”, “Shoes”, “Electronics”).")
     private String name;
 
@@ -51,4 +56,12 @@ public class Category {
     private String createdBy;
     @Column(name = "updated_by")
     private String updatedBy;
+
+    @PrePersist
+    public void generateCodeAfterInsert() {
+        if (this.code == null) {
+            this.code = "CAT" + String.format("%04d", (int)(Math.random()*999));
+        }
+        this.active=true;
+    }
 }

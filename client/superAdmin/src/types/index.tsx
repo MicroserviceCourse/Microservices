@@ -1,14 +1,6 @@
 import type { Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
-export interface Category {
-    id: number;
-    name: string;
-    icon: string;
-    quantity: number;
-    sale: number;
-    startDate: string;
-}
 export interface Column<T> {
     header: string;
     accessor: string;
@@ -81,6 +73,7 @@ export type ModalFormProps = {
     cancelText?: string;
     loading?: boolean;
     width?: string;
+    height?:string;
 }
 export interface ModuleFormModalProps {
     isOpen: boolean;
@@ -403,4 +396,32 @@ export interface ShopDetailTabProps  {
 }
 export interface HistoryTabProps {
     shopId:number;
+}
+export interface CategoryResponse {
+    id:number;
+    name:string;
+    parentId: number | null;
+    parentName: string | null;
+    sortOrder: number | null;
+    active: boolean;
+    level: number;
+    children : CategoryResponse[];
+}
+export interface CategoryFormModalProps {
+    isOpen:boolean;
+    onClose:()=>void;
+    onSubmit?:()=>void;
+    loading?:boolean;
+}
+export interface CategoryUpdateFormModalProps{
+    isOpen:boolean;
+    onClose:()=>void;
+    onSubmit?:()=>void;
+    loading?:boolean;
+    categoryData:any;
+}
+export interface CategoryParentSelectedProps {
+    categories:CategoryResponse[];
+    value:number | "";
+    onChange:(value:number | "")=>void;
 }
