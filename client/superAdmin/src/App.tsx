@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import MainLayout from "./layout/MainLayout"
 import Home from "./pages/Home"
 import CreateCategory from "./pages/category/CreateCategory"
-import CategoryList from "./pages/category/CategoryList"
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import ModuleList from "./pages/module/ModuleList"
@@ -17,6 +16,7 @@ import BlogPostList from "./pages/blog/post/BlogPostList";
 import BlogCreatePost from "./pages/blog/post/BlogCreatePost";
 import ShopList from "./pages/Shop/ShopList"
 import ShopDetailPage from "./pages/Shop/detail/ShopDetailPage"
+import CategoryList from "./pages/category/CategoryList"
 
 function App() {
   return (
