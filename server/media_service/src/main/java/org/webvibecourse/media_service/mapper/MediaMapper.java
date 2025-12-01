@@ -1,0 +1,14 @@
+package org.webvibecourse.media_service.mapper;
+
+import org.mapstruct.Mapper;
+import org.webvibecourse.media_service.dto.response.MediaResponse;
+import org.webvibecourse.media_service.entity.Media;
+
+@Mapper(componentModel = "spring")
+public interface MediaMapper {
+    /**
+     * Mapper responsible for converting between media and
+     * MediaResponse.
+     */
+    MediaResponse toResponse(Media media);
+}
