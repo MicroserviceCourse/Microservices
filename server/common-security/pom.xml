@@ -24,19 +24,25 @@
 
     <dependencies>
 
+        <!-- Spring Context (BẮT BUỘC để dùng @Value, @Component, @Service, Environment...) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- OAuth2 Resource Server (BẮT BUỘC CHO JWT Decoding) -->
+        <!-- OAuth2 Resource Server (JWT decoding) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 
-        <!-- JPA (có EntityManager cho RsqlConfig) -->
+        <!-- JPA (nếu SecurityUtils cần inject EntityManager) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -80,6 +86,12 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Bean Validation (Optional nhưng nên có) -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -87,6 +99,11 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
 
         <!-- Test -->
         <dependency>
@@ -118,7 +135,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Đảm bảo JAR chứa đúng package -->
+            <!-- JAR packing -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -132,5 +149,17 @@
 
         </plugins>
     </build>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2023.0.1</version> <!-- tùy version bạn dùng -->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
 </project>

@@ -13,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "product",schema = "product_service")
@@ -43,6 +44,11 @@ public class Product {
     @Schema(description = "Original price of the product.")
     private BigDecimal price;
 
+    @Schema(description = "Unique product code, auto-generated.")
+    @Column(name = "code", unique = true, nullable = false, length = 50)
+    private String code;
+
+
     @Schema(description = "Product status:\n"
                           + "0 = Hidden\n"
                           + "1 = Active/Published\n"
@@ -62,4 +68,42 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductVariant> variants;
+
+    @Schema(description = "Main thumbnail image URl of the product")
+    @Column(name = "thumbnail_url", columnDefinition = "TEXT")
+    private String thumbnailUrl;
+    @Schema(description = "List of secondary image URLs (gallery) for the product.")
+    @Column(name = "gallery_urls", columnDefinition = "TEXT")
+    private String galleryUrls;
+
+    @PrePersist
+    public void prePersist() {
+        if(this.slug == null || this.slug.isBlank()){
+            this.slug = generateSlug(this.name);
+        }
+
+        if(this.code == null || this.code.isBlank()){
+            this.code = generateProductCode();
+        }
+    }
+
+    private String generateSlug(String input){
+        if(input==null){
+            return null;
+        }
+        String nowhitespace = java.text.Normalizer.normalize(input, java.text.Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .replaceAll("[^\\w\\s-]", "")
+                .trim()
+                .replaceAll("\\s+", "-");
+
+        return nowhitespace.toLowerCase();
+    }
+    private String generateProductCode() {
+        // Random 6 ký tự A-Z0-9
+        String random = UUID.randomUUID().toString().
+                replace("-", "").substring(0, 6).toUpperCase();
+        return "PRD-" + random;
+    }
+
 }
