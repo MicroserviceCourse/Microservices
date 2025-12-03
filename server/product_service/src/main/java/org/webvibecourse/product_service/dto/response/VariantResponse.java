@@ -1,23 +1,19 @@
-package org.webvibecourse.product_service.entity;
+package org.webvibecourse.product_service.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-@Entity
-@Table(name = "product_variant",schema = "product_service")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductVariant {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class VariantResponse {
     @Schema(description = "Unique identifier of the product variant.")
     private Long id;
 
@@ -35,9 +31,4 @@ public class ProductVariant {
             example = "https://cdn.example.com/images/products/variant-red.png"
     )
     private String imageUrl;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    @Schema(description = "Reference to the parent product. Links variant to its product.")
-    private Product product;
 }

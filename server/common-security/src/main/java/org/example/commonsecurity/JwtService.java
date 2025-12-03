@@ -24,18 +24,19 @@ public class JwtService {
     private Key getSignKey(){
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
-    public String generateAccessToken(String email, Long userId, List<String> role) {
-        return buildToken(email,role , accessExpiration,userId);
+    public String generateAccessToken(String email, Long userId, List<String> role,Long shopId) {
+        return buildToken(email,role , accessExpiration,userId,shopId);
     }
-    public String generateRefreshToken(String email,Long userId,List<String> role){
-        return buildToken(email, role,refreshExpiration,userId);
+    public String generateRefreshToken(String email,Long userId,List<String> role,Long shopId){
+        return buildToken(email, role,refreshExpiration,userId,shopId);
     }
 
-    private String buildToken(String email,List<String> role,Long expiration,Long userId){
+    private String buildToken(String email,List<String> role,Long expiration,Long userId,Long shopId){
         return Jwts.builder()
                 .setSubject(email)
                 .claim("userId",userId)
                 .claim("role",role)
+                .claim("shopId",shopId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+expiration))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)

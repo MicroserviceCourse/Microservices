@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import SellerHeader from "../components/SellerHeader";
 import Sidebar from "./SideBar";
+import { AlertProvider } from "./alert-context";
 
 export default function SellerLayout() {
   return (
@@ -18,7 +19,9 @@ export default function SellerLayout() {
 
         {/* CONTENT AREA */}
         <div className="p-6">
-          <Outlet />
+        <AlertProvider>
+            <Outlet />
+          </AlertProvider>
         </div>
 
       </div>

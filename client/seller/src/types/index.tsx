@@ -1,37 +1,47 @@
+import type { JSX } from "react";
 import type { IconType } from "react-icons";
 
 export type Tokens = {
-    accessToken: string;
-    refreshToken?: string;
-    accessTokenAt: number;
-    refreshTokenAt?: number;
+  accessToken: string;
+  refreshToken?: string;
+  accessTokenAt: number;
+  refreshTokenAt?: number;
 }
 export type SidebarItemProps = {
-    icon: IconType;
-    label: string;
-    onClick?: () => void;
-  };
+  icon: IconType;
+  label: string;
+  onClick?: () => void;
+};
 export type ReportItemProps = {
-    icon: string;
-    label: string;
-    amount: string;
-    growth: string;
-    color: string;
-  };
-export type TableColumn<T> =  {
-  key:string;
-  label:string;
+  icon: string;
+  label: string;
+  amount: string;
+  growth: string;
+  color: string;
+};
+export type TableColumn<T> = {
+  key: string;
+  label: string;
   sortable?: boolean;
-  align?:"left" | "center" | "right";
-  render?:(row:any)=>React.ReactNode;
+  align?: "left" | "center" | "right";
+  render?: (row: any) => React.ReactNode;
 }
-export type TableUIProps<T> ={
-  columns:TableColumn<T>[];
+export type TableUIProps<T> = {
+  columns: TableColumn<T>[];
   data: T[];
   loading?: boolean;
   sortKey?: string;
   sortDir?: "asc" | "desc";
   onSort?: (key: keyof T) => void;
+
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+export type PaginationProps = {
+  page: number;
+  totalPages: number;
+  onChange: (page: number) => void;
 }
 export interface Product {
   id: number;
@@ -44,11 +54,95 @@ export interface Product {
   updatedAt: string;
 }
 export type GetAllOptions = {
-  page?:number;
-    size?:number;
-    sort?:string;
-    filter?:string;
-    searchField?:string;
-    searchValue?:string
-    all?:boolean;
+  page?: number;
+  size?: number;
+  sort?: string;
+  filter?: string;
+  searchField?: string;
+  searchValue?: string
+  all?: boolean;
 };
+export type Variant = {
+  id: number | null;
+  name: string;
+  price: string;
+  sku: string;
+  imagePreview?: string | null;
+  imageFile?: File | null;
+}
+export type ProductFormData = {
+  name: string;
+  description: string;
+  price: string;
+  thumbnailFile: File | null;
+  galleryFiles: File[];
+}
+export interface CreateProductPayload {
+  name: string;
+  description: string;
+  price: number;
+  thumbnailFile: File | null;
+  galleryFiles: File[];
+  variants: {
+    name: string;
+    sku: string;
+    price: number;
+    imageFile: File | null;
+  }[];
+}
+
+export interface VariantUpdatePayload {
+  id: number | null;
+  name: string;
+  sku: string;
+  price: number;
+
+  // file upload (FE gửi)
+  imageFile: File | null;
+
+  // BE dùng để map file đúng variant
+  imageIndex: number | null;
+}
+
+export interface UpdateProductPayload {
+  name: string;
+  description: string;
+  price: number;
+  status: string;
+
+  thumbnailFile: File | null;
+  galleryFiles: File[];
+
+  variants: VariantUpdatePayload[];
+}
+
+
+export type IActionItem = {
+  label: string;
+  icon?: JSX.Element;
+  onClick?: () => void;
+  hidden?: boolean;
+}
+export type TableActionProps = {
+  actions: IActionItem[];
+}
+export type ProductTableActionProps = {
+  product: Product,
+  onUpdated?: () => void;
+}
+export type ProductEditData = {
+  name: string;
+  description: string;
+  price: string;
+  thumbnailFile: File | null;
+  galleryFiles: File[];
+  status: string;
+}
+export type BaseBadgeProps = {
+  label: string;
+  className?: string;
+  icon?:React.ReactNode;
+}
+export type StatusBadgeProps ={
+  value:number | string;
+}

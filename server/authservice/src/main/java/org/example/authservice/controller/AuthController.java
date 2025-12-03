@@ -54,8 +54,20 @@ public class AuthController {
                 if (roles.contains("SELLER")) {
                     shopInfo = shopClient.getShopById(account.getId()).getData();
                 }
-                String accessToken = jwtService.generateAccessToken(account.getEmail(), account.getId(), roles);
-                String refreshToken = jwtService.generateRefreshToken(account.getEmail(), account.getId(), roles);
+                String accessToken = jwtService.
+                        generateAccessToken(
+                                account.getEmail(),
+                                account.getId(),
+                                roles,
+                                shopInfo!=null && shopInfo.getId()!=null?shopInfo.getId():null);
+                String refreshToken = jwtService.
+                        generateRefreshToken
+                                (
+                                        account.getEmail(),
+                                        account.getId(),
+                                        roles,
+                                        shopInfo!=null && shopInfo.getId()!=null?shopInfo.getId():null
+                                );
                 long accessTokenExpiryAt = jwtService.getAccessExpiration();
                 long refreshTokenExpiryAt = jwtService.getRefreshExpiration();
                 List<String> extractedRoles = jwtService.extractRole(accessToken);

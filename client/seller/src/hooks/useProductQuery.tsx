@@ -3,7 +3,7 @@ import type { Product } from "../types";
 
 const useProductQuery=()=>{
     const [search, setSearch] =useState("");
-    const [status, setStatus] = useState<"ALL" | Product["status"]>(0);
+    const [status, setStatus] = useState<"ALL" | Product["status"]>("ALL");
     const [sortKey, setSortKey] = useState<keyof Product>("id");
     const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
     const [page, setPage] = useState(1);
@@ -20,8 +20,8 @@ const useProductQuery=()=>{
     const buildParams = () => ({
         page,
         size,
-        search: search.trim(),
-        filter  : `status==${status === "ALL" ? "" : status}` ,
+        searchValue: search.trim(),
+        filter  : status=="ALL" ?"":`status==${status}` ,
         sort: `${sortKey},${sortDir}`,
       });
       return {

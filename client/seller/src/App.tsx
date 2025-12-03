@@ -4,6 +4,7 @@ import SellerLayout from "./components/SellerLayout"
 import HomePage from "./pages/HomePage"
 import ProductPage from "./pages/ProductPage"
 import CreateProductPage from "./pages/CreateProductPage"
+import EditProductPage from "./pages/EditProductPage"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
                 <Route index element={<HomePage/>}/>
                 <Route path="product" element={<ProductPage/>}/>
                 <Route path="product/create" element={<CreateProductPage/>}/>
+                <Route path="product/:id/edit" element={<EditProductPage/>}/>"
               </Route>
           </Routes>
      </BrowserRouter>

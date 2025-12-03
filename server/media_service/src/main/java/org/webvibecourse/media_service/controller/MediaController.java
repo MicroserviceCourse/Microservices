@@ -32,4 +32,10 @@ public class MediaController {
              @RequestParam(value = "subDirectory") String subDirectory) throws IOException {
         return ResponseEntity.ok(ApiResponse.success(service.uploadMedias(files,subDirectory)));
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ApiResponse<MediaResponse>> deleteMedia(@RequestParam("url") String url) throws IOException {
+        service.deleteMedia(url);
+        return ResponseEntity.ok(ApiResponse.success("Delete media successfully!"));
+    }
 }

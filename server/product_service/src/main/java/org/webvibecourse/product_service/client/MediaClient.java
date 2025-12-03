@@ -116,4 +116,22 @@ public class MediaClient {
             throw new RuntimeException("Error uploading single file: " + e.getMessage(), e);
         }
     }
+    public void deleteMedia(String url){
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<Void> request = new HttpEntity<>(headers);
+
+            String deleteUrl = mediaServiceBaseUrl + "/delete?url=" + url;
+
+            template.exchange(
+                    deleteUrl,
+                    HttpMethod.DELETE,
+                    request,
+                    Void.class
+                             );
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting media: " + e.getMessage(), e);
+        }
+    }
 }

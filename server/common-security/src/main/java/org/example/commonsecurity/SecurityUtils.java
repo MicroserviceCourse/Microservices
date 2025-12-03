@@ -18,6 +18,11 @@ public class SecurityUtils {
         return jwt != null ? jwt.getClaim("userId") : null;
     }
 
+    public Long getCurrentShopId() {
+        Jwt jwt = getJwtToken();
+        return jwt != null ? jwt.getClaim("shopId") : null;
+    }
+
     /**
      * 🔹 Lấy email (subject) từ JWT
      */

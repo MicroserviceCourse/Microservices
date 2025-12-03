@@ -1,11 +1,13 @@
 package org.webvibecourse.product_service.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -33,6 +35,12 @@ public class ProductResponse {
 
     private Integer status;
 
+    @Schema(description = "Main thumbnail image URL of the product")
     private String thumbnailUrl;
 
+    @Schema(description = "List of secondary image URLs (gallery) for the product.")
+    private List<String> galleryUrls;   // 👈 parse từ String trong entity
+
+    @Schema(description = "Danh sách variant của sản phẩm")
+    private List<VariantResponse> variants;
 }

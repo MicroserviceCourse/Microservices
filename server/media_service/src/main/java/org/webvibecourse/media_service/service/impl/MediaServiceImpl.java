@@ -23,6 +23,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,18 +46,32 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public MediaResponse uploadMedia(MultipartFile file, String subDirectory) throws IOException {
         try {
-           String originalName = file.getOriginalFilename();
-           String extension = "";
+            String originalName = file.getOriginalFilename();
+            String extension = "";
 
-           if(originalName != null && originalName.contains(".")){
-               extension = originalName.substring(originalName.lastIndexOf("."));
-           }
+            if (originalName != null && originalName.contains(".")) {
+                extension = originalName.substring(originalName.lastIndexOf("."));
+            }
 
-           String uniqueName = UUID.randomUUID().toString() + extension;
+            String uniqueName = UUID.randomUUID().toString() + extension;
 
-           String key = (subDirectory !=null && !subDirectory.isEmpty()
-           ? subDirectory + "/" : "") + uniqueName;
+            String key = (subDirectory != null && !subDirectory.isEmpty()
+                                  ? subDirectory + "/" : "") + uniqueName;
 
+            // 👉 Đo width/height TỪ MultipartFile (trước khi upload)
+            int width = 0;
+            int height = 0;
+            try (InputStream in = file.getInputStream()) {
+                BufferedImage image = ImageIO.read(in);
+                if (image != null) {
+                    width = image.getWidth();
+                    height = image.getHeight();
+                }
+            } catch (Exception e) {
+                // có thể log warning, nhưng không throw, cho width/height = 0 cũng được
+            }
+
+            // 👉 Upload S3 như cũ
             PutObjectRequest putRequest = PutObjectRequest.builder()
                     .bucket(bucketName)
                     .key(key)
@@ -65,42 +80,24 @@ public class MediaServiceImpl implements MediaService {
 
             s3Client.putObject(putRequest, RequestBody.fromBytes(file.getBytes()));
 
+            // 👉 Không cần getObject nữa
             Media media = new Media();
             media.setUrl("https://" + bucketName + ".s3.ap-southeast-2.amazonaws.com/" + key);
             media.setFileName(originalName);
             media.setSize(file.getSize());
             media.setMimeType(file.getContentType());
             media.setOwnerId(securityUtils.getCurrentUserId());
-            try {
-                ResponseBytes<GetObjectResponse> s3Object =
-                        s3Client.getObjectAsBytes(
-                                GetObjectRequest.builder()
-                                        .bucket(bucketName)
-                                        .key(key)
-                                        .build()
-                                                 );
+            media.setWidth(width);
+            media.setHeight(height);
 
-                BufferedImage image = ImageIO.read(
-                        new ByteArrayInputStream(s3Object.asByteArray()));
-
-                if (image != null) {
-                    media.setWidth(image.getWidth());
-                    media.setHeight(image.getHeight());
-                } else {
-                    media.setWidth(0);
-                    media.setHeight(0);
-                }
-
-            } catch (Exception e) {
-                throw new RuntimeException("Cannot read image from S3: " + e.getMessage(), e);
-            }
-            media=repository.save(media);
+            media = repository.save(media);
 
             return mapper.toResponse(media);
-        }catch (Exception e){
-            throw new RuntimeException("Cannot upload file to S3: "+e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Cannot upload file to S3: " + e.getMessage(), e);
         }
     }
+
 
     @Override
     public List<MediaResponse> uploadMedias(List<MultipartFile> files, String subDirectory) throws IOException {
@@ -114,5 +111,33 @@ public class MediaServiceImpl implements MediaService {
             responses.add(response);
         }
         return responses;
+    }
+
+    @Override
+    public void deleteMedia(String url) {
+        try {
+            String prefix = "https://" + bucketName + ".s3.ap-southeast-2.amazonaws.com/";
+            if(!url.startsWith(prefix)){
+                throw new RuntimeException("Invalid S3 URL");
+            }
+
+            String key = url.substring(prefix.length());
+
+            s3Client.deleteObject(builder ->
+                                          builder.bucket(bucketName).key(key)
+                                 );
+
+            Media media = repository.findByUrl(url).orElse(null);
+
+            if (media != null) {
+                repository.delete(media);
+            }
+
+            log.info("Deleted file from S3 & DB: {}", url);
+        }catch (Exception e){
+            log.error("Error deleting file: {}", e.getMessage());
+            throw new RuntimeException("Cannot delete file: " + e.getMessage());
+
+        }
     }
 }

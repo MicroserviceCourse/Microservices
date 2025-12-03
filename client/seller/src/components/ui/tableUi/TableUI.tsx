@@ -1,5 +1,6 @@
 import { ChevronsUpDown, ChevronUp, ChevronDown } from "lucide-react";
-import type { TableUIProps } from "../../types";
+import type { TableUIProps } from "../../../types";
+import Pagination from "./Pagination";
 
 const TableUI = <T,>({
   columns,
@@ -7,6 +8,9 @@ const TableUI = <T,>({
   loading,
   sortKey,
   sortDir,
+  page,
+  totalPages,
+  onPageChange,
   onSort,
 }: TableUIProps<T>) => {
   return (
@@ -22,18 +26,16 @@ const TableUI = <T,>({
               return (
                 <th
                   key={i}
-                  className={`py-3 px-4 font-semibold bg-white ${
-                    col.align === "right"
+                  className={`py-3 px-4 font-semibold bg-white ${col.align === "right"
                       ? "text-right"
                       : col.align === "center"
-                      ? "text-center"
-                      : "text-left"
-                  }`}
+                        ? "text-center"
+                        : "text-left"
+                    }`}
                 >
                   <div
-                    className={`flex items-center gap-1 ${
-                      col.sortable ? "cursor-pointer select-none" : ""
-                    }`}
+                    className={`flex items-center gap-1 ${col.sortable ? "cursor-pointer select-none" : ""
+                      }`}
                     onClick={() => col.sortable && onSort?.(col.key as keyof T)}
 
                   >
@@ -100,13 +102,12 @@ const TableUI = <T,>({
                 {columns.map((col, cIdx) => (
                   <td
                     key={cIdx}
-                    className={`py-4 px-4 border-b border-gray-200 ${
-                      col.align === "right"
+                    className={`py-4 px-4 border-b border-gray-200 ${col.align === "right"
                         ? "text-right"
                         : col.align === "center"
-                        ? "text-center"
-                        : "text-left"
-                    }`}
+                          ? "text-center"
+                          : "text-left"
+                      }`}
                   >
                     {col.render ? col.render(row) : (row as any)[col.key]}
                   </td>
@@ -115,6 +116,12 @@ const TableUI = <T,>({
             ))}
         </tbody>
       </table>
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        onChange={onPageChange}
+      />
+
     </div>
   );
 };
