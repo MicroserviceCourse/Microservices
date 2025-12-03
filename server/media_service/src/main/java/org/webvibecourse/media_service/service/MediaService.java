@@ -13,4 +13,6 @@ public interface MediaService {
 
     List<MediaResponse> uploadMedias
             (List<MultipartFile> files, String subDirectory) throws IOException;
+
+    void deleteMedia(String url);
 }

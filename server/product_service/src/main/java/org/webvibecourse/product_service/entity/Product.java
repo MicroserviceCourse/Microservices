@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.commonutils.Enum.ProductStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -66,6 +67,12 @@ public class Product {
     @Schema(description = "Timestamp when the product was last updated (auto-generated).")
     private LocalDateTime updatedAt;
 
+    @Column(name = "created_by")
+    private String createdBy;
+    @Column(name = "updated_by")
+    private String updatedBy;
+
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductVariant> variants;
 
@@ -84,6 +91,9 @@ public class Product {
 
         if(this.code == null || this.code.isBlank()){
             this.code = generateProductCode();
+        }
+        if(this.status == null ){
+            this.status = ProductStatus.ACTIVE.getCode();
         }
     }
 

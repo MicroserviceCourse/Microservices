@@ -1,5 +1,6 @@
 package org.webvibecourse.product_service.dto.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -14,6 +15,7 @@ import lombok.Data;
  * This DTO is used as the request payload in create/update category APIs.
  */
 @Data
+@Schema(description = "Category request")
 public class CategoryRequest {
 
     private String name;

@@ -1,76 +1,141 @@
 import { useState } from "react";
-import { Upload, Image, Plus, X, ImageIcon, Edit2, ImageUp } from "lucide-react";
+import { Plus, X, ImageIcon, Edit2, ImageUp } from "lucide-react";
+import { type ProductFormData, type Variant } from "../types";
+import { useAlert } from "../components/alert-context";
+import { createProduct } from "../service/api/Product";
+import { useNavigate } from "react-router-dom";
 
 const inputBase =
     "w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 " +
     "text-slate-800 dark:text-slate-200 rounded-md shadow-sm px-3 py-2.5 " +
     " focus:ring-2 focus:ring-blue-600 focus:outline-none transition";
 
-interface Variant {
-    id: number;
-    name: string;
-    price: string;
-    stock: string;
-    sku: string;
-    image?: string | null;
-}
 
 const CreateProductPage = () => {
+    const [formData, setFormData] = useState<ProductFormData>({
+        name: "",
+        description: "",
+        price: "",
+        thumbnailFile: null as File | null,
+        galleryFiles: []
+    });
+    const navigate = useNavigate();
+    const { showAlert } = useAlert();
+    const [removingGalleryIndex, setRemovingGalleryIndex] = useState<number | null>(null);
+
+    const [isRemovingThumb, setIsRemovingThumb] = useState(false);
+
+    const [removingIds, setRemovingIds] = useState<number[]>([]);
+
+    const [isDraggingThumb, setIsDraggingThumb] = useState(false);
+    const [isDraggingGallery, setIsDraggingGallery] = useState(false);
+    const [galleryPreview, setGalleryPreview] = useState<string[]>([]);
+    const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
     const [variants, setVariants] = useState<Variant[]>([
-        { id: 1, name: "", price: "", stock: "", sku: "", image: null },
+        {id:null, name: "", price: "", sku: "", imagePreview: null, imageFile: null }
     ]);
-    const [thumbnail, setThumbnail] = useState<string | null>(null);
-    const [gallery, setGallery] = useState<string[]>([]);
-    const [removing, setRemoving] = useState<number | null>(null);
     const uploadThumbnail = (file: File) => {
+        setFormData(prev => ({
+            ...prev,
+            thumbnailFile: file
+        }));
+
+        // Tạo preview
         const reader = new FileReader();
-        reader.onload = () => setThumbnail(reader.result as string);
+        reader.onload = () => setThumbnailPreview(reader.result as string);
         reader.readAsDataURL(file);
     };
 
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
     const uploadGallery = (files: FileList) => {
-        const readers = Array.from(files).map(file => {
-            return new Promise<string>((resolve) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result as string);
-                reader.readAsDataURL(file);
-            });
-        });
-    
-        Promise.all(readers).then(images => {
-            // images = ["base64_1", "base64_2", ...]
-            setGallery(prev => [...prev, ...images]);
+        const arr = Array.from(files);
+
+        // Lưu file thật
+        setFormData(prev => ({
+            ...prev,
+            galleryFiles: [...prev.galleryFiles, ...arr]
+        }));
+
+        // Tạo preview
+        Promise.all(
+            arr.map(file => {
+                return new Promise<string>((resolve) => {
+                    const r = new FileReader();
+                    r.onload = () => resolve(r.result as string);
+                    r.readAsDataURL(file);
+                });
+            })
+        ).then(images => {
+            setGalleryPreview(prev => [...prev, ...images]);
         });
     };
-    
-    const removeGalleryImage = (index: number) => {
-        setGallery((prev) => prev.filter((_, i) => i !== index));
+    const uploadVariantImage = (index: number, file: File) => {
+        const preview = URL.createObjectURL(file);
+        setVariants(prev => {
+            const arr = [...prev];
+            arr[index] = {
+                ...arr[index],
+                imagePreview: preview,
+                imageFile: file
+            };
+            return arr;
+        });
     };
+
     const addVariant = () => {
-        setVariants([
-            ...variants,
-            { id: Date.now(), name: "", price: "", stock: "", sku: "", image: null },
+        setVariants(prev => [
+            ...prev,
+            { id: null, name: "", price: "", sku: "", imagePreview: null, imageFile: null }
         ]);
     };
 
-    const updateVariant = (id: number, key: keyof Variant, value: any) => {
-        setVariants((prev) =>
-            prev.map((v) => (v.id === id ? { ...v, [key]: value } : v))
-        );
+    const updateVariant = (index: number, key: keyof Variant, value: any) => {
+        setVariants(prev => {
+            const arr = [...prev];
+            arr[index] = {
+                ...arr[index],
+                [key]: value,
+                sku: key === "name"
+                    ? generateVariantSKU(formData.name, value)
+                    : arr[index].sku
+            };
+            return arr;
+        });
     };
+    
 
-    const uploadVariantImage = (id: number, file: File) => {
-        const url = URL.createObjectURL(file);
-        updateVariant(id, "image", url);
-    };
-    const deleteVariantRow = (id: number) => {
-        setRemoving(id);
+
+    const removeVariant = (index: number) => {
+        setRemovingIds(prev => [...prev, index]);
+
+
         setTimeout(() => {
-            setVariants(prev => prev.filter(v => v.id !== id));
-            setRemoving(null);
+            setVariants(prev => prev.filter((_, i) => i !== index));
+
+            setRemovingIds(prev => prev.filter(x => x !== index));
         }, 250);
     };
-    const [isDraggingThumb, setIsDraggingThumb] = useState(false);
+
+    const removeGalleryImage = (index: number) => {
+        // Xóa preview
+        setRemovingGalleryIndex(index);
+
+        setTimeout(() => {
+            // Xóa preview
+            setGalleryPreview(prev => prev.filter((_, i) => i !== index));
+
+            // Xóa file thật
+            setFormData(prev => ({
+                ...prev,
+                galleryFiles: prev.galleryFiles.filter((_, i) => i !== index)
+            }));
+
+            setRemovingGalleryIndex(null);
+        }, 250);
+    };
 
     const handleDropThumbnail = (e: React.DragEvent<HTMLLabelElement>) => {
         e.preventDefault();
@@ -79,14 +144,74 @@ const CreateProductPage = () => {
         const file = e.dataTransfer.files?.[0];
         if (file) uploadThumbnail(file);
     };
-    const [isDraggingGallery, setIsDraggingGallery] = useState(false);
     const handleDropGallery = (e: React.DragEvent<HTMLLabelElement>) => {
         e.preventDefault();
         setIsDraggingGallery(false);
-
-        const files = e.dataTransfer.files;
-        if (files && files.length > 0) uploadGallery(files);
+        if (e.dataTransfer.files) uploadGallery(e.dataTransfer.files);
     };
+    const removeThumbnail = () => {
+        setIsRemovingThumb(true);
+        setTimeout(() => {
+            setThumbnailPreview(null);
+            setFormData(prev => ({ ...prev, thumbnailFile: null }));
+            setIsRemovingThumb(false);
+        }, 250);
+    };
+    const toSKU = (text: string) =>
+        text
+            .trim()
+            .toUpperCase()
+            .replace(/[^A-Z0-9]+/g, "-")
+            .replace(/-+/g, "-")
+            .replace(/^-|-$/g, "");
+    const generateVariantSKU = (productName: string, variantName: string) => {
+        const base = toSKU(productName || "PRODUCT");
+        const v = toSKU(variantName || "OPTION");
+        return `${base}-${v}`;
+    };
+    const handleSaveProduct = async()=>{
+        console.log(formData.name)
+        const payload ={
+            name:formData.name,
+            description:formData.description,
+            price:Number(formData.price),
+            thumbnailFile:formData.thumbnailFile,
+            galleryFiles:formData.galleryFiles,
+            variants: variants.map(v => ({
+                name: v.name,
+                price: Number(v.price),
+                sku: v.sku,
+                imageFile: v.imageFile ?? null
+            }))
+        }
+        try{
+            const response = await createProduct(payload);
+
+            showAlert({
+                title: response?.data?.message || "Product created successfully!",
+                type: "success",
+                autoClose: 3000,
+              });
+
+              setFormData({
+                name: "",
+                description: "",
+                price: "",
+                thumbnailFile: null as File | null,
+                galleryFiles: []
+              });
+              setGalleryPreview([]);
+              setThumbnailPreview(null);
+              setVariants([]);
+
+        }catch(err:any){
+            showAlert({
+                title: err?.response?.data?.message || "Failed to create product.",
+                type: "error",
+                autoClose: 3000,
+              });
+        }
+    }
 
     return (
         <div className="p-8 bg-gray-50 min-h-screen space-y-8">
@@ -96,11 +221,11 @@ const CreateProductPage = () => {
                 <h1 className="text-2xl font-bold">Create Product</h1>
 
                 <div className="flex gap-3">
-                    <button className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155">
+                    <button onClick={()=>navigate("/Dashboard/product")} className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155">
                         Cancel
                     </button>
 
-                    <button className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-sm">
+                    <button onClick={handleSaveProduct} className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-sm">
                         Save Product
                     </button>
                 </div>
@@ -117,7 +242,21 @@ const CreateProductPage = () => {
 
                         <div>
                             <label className="text-sm font-medium">Name</label>
-                            <input className={inputBase} placeholder="e.g. Modern Sofa" />
+                            <input
+                                className={inputBase}
+                                name="name"
+                                value={formData.name}
+                                onChange={(e) => {
+                                    const name = e.target.value;
+                                    setFormData(prev => ({ ...prev, name }));
+                                    setVariants(prev =>
+                                        prev.map(v => ({
+                                            ...v,
+                                            sku: generateVariantSKU(name, v.name)
+                                        }))
+                                    );
+                                }}
+                                placeholder="e.g. Modern Sofa" />
                         </div>
 
                         <div>
@@ -125,13 +264,21 @@ const CreateProductPage = () => {
                             <textarea
                                 className={inputBase}
                                 rows={5}
+                                onChange={handleChange}
+                                name="description"
+                                value={formData.description}
                                 placeholder="Write a detailed description for your product..."
                             ></textarea>
                         </div>
 
                         <div>
                             <label className="text-sm font-medium">Price</label>
-                            <input className={inputBase} placeholder="$ 250.00" />
+                            <input
+                                className={inputBase}
+                                name="price"
+                                value={formData.price}
+                                onChange={handleChange}
+                                placeholder="$ 250.00" />
                         </div>
 
                     </div>
@@ -153,18 +300,33 @@ const CreateProductPage = () => {
                             onDrop={handleDropThumbnail}
                             className={`
                                 relative border-2 border-dashed rounded-xl w-full h-56 flex flex-col 
-                                items-center justify-center text-slate-500 cursor-pointer overflow-hidden
-                                ${isDraggingThumb ? "border-blue-600 bg-blue-50" : "border-slate-300"}
+                                items-center justify-center cursor-pointer overflow-hidden
+                                group
+                                ${isDraggingThumb ? "border-blue-600 bg-blue-50 drop-hover" : "border-slate-300"}
                             `}
+
                         >
                             {/* Khi có thumbnail -> hiện ảnh full box */}
-                            {thumbnail ? (
+                            {thumbnailPreview ? (
                                 <>
                                     <img
-                                        src={thumbnail}
-                                        className="absolute inset-0 w-full h-full object-cover"
+                                        src={thumbnailPreview}
+                                        className={`absolute inset-0 w-full h-full object-cover 
+                                            ${isRemovingThumb ? "scale-out" : "scale-in"}
+                                        `}
                                     />
-
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            removeThumbnail();
+                                        }}
+                                        className="
+                        absolute top-3 right-3 bg-black/60 text-white p-1.5 rounded-full
+                        opacity-0 group-hover:opacity-100 transition
+                    "
+                                    >
+                                        <X className="h-4 w-4" />
+                                    </button>
                                     {/* Overlay Edit */}
                                     <div
                                         className="
@@ -209,10 +371,11 @@ const CreateProductPage = () => {
                             onDragLeave={() => setIsDraggingGallery(false)}
                             onDrop={handleDropGallery}
                             className={`
-        border-2 border-dashed rounded-lg p-10 mt-2 flex flex-col items-center justify-center 
-        text-slate-500 cursor-pointer transition
-        ${isDraggingGallery ? "border-blue-600 bg-blue-50" : "border-slate-300"}
-    `}
+                                border-2 border-dashed rounded-lg p-10 mt-2 flex flex-col items-center
+                                justify-center cursor-pointer transition
+                                ${isDraggingGallery ? "border-blue-600 bg-blue-50 drop-hover" : "border-slate-300"}
+                              `}
+
                         >
                             <ImageIcon className="h-10 w-10 mb-2" />
                             <p className="text-blue-600 font-medium">
@@ -232,8 +395,11 @@ const CreateProductPage = () => {
 
                         {/* Preview gallery */}
                         <div className="flex gap-3 mt-4 flex-wrap">
-                            {gallery.map((img, index) => (
-                                <div key={index} className="relative group h-20 w-20">
+                            {galleryPreview.map((img, index) => (
+                                <div key={index} className={`
+                                    relative group h-20 w-20 rounded-lg overflow-hidden
+                                    ${removingGalleryIndex === index ? "scale-out" : "scale-in"}
+                                  `}>
                                     <img src={img} className="h-20 w-20 rounded-lg object-cover" />
 
                                     {/* Remove Button */}
@@ -282,18 +448,18 @@ const CreateProductPage = () => {
                         </thead>
 
                         <tbody>
-                            {variants.map((v) => (
-                                <tr key={v.id} className={`
-                                    border-b border-slate-200 last:border-none hover:bg-slate-50 transition
-                                    ${removing === v.id ? "fade-out" : "fade-in"}
-                                  `}>
+                            {variants.map((v,index) => (
+                                <tr key={index} className={`
+                                border-b border-slate-200 last:border-none hover:bg-slate-50 transition
+                                ${removingIds.includes(index) ? "fade-out" : "fade-in"}
+                              `}>
 
                                     {/* Variant */}
                                     <td className="px-4 py-3">
                                         <input
                                             className={inputBase}
                                             value={v.name}
-                                            onChange={(e) => updateVariant(v.id, "name", e.target.value)}
+                                            onChange={(e) => updateVariant(index, "name", e.target.value)}
                                             placeholder="Red / Small"
                                         />
                                     </td>
@@ -303,7 +469,7 @@ const CreateProductPage = () => {
                                         <input
                                             className={inputBase}
                                             value={v.price}
-                                            onChange={(e) => updateVariant(v.id, "price", e.target.value)}
+                                            onChange={(e) => updateVariant(index, "price", e.target.value)}
                                             placeholder="$ 250.00"
                                         />
                                     </td>
@@ -311,15 +477,20 @@ const CreateProductPage = () => {
                                     {/* SKU */}
                                     <td className="px-4 py-3">
                                         <input
-                                            className={inputBase}
+                                            className="
+                                            w-full px-3 py-2.5 rounded-md 
+                                            bg-slate-100 text-slate-500 cursor-not-allowed 
+                                             border border-slate-300 
+                                             opacity-70 
+                                             focus:outline-none
+                                            select-none"
                                             value={v.sku}
-                                            onChange={(e) => updateVariant(v.id, "sku", e.target.value)}
-                                            placeholder="SOFA-RED-S"
+                                            disabled
                                         />
                                     </td>
 
                                     <td className="px-4 py-3">
-                                        {!v.image ? (
+                                        {!v.imagePreview ? (
                                             /* ADD IMAGE */
                                             <label className="text-blue-600 cursor-pointer hover:underline text-sm">
                                                 <ImageUp className="h-5 w-5" />
@@ -329,7 +500,7 @@ const CreateProductPage = () => {
                                                     className="hidden"
                                                     onChange={(e) =>
                                                         e.target.files &&
-                                                        uploadVariantImage(v.id, e.target.files[0])
+                                                        uploadVariantImage(index, e.target.files[0])
                                                     }
                                                 />
                                             </label>
@@ -337,7 +508,7 @@ const CreateProductPage = () => {
                                             /* IMAGE WITH EDIT ICON ONLY */
                                             <div className="relative w-12 h-12 group">
                                                 <img
-                                                    src={v.image}
+                                                    src={v.imagePreview}
                                                     className="w-12 h-12 rounded-md object-cover"
                                                 />
 
@@ -372,7 +543,7 @@ const CreateProductPage = () => {
                                                             className="hidden"
                                                             onChange={(e) =>
                                                                 e.target.files &&
-                                                                uploadVariantImage(v.id, e.target.files[0])
+                                                                uploadVariantImage(index, e.target.files[0])
                                                             }
                                                         />
                                                     </label>
@@ -386,23 +557,10 @@ const CreateProductPage = () => {
                                     {/* DELETE ROW */}
                                     <td className="px-4 py-3 text-right">
                                         <button
-                                            onClick={() => deleteVariantRow(v.id)}
-                                            className="text-red-500 hover:text-red-700 transition"
+                                            onClick={() => removeVariant(index)}
+                                            className="text-red-500 hover:text-red-700"
                                         >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-5 w-5"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3m-4 0h14"
-                                                />
-                                            </svg>
+                                            <X />
                                         </button>
                                     </td>
 

@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {
         "org.webvibecourse.product_service",
-        "org.example.commonsecurity"
+        "org.example.commonsecurity",
+        "org.example.commonsecurity.binder"
 })
 public class ProductServiceApplication {
 

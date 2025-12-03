@@ -11,7 +11,9 @@ import java.util.List;
 public interface ProductService {
 
     void create(ProductRequest request,
-                MultipartFile thumbnailUrl, List<MultipartFile> galleryUrls);
+                MultipartFile thumbnailUrl,
+                List<MultipartFile> galleryUrls,
+                List<MultipartFile> variantImages);
 
     Page<ProductResponse> getProducts
             (
@@ -22,5 +24,18 @@ public interface ProductService {
                     String searchValue,
                     String filter,
                     boolean all
+            );
+
+    void changeStatus(Long id,Integer status);
+
+    ProductResponse findById(Long id);
+
+    void update
+            (
+                    Long id,
+                    ProductRequest request,
+                    MultipartFile newThumbnail,
+                    List<MultipartFile> newGallery,
+                    List<MultipartFile> newVariantImages
             );
 }
