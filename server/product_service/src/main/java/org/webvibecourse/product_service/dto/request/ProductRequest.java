@@ -30,5 +30,9 @@ public class ProductRequest {
     private List<Long> categoryIds;
 
     private List<ProductVariantRequest> variants;
+    
+    private String thumbnailUrl;
+
+    private List<String> galleryUrls;
 
 }

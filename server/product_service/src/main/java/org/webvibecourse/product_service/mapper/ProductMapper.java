@@ -13,12 +13,17 @@ public interface ProductMapper extends CommonMapper {
     @Mapping(target = "createdBy", source = "userId")
     @Mapping(target = "updatedBy", source = "userId")
     @Mapping(target = "shopId", source = "shopId")
+    @Mapping(target = "galleryUrls",
+            expression = "java(JsonUtils.toJson(request.getGalleryUrls()))")
+
     Product toEntity(ProductRequest request, Long shopId, Long userId);
+
 
     @BeanMapping(nullValuePropertyMappingStrategy =
             NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "updatedBy", source = "userId")
     @Mapping(target = "shopId", source = "shopId")
+    @Mapping(target = "galleryUrls", ignore = true)
     void update(ProductRequest request, @MappingTarget Product product, Long shopId, Long userId);
 
     @Mapping(target = "galleryUrls",

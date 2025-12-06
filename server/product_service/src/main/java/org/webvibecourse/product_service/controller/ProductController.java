@@ -27,19 +27,12 @@ public class ProductController {
 
     private final ProductService service;
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping
     public ResponseEntity<ApiResponse<Void>> create
             (
-                    @ModelAttribute ProductRequest request,
-                    @RequestParam("thumbnail") MultipartFile thumbnail,
-
-                    @RequestParam(value = "gallery", required = false)
-                    @Parameter(required = false, allowEmptyValue = true) List<MultipartFile> gallery,
-
-                    @RequestParam(value = "variantImages", required = false)
-                    @Parameter(required = false, allowEmptyValue = true) List<MultipartFile> variantImages
+                    @RequestBody ProductRequest request
             ){
-        service.create(request,thumbnail,gallery,variantImages);
+        service.create(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success("Product created successfully"));

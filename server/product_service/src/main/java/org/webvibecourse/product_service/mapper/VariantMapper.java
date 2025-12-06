@@ -11,11 +11,10 @@ public interface VariantMapper {
 
     @Mapping(target = "id",ignore = true)
     @Mapping(target = "product",source = "product")
-    @Mapping(target = "imageUrl", source = "imageUrl")
     @Mapping(target = "name", source = "request.name")
     @Mapping(target = "sku", source = "request.sku")
     @Mapping(target = "price", source = "request.price")
-    ProductVariant toEntity(ProductVariantRequest request, Product product, String imageUrl);
+    ProductVariant toEntity(ProductVariantRequest request, Product product);
 
 
     VariantResponse toResponse(ProductVariant entity);

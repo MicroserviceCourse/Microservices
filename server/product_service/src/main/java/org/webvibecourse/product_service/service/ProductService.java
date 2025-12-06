@@ -10,10 +10,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    void create(ProductRequest request,
-                MultipartFile thumbnailUrl,
-                List<MultipartFile> galleryUrls,
-                List<MultipartFile> variantImages);
+    void create(ProductRequest request);
 
     Page<ProductResponse> getProducts
             (

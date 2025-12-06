@@ -7,10 +7,8 @@ import { createMedia, getMedias } from "../service/api/Media";
 const MediaPage = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [uploading, setUploading] = useState<any[]>([]);
-    const [progress, setProgress] = useState(0);
-
-    const [typeFilter, setTypeFilter] = useState("ALL");
-    const [dateFilter, setDateFilter] = useState("ALL");
+    const [typeFilter, setTypeFilter] = useState("");
+    const [dateFilter, setDateFilter] = useState("");
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
     const [media, setMedia] = useState<any[]>([]);
@@ -50,10 +48,57 @@ const MediaPage = () => {
             return newSelected;
         });
     };
+    const getDateRange = (dateFilter: string) => {
+        const now = new Date();
+        let startDate: Date | null = null;
+    
+        switch (dateFilter) {
+            case "TODAY":
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                break;
+    
+            case "WEEK":
+                startDate = new Date();
+                startDate.setDate(now.getDate() - 7);
+                break;
+    
+            case "MONTH":
+                startDate = new Date();
+                startDate.setDate(now.getDate() - 30);
+                break;
+    
+            default:
+                return null;
+        }
+    
+        // Format YYYY-MM-DD
+        const format = (d: Date) =>
+            d.toISOString().split("T")[0];
+    
+        return {
+            start: format(startDate),
+            end: format(now)
+        };
+    };
+    
 
     const fetchData = async () => {
         try {
-            const resp = await getMedias({ page: 1, size: 10 });
+            let filters: string[] = [];
+            if (typeFilter) {
+                filters.push(`mediaType==${typeFilter}`)
+            }
+            const range = getDateRange(dateFilter);
+            if (range) {
+                filters.push(`createdAt>=${range.start} and createdAt<=${range.end}`);
+            }
+            const filterQuery = filters.join(" and ");
+            const param = {
+                page: 1,
+                size: 10,
+                ...(filterQuery ? { filter: filterQuery } : {})
+            }
+            const resp = await getMedias(param);
             setMedia(resp.content ?? []);
         } catch (err) {
             console.log(err);
@@ -61,7 +106,7 @@ const MediaPage = () => {
     }
     useEffect(() => {
         fetchData();
-    }, [])
+    }, [typeFilter,dateFilter])
     const selectAll = () => {
         if (selected.length === media.length) setSelected([]);
         else setSelected(media.map((m) => m.id));
@@ -162,34 +207,54 @@ const MediaPage = () => {
 
                 <div className="flex items-center gap-4">
                     {/* TYPE FILTER */}
-                    <select
-                        className="bg-white border border-gray-300 rounded-lg px-3 py-1.5"
-                        value={typeFilter}
-                        onChange={(e) => setTypeFilter(e.target.value)}
-                    >
-                        <option value="ALL">Tất cả file media</option>
-                        <option value="IMAGE">Ảnh</option>
-                        <option value="VIDEO">Video</option>
-                    </select>
+                    <div className="relative inline-block">
+                        <select
+                            className="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-2 pr-10 
+                   shadow-sm text-gray-700 cursor-pointer transition-all
+                   hover:border-gray-400
+                   focus:outline-none focus:ring-0 focus:border-gray-300"
+                            value={typeFilter}
+                            onChange={(e) => setTypeFilter(e.target.value)}
+                        >
+                            <option value="ALL">Tất cả file media</option>
+                            <option value="1">Ảnh</option>
+                            <option value="2">Video</option>
+                        </select>
+
+                        {/* Arrow Icon */}
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                            ▼
+                        </div>
+                    </div>
+
 
                     {/* DATE FILTER */}
-                    <select
-                        className="bg-white border border-gray-300 rounded-lg px-3 py-1.5"
-                        value={dateFilter}
-                        onChange={(e) => setDateFilter(e.target.value)}
-                    >
-                        <option value="ALL">Tất cả các ngày</option>
-                        <option value="TODAY">Hôm nay</option>
-                        <option value="WEEK">7 ngày qua</option>
-                        <option value="MONTH">30 ngày qua</option>
-                    </select>
+                    <div className="relative">
+                        <select
+                            className="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-2 pr-10
+                   shadow-sm text-gray-700 focus:ring-2 focus:ring-blue-400 focus:border-blue-400
+                   hover:border-gray-400 transition-all cursor-pointer"
+                            value={dateFilter}
+                            onChange={(e) => setDateFilter(e.target.value)}
+                        >
+                            <option value="ALL">Tất cả các ngày</option>
+                            <option value="TODAY">Hôm nay</option>
+                            <option value="WEEK">7 ngày qua</option>
+                            <option value="MONTH">30 ngày qua</option>
+                        </select>
+
+                        {/* Arrow Icon */}
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                            ▼
+                        </div>
+                    </div>
                 </div>
 
                 {/* VIEW MODE */}
                 <div className="flex border border-gray-300 rounded-lg overflow-hidden bg-white">
                     <button
                         onClick={() => setViewMode("grid")}
-                        className={`h-10 w-10 flex items-center justify-center border-r
+                        className={`h-10 w-10 flex items-center justify-center border-r border-slate-200
                             ${viewMode === "grid" ? "bg-blue-50" : "hover:bg-gray-100"}`}
                     >
                         <Grid size={18} className={viewMode === "grid" ? "text-blue-600" : "text-gray-600"} />

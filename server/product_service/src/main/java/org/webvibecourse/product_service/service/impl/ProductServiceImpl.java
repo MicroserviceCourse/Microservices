@@ -54,50 +54,23 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void create
             (
-                    ProductRequest request,
-                    MultipartFile thumbnailUrl,
-                    List<MultipartFile> galleryUrls,
-                    List<MultipartFile> variantImages
+                    ProductRequest request
             ) {
 
         Product product = mapper.toEntity
                 (request,
                  securityUtils.getCurrentUserId(),
                  securityUtils.getCurrentShopId());
-
-        handleThumbnailUpload(product, thumbnailUrl);
-
-        handleGalleryUpload(product, galleryUrls);
-
         product = repository.save(product);
 
-        handleVariants(product,request.getVariants(),variantImages);
+        handleVariants(product,request.getVariants());
 
         repository.save(product);
     }
 
-    private void handleThumbnailUpload(Product product,MultipartFile thumbnail){
-        if(thumbnail !=null && !thumbnail.isEmpty()){
-            MediaResponse uploaded = mediaClient.uploadSingleImage(thumbnail,"product/main");
-            if(uploaded!=null){
-                product.setThumbnailUrl(uploaded.getUrl());
-            }
-        }
-    }
 
-    private void handleGalleryUpload(Product product,List<MultipartFile> gallery){
-        if(gallery !=null && !gallery.isEmpty()){
 
-            List<MediaResponse> uploaded =
-                    mediaClient.uploadMultipleImages(gallery,"product/sub");
 
-            List<String> urls = uploaded.stream()
-                    .map(MediaResponse::getUrl)
-                    .toList();
-
-            product.setGalleryUrls(JsonUtils.toJson(urls));
-        }
-    }
 
     private String uploadVariantImage(List<MultipartFile> variantImages, int index){
         if(variantImages == null ||
@@ -116,8 +89,7 @@ public class ProductServiceImpl implements ProductService {
     private void handleVariants
             (
                     Product product,
-                    List<ProductVariantRequest> variantRequests,
-                    List<MultipartFile> variantImages
+                    List<ProductVariantRequest> variantRequests
             ){
         if(variantRequests ==null || variantRequests.isEmpty())return;
 
@@ -125,10 +97,10 @@ public class ProductServiceImpl implements ProductService {
 
             ProductVariantRequest req = variantRequests.get(i);
 
-            String variantImageUrl = uploadVariantImage(variantImages, i);
+
 
             ProductVariant variant =
-                    variantMapper.toEntity(req,product, variantImageUrl);
+                    variantMapper.toEntity(req,product);
 
             if(variant.getPrice() ==null){
                 variant.setPrice(req.getPrice());
@@ -288,7 +260,7 @@ public class ProductServiceImpl implements ProductService {
                 }
             }
 
-            ProductVariant newVar = variantMapper.toEntity(vr, product, imageUrl);
+            ProductVariant newVar = variantMapper.toEntity(vr, product);
             newVar.setProduct(product);
             oldVariants.add(newVar);
         }
