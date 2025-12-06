@@ -76,6 +76,7 @@ export type ProductFormData = {
   price: string;
   thumbnailFile: File | null;
   galleryFiles: File[];
+  categoryIds: number[]
 }
 export interface CreateProductPayload {
   name: string;
@@ -83,6 +84,7 @@ export interface CreateProductPayload {
   price: number;
   thumbnailFile: File | null;
   galleryFiles: File[];
+  categoryIds: number[];
   variants: {
     name: string;
     sku: string;
@@ -112,10 +114,12 @@ export interface UpdateProductPayload {
 
   thumbnailFile: File | null;
   galleryFiles: File[];
-
+  categoryIds: number[];
   variants: VariantUpdatePayload[];
 }
-
+export type CheckBoxProps = {
+  checked: boolean;
+}
 
 export type IActionItem = {
   label: string;
@@ -137,12 +141,41 @@ export type ProductEditData = {
   thumbnailFile: File | null;
   galleryFiles: File[];
   status: string;
+  categoryIds: number[]
+
 }
 export type BaseBadgeProps = {
   label: string;
   className?: string;
-  icon?:React.ReactNode;
+  icon?: React.ReactNode;
 }
-export type StatusBadgeProps ={
-  value:number | string;
+export type StatusBadgeProps = {
+  value: number | string;
+}
+export interface CategoryParentSelectedProps {
+  categories: CategoryResponse[];
+  value: number[];
+  onChange: (ids: number[]) => void;
+}
+export interface CategoryResponse {
+  id: number;
+  name: string;
+  parentId: number | null;
+  parentName: string | null;
+  sortOrder: number | null;
+  active: boolean;
+  level: number;
+  children: CategoryResponse[];
+}
+export type MediaDetailsProps = {
+  active: {
+    url: string;
+    fileName: string;
+    mediaType: string;
+    createdAt: string;
+    mimeType: string;
+    size: string;
+    alt: string;
+
+  }
 }

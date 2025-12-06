@@ -2,6 +2,7 @@ package org.webvibecourse.media_service.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.commonutils.api.ApiResponse;
+import org.example.commonutils.api.PageResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,20 +20,35 @@ public class MediaController {
 
     private final MediaService service;
 
-    @PostMapping(value = "/upload",consumes =  MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ApiResponse<MediaResponse>>upload(
-            @RequestParam("file") MultipartFile file,
-            @RequestParam(value = "subDirectory", required = false) String subDirectory) throws IOException {
-        return ResponseEntity.ok(ApiResponse.success(service.uploadMedia(file,subDirectory)));
-    }
-
-    @PostMapping(value = "/upload/multiple",consumes =   MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes =MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<List<MediaResponse>>> uploadMultiple
-            (@RequestPart("files") List<MultipartFile> files,
-             @RequestParam(value = "subDirectory") String subDirectory) throws IOException {
-        return ResponseEntity.ok(ApiResponse.success(service.uploadMedias(files,subDirectory)));
+            (@RequestPart("files") List<MultipartFile> files) throws IOException {
+        return ResponseEntity.ok(ApiResponse.success(service.uploadMedias(files)));
     }
 
+    @GetMapping
+    public ResponseEntity<ApiResponse<PageResponse<MediaResponse>>> getMedias
+            (
+                    @RequestParam(defaultValue = "1") Integer page,
+                    @RequestParam(defaultValue = "5") Integer size,
+                    @RequestParam(defaultValue = "id,desc") String sort,
+                    @RequestParam(required = false) String filter,
+                    @RequestParam(required = false) String searchField,
+                    @RequestParam(required = false) String searchValue,
+                    @RequestParam(defaultValue = "false") Boolean all
+            ){
+        return ResponseEntity.ok(
+                ApiResponse.success
+                        (new PageResponse<>(
+                                service.getMedias(
+                                        page,
+                                        size,
+                                        sort,
+                                        searchField,
+                                        searchValue,
+                                        filter,
+                                        all))));
+    }
     @DeleteMapping("/delete")
     public ResponseEntity<ApiResponse<MediaResponse>> deleteMedia(@RequestParam("url") String url) throws IOException {
         service.deleteMedia(url);

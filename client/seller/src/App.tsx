@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage"
 import ProductPage from "./pages/ProductPage"
 import CreateProductPage from "./pages/CreateProductPage"
 import EditProductPage from "./pages/EditProductPage"
+import MediaPage from "./pages/MediaPage"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route path="/dashboard" element={<SellerLayout/>}>
                 <Route index element={<HomePage/>}/>
                 <Route path="product" element={<ProductPage/>}/>
+                <Route path="media" element={<MediaPage/>}/>
                 <Route path="product/create" element={<CreateProductPage/>}/>
                 <Route path="product/:id/edit" element={<EditProductPage/>}/>"
               </Route>

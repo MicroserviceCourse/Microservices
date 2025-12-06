@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus, X, ImageIcon, Edit2, ImageUp } from "lucide-react";
 import { type ProductFormData, type Variant } from "../types";
 import { useAlert } from "../components/alert-context";
 import { createProduct } from "../service/api/Product";
 import { useNavigate } from "react-router-dom";
+import { getCategories } from "../service/api/Categories";
+import CategoryParentSelect from "../components/category/CategoryParentSelect";
 
 const inputBase =
     "w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 " +
@@ -12,17 +14,21 @@ const inputBase =
 
 
 const CreateProductPage = () => {
+
+    const [categories,setCategories]=useState<any[]>([]);
     const [formData, setFormData] = useState<ProductFormData>({
         name: "",
         description: "",
         price: "",
         thumbnailFile: null as File | null,
-        galleryFiles: []
+        galleryFiles: [],
+        categoryIds: [] as number[]
     });
     const navigate = useNavigate();
     const { showAlert } = useAlert();
     const [removingGalleryIndex, setRemovingGalleryIndex] = useState<number | null>(null);
 
+    const [isSaving, setIsSaving] = useState(false);
     const [isRemovingThumb, setIsRemovingThumb] = useState(false);
 
     const [removingIds, setRemovingIds] = useState<number[]>([]);
@@ -32,7 +38,7 @@ const CreateProductPage = () => {
     const [galleryPreview, setGalleryPreview] = useState<string[]>([]);
     const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
     const [variants, setVariants] = useState<Variant[]>([
-        {id:null, name: "", price: "", sku: "", imagePreview: null, imageFile: null }
+        { id: null, name: "", price: "", sku: "", imagePreview: null, imageFile: null }
     ]);
     const uploadThumbnail = (file: File) => {
         setFormData(prev => ({
@@ -105,7 +111,7 @@ const CreateProductPage = () => {
             return arr;
         });
     };
-    
+
 
 
     const removeVariant = (index: number) => {
@@ -136,7 +142,17 @@ const CreateProductPage = () => {
             setRemovingGalleryIndex(null);
         }, 250);
     };
-
+    const fetchCategories = async () => {
+        try {
+            const res = await getCategories({ all: true });
+            setCategories(res.content || []);
+        } catch (err) {
+            console.log("Failed to load categories");
+        }
+    };
+    useEffect(()=>{
+        fetchCategories();
+    })
     const handleDropThumbnail = (e: React.DragEvent<HTMLLabelElement>) => {
         e.preventDefault();
         setIsDraggingThumb(false);
@@ -169,14 +185,18 @@ const CreateProductPage = () => {
         const v = toSKU(variantName || "OPTION");
         return `${base}-${v}`;
     };
-    const handleSaveProduct = async()=>{
-        console.log(formData.name)
-        const payload ={
-            name:formData.name,
-            description:formData.description,
-            price:Number(formData.price),
-            thumbnailFile:formData.thumbnailFile,
-            galleryFiles:formData.galleryFiles,
+    const handleSaveProduct = async () => {
+        if (isSaving) return;
+
+        setIsSaving(true);
+
+        const payload = {
+            name: formData.name,
+            description: formData.description,
+            price: Number(formData.price),
+            thumbnailFile: formData.thumbnailFile,
+            categoryIds:formData.categoryIds,
+            galleryFiles: formData.galleryFiles,
             variants: variants.map(v => ({
                 name: v.name,
                 price: Number(v.price),
@@ -184,32 +204,35 @@ const CreateProductPage = () => {
                 imageFile: v.imageFile ?? null
             }))
         }
-        try{
+        try {
             const response = await createProduct(payload);
 
             showAlert({
                 title: response?.data?.message || "Product created successfully!",
                 type: "success",
                 autoClose: 3000,
-              });
+            });
 
-              setFormData({
+            setFormData({
                 name: "",
                 description: "",
                 price: "",
                 thumbnailFile: null as File | null,
-                galleryFiles: []
-              });
-              setGalleryPreview([]);
-              setThumbnailPreview(null);
-              setVariants([]);
+                galleryFiles: [],
+                categoryIds: [] as number[]
+            });
+            setGalleryPreview([]);
+            setThumbnailPreview(null);
+            setVariants([]);
 
-        }catch(err:any){
+        } catch (err: any) {
             showAlert({
                 title: err?.response?.data?.message || "Failed to create product.",
                 type: "error",
                 autoClose: 3000,
-              });
+            });
+        } finally {
+            setIsSaving(false);
         }
     }
 
@@ -221,12 +244,30 @@ const CreateProductPage = () => {
                 <h1 className="text-2xl font-bold">Create Product</h1>
 
                 <div className="flex gap-3">
-                    <button onClick={()=>navigate("/Dashboard/product")} className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155">
+                    <button onClick={() => navigate("/Dashboard/product")} className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155">
                         Cancel
                     </button>
 
-                    <button onClick={handleSaveProduct} className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-sm">
-                        Save Product
+                    <button
+                        disabled={isSaving}
+                        onClick={handleSaveProduct}
+                        className={`px-4 py-2 rounded-lg text-white shadow-sm 
+                        ${isSaving ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}
+                    `}
+                    >
+                        {isSaving ? (
+                            <div className="flex items-center gap-2">
+                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    <path className="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8v4l3.5-3.5L12 0v4a8 8 0 010 16v4l3.5-3.5L12 20v-4a8 8 0 01-8-8z">
+                                    </path>
+                                </svg>
+                                Saving...
+                            </div>
+                        ) : (
+                            "Save Product"
+                        )}
                     </button>
                 </div>
             </div>
@@ -279,6 +320,17 @@ const CreateProductPage = () => {
                                 value={formData.price}
                                 onChange={handleChange}
                                 placeholder="$ 250.00" />
+                        </div>
+
+                        <div>
+                            <label className="text-sm font-medium">Categories</label>
+                            <CategoryParentSelect
+                            categories={categories}
+                            value={formData.categoryIds}
+                            onChange={(ids) =>
+                                setFormData(prev => ({ ...prev, categoryIds: ids }))
+                            }
+                            />
                         </div>
 
                     </div>
@@ -448,7 +500,7 @@ const CreateProductPage = () => {
                         </thead>
 
                         <tbody>
-                            {variants.map((v,index) => (
+                            {variants.map((v, index) => (
                                 <tr key={index} className={`
                                 border-b border-slate-200 last:border-none hover:bg-slate-50 transition
                                 ${removingIds.includes(index) ? "fade-out" : "fade-in"}
