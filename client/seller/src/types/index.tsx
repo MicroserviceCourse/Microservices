@@ -82,14 +82,14 @@ export interface CreateProductPayload {
   name: string;
   description: string;
   price: number;
-  thumbnailFile: File | null;
-  galleryFiles: File[];
+  thumbnailUrl: string;
+  galleryUrls: string[];
   categoryIds: number[];
   variants: {
     name: string;
     sku: string;
     price: number;
-    imageFile: File | null;
+    imageUrl: string;
   }[];
 }
 
@@ -178,4 +178,20 @@ export type MediaDetailsProps = {
     alt: string;
 
   }
+}
+export type MediaItem = {
+  id: number;
+  url: string;
+  fileName: string;
+  size: number;
+  createdAt: string;
+  alt:string;
+  width:number;
+  height:number
+}
+export type MediaLibraryProps ={
+  isOpen: boolean;
+  onClose: () => void;
+  multiple?: boolean; 
+  onSelect: (url: string | string[]) => void;
 }

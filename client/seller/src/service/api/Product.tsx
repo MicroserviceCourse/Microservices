@@ -11,23 +11,9 @@ export const getProducts = async (options: GetAllOptions = {}) => {
 }
 
 export const createProduct = async (payload: CreateProductPayload) => {
-    const formData = objectToFormData(payload);
-    if (payload.thumbnailFile) {
-        formData.append("thumbnail", payload.thumbnailFile);
-    }
 
-    payload.galleryFiles.forEach(f => {
-        if (f) formData.append("gallery", f);
-    });
-
-    payload.variants.forEach(v => {
-        if (v.imageFile) formData.append("variantImages", v.imageFile);
-    });
-
-    const resp = await Http.post("/api/products", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-    });
-    return resp.data;
+  return await Http.post("/api/products", payload);
+  
 };
 
 export const ChangeStatus =async(id:number,status:number)=>{
@@ -60,23 +46,7 @@ export const EditProduct = async (id: number, payload: UpdateProductPayload) => 
         })], { type: "application/json" })
     );
 
-    // thumbnail
-    if (payload.thumbnailFile) {
-        formData.append("thumbnail", payload.thumbnailFile);
-    }
-
-    // gallery
-    payload.galleryFiles.forEach(f => {
-        if (f) formData.append("gallery", f);
-    });
-
-    // variant images
-    payload.variants.forEach(v => {
-        if (v.imageFile) {
-            formData.append("variantImages", v.imageFile);
-        }
-    });
-
+  
     const resp = await Http.put(`/api/products/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
     });
