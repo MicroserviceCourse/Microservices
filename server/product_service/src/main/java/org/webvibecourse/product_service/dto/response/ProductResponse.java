@@ -43,4 +43,6 @@ public class ProductResponse {
 
     @Schema(description = "Danh sách variant của sản phẩm")
     private List<VariantResponse> variants;
+
+    private List<CategoryResponse> categories;
 }

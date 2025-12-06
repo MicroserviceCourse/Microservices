@@ -5,9 +5,10 @@ import org.mapstruct.*;
 import org.webvibecourse.product_service.dto.request.ProductRequest;
 import org.webvibecourse.product_service.dto.response.ProductResponse;
 import org.webvibecourse.product_service.entity.Product;
+import org.webvibecourse.product_service.mapper.common.CommonMapper;
 
-@Mapper(componentModel = "spring",imports = {JsonUtils.class})
-public interface ProductMapper {
+@Mapper(componentModel = "spring",imports = {JsonUtils.class,CommonMapper.class},uses = {CategoryMapper.class})
+public interface ProductMapper extends CommonMapper {
 
     @Mapping(target = "createdBy", source = "userId")
     @Mapping(target = "updatedBy", source = "userId")
@@ -22,5 +23,9 @@ public interface ProductMapper {
 
     @Mapping(target = "galleryUrls",
             expression = "java(JsonUtils.jsonToList(entity.getGalleryUrls(),String.class))")
+    @Mapping(
+            target = "categories",
+            expression = "java(CommonMapper.mapCategories(entity))"
+    )
     ProductResponse toResponse(Product entity);
 }

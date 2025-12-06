@@ -4,7 +4,7 @@ import type { Product, TableColumn } from "../types";
 import TableUI from "../components/ui/tableUi/TableUI";
 
 import { getProducts } from "../service/api/Product";
-import { ChevronDown, ChevronLeft, ChevronRight, MoreVertical, Search } from "lucide-react";
+import {  Search } from "lucide-react";
 import useProductQuery from "../hooks/useProductQuery";
 import ProductTableActions from "../components/product/ProductTableActions";
 import { useNavigate } from "react-router-dom";

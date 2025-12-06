@@ -3,7 +3,13 @@ package org.webvibecourse.media_service.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.commonsecurity.SecurityUtils;
+import org.example.commonutils.Enum.MediaType;
+import org.example.commonutils.util.GenericSpecBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.webvibecourse.media_service.dto.response.MediaResponse;
@@ -40,11 +46,31 @@ public class MediaServiceImpl implements MediaService {
     private final SecurityUtils securityUtils;
 
     private final MediaMapper mapper;
+    private static final List<String> SEARCH_FIELDS =
+            List.of("mediaType");
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
-    @Override
-    public MediaResponse uploadMedia(MultipartFile file, String subDirectory) throws IOException {
+    private int detectMediaType(String mimeType){
+        if(mimeType ==null) return 0;
+        if (mimeType.startsWith("image/")) return 1;     // IMAGE
+        if (mimeType.startsWith("video/")) return 2;     // VIDEO
+        if (mimeType.startsWith("application/")) return 3; // DOCUMENT (pdf, docx...)
+        if (mimeType.startsWith("audio/")) return 4;     // AUDIO
+
+        return 0;
+    }
+    private String getDirectoryByMediaType(MediaType mediaType) {
+        return switch (mediaType) {
+            case  IMAGE-> "images";
+            case VIDEO-> "videos";
+            case DOCUMENT-> "documents";
+            case AUDIO-> "audio";
+            default -> "others";
+        };
+    }
+
+    private MediaResponse uploadMedia(MultipartFile file) throws IOException {
         try {
             String originalName = file.getOriginalFilename();
             String extension = "";
@@ -55,8 +81,12 @@ public class MediaServiceImpl implements MediaService {
 
             String uniqueName = UUID.randomUUID().toString() + extension;
 
-            String key = (subDirectory != null && !subDirectory.isEmpty()
-                                  ? subDirectory + "/" : "") + uniqueName;
+            int mediaTypeValue = detectMediaType(file.getContentType());
+            MediaType mediaType = MediaType.fromValue(mediaTypeValue);
+
+            String directory = getDirectoryByMediaType(mediaType);
+            String key = directory + "/" + uniqueName;
+
 
             // 👉 Đo width/height TỪ MultipartFile (trước khi upload)
             int width = 0;
@@ -89,6 +119,8 @@ public class MediaServiceImpl implements MediaService {
             media.setOwnerId(securityUtils.getCurrentUserId());
             media.setWidth(width);
             media.setHeight(height);
+            media.setAlt(originalName);
+            media.setMediaType(mediaTypeValue);
 
             media = repository.save(media);
 
@@ -100,14 +132,14 @@ public class MediaServiceImpl implements MediaService {
 
 
     @Override
-    public List<MediaResponse> uploadMedias(List<MultipartFile> files, String subDirectory) throws IOException {
+    public List<MediaResponse> uploadMedias(List<MultipartFile> files) throws IOException {
         List<MediaResponse> responses = new ArrayList<>();
 
         for (MultipartFile file : files){
             if(file == null || file.isEmpty()){
                 continue;
             }
-            MediaResponse response = uploadMedia(file,subDirectory);
+            MediaResponse response = uploadMedia(file);
             responses.add(response);
         }
         return responses;
@@ -139,5 +171,29 @@ public class MediaServiceImpl implements MediaService {
             throw new RuntimeException("Cannot delete file: " + e.getMessage());
 
         }
+    }
+
+    @Override
+    public Page<MediaResponse> getMedias(
+            Integer page, Integer size, String sort, String searchField,
+            String searchValue, String filter, boolean all
+                                        ) {
+        log.info("start get Medias");
+        Pageable pageable = all
+                ? Pageable.unpaged()
+                : PageRequest.of(page - 1, size);
+        Specification<Media> spec = GenericSpecBuilder.
+                build(sort, filter, searchField, searchValue, SEARCH_FIELDS);
+
+        Long ownerId = securityUtils.getCurrentUserId();
+
+        Specification<Media> ownerSpec =
+                (root, query, cb)
+                        -> cb.equal(root.get("ownerId"), ownerId);
+        spec = spec.and(ownerSpec);
+
+        Page<Media> medias = repository.findAll(spec,pageable);
+
+        return medias.map(mapper::toResponse);
     }
 }

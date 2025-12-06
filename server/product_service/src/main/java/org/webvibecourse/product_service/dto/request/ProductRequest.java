@@ -26,7 +26,9 @@ public class ProductRequest {
     private BigDecimal price;
 
     private Integer status;
-    private List<MultipartFile> variantImages;
+
+    private List<Long> categoryIds;
+
     private List<ProductVariantRequest> variants;
 
 }

@@ -5,6 +5,8 @@ import { EditProduct, getProductDetail } from "../service/api/Product";
 import { useAlert } from "../components/alert-context";
 import { type Variant, type ProductEditData, type UpdateProductPayload } from "../types";
 import { ProductStatus, ProductStatusLabel } from "../enums";
+import CategoryParentSelect from "../components/category/CategoryParentSelect";
+import { getCategories } from "../service/api/Categories";
 
 const inputBase =
     "w-full bg-slate-50 border border-slate-300 text-slate-800 rounded-md shadow-sm px-3 py-2.5 " +
@@ -17,6 +19,7 @@ const EditProductPage = () => {
     const [isRemovingThumb, setIsRemovingThumb] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [loading, setLoading] = useState(true);
+    const[hasError, setHasError] = useState(false);
     const [isDraggingThumb, setIsDraggingThumb] = useState(false);
     const [isDraggingGallery, setIsDraggingGallery] = useState(false);
     const [removingGalleryIndex, setRemovingGalleryIndex] = useState<number | null>(null);
@@ -26,16 +29,26 @@ const EditProductPage = () => {
         price: "",
         status: String(ProductStatus.ACTIVE),
         thumbnailFile: null,
-        galleryFiles: []
+        galleryFiles: [],
+        categoryIds: [] as number[]
     });
 
     const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
     const [galleryPreview, setGalleryPreview] = useState<string[]>([]);
 
     const [variants, setVariants] = useState<Variant[]>([]);
-
+    const [isSaving, setIsSaving] = useState(false);
+    const [categories,setCategories]=useState<any[]>([]);
 
     // ============================= LOAD PRODUCT =============================
+    const fetchCategories = async () => {
+        try {
+            const res = await getCategories({ all: true });
+            setCategories(res.content || []);
+        } catch (err) {
+            console.log("Failed to load categories");
+        }
+    };
     useEffect(() => {
         if (!id) return;
 
@@ -50,7 +63,8 @@ const EditProductPage = () => {
                     price: String(p.price),
                     status: p.status ?? String(ProductStatus.ACTIVE),
                     thumbnailFile: null,
-                    galleryFiles: []
+                    galleryFiles: [],
+                    categoryIds: p.categories.map((c: any) => c.id)
                 });
 
                 // Thumbnail
@@ -81,12 +95,14 @@ const EditProductPage = () => {
 
             } catch (error) {
                 showAlert({ title: "Unable to load product", type: "error" });
+                setHasError(true)
             } finally {
                 setLoading(false);
             }
         };
 
         fetchProduct();
+        fetchCategories();
     }, [id]);
 
     // ============================= UPLOAD FUNCTIONS =============================
@@ -208,14 +224,16 @@ const EditProductPage = () => {
 
     // ============================= SAVE EDIT =============================
     const handleSave = async () => {
-        if (!id) return;
 
+        if (isSaving) return;
+
+        setIsSaving(true);
         const payload: UpdateProductPayload = {
             name: formData.name,
             description: formData.description,
             price: Number(formData.price),
             status: formData.status,
-
+            categoryIds:formData.categoryIds,
             thumbnailFile: formData.thumbnailFile,
             galleryFiles: formData.galleryFiles,
 
@@ -246,6 +264,8 @@ const EditProductPage = () => {
                 title: err?.response?.data?.message || "Update failed",
                 type: "error"
             });
+        } finally {
+            setIsSaving(false);
         }
     };
     const handleDropGallery = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -254,6 +274,21 @@ const EditProductPage = () => {
         if (e.dataTransfer.files) uploadGallery(e.dataTransfer.files);
     };
     if (loading) return <div className="p-6">Loading...</div>;
+    if (hasError)
+        return (
+            <div className="p-10 text-center">
+                <h2 className="text-xl font-semibold text-red-500">Failed to load product.</h2>
+                <p className="text-slate-600 mt-2">Please try again later.</p>
+    
+                <button
+                    onClick={() => navigate("/Dashboard/product")}
+                    className="mt-4 px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                >
+                    Go Back
+                </button>
+            </div>
+        );
+    
     const toSKU = (text: string) =>
         text
             .trim()
@@ -266,9 +301,6 @@ const EditProductPage = () => {
         const v = toSKU(variantName || "OPTION");
         return `${base}-${v}`;
     };
-
-
-    // ============================= UI =============================
     return (
         <div className="p-8 bg-gray-50 min-h-screen space-y-8">
             {/* HEADER */}
@@ -276,12 +308,26 @@ const EditProductPage = () => {
                 <h1 className="text-2xl font-bold">Edit Product</h1>
 
                 <div className="flex gap-3">
-                    <button onClick={()=>navigate("/Dashboard/product")} className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155">
+                    <button onClick={() => navigate("/Dashboard/product")} className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155">
                         Cancel
                     </button>
 
-                    <button onClick={handleSave} className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-sm">
-                        Save Product
+                    <button onClick={handleSave} className={`px-4 py-2 rounded-lg text-white shadow-sm 
+                        ${isSaving ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}
+                    `}>
+                       {isSaving ? (
+                            <div className="flex items-center gap-2">
+                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    <path className="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8v4l3.5-3.5L12 0v4a8 8 0 010 16v4l3.5-3.5L12 20v-4a8 8 0 01-8-8z">
+                                    </path>
+                                </svg>
+                                Saving...
+                            </div>
+                        ) : (
+                            "Save Product"
+                        )}
                     </button>
                 </div>
             </div>
@@ -337,6 +383,17 @@ const EditProductPage = () => {
                                     onChange={e => setFormData(prev => ({ ...prev, price: e.target.value }))}
                                 />
                             </div>
+
+                            <div>
+                            <label className="text-sm font-medium">Categories</label>
+                            <CategoryParentSelect
+                            categories={categories}
+                            value={formData.categoryIds}
+                            onChange={(ids) =>
+                                setFormData(prev => ({ ...prev, categoryIds: ids }))
+                            }
+                            />
+                        </div>
                         </div>
                     </div>
 
@@ -440,8 +497,8 @@ const EditProductPage = () => {
                             <label onDragOver={(e) => {
                                 e.preventDefault();
                                 setIsDraggingGallery(true);
-                            }} 
-                            onDragLeave={() => setIsDraggingGallery(false)}
+                            }}
+                                onDragLeave={() => setIsDraggingGallery(false)}
                                 onDrop={handleDropGallery}
                                 className={`
                                 border-2 border-dashed rounded-lg p-10 mt-2 flex flex-col items-center
@@ -461,25 +518,25 @@ const EditProductPage = () => {
                             </label>
 
                             <div className="flex gap-3 mt-4 flex-wrap">
-                            {galleryPreview.map((img, index) => (
-                                <div key={index} className={`
+                                {galleryPreview.map((img, index) => (
+                                    <div key={index} className={`
                                     relative group h-20 w-20 rounded-lg overflow-hidden
                                     ${removingGalleryIndex === index ? "scale-out" : "scale-in"}
                                   `}>
-                                    <img src={img} className="h-20 w-20 rounded-lg object-cover" />
+                                        <img src={img} className="h-20 w-20 rounded-lg object-cover" />
 
-                                    {/* Remove Button */}
-                                    <button
-                                        onClick={() => removeGalleryImage(index)}
-                                        className="
+                                        {/* Remove Button */}
+                                        <button
+                                            onClick={() => removeGalleryImage(index)}
+                                            className="
               absolute top-1 right-1 bg-black/50 p-1 rounded-full 
               opacity-0 group-hover:opacity-100 transition
             "
-                                    >
-                                        <X className="h-4 w-4 text-white" />
-                                    </button>
-                                </div>
-                            ))}
+                                        >
+                                            <X className="h-4 w-4 text-white" />
+                                        </button>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

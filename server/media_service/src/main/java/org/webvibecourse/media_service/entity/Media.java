@@ -32,6 +32,10 @@ public class Media {
     @Schema(description = "Original file name uploaded by the user.")
     private String fileName;
 
+    @Schema(description = "Alternative text for accessibility or SEO.")
+    private String alt;
+
+
     @Column(name = "owner_id")
     private Long ownerId;
 
@@ -43,18 +47,16 @@ public class Media {
     @Schema(description = "File size in bytes.")
     private Long size;
 
-    @Column(name = "entity_id")
-    @Schema(description = "ID of the system entity that owns this media. Example: Product ID, User ID, Shop ID.")
-    private Long entityId;
-
-    @Column(name = "entity_type")
-    @Schema(description = "Type of the entity that owns this media. Example: PRODUCT, USER, SHOP, BANNER.")
-    private Integer entityType;
 
     @Column(nullable = false)
     private Integer width;
     @Column(nullable = false)
     private Integer height;
+
+    @Column(name = "media_type", nullable = false)
+    @Schema(description = "Type of media: 1=IMAGE, 2=VIDEO, 3=DOCUMENT, 4=AUDIO")
+    private Integer mediaType;
+
 
     @CreationTimestamp
     @Column(name = "created_at",updatable = false)

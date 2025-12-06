@@ -49,6 +49,7 @@ export const EditProduct = async (id: number, payload: UpdateProductPayload) => 
             description: payload.description,
             price: payload.price,
             status: payload.status,
+            categoryIds:payload.categoryIds,
             variants: payload.variants.map(v => ({
                 id: v.id,
                 name: v.name,
