@@ -207,7 +207,7 @@ const MediaLibraryModal = ({ isOpen, onClose, onSelect,multiple=false}: MediaLib
 
                                     {/* FILE INFO */}
                                     <div className="space-y-2 text-xs text-gray-600">
-                                        <p><strong>{selectedDetail.fileName}</strong></p>
+                                        <p className="break-words break-all text-wrap"><strong>{selectedDetail.fileName}</strong></p>
                                         <p>{formatDate(selectedDetail.createdAt)}</p>
                                         <p>{(selectedDetail.size / 1024).toFixed(1)} KB</p>
                                         <p>{selectedDetail.width} × {selectedDetail.height} pixels</p>

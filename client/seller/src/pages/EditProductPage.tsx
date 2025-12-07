@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus, X, ImageIcon, Edit2, ImageUp } from "lucide-react";
 import { useParams, useNavigate } from "react-router-dom";
 import { EditProduct, getProductDetail } from "../service/api/Product";
@@ -7,6 +7,7 @@ import { type Variant, type ProductEditData, type UpdateProductPayload } from ".
 import { ProductStatus, ProductStatusLabel } from "../enums";
 import CategoryParentSelect from "../components/category/CategoryParentSelect";
 import { getCategories } from "../service/api/Categories";
+import MediaLibraryModal from "../components/media/MediaLibraryModal";
 
 const inputBase =
     "w-full bg-slate-50 border border-slate-300 text-slate-800 rounded-md shadow-sm px-3 py-2.5 " +
@@ -17,11 +18,8 @@ const EditProductPage = () => {
     const navigate = useNavigate();
     const { showAlert } = useAlert();
     const [isRemovingThumb, setIsRemovingThumb] = useState(false);
-    const inputRef = useRef<HTMLInputElement | null>(null);
     const [loading, setLoading] = useState(true);
-    const[hasError, setHasError] = useState(false);
-    const [isDraggingThumb, setIsDraggingThumb] = useState(false);
-    const [isDraggingGallery, setIsDraggingGallery] = useState(false);
+    const [hasError, setHasError] = useState(false);
     const [removingGalleryIndex, setRemovingGalleryIndex] = useState<number | null>(null);
     const [formData, setFormData] = useState<ProductEditData>({
         name: "",
@@ -32,13 +30,15 @@ const EditProductPage = () => {
         galleryFiles: [],
         categoryIds: [] as number[]
     });
+    const [openVariantIndex, setOpenVariantIndex] = useState<number | null>(null);
 
     const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
+    const [openMediaModal, setOpenMediaModal] = useState<"thumbnail" | "gallery" | false>(false);
     const [galleryPreview, setGalleryPreview] = useState<string[]>([]);
 
     const [variants, setVariants] = useState<Variant[]>([]);
     const [isSaving, setIsSaving] = useState(false);
-    const [categories,setCategories]=useState<any[]>([]);
+    const [categories, setCategories] = useState<any[]>([]);
 
     // ============================= LOAD PRODUCT =============================
     const fetchCategories = async () => {
@@ -104,88 +104,24 @@ const EditProductPage = () => {
         fetchProduct();
         fetchCategories();
     }, [id]);
-
-    // ============================= UPLOAD FUNCTIONS =============================
-    const uploadThumbnail = (file: File) => {
-        setFormData(prev => ({ ...prev, thumbnailFile: file }));
-
-        const reader = new FileReader();
-        reader.onload = () => setThumbnailPreview(reader.result as string);
-        reader.readAsDataURL(file);
-    };
-
-    const handleDropThumbnail = (e: React.DragEvent<HTMLLabelElement>) => {
-        e.preventDefault();
-        setIsDraggingThumb(false);
-
-        const file = e.dataTransfer.files?.[0];
-        if (file) uploadThumbnail(file);
-    }
-
-    const handleEditThumbnail = () => {
-        inputRef.current?.click();
-    };
-    const handleChangeThumbnail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) uploadThumbnail(file);
-    };
-
     const removeThumbnail = () => {
         setIsRemovingThumb(true);
         setTimeout(() => {
             setThumbnailPreview(null);
-            setFormData(prev => ({ ...prev, thumbnailFile: null }));
             setIsRemovingThumb(false);
         }, 250);
     };
 
-    const uploadGallery = (files: FileList) => {
-        const arr = Array.from(files);
-
-        setFormData(prev => ({
-            ...prev,
-            galleryFiles: [...prev.galleryFiles, ...arr]
-        }));
-
-        Promise.all(
-            arr.map(file => {
-                return new Promise<string>(resolve => {
-                    const r = new FileReader();
-                    r.onload = () => resolve(r.result as string);
-                    r.readAsDataURL(file);
-                });
-            })
-        ).then(newImages => {
-            setGalleryPreview(prev => [...prev, ...newImages]);
-        });
-    };
-
     const removeGalleryImage = (index: number) => {
+       
         setRemovingGalleryIndex(index);
 
         setTimeout(() => {
             // Xóa preview
             setGalleryPreview(prev => prev.filter((_, i) => i !== index));
-
-            // Xóa file thật
-            setFormData(prev => ({
-                ...prev,
-                galleryFiles: prev.galleryFiles.filter((_, i) => i !== index)
-            }));
-
             setRemovingGalleryIndex(null);
         }, 250);
     };
-
-    const uploadVariantImage = (index: number, file: File) => {
-        const preview = URL.createObjectURL(file);
-        setVariants(prev => {
-            const updated = [...prev];
-            updated[index] = { ...updated[index], imagePreview: preview, imageFile: file };
-            return updated;
-        });
-    };
-
 
     const removeVariant = (index: number) => {
         setVariants(prev => prev.filter((_, i) => i !== index));
@@ -232,19 +168,16 @@ const EditProductPage = () => {
             name: formData.name,
             description: formData.description,
             price: Number(formData.price),
-            status: formData.status,
-            categoryIds:formData.categoryIds,
-            thumbnailFile: formData.thumbnailFile,
-            galleryFiles: formData.galleryFiles,
-
-            variants: variants.map((v, idx) => ({
-                id: typeof v.id === "number" ? v.id : null,   // new variant: id=null
+            thumbnailUrl: typeof thumbnailPreview === "string" ? thumbnailPreview : "",   
+            galleryUrls: galleryPreview,
+            status:formData.status,
+            categoryIds: formData.categoryIds,
+            variants: variants.map(v => ({
+                id: typeof v.id === "number" ? v.id : null, 
                 name: v.name,
-                sku: v.sku,
                 price: Number(v.price),
-
-                imageFile: v.imageFile ?? null,               // gửi file lên
-                imageIndex: v.imageFile ? idx : null          // index để BE nhận đúng file
+                sku: v.sku,
+                imageUrl: v.imagePreview ?? ""
             }))
         };
 
@@ -268,18 +201,14 @@ const EditProductPage = () => {
             setIsSaving(false);
         }
     };
-    const handleDropGallery = (e: React.DragEvent<HTMLLabelElement>) => {
-        e.preventDefault();
-        setIsDraggingGallery(false);
-        if (e.dataTransfer.files) uploadGallery(e.dataTransfer.files);
-    };
+    
     if (loading) return <div className="p-6">Loading...</div>;
     if (hasError)
         return (
             <div className="p-10 text-center">
                 <h2 className="text-xl font-semibold text-red-500">Failed to load product.</h2>
                 <p className="text-slate-600 mt-2">Please try again later.</p>
-    
+
                 <button
                     onClick={() => navigate("/Dashboard/product")}
                     className="mt-4 px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
@@ -288,7 +217,7 @@ const EditProductPage = () => {
                 </button>
             </div>
         );
-    
+
     const toSKU = (text: string) =>
         text
             .trim()
@@ -315,7 +244,7 @@ const EditProductPage = () => {
                     <button onClick={handleSave} className={`px-4 py-2 rounded-lg text-white shadow-sm 
                         ${isSaving ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}
                     `}>
-                       {isSaving ? (
+                        {isSaving ? (
                             <div className="flex items-center gap-2">
                                 <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -385,15 +314,15 @@ const EditProductPage = () => {
                             </div>
 
                             <div>
-                            <label className="text-sm font-medium">Categories</label>
-                            <CategoryParentSelect
-                            categories={categories}
-                            value={formData.categoryIds}
-                            onChange={(ids) =>
-                                setFormData(prev => ({ ...prev, categoryIds: ids }))
-                            }
-                            />
-                        </div>
+                                <label className="text-sm font-medium">Categories</label>
+                                <CategoryParentSelect
+                                    categories={categories}
+                                    value={formData.categoryIds}
+                                    onChange={(ids) =>
+                                        setFormData(prev => ({ ...prev, categoryIds: ids }))
+                                    }
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -402,143 +331,100 @@ const EditProductPage = () => {
                         <h2 className="text-lg font-semibold mb-4">Media</h2>
 
                         {/* THUMBNAIL */}
-                        <div>
+                        <div className="space-y-2">
                             <label className="text-sm font-medium">Thumbnail</label>
 
-                            <label
-                                onDragOver={(e) => {
-                                    e.preventDefault();
-                                    setIsDraggingThumb(true);
-                                }}
-                                onDragLeave={() => setIsDraggingThumb(false)}
-                                onDrop={handleDropThumbnail}
-                                className={`
-                                    relative border-2 border-dashed rounded-xl w-full h-56 flex flex-col 
-                                    items-center justify-center cursor-pointer overflow-hidden
-                                    group
-                                    ${isDraggingThumb ? "border-blue-600 bg-blue-50 drop-hover" : "border-slate-300"}
-                                `}>
+                            <div
+                                onClick={() => setOpenMediaModal("thumbnail")}
+                                className="
+        relative border-2 border-dashed rounded-xl w-full h-56 flex flex-col 
+        items-center justify-center cursor-pointer overflow-hidden group
+        border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition
+    "
+                            >
                                 {thumbnailPreview ? (
                                     <>
                                         <img
                                             src={thumbnailPreview}
                                             className={`absolute inset-0 w-full h-full object-cover 
-                                     ${isRemovingThumb ? "scale-out" : "scale-in"}
-                                   `}
+                                            ${isRemovingThumb ? "scale-out" : "scale-in"}
+                                        `}
                                         />
 
-                                        {/* REMOVE BUTTON – nằm trên cùng */}
+                                        {/* DELETE BUTTON */}
                                         <button
-                                            type="button"
                                             onClick={(e) => {
-                                                e.stopPropagation();
-                                                e.preventDefault();
+                                                e.stopPropagation(); // CHẶN MỞ POPUP
                                                 removeThumbnail();
                                             }}
                                             className="
-                                       absolute top-3 right-3 bg-black/60 text-white p-1.5 rounded-full
-                                       opacity-0 group-hover:opacity-100 transition z-30
-                                   "
+                    absolute top-3 right-3 bg-black/60 text-white p-1.5 rounded-full
+                    opacity-0 group-hover:opacity-100 transition z-20
+                "
                                         >
                                             <X className="h-4 w-4" />
                                         </button>
 
-                                        {/* EDIT OVERLAY – không bắt click, chỉ icon mới bắt click */}
+                                        {/* EDIT OVERLAY */}
                                         <div
+                                            onClick={(e) => e.stopPropagation()}  // CHẶN CLICK
                                             className="
-                                     absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 
-                                     flex items-center justify-center transition cursor-pointer
-                                     pointer-events-none z-10
-                                   "
+                    absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 
+                    flex items-center justify-center transition cursor-pointer
+                "
                                         >
-                                            <Edit2
-                                                className="text-white h-7 w-7 pointer-events-auto"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    e.preventDefault();
-                                                    handleEditThumbnail();
-                                                }}
-                                            />
+                                            <Edit2   onClick={() => setOpenMediaModal("thumbnail")} className="text-white h-7 w-7" />
                                         </div>
-
-                                        {/* Hidden input */}
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            ref={inputRef}
-                                            onChange={handleChangeThumbnail}
-                                            className="hidden"
-                                        />
                                     </>
-
-
                                 ) : (
-                                    /* Khi chưa có thumbnail -> hiện UI upload */
-                                    <div className="flex flex-col items-center">
+                                    <div className="flex flex-col items-center pointer-events-none">
                                         <ImageIcon className="h-12 w-12 text-slate-400" />
-                                        <p className="text-blue-600 font-medium mt-2">Upload a file</p>
+                                        <p className="text-blue-600 font-medium mt-2">Chọn ảnh từ thư viện</p>
                                         <p className="text-xs text-slate-400">PNG, JPG up to 5MB</p>
                                     </div>
                                 )}
+                            </div>
 
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    className="hidden"
-                                    onChange={(e) => e.target.files && uploadThumbnail(e.target.files[0])}
-                                />
-                            </label>
                         </div>
-
                         {/* GALLERY */}
                         <div className="mt-6">
-                            <label className="text-sm font-medium">Gallery</label>
+                        <label className="text-sm font-medium">Gallery</label>
 
-                            <label onDragOver={(e) => {
-                                e.preventDefault();
-                                setIsDraggingGallery(true);
-                            }}
-                                onDragLeave={() => setIsDraggingGallery(false)}
-                                onDrop={handleDropGallery}
-                                className={`
-                                border-2 border-dashed rounded-lg p-10 mt-2 flex flex-col items-center
-                                justify-center cursor-pointer transition
-                                ${isDraggingGallery ? "border-blue-600 bg-blue-50 drop-hover" : "border-slate-300"}
-                              `}>
-                                <ImageIcon className="h-10 w-10 mb-2" />
-                                <p className="text-blue-600 font-medium">Upload images</p>
-                                <p className="text-xs text-slate-400">PNG, JPG up to 5MB</p>
-                                <input
-                                    type="file"
-                                    multiple
-                                    accept="image/*"
-                                    className="hidden"
-                                    onChange={(e) => e.target.files && uploadGallery(e.target.files)}
-                                />
-                            </label>
+                        {/* Button mở thư viện */}
+                        <div
+                            onClick={() => setOpenMediaModal("gallery")}
+                            className="
+            border-2 border-dashed rounded-lg p-10 mt-2 flex flex-col items-center
+            justify-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition
+        "
+                        >
+                            <ImageIcon className="h-10 w-10 mb-2" />
+                            <p className="text-blue-600 font-medium">Chọn ảnh từ thư viện</p>
+                            <p className="text-xs text-slate-400">PNG, JPG up to 5MB</p>
+                        </div>
 
-                            <div className="flex gap-3 mt-4 flex-wrap">
-                                {galleryPreview.map((img, index) => (
-                                    <div key={index} className={`
+                        {/* Preview gallery */}
+                        <div className="flex gap-3 mt-4 flex-wrap">
+                            {galleryPreview.map((img, index) => (
+                                <div key={index} className={`
                                     relative group h-20 w-20 rounded-lg overflow-hidden
                                     ${removingGalleryIndex === index ? "scale-out" : "scale-in"}
                                   `}>
-                                        <img src={img} className="h-20 w-20 rounded-lg object-cover" />
-
-                                        {/* Remove Button */}
-                                        <button
-                                            onClick={() => removeGalleryImage(index)}
-                                            className="
-              absolute top-1 right-1 bg-black/50 p-1 rounded-full 
-              opacity-0 group-hover:opacity-100 transition
-            "
-                                        >
-                                            <X className="h-4 w-4 text-white" />
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
+                                    <img src={img} className="h-20 w-20 rounded-lg object-cover" />
+                                    <button
+                                        onClick={() => removeGalleryImage(index)}
+                                        className="
+                        absolute top-1 right-1 bg-black/50 p-1 rounded-full 
+                        opacity-0 group-hover:opacity-100 transition
+                    "
+                                    >
+                                        <X className="h-4 w-4 text-white" />
+                                    </button>
+                                </div>
+                            ))}
                         </div>
+                    </div>
+
                     </div>
 
                     {/* VARIANTS */}
@@ -593,39 +479,27 @@ const EditProductPage = () => {
                                         </td>
 
                                         <td className="px-4 py-3">
-                                            {!v.imagePreview ? (
-                                                <label className="cursor-pointer text-blue-600">
-                                                    <ImageUp className="h-5 w-5" />
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        className="hidden"
-                                                        onChange={(e) =>
-                                                            e.target.files &&
-                                                            uploadVariantImage(index, e.target.files[0])
-                                                        }
-                                                    />
-                                                </label>
-                                            ) : (
-                                                <div className="relative w-12 h-12 group">
-                                                    <img src={v.imagePreview} className="w-12 h-12 rounded-md object-cover" />
+                                        {!v.imagePreview ? (
+                                            <div
+                                                className="text-blue-600 cursor-pointer hover:underline text-sm"
+                                                onClick={() => setOpenVariantIndex(index)}
+                                            >
+                                                <ImageUp className="h-5 w-5" />
+                                            </div>
+                                        ) : (
+                                            <div className="relative w-12 h-12 group cursor-pointer" onClick={() => setOpenVariantIndex(index)}>
+                                                <img src={v.imagePreview} className="w-12 h-12 rounded-md object-cover" />
 
-                                                    <div className="absolute inset-0 bg-black/50 rounded-md opacity-0 group-hover:opacity-100 flex items-center justify-center">
-                                                        <label className="cursor-pointer">
-                                                            <Edit2 className="h-5 w-5 text-white" />
-                                                            <input
-                                                                type="file"
-                                                                accept="image/*"
-                                                                className="hidden"
-                                                                onChange={(e) =>
-                                                                    e.target.files &&
-                                                                    uploadVariantImage(index, e.target.files[0])
-                                                                }
-                                                            />
-                                                        </label>
-                                                    </div>
+                                                {/* OVERLAY */}
+                                                <div className="
+                                absolute inset-0 bg-black/50 rounded-md 
+                                 opacity-0 group-hover:opacity-100 
+                                 flex items-center justify-center
+                                 transition-opacity">
+                                                    <Edit2 className="h-5 w-5 text-white" />
                                                 </div>
-                                            )}
+                                            </div>
+                                        )}
                                         </td>
 
                                         <td className="px-4 py-3 text-right">
@@ -677,6 +551,45 @@ const EditProductPage = () => {
                 </div>
 
             </div>
+
+            <MediaLibraryModal
+                isOpen={openMediaModal === "thumbnail"}
+                multiple={false}
+                onClose={() => setOpenMediaModal(false)}
+                onSelect={(value) => {
+                    const url = Array.isArray(value) ? value[0] : value; 
+                    setThumbnailPreview(url);
+                }}
+            />
+            <MediaLibraryModal
+                isOpen={openMediaModal === "gallery"}
+                multiple={true}
+                onClose={() => setOpenMediaModal(false)}
+                onSelect={(urls) => {
+                    const arr = Array.isArray(urls) ? urls : [urls];
+                    setGalleryPreview(prev => [...prev, ...arr]);
+                }}
+            />
+
+            <MediaLibraryModal
+                isOpen={openVariantIndex !== null}
+                multiple={false}
+                onClose={() => setOpenVariantIndex(null)}
+                onSelect={(url) => {
+                    if (openVariantIndex === null) return;
+
+                    const finalUrl = Array.isArray(url) ? url[0] : url; // luôn là string
+                
+                    setVariants(prev => {
+                        const arr = [...prev];
+                        arr[openVariantIndex].imagePreview = finalUrl;
+                        arr[openVariantIndex].imageFile = null;
+                        return arr;
+                    });
+            
+                    setOpenVariantIndex(null);
+                }}
+            />
         </div>
 
     );

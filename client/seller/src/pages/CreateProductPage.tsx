@@ -22,8 +22,6 @@ const CreateProductPage = () => {
         name: "",
         description: "",
         price: "",
-        thumbnailFile: null as File | null,
-        galleryFiles: [],
         categoryIds: [] as number[]
     });
     const navigate = useNavigate();
@@ -40,19 +38,8 @@ const CreateProductPage = () => {
     const [galleryPreview, setGalleryPreview] = useState<string[]>([]);
     const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
     const [variants, setVariants] = useState<Variant[]>([
-        { id: null, name: "", price: "", sku: "", imagePreview: null, imageFile: null }
+        { id: null, name: "", price: "", sku: "" }
     ]);
-    const uploadThumbnail = (file: File) => {
-        setFormData(prev => ({
-            ...prev,
-            thumbnailFile: file
-        }));
-
-        // Tạo preview
-        const reader = new FileReader();
-        reader.onload = () => setThumbnailPreview(reader.result as string);
-        reader.readAsDataURL(file);
-    };
     const removeThumbnail = () => {
         setIsRemovingThumb(true);
         setTimeout(() => {
@@ -63,40 +50,6 @@ const CreateProductPage = () => {
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-    };
-    const uploadGallery = (files: FileList) => {
-        const arr = Array.from(files);
-
-        // Lưu file thật
-        setFormData(prev => ({
-            ...prev,
-            galleryFiles: [...prev.galleryFiles, ...arr]
-        }));
-
-        // Tạo preview
-        Promise.all(
-            arr.map(file => {
-                return new Promise<string>((resolve) => {
-                    const r = new FileReader();
-                    r.onload = () => resolve(r.result as string);
-                    r.readAsDataURL(file);
-                });
-            })
-        ).then(images => {
-            setGalleryPreview(prev => [...prev, ...images]);
-        });
-    };
-    const uploadVariantImage = (index: number, file: File) => {
-        const preview = URL.createObjectURL(file);
-        setVariants(prev => {
-            const arr = [...prev];
-            arr[index] = {
-                ...arr[index],
-                imagePreview: preview,
-                imageFile: file
-            };
-            return arr;
-        });
     };
 
     const addVariant = () => {
@@ -200,8 +153,6 @@ const CreateProductPage = () => {
                 name: "",
                 description: "",
                 price: "",
-                thumbnailFile: null as File | null,
-                galleryFiles: [],
                 categoryIds: [] as number[]
             });
             setGalleryPreview([]);
@@ -322,8 +273,7 @@ const CreateProductPage = () => {
                 <div className="bg-white p-6 rounded-xl border border-slate-200">
                     <h2 className="text-lg font-semibold mb-4">Media</h2>
 
-                    {/* ---------------------- THUMBNAIL ---------------------- */}
-                    {/* ---------------------- THUMBNAIL ---------------------- */}
+       
                     <div className="space-y-2">
                         <label className="text-sm font-medium">Thumbnail</label>
 

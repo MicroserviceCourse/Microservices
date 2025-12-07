@@ -74,8 +74,6 @@ export type ProductFormData = {
   name: string;
   description: string;
   price: string;
-  thumbnailFile: File | null;
-  galleryFiles: File[];
   categoryIds: number[]
 }
 export interface CreateProductPayload {
@@ -98,12 +96,7 @@ export interface VariantUpdatePayload {
   name: string;
   sku: string;
   price: number;
-
-  // file upload (FE gửi)
-  imageFile: File | null;
-
-  // BE dùng để map file đúng variant
-  imageIndex: number | null;
+  imageUrl:string;
 }
 
 export interface UpdateProductPayload {
@@ -112,8 +105,8 @@ export interface UpdateProductPayload {
   price: number;
   status: string;
 
-  thumbnailFile: File | null;
-  galleryFiles: File[];
+  thumbnailUrl: string;
+  galleryUrls:string[];
   categoryIds: number[];
   variants: VariantUpdatePayload[];
 }

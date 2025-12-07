@@ -71,19 +71,11 @@ public class ProductController {
     public ResponseEntity<ApiResponse<ProductResponse>> getProductById(@PathVariable Long id){
         return ResponseEntity.ok(ApiResponse.success(service.findById(id)));
     }
-    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "/{id}")
     public ResponseEntity<ApiResponse<Void>> update(
             @PathVariable Long id,
-            @RequestPart("data") ProductRequest request,
-            @RequestParam(value = "thumbnail",required = false) MultipartFile thumbnail,
-
-            @RequestParam(value = "gallery", required = false)
-            @Parameter(required = false, allowEmptyValue = true) List<MultipartFile> gallery,
-
-                @RequestParam(value = "variantImages", required = false)
-            @Parameter(required = false, allowEmptyValue = true) List<MultipartFile> variantImages
-                                                   ){
-        service.update(id, request,thumbnail,gallery,variantImages);
+            @RequestBody ProductRequest request){
+        service.update(id, request);
 
         return ResponseEntity.ok(ApiResponse.success("Product updated successfully"));
     }
