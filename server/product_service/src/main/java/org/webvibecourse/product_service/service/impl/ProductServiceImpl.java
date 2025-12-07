@@ -67,25 +67,6 @@ public class ProductServiceImpl implements ProductService {
 
         repository.save(product);
     }
-
-
-
-
-
-    private String uploadVariantImage(List<MultipartFile> variantImages, int index){
-        if(variantImages == null ||
-           variantImages.size() <= index ||
-           variantImages.get(index).isEmpty()){
-            return null;
-        }
-
-        MediaResponse uploaded = mediaClient.uploadSingleImage
-                (
-                        variantImages.get(index),
-                        "variant"
-                );
-        return uploaded !=null ? uploaded.getUrl() : null;
-    }
     private void handleVariants
             (
                     Product product,
@@ -147,46 +128,14 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void update(
             Long id,
-            ProductRequest request,
-            MultipartFile newThumbnail,
-            List<MultipartFile> newGallery,
-            List<MultipartFile> newVariantImages
+            ProductRequest request
                       ) {
         Product product = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with id " + id));
 
         mapper.update(request, product, securityUtils.getCurrentShopId(), securityUtils.getCurrentUserId());
 
-        // ----------------------------
-        // 1) UPDATE THUMBNAIL
-        // ----------------------------
-        if (newThumbnail != null && !newThumbnail.isEmpty()) {
-            if (product.getThumbnailUrl() != null) {
-                mediaClient.deleteMedia(product.getThumbnailUrl());
-            }
 
-            MediaResponse uploaded = mediaClient.uploadSingleImage(newThumbnail, "product/main");
-            product.setThumbnailUrl(uploaded.getUrl());
-        }
-
-        // ----------------------------
-        // 2) UPDATE GALLERY
-        // ----------------------------
-        List<String> oldGallery = JsonUtils.jsonToList(product.getGalleryUrls(), String.class);
-
-        if (newGallery != null && !newGallery.isEmpty()) {
-
-            if (oldGallery != null) {
-                oldGallery.forEach(mediaClient::deleteMedia);
-            }
-
-            List<String> galleryUrls = mediaClient.uploadMultipleImages(newGallery, "product/sub")
-                    .stream()
-                    .map(MediaResponse::getUrl)
-                    .toList();
-
-            product.setGalleryUrls(JsonUtils.toJson(galleryUrls));
-        }
 
         // ----------------------------
         // 3) SYNC VARIANTS
@@ -205,10 +154,6 @@ public class ProductServiceImpl implements ProductService {
                 .filter(v -> v.getId() != null && !reqIds.contains(v.getId()))
                 .toList();
 
-        removed.forEach(v -> {
-            if (v.getImageUrl() != null) mediaClient.deleteMedia(v.getImageUrl());
-        });
-
         oldVariants.removeAll(removed);
 
         // B) UPDATE VARIANT CŨ
@@ -222,44 +167,12 @@ public class ProductServiceImpl implements ProductService {
                     .orElseThrow(() -> new EntityNotFoundException("Variant not found: " + vr.getId()));
             existing.setProduct(product);
             variantMapper.update(existing, vr);
-
-            if (vr.getImageIndex() != null &&
-                newVariantImages != null &&
-                vr.getImageIndex() < newVariantImages.size()) {
-
-                MultipartFile img = newVariantImages.get(vr.getImageIndex());
-
-                if (img != null && !img.isEmpty()) {
-
-                    if (existing.getImageUrl() != null) {
-                        mediaClient.deleteMedia(existing.getImageUrl());
-                    }
-
-                    MediaResponse up = mediaClient.uploadSingleImage(img, "variant");
-                    existing.setImageUrl(up.getUrl());
-                }
-            }
         }
 
         // C) TẠO VARIANT MỚI
         for (ProductVariantRequest vr : reqVariants) {
 
             if (vr.getId() != null) continue;
-
-            String imageUrl = null;
-
-            if (vr.getImageIndex() != null &&
-                newVariantImages != null &&
-                vr.getImageIndex() < newVariantImages.size()) {
-
-                MultipartFile img = newVariantImages.get(vr.getImageIndex());
-
-                if (img != null && !img.isEmpty()) {
-                    MediaResponse up = mediaClient.uploadSingleImage(img, "variant");
-                    imageUrl = up.getUrl();
-                }
-            }
-
             ProductVariant newVar = variantMapper.toEntity(vr, product);
             newVar.setProduct(product);
             oldVariants.add(newVar);

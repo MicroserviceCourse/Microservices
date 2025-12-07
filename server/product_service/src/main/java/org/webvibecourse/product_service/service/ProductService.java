@@ -30,9 +30,6 @@ public interface ProductService {
     void update
             (
                     Long id,
-                    ProductRequest request,
-                    MultipartFile newThumbnail,
-                    List<MultipartFile> newGallery,
-                    List<MultipartFile> newVariantImages
+                    ProductRequest request
             );
 }

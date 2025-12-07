@@ -1,5 +1,4 @@
 import type { CreateProductPayload, GetAllOptions, UpdateProductPayload } from "../../types";
-import { objectToFormData } from "../../util/formData.util";
 import Http from "../http/http";
 
 export const getProducts = async (options: GetAllOptions = {}) => {
@@ -25,31 +24,5 @@ export const getProductDetail=async(id:number)=>{
 
 }
 export const EditProduct = async (id: number, payload: UpdateProductPayload) => {
-    const formData = new FormData();
-    console.log(payload)
-    // append JSON vào field "data"
-    formData.append(
-        "data",
-        new Blob([JSON.stringify({
-            name: payload.name,
-            description: payload.description,
-            price: payload.price,
-            status: payload.status,
-            categoryIds:payload.categoryIds,
-            variants: payload.variants.map(v => ({
-                id: v.id,
-                name: v.name,
-                sku: v.sku,
-                price: v.price,
-                imageIndex: v.imageIndex
-            }))
-        })], { type: "application/json" })
-    );
-
-  
-    const resp = await Http.put(`/api/products/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-    });
-
-    return resp.data;
+  return await Http.put(`/api/products/${id}`, payload);
 };
