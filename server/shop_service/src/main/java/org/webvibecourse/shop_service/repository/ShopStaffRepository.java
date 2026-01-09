@@ -5,4 +5,5 @@ import org.webvibecourse.shop_service.entity.ShopStaff;
 
 public interface ShopStaffRepository extends
         JpaRepository<ShopStaff, Long> {
+
 }
