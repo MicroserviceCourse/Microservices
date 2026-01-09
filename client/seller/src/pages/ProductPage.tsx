@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import type { Product, TableColumn } from "../types";
+import type {  TableColumn } from "../types";
 
 import TableUI from "../components/ui/tableUi/TableUI";
 
@@ -9,6 +9,7 @@ import useProductQuery from "../hooks/useProductQuery";
 import ProductTableActions from "../components/product/ProductTableActions";
 import { useNavigate } from "react-router-dom";
 import StatusBadge from "../components/badge/StatusBadge";
+import type { Product } from "../types/product.type";
 
 const ProductPage = () => {
     const navigate = useNavigate();

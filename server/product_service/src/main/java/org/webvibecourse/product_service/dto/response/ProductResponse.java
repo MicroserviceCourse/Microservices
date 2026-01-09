@@ -39,7 +39,9 @@ public class ProductResponse {
     private String thumbnailUrl;
 
     @Schema(description = "List of secondary image URLs (gallery) for the product.")
-    private List<String> galleryUrls;   // 👈 parse từ String trong entity
+    private List<String> galleryUrls;
+
+    private Integer stock;
 
     @Schema(description = "Danh sách variant của sản phẩm")
     private List<VariantResponse> variants;

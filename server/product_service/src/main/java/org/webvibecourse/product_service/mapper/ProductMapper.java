@@ -32,5 +32,9 @@ public interface ProductMapper extends CommonMapper {
             target = "categories",
             expression = "java(CommonMapper.mapCategories(entity))"
     )
+    @Mapping(
+            target = "stock",
+            source = "inventory.quantity"
+    )
     ProductResponse toResponse(Product entity);
 }

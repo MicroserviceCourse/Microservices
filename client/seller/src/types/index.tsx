@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 import type { IconType } from "react-icons";
+import type { Product } from "./product.type";
 
 export type Tokens = {
   accessToken: string;
@@ -43,16 +44,7 @@ export type PaginationProps = {
   totalPages: number;
   onChange: (page: number) => void;
 }
-export interface Product {
-  id: number;
-  code: string;
-  name: string;
-  slug: string;
-  price: number;
-  status: number;
-  thumbnailUrl: string;
-  updatedAt: string;
-}
+
 export type GetAllOptions = {
   page?: number;
   size?: number;

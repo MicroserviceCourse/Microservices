@@ -46,6 +46,9 @@ public class Product {
     @Schema(description = "Original price of the product.")
     private BigDecimal price;
 
+    @OneToOne(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Inventory inventory;
+
     @Schema(description = "Unique product code, auto-generated.")
     @Column(name = "code", unique = true, nullable = false, length = 50)
     private String code;

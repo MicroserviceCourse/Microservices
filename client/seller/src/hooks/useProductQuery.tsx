@@ -1,5 +1,5 @@
 import { useState } from "react"
-import type { Product } from "../types";
+import type { Product } from "../types/product.type";
 
 const useProductQuery=()=>{
     const [search, setSearch] =useState("");
