@@ -16,7 +16,6 @@ const TableUI = <T,>({
   return (
     <div className="relative">
       <table className="w-full text-left border-separate border-spacing-0">
-
         {/* HEADER */}
         <thead className="text-sm text-gray-500">
           <tr>
@@ -34,19 +33,17 @@ const TableUI = <T,>({
                     }`}
                 >
                   <div
-                    className={`flex items-center gap-1 ${col.sortable ? "cursor-pointer select-none" : ""
-                      }`}
+                    className={`flex items-center gap-1 ${
+                      col.sortable ? "cursor-pointer select-none" : ""
+                    }`}
                     onClick={() => col.sortable && onSort?.(col.key as keyof T)}
-
                   >
                     <span>{col.label}</span>
 
                     {/* ICON SORT */}
                     {col.sortable && (
                       <>
-                        {!isSorted && (
-                          <ChevronsUpDown className="h-4 w-4 text-gray-400" />
-                        )}
+                        {!isSorted && <ChevronsUpDown className="h-4 w-4 text-gray-400" />}
 
                         {isSorted && sortDir === "asc" && (
                           <ChevronUp className="h-4 w-4 text-primary" />
@@ -95,10 +92,7 @@ const TableUI = <T,>({
           {/* DATA */}
           {!loading &&
             data.map((row, idx) => (
-              <tr
-                key={idx}
-                className="hover:bg-gray-50 transition"
-              >
+              <tr key={idx} className="hover:bg-gray-50 transition">
                 {columns.map((col, cIdx) => (
                   <td
                     key={cIdx}
@@ -115,12 +109,7 @@ const TableUI = <T,>({
             ))}
         </tbody>
       </table>
-      <Pagination
-        page={page}
-        totalPages={totalPages}
-        onChange={onPageChange}
-      />
-
+      <Pagination page={page} totalPages={totalPages} onChange={onPageChange} />
     </div>
   );
 };

@@ -3,7 +3,6 @@ import type { InternalAxiosRequestConfig } from "axios";
 import { BASE_API } from "../../constant/app";
 import { getTokens } from "../../util/auth";
 
-
 declare module "axios" {
   export interface AxiosRequestConfig {
     skipAuth?: boolean;
@@ -27,7 +26,7 @@ Http.interceptors.request.use(
 
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 Http.interceptors.response.use(
@@ -35,14 +34,13 @@ Http.interceptors.response.use(
   (error) => {
     if (
       error.response?.status === 401 &&
-      (error.response.data === "Token has expired" ||
-        error.response.data === "Invalid JWT token")
+      (error.response.data === "Token has expired" || error.response.data === "Invalid JWT token")
     ) {
       localStorage.removeItem("token");
       window.location.href = "/login";
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default Http;
