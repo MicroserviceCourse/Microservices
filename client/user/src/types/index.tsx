@@ -25,3 +25,10 @@ export interface PostDto {
   // tuỳ PostResponse bên backend của bạn có gì
   categoryName?: string;
 }
+export interface BreadCrumbItem {
+  label:string;
+  href?:string;
+}
+export interface BreadCrumbProps {
+  items:BreadCrumbItem[]
+}

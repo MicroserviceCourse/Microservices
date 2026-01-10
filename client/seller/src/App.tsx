@@ -7,6 +7,9 @@ import CreateProductPage from "./pages/CreateProductPage"
 import EditProductPage from "./pages/EditProductPage"
 import MediaPage from "./pages/MediaPage"
 import InventoryImportPage from "./pages/InventoryImportPage"
+import CreatePromotionPage from "./pages/CreatePromotionPage"
+import PromotionPage from "./pages/PromotionPage"
+import EditPromotionPage from "./pages/EditPromotionPage"
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
                 <Route path="inventory/import" element={<InventoryImportPage/>}/>
                 <Route path="product" element={<ProductPage/>}/>
                 <Route path="media" element={<MediaPage/>}/>
+                <Route path="promotion/create" element={<CreatePromotionPage/>}/>
+                <Route path="promotion" element={<PromotionPage/>}/>
+                <Route path="promotion/:id" element={<EditPromotionPage/>}/>
                 <Route path="product/create" element={<CreateProductPage/>}/>
                 <Route path="product/:id/edit" element={<EditProductPage/>}/>"
               </Route>
