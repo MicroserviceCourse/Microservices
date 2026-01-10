@@ -14,7 +14,7 @@ const TableUI = <T,>({
   onSort,
 }: TableUIProps<T>) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="relative">
       <table className="w-full text-left border-separate border-spacing-0">
 
         {/* HEADER */}
@@ -27,10 +27,10 @@ const TableUI = <T,>({
                 <th
                   key={i}
                   className={`py-3 px-4 font-semibold bg-white ${col.align === "right"
-                      ? "text-right"
-                      : col.align === "center"
-                        ? "text-center"
-                        : "text-left"
+                    ? "text-right"
+                    : col.align === "center"
+                      ? "text-center"
+                      : "text-left"
                     }`}
                 >
                   <div
@@ -102,15 +102,14 @@ const TableUI = <T,>({
                 {columns.map((col, cIdx) => (
                   <td
                     key={cIdx}
-                    className={`py-4 px-4 border-b border-gray-200 ${col.align === "right"
-                        ? "text-right"
-                        : col.align === "center"
-                          ? "text-center"
-                          : "text-left"
-                      }`}
+                    className={`py-4 px-4 border-b border-gray-200
+    ${col.align === "right" ? "text-right" : ""}
+    relative
+  `}
                   >
                     {col.render ? col.render(row) : (row as any)[col.key]}
                   </td>
+
                 ))}
               </tr>
             ))}

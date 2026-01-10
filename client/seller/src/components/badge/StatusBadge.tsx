@@ -2,7 +2,7 @@ import type { StatusBadgeProps } from "../../types"
 import BaseBadge from "./BaseBadge";
 
 const STATUS_MAP = {
-    0:{label:"Hidden",className:"bg-gray-200 text-gray-700"},
+    0:{label:"Hidden",className:" "},
     1:{label:"Active",className:"bg-green-100 text-green-700"},
     2:{label:"Deleted",className:"bg-red-100 text-red-700"},
 

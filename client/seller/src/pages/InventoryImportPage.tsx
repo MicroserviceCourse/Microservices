@@ -4,8 +4,8 @@ import { getProducts } from "../service/api/Product";
 import { AlertCircle, Search } from "lucide-react";
 import { useAlert } from "../components/alert-context";
 import { getCategories } from "../service/api/Categories";
-import { importInventory } from "../service/api/inventory";
 import type { Product, SelectedItem } from "../types/product.type";
+import { importInventory } from "../service/api/Inventory";
 const InventoryImportPage = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [selected, setSelected] = useState<Record<number, SelectedItem>>({});
