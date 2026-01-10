@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaFileUpload } from "react-icons/fa";
-import {  Grid, List, Trash2 } from "lucide-react";
+import { Grid, List, Trash2 } from "lucide-react";
 import MediaDetailsPanel from "../components/media/MediaDetailsPanel";
 import { createMedia, getMedias } from "../service/api/Media";
 

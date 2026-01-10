@@ -25,12 +25,13 @@ const TableUI = <T,>({
               return (
                 <th
                   key={i}
-                  className={`py-3 px-4 font-semibold bg-white ${col.align === "right"
-                    ? "text-right"
-                    : col.align === "center"
-                      ? "text-center"
-                      : "text-left"
-                    }`}
+                  className={`py-3 px-4 font-semibold bg-white ${
+                    col.align === "right"
+                      ? "text-right"
+                      : col.align === "center"
+                        ? "text-center"
+                        : "text-left"
+                  }`}
                 >
                   <div
                     className={`flex items-center gap-1 ${
@@ -103,7 +104,6 @@ const TableUI = <T,>({
                   >
                     {col.render ? col.render(row) : (row as any)[col.key]}
                   </td>
-
                 ))}
               </tr>
             ))}

@@ -25,7 +25,7 @@ const PromotionPage = () => {
       setSortKey(key);
       setSortDir("asc");
     }
-  }
+  };
 
   const fetchData = useCallback(async () => {
     try {
@@ -36,7 +36,7 @@ const PromotionPage = () => {
         searchValue: search.trim(),
         filter: status == "ALL" ? "" : `active==${status}`,
         sort: `${sortKey},${sortDir}`,
-      }
+      };
       const response = await getPromotions(payload);
       const data = response.data ?? response;
       setPromotions(data.content ?? []);
@@ -44,22 +44,22 @@ const PromotionPage = () => {
       setPage(data.pageNumber + 1);
     } catch (err) {
       console.log(err);
-      setPromotions([])
+      setPromotions([]);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }, [search, status, sortDir, sortKey, page, size]);
 
   useEffect(() => {
     fetchData();
-  }, [fetchData])
+  }, [fetchData]);
 
   const columns: TableColumn<Promotion>[] = [
     {
       key: "code",
       label: "Product Code",
       sortable: true,
-      render: (p) => <span className="font-mono text-sm">{p.code}</span>
+      render: (p) => <span className="font-mono text-sm">{p.code}</span>,
     },
     {
       key: "name",
@@ -74,21 +74,18 @@ const PromotionPage = () => {
     {
       key: "startAt",
       label: "Start At",
-      sortable: true
+      sortable: true,
     },
     {
       key: "endAt",
       label: "End At",
-      sortable: true
+      sortable: true,
     },
     {
       key: "createdAt",
       label: "Created At",
       sortable: true,
-      render: (p) =>
-        p.createdAt
-          ? new Date(p.createdAt).toLocaleDateString("vi-VN")
-          : "--",
+      render: (p) => (p.createdAt ? new Date(p.createdAt).toLocaleDateString("vi-VN") : "--"),
     },
     {
       key: "updatedAt",
@@ -103,10 +100,7 @@ const PromotionPage = () => {
       render: (p) => (
         <span
           className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium
-        ${p.active
-              ? "bg-green-100 text-green-700"
-              : "bg-gray-200 text-gray-700"
-            }
+        ${p.active ? "bg-green-100 text-green-700" : "bg-gray-200 text-gray-700"}
       `}
         >
           {p.active ? "Active" : "Inactive"}
@@ -116,9 +110,7 @@ const PromotionPage = () => {
     {
       key: "actions",
       label: "Actions",
-      render: (p) => (
-        <PromotionTableAction promotion={p} onUpdated={fetchData} />
-      ),
+      render: (p) => <PromotionTableAction promotion={p} onUpdated={fetchData} />,
     },
   ];
   return (
@@ -152,7 +144,6 @@ const PromotionPage = () => {
               <option value="ALL">All Status</option>
               <option value="true">Active</option>
               <option value="false">Hidden</option>
-
             </select>
           </div>
         </div>
@@ -173,9 +164,8 @@ const PromotionPage = () => {
         page={page}
         totalPages={totalPages}
         onPageChange={setPage}
-
       />
     </div>
-  )
-}
+  );
+};
 export default PromotionPage;
