@@ -106,7 +106,7 @@ export function AlertModal({
     if (!open || !panelRef.current) return;
     const el = panelRef.current;
     const focusable = el.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
@@ -158,7 +158,12 @@ export function AlertModal({
             initial={{ opacity: 0, y: 20, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
-            transition={{ type: reduced ? "tween" : "spring", duration: reduced ? 0.18 : 0.28, stiffness: 420, damping: 30 }}
+            transition={{
+              type: reduced ? "tween" : "spring",
+              duration: reduced ? 0.18 : 0.28,
+              stiffness: 420,
+              damping: 30,
+            }}
           >
             {/* Accent bar */}
             <div className={`h-1.5 bg-gradient-to-r ${t.accent}`} />
@@ -166,11 +171,16 @@ export function AlertModal({
             {/* Header */}
             <div className="p-5">
               <div className="flex items-start gap-3">
-                <div className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl ${t.badge}`}>
+                <div
+                  className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl ${t.badge}`}
+                >
                   <span className={`${t.icon}`}>{iconMap[type]}</span>
                 </div>
                 <div className="flex-1">
-                  <h2 id={titleId} className="text-base font-semibold tracking-tight text-neutral-900">
+                  <h2
+                    id={titleId}
+                    className="text-base font-semibold tracking-tight text-neutral-900"
+                  >
                     {title}
                   </h2>
                   {description && (
@@ -211,19 +221,30 @@ export function AlertModal({
                 initial={{ scaleX: 1 }}
                 animate={{ scaleX: 0 }}
                 style={{ transformOrigin: "left" }}
-                transition={{ duration: reduced ? 0 : (autoClose / 1000), ease: "linear" }}
+                transition={{ duration: reduced ? 0 : autoClose / 1000, ease: "linear" }}
               />
             )}
           </motion.div>
         </div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 }
 
-function ActionButton({ label, onClick, autoFocus, variant = "primary", onClose }:
-  { label: string; onClick?: () => void; autoFocus?: boolean; variant?: "primary" | "secondary" | "ghost"; onClose: () => void }) {
+function ActionButton({
+  label,
+  onClick,
+  autoFocus,
+  variant = "primary",
+  onClose,
+}: {
+  label: string;
+  onClick?: () => void;
+  autoFocus?: boolean;
+  variant?: "primary" | "secondary" | "ghost";
+  onClose: () => void;
+}) {
   const base =
     "inline-flex items-center justify-center rounded-xl px-3.5 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-black/30 transition";
   const styles: Record<string, string> = {

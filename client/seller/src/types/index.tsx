@@ -7,7 +7,7 @@ export type Tokens = {
   refreshToken?: string;
   accessTokenAt: number;
   refreshTokenAt?: number;
-}
+};
 export type SidebarItemProps = {
   icon: IconType;
   label: string;
@@ -26,7 +26,7 @@ export type TableColumn<T> = {
   sortable?: boolean;
   align?: "left" | "center" | "right";
   render?: (row: any) => React.ReactNode;
-}
+};
 export type TableUIProps<T> = {
   columns: TableColumn<T>[];
   data: T[];
@@ -38,12 +38,12 @@ export type TableUIProps<T> = {
   page: number;
   totalPages: number;
   onPageChange: (page: number) => void;
-}
+};
 export type PaginationProps = {
   page: number;
   totalPages: number;
   onChange: (page: number) => void;
-}
+};
 
 export type GetAllOptions = {
   page?: number;
@@ -51,7 +51,7 @@ export type GetAllOptions = {
   sort?: string;
   filter?: string;
   searchField?: string;
-  searchValue?: string
+  searchValue?: string;
   all?: boolean;
 };
 export type Variant = {
@@ -61,13 +61,13 @@ export type Variant = {
   sku: string;
   imagePreview?: string | null;
   imageFile?: File | null;
-}
+};
 export type ProductFormData = {
   name: string;
   description: string;
   price: string;
-  categoryIds: number[]
-}
+  categoryIds: number[];
+};
 export interface CreateProductPayload {
   name: string;
   description: string;
@@ -88,7 +88,7 @@ export interface VariantUpdatePayload {
   name: string;
   sku: string;
   price: number;
-  imageUrl:string;
+  imageUrl: string;
 }
 
 export interface UpdateProductPayload {
@@ -98,27 +98,27 @@ export interface UpdateProductPayload {
   status: string;
 
   thumbnailUrl: string;
-  galleryUrls:string[];
+  galleryUrls: string[];
   categoryIds: number[];
   variants: VariantUpdatePayload[];
 }
 export type CheckBoxProps = {
   checked: boolean;
-}
+};
 
 export type IActionItem = {
   label: string;
   icon?: JSX.Element;
   onClick?: () => void;
   hidden?: boolean;
-}
+};
 export type TableActionProps = {
   actions: IActionItem[];
-}
+};
 export type ProductTableActionProps = {
-  product: Product,
+  product: Product;
   onUpdated?: () => void;
-}
+};
 export type ProductEditData = {
   name: string;
   description: string;
@@ -126,17 +126,16 @@ export type ProductEditData = {
   thumbnailFile: File | null;
   galleryFiles: File[];
   status: string;
-  categoryIds: number[]
-
-}
+  categoryIds: number[];
+};
 export type BaseBadgeProps = {
   label: string;
   className?: string;
   icon?: React.ReactNode;
-}
+};
 export type StatusBadgeProps = {
   value: number | string;
-}
+};
 export interface CategoryParentSelectedProps {
   categories: CategoryResponse[];
   value: number[];
@@ -161,22 +160,21 @@ export type MediaDetailsProps = {
     mimeType: string;
     size: string;
     alt: string;
-
-  }
-}
+  };
+};
 export type MediaItem = {
   id: number;
   url: string;
   fileName: string;
   size: number;
   createdAt: string;
-  alt:string;
-  width:number;
-  height:number
-}
-export type MediaLibraryProps ={
+  alt: string;
+  width: number;
+  height: number;
+};
+export type MediaLibraryProps = {
   isOpen: boolean;
   onClose: () => void;
-  multiple?: boolean; 
+  multiple?: boolean;
   onSelect: (url: string | string[]) => void;
-}
+};

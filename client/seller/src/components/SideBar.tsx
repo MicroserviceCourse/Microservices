@@ -9,11 +9,10 @@ export default function Sidebar() {
 
   return (
     <div className="w-64 h-screen bg-white border-r border-gray-200 p-6 flex flex-col">
-
       {/* LOGO */}
       <div className="flex items-center gap-3 mb-10">
         <img
-          src="https://shop-point.merku.love/assets/logo-b0773cd1.svg"
+          src="https://shop-point.merku.love/assets/logo_light-33bb10d5.svg"
           className="w-8 h-8"
         />
         <h1 className="text-xl font-semibold text-[#00224F]">ShopPoint</h1>
@@ -29,10 +28,8 @@ export default function Sidebar() {
               <div key={idx}>
                 {/* COLLAPSE BUTTON */}
                 <button
-                  onClick={() =>
-                    setOpenMenu(openMenu === menu.label ? "" : menu.label)
-                  }
-                  className="flex justify-between items-center w-full px-3 py-2 text-left 
+                  onClick={() => setOpenMenu(openMenu === menu.label ? "" : menu.label)}
+                  className="flex justify-between items-center w-full px-3 py-2 text-left
                              font-medium text-[#00224F] hover:bg-gray-100 rounded-lg"
                 >
                   <span className="flex items-center gap-3">
@@ -59,7 +56,7 @@ export default function Sidebar() {
                     {menu.submenu.map((sub, subIdx) => (
                       <li
                         key={subIdx}
-                        className="flex items-center text-sm text-gray-600 cursor-pointer 
+                        className="flex items-center text-sm text-gray-600 cursor-pointer
                                    hover:text-[#00224F] transition"
                       >
                         <span className="mr-2 text-lg">•</span>
@@ -73,13 +70,7 @@ export default function Sidebar() {
           }
 
           // Nếu là menu thường
-          return (
-            <SidebarItem
-              key={idx}
-              icon={Icon}
-              label={menu.label}
-            />
-          );
+          return <SidebarItem key={idx} icon={Icon} label={menu.label} />;
         })}
       </nav>
     </div>
