@@ -4,12 +4,12 @@ export interface Product {
   name: string;
   slug: string;
   price: number;
-  stock:number;
+  stock: number;
   status: number;
   thumbnailUrl: string;
   updatedAt: string;
 }
 export interface SelectedItem {
-    productId:number;
-    importQty:number | undefined;
+  productId: number;
+  importQty: number | undefined;
 }

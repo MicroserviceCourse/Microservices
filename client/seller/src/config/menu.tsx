@@ -16,7 +16,34 @@ export const MenuConfig = [
     ],
   },
 
-  { label: "Products", icon: Icons.Products, path: "/seller/products" },
+  {
+    label: "Products",
+    icon: Icons.Products,
+    path: "/seller/products",
+    collapsible: true,
+    submenu: [
+      {
+        label: "Top Products",
+        path: "/top-products",
+      },
+      {
+        label: "Products Grid",
+        path: "/grid",
+      },
+      {
+        label: "Products Management",
+        path: "/management",
+      },
+      {
+        label: "Products Editor",
+        path: "/editor",
+      },
+      {
+        label: "Banner",
+        path: "/banner",
+      },
+    ],
+  },
   { label: "Orders", icon: Icons.Orders, path: "/seller/orders" },
   { label: "Statistics", icon: Icons.Statistics, path: "/seller/statistics" },
   { label: "Reviews", icon: Icons.Reviews, path: "/seller/reviews" },
