@@ -12,6 +12,7 @@ const MediaPage = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const [media, setMedia] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const [selected, setSelected] = useState<number[]>([]);
   const [active, setActive] = useState<any | null>(null);
@@ -79,6 +80,7 @@ const MediaPage = () => {
   };
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const filters: string[] = [];
       if (typeFilter) {
@@ -98,6 +100,8 @@ const MediaPage = () => {
       setMedia(resp.content ?? []);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -322,44 +326,54 @@ const MediaPage = () => {
               </div>
             </div>
           ))}
-
-          {media.map((m) => (
-            <div
-              key={m.id}
-              className="relative cursor-pointer flex-none w-[140px] h-[112px]"
-              onClick={() => toggleItem(m)}
-            >
-              {/* CHECKBOX */}
+          {loading &&
+            Array.from({ length: 6 }).map((_, idx) => (
               <div
-                className={`absolute top-2 left-2 h-5 w-5 rounded-md  flex items-center justify-center z-10
-                ${
-                  selected.includes(m.id)
-                    ? "bg-blue-600 border-blue-600"
-                    : "bg-white border-gray-300"
-                }`}
-              >
-                {selected.includes(m.id) && (
-                  <svg
-                    className="h-3 w-3 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-              </div>
-
-              {/* IMAGE */}
-              <img
-                src={m.url}
-                className={`w-full h-full object-cover rounded-lg ${
-                  selected.includes(m.id) ? "border-2 border-blue-500" : "border border-gray-300"
-                }`}
+                key={idx}
+                className="flex-none w-[140px] h-[112px] rounded-lg border border-gray-300
+                   bg-gray-200 animate-pulse"
               />
-            </div>
-          ))}
+            ))}
+
+          {/* EMPTY STATE */}
+          {!loading && media.length === 0 && (
+            <div className="text-gray-500 text-sm mt-6">No media files found.</div>
+          )}
+          {!loading &&
+            media.map((m) => (
+              <div
+                key={m.id}
+                className="relative cursor-pointer flex-none w-[140px] h-[112px]"
+                onClick={() => toggleItem(m)}
+              >
+                {/* CHECKBOX */}
+                <div
+                  className={`absolute top-2 left-2 h-5 w-5 rounded-md flex items-center justify-center z-10
+            ${
+              selected.includes(m.id) ? "bg-blue-600 border-blue-600" : "bg-white border-gray-300"
+            }`}
+                >
+                  {selected.includes(m.id) && (
+                    <svg
+                      className="h-3 w-3 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </div>
+
+                <img
+                  src={m.url}
+                  className={`w-full h-full object-cover rounded-lg ${
+                    selected.includes(m.id) ? "border-2 border-blue-500" : "border border-gray-300"
+                  }`}
+                />
+              </div>
+            ))}
         </div>
 
         {/* DETAILS PANEL — BÊN PHẢI */}

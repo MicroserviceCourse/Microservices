@@ -1,5 +1,11 @@
 package org.webvibecourse.media_service.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.commonsecurity.SecurityUtils;
@@ -17,183 +23,138 @@ import org.webvibecourse.media_service.entity.Media;
 import org.webvibecourse.media_service.mapper.MediaMapper;
 import org.webvibecourse.media_service.repository.MediaRepository;
 import org.webvibecourse.media_service.service.MediaService;
-import software.amazon.awssdk.core.ResponseBytes;
-import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.services.s3.model.GetObjectResponse;
-import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class MediaServiceImpl implements MediaService {
 
-    private final S3Client s3Client;
+  private final Cloudinary cloudinary;
 
-    private final MediaRepository repository;
+  private final MediaRepository repository;
 
-    private final SecurityUtils securityUtils;
+  private final SecurityUtils securityUtils;
 
-    private final MediaMapper mapper;
-    private static final List<String> SEARCH_FIELDS =
-            List.of("mediaType");
+  private final MediaMapper mapper;
+  private static final List<String> SEARCH_FIELDS = List.of("mediaType");
 
-    @Value("${cloud.aws.s3.bucket}")
-    private String bucketName;
-    private int detectMediaType(String mimeType){
-        if(mimeType ==null) return 0;
-        if (mimeType.startsWith("image/")) return 1;     // IMAGE
-        if (mimeType.startsWith("video/")) return 2;     // VIDEO
-        if (mimeType.startsWith("application/")) return 3; // DOCUMENT (pdf, docx...)
-        if (mimeType.startsWith("audio/")) return 4;     // AUDIO
+  private int detectMediaType(String mimeType) {
+    if (mimeType == null) return 0;
+    if (mimeType.startsWith("image/")) return 1; // IMAGE
+    if (mimeType.startsWith("video/")) return 2; // VIDEO
+    if (mimeType.startsWith("application/")) return 3; // DOCUMENT (pdf, docx...)
+    if (mimeType.startsWith("audio/")) return 4; // AUDIO
 
-        return 0;
+    return 0;
+  }
+
+  private String getDirectoryByMediaType(MediaType mediaType) {
+    return switch (mediaType) {
+      case IMAGE -> "images";
+      case VIDEO -> "videos";
+      case DOCUMENT -> "documents";
+      case AUDIO -> "audio";
+      default -> "others";
+    };
+  }
+
+  private MediaResponse uploadMedia(MultipartFile file) throws IOException {
+    try {
+      String originalName = file.getOriginalFilename();
+      String extension = "";
+
+      if (originalName != null && originalName.contains(".")) {
+        extension = originalName.substring(originalName.lastIndexOf("."));
+      }
+      int mediaTypeValue = detectMediaType(file.getContentType());
+      MediaType mediaType = MediaType.fromValue(mediaTypeValue);
+
+      String folder = getDirectoryByMediaType(mediaType);
+
+      Map<?, ?> uploadResult =
+          cloudinary
+              .uploader()
+              .upload(
+                  file.getBytes(), ObjectUtils.asMap("folder", folder, "resource_type", "auto"));
+      String url = (String) uploadResult.get("secure_url");
+      String publicId = (String) uploadResult.get("public_id");
+      Integer width =
+          uploadResult.get("width") != null ? ((Number) uploadResult.get("width")).intValue() : 0;
+
+      Integer height =
+          uploadResult.get("height") != null ? ((Number) uploadResult.get("height")).intValue() : 0;
+      Media media = new Media();
+      media.setUrl(url);
+      media.setFileName(originalName);
+      media.setSize(file.getSize());
+      media.setMimeType(file.getContentType());
+      media.setOwnerId(securityUtils.getCurrentUserId());
+      media.setWidth(width);
+      media.setHeight(height);
+      media.setAlt(originalName);
+      media.setMediaType(mediaTypeValue);
+      media.setPublicId(publicId);
+      media = repository.save(media);
+
+      return mapper.toResponse(media);
+
+    } catch (Exception e) {
+      throw new RuntimeException("Cannot upload file to S3: " + e.getMessage(), e);
     }
-    private String getDirectoryByMediaType(MediaType mediaType) {
-        return switch (mediaType) {
-            case  IMAGE-> "images";
-            case VIDEO-> "videos";
-            case DOCUMENT-> "documents";
-            case AUDIO-> "audio";
-            default -> "others";
-        };
+  }
+
+  @Override
+  public List<MediaResponse> uploadMedias(List<MultipartFile> files) throws IOException {
+    List<MediaResponse> responses = new ArrayList<>();
+
+    for (MultipartFile file : files) {
+      if (file == null || file.isEmpty()) {
+        continue;
+      }
+      MediaResponse response = uploadMedia(file);
+      responses.add(response);
     }
+    return responses;
+  }
 
-    private MediaResponse uploadMedia(MultipartFile file) throws IOException {
-        try {
-            String originalName = file.getOriginalFilename();
-            String extension = "";
+  @Override
+  public void deleteMedia(String url) {
+    Media media =
+        repository.findByUrl(url).orElseThrow(() -> new RuntimeException("Media not found"));
 
-            if (originalName != null && originalName.contains(".")) {
-                extension = originalName.substring(originalName.lastIndexOf("."));
-            }
+    try {
+      cloudinary.uploader().destroy(media.getPublicId(), ObjectUtils.emptyMap());
 
-            String uniqueName = UUID.randomUUID().toString() + extension;
+      repository.delete(media);
+      log.info("Deleted media from Cloudinary & DB: {}", url);
 
-            int mediaTypeValue = detectMediaType(file.getContentType());
-            MediaType mediaType = MediaType.fromValue(mediaTypeValue);
-
-            String directory = getDirectoryByMediaType(mediaType);
-            String key = directory + "/" + uniqueName;
-
-
-            // 👉 Đo width/height TỪ MultipartFile (trước khi upload)
-            int width = 0;
-            int height = 0;
-            try (InputStream in = file.getInputStream()) {
-                BufferedImage image = ImageIO.read(in);
-                if (image != null) {
-                    width = image.getWidth();
-                    height = image.getHeight();
-                }
-            } catch (Exception e) {
-                // có thể log warning, nhưng không throw, cho width/height = 0 cũng được
-            }
-
-            // 👉 Upload S3 như cũ
-            PutObjectRequest putRequest = PutObjectRequest.builder()
-                    .bucket(bucketName)
-                    .key(key)
-                    .contentType(file.getContentType())
-                    .build();
-
-            s3Client.putObject(putRequest, RequestBody.fromBytes(file.getBytes()));
-
-            // 👉 Không cần getObject nữa
-            Media media = new Media();
-            media.setUrl("https://" + bucketName + ".s3.ap-southeast-2.amazonaws.com/" + key);
-            media.setFileName(originalName);
-            media.setSize(file.getSize());
-            media.setMimeType(file.getContentType());
-            media.setOwnerId(securityUtils.getCurrentUserId());
-            media.setWidth(width);
-            media.setHeight(height);
-            media.setAlt(originalName);
-            media.setMediaType(mediaTypeValue);
-
-            media = repository.save(media);
-
-            return mapper.toResponse(media);
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot upload file to S3: " + e.getMessage(), e);
-        }
+    } catch (Exception e) {
+      log.error("Error deleting Cloudinary file", e);
+      throw new RuntimeException("Cannot delete media");
     }
+  }
 
+  @Override
+  public Page<MediaResponse> getMedias(
+      Integer page,
+      Integer size,
+      String sort,
+      String searchField,
+      String searchValue,
+      String filter,
+      boolean all) {
+    log.info("start get Medias");
+    Pageable pageable = all ? Pageable.unpaged() : PageRequest.of(page - 1, size);
+    Specification<Media> spec =
+        GenericSpecBuilder.build(sort, filter, searchField, searchValue, SEARCH_FIELDS);
 
-    @Override
-    public List<MediaResponse> uploadMedias(List<MultipartFile> files) throws IOException {
-        List<MediaResponse> responses = new ArrayList<>();
+    Long ownerId = securityUtils.getCurrentUserId();
 
-        for (MultipartFile file : files){
-            if(file == null || file.isEmpty()){
-                continue;
-            }
-            MediaResponse response = uploadMedia(file);
-            responses.add(response);
-        }
-        return responses;
-    }
+    Specification<Media> ownerSpec = (root, query, cb) -> cb.equal(root.get("ownerId"), ownerId);
+    spec = spec.and(ownerSpec);
 
-    @Override
-    public void deleteMedia(String url) {
-        try {
-            String prefix = "https://" + bucketName + ".s3.ap-southeast-2.amazonaws.com/";
-            if(!url.startsWith(prefix)){
-                throw new RuntimeException("Invalid S3 URL");
-            }
+    Page<Media> medias = repository.findAll(spec, pageable);
 
-            String key = url.substring(prefix.length());
-
-            s3Client.deleteObject(builder ->
-                                          builder.bucket(bucketName).key(key)
-                                 );
-
-            Media media = repository.findByUrl(url).orElse(null);
-
-            if (media != null) {
-                repository.delete(media);
-            }
-
-            log.info("Deleted file from S3 & DB: {}", url);
-        }catch (Exception e){
-            log.error("Error deleting file: {}", e.getMessage());
-            throw new RuntimeException("Cannot delete file: " + e.getMessage());
-
-        }
-    }
-
-    @Override
-    public Page<MediaResponse> getMedias(
-            Integer page, Integer size, String sort, String searchField,
-            String searchValue, String filter, boolean all
-                                        ) {
-        log.info("start get Medias");
-        Pageable pageable = all
-                ? Pageable.unpaged()
-                : PageRequest.of(page - 1, size);
-        Specification<Media> spec = GenericSpecBuilder.
-                build(sort, filter, searchField, searchValue, SEARCH_FIELDS);
-
-        Long ownerId = securityUtils.getCurrentUserId();
-
-        Specification<Media> ownerSpec =
-                (root, query, cb)
-                        -> cb.equal(root.get("ownerId"), ownerId);
-        spec = spec.and(ownerSpec);
-
-        Page<Media> medias = repository.findAll(spec,pageable);
-
-        return medias.map(mapper::toResponse);
-    }
+    return medias.map(mapper::toResponse);
+  }
 }

@@ -180,7 +180,7 @@ const EditProductPage = () => {
         autoClose: 2500,
       });
 
-      navigate("/Dashboard/product");
+      navigate("/product");
     } catch (err: any) {
       showAlert({
         title: err?.response?.data?.message || "Update failed",
@@ -199,7 +199,7 @@ const EditProductPage = () => {
         <p className="text-slate-600 mt-2">Please try again later.</p>
 
         <button
-          onClick={() => navigate("/Dashboard/product")}
+          onClick={() => navigate("/product")}
           className="mt-4 px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           Go Back
@@ -220,14 +220,14 @@ const EditProductPage = () => {
     return `${base}-${v}`;
   };
   return (
-    <div className="p-8 bg-gray-50 min-h-screen space-y-8">
+    <div className=" bg-gray-50 min-h-screen space-y-8">
       {/* HEADER */}
-      <div className="flex items-center justify-between">
+      <div className="mx-auto flex max-w-7xl items-center justify-between">
         <h1 className="text-2xl font-bold">Edit Product</h1>
 
         <div className="flex gap-3">
           <button
-            onClick={() => navigate("/Dashboard/product")}
+            onClick={() => navigate("/product")}
             className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155"
           >
             Cancel
@@ -271,7 +271,7 @@ const EditProductPage = () => {
       </div>
 
       {/* === GRID 2 COLUMNS === */}
-      <div className="max-w-6xl mx-auto grid grid-cols-12 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
         {/* ---------------- LEFT SIDE (8 cols) ---------------- */}
         <div className="col-span-8 space-y-8">
           {/* BASIC INFO */}

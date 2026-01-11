@@ -68,7 +68,7 @@ const LoginPage = () => {
   const handleModalOpenChange = (open: boolean) => {
     setModalOpen(open);
     if (!open && modalCfg?.type === "success") {
-      navigate("/Dashboard");
+      navigate("/");
     }
   };
   return (

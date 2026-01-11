@@ -149,7 +149,7 @@ const ProductPage = () => {
 
         {/* ADD PRODUCT */}
         <button
-          onClick={() => navigate("/Dashboard/product/create")}
+          onClick={() => navigate("/product/create")}
           className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl"
         >
           + Add Product

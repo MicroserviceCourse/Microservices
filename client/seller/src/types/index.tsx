@@ -19,6 +19,7 @@ export type ReportItemProps = {
   amount: string;
   growth: string;
   color: string;
+  arrowIcon:any;
 };
 export type TableColumn<T> = {
   key: string;

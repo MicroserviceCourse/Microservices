@@ -5,47 +5,49 @@ export const MenuConfig = [
   {
     label: "Dashboard",
     icon: Icons.Dashboard,
-    collapsible: true,
-    submenu: [
-      { label: "Sales Analytics", path: "/seller/analytics" },
-      { label: "Sellers List", path: "/seller/sellers/list" },
-      { label: "Sellers Table", path: "/seller/sellers/table" },
-      { label: "Sellers Grid", path: "/seller/sellers/grid" },
-      { label: "Seller Profile", path: "/seller/profile" },
-      { label: "Revenue by Period", path: "/seller/revenue" },
-    ],
+    path: "/",
   },
 
   {
     label: "Products",
     icon: Icons.Products,
-    path: "/seller/products",
     collapsible: true,
     submenu: [
       {
-        label: "Top Products",
-        path: "/top-products",
+        label: "Products List",
+        path: "/product",
       },
       {
-        label: "Products Grid",
-        path: "/grid",
-      },
-      {
-        label: "Products Management",
-        path: "/management",
-      },
-      {
-        label: "Products Editor",
-        path: "/editor",
-      },
-      {
-        label: "Banner",
-        path: "/banner",
+        label: "Create Product",
+        path: "/product/create",
       },
     ],
   },
-  { label: "Orders", icon: Icons.Orders, path: "/seller/orders" },
-  { label: "Statistics", icon: Icons.Statistics, path: "/seller/statistics" },
-  { label: "Reviews", icon: Icons.Reviews, path: "/seller/reviews" },
-  { label: "Customers", icon: Icons.Customers, path: "/seller/customers" },
+  {
+    label: "Inventory",
+    icon: Icons.Inventory,
+    path: "/inventory/import",
+  },
+
+  {
+    label: "Media",
+    icon: Icons.Media,
+    path: "/media",
+  },
+
+  {
+    label: "Promotions",
+    icon: Icons.Promotions,
+    collapsible: true,
+    submenu: [
+      {
+        label: "All Promotions",
+        path: "/promotion",
+      },
+      {
+        label: "Create Promotion",
+        path: "/promotion/create",
+      },
+    ],
+  },
 ];

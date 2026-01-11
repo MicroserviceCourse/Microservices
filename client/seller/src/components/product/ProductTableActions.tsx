@@ -86,7 +86,7 @@ const ProductTableActions = ({ product, onUpdated }: ProductTableActionProps) =>
     {
       label: "Edit",
       icon: <Pencil className="h-4 w-4" />,
-      onClick: () => navigate(`/Dashboard/product/${product.id}/edit`),
+      onClick: () => navigate(`/product/${product.id}/edit`),
     },
     {
       label: "Hide Product",

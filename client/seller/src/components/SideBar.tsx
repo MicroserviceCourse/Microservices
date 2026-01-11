@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import { Icons } from "../icons";
 import { MenuConfig } from "../config/menu";
 import SidebarItem from "./SidebarItem";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const [openMenu, setOpenMenu] = useState("Dashboard");
-
+  const navigate = useNavigate();
   return (
     <div className="w-64 h-screen bg-white border-r border-gray-200 p-6 flex flex-col">
       {/* LOGO */}
@@ -29,7 +30,7 @@ export default function Sidebar() {
                 {/* COLLAPSE BUTTON */}
                 <button
                   onClick={() => setOpenMenu(openMenu === menu.label ? "" : menu.label)}
-                  className="flex justify-between items-center w-full px-3 py-2 text-left
+                  className="flex justify-between cursor-pointer items-center w-full px-3 py-2 text-left
                              font-medium text-[#00224F] hover:bg-gray-100 rounded-lg"
                 >
                   <span className="flex items-center gap-3">
@@ -56,6 +57,7 @@ export default function Sidebar() {
                     {menu.submenu.map((sub, subIdx) => (
                       <li
                         key={subIdx}
+                        onClick={() => navigate(sub.path)}
                         className="flex items-center text-sm text-gray-600 cursor-pointer
                                    hover:text-[#00224F] transition"
                       >
@@ -70,7 +72,14 @@ export default function Sidebar() {
           }
 
           // Nếu là menu thường
-          return <SidebarItem key={idx} icon={Icon} label={menu.label} />;
+          return (
+            <SidebarItem
+              key={idx}
+              icon={Icon}
+              label={menu.label}
+              onClick={menu.path ? () => navigate(menu.path) : undefined}
+            />
+          );
         })}
       </nav>
     </div>
