@@ -49,7 +49,7 @@ const EditPromotionPage = () => {
         startAt: "",
         endAt: "",
       });
-      navigate("/Dashboard/promotion");
+      navigate("/promotion");
     } catch (err: any) {
       showAlert({
         title: err?.response?.data?.message || "Failed to update promotion.",
@@ -96,7 +96,7 @@ const EditPromotionPage = () => {
         </div>
         <div className="flex gap-3">
           <button
-            onClick={() => navigate("/Dashboard/promotion")}
+            onClick={() => navigate("/promotion")}
             className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155"
           >
             Cancel

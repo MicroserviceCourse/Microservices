@@ -7,10 +7,7 @@ import org.webvibecourse.media_service.entity.Media;
 
 @Mapper(componentModel = "spring")
 public interface MediaMapper {
-    /**
-     * Mapper responsible for converting between media and
-     * MediaResponse.
-     */
-    @Mapping(target = "createdAt",source = "createdAt")
-    MediaResponse toResponse(Media media);
+  /** Mapper responsible for converting between media and MediaResponse. */
+  @Mapping(target = "createdAt", source = "createdAt")
+  MediaResponse toResponse(Media media);
 }

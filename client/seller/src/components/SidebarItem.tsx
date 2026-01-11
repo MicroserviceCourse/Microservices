@@ -5,7 +5,7 @@ export default function SidebarItem({ icon: Icon, label, onClick }: SidebarItemP
     <button
       onClick={onClick}
       className="flex items-center gap-3 px-3 py-2 w-full text-[#00224F] 
-        hover:bg-gray-100 rounded-lg transition"
+        hover:bg-gray-100 rounded-lg transition cursor-pointer"
     >
       <Icon size={18} />
       {label}

@@ -158,15 +158,15 @@ const CreateProductPage = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen space-y-8">
+    <div className=" bg-gray-50 min-h-screen space-y-8">
       {/* HEADER */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Create Product</h1>
+      <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <h1 className="text-2xl font-bold text-slate-800">Create Product</h1>
 
         <div className="flex gap-3">
           <button
-            onClick={() => navigate("/Dashboard/product")}
-            className="px-4 py-2 rounded-lg  bg-slate-200 hover:bg-slate-300 font-medium text-[#334155"
+            onClick={() => navigate("/product")}
+            className="rounded-lg bg-slate-200 px-4 py-2 font-medium text-slate-700 hover:bg-slate-300"
           >
             Cancel
           </button>
@@ -174,14 +174,13 @@ const CreateProductPage = () => {
           <button
             disabled={isSaving}
             onClick={handleSaveProduct}
-            className={`px-4 py-2 rounded-lg text-white shadow-sm 
-                        ${isSaving ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}
-                    `}
+            className={`rounded-lg px-4 py-2 text-white shadow-sm
+        ${isSaving ? "cursor-not-allowed bg-gray-400" : "bg-blue-600 hover:bg-blue-700"}`}
           >
             {isSaving ? (
               <div className="flex items-center gap-2">
                 <svg
-                  className="animate-spin h-5 w-5 text-white"
+                  className="h-5 w-5 animate-spin text-white"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -193,12 +192,12 @@ const CreateProductPage = () => {
                     r="10"
                     stroke="currentColor"
                     strokeWidth="4"
-                  ></circle>
+                  />
                   <path
                     className="opacity-75"
                     fill="currentColor"
                     d="M4 12a8 8 0 018-8v4l3.5-3.5L12 0v4a8 8 0 010 16v4l3.5-3.5L12 20v-4a8 8 0 01-8-8z"
-                  ></path>
+                  />
                 </svg>
                 Saving...
               </div>
@@ -210,7 +209,7 @@ const CreateProductPage = () => {
       </div>
 
       {/* ================= CONTENT ================= */}
-      <div className="space-y-8 max-w-6xl mx-auto">
+      <div className="space-y-8 max-w-7xl mx-auto">
         {/* BASIC INFO */}
         <div className="bg-white p-6 rounded-xl  border border-slate-200">
           <h2 className="text-lg font-semibold mb-4">Basic Info</h2>
