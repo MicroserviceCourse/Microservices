@@ -8,5 +8,4 @@ public interface CategoryRepository extends
         JpaRepository<Category, Long>,
         JpaSpecificationExecutor<Category> {
 
-    boolean existsBySlug(String slug);
 }

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface TagService {
 
-    TagDto create(TagRequest request);
+    void create(TagRequest request);
 
     void update(Long id, TagRequest request);
 
@@ -15,5 +15,11 @@ public interface TagService {
 
     TagDto getById(Long id);
 
-    Page<TagDto> getPage(Pageable pageable);
+    Page<TagDto> getPage(Integer page,
+                         Integer size,
+                         String sort,
+                         String filter,
+                         String searchField,
+                         String searchValue,
+                         boolean all);
 }

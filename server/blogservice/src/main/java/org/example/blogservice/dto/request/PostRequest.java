@@ -16,13 +16,10 @@ public class PostRequest {
     private String content;
 
     private String thumbnailUrl;
-    private String metaTitle;
-    private String metaDescription;
+
 
     @NotNull
     private Long categoryId;
 
     private List<Long> tagIds;
-
-    private Boolean published;
 }

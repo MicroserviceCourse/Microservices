@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface PostService {
 
-    PostResponse create(PostRequest request);
+    void create(PostRequest request);
 
     void update(Long id, PostRequest request);
 
@@ -15,5 +15,11 @@ public interface PostService {
 
     PostResponse getById(Long id);
 
-    Page<PostResponse> getPage(Pageable pageable);
+    Page<PostResponse> getPage(Integer page,
+                               Integer size,
+                               String sort,
+                               String filter,
+                               String searchField,
+                               String searchValue,
+                               boolean all);
 }

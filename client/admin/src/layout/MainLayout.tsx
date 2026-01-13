@@ -1,6 +1,8 @@
 import { Bell, Search } from "lucide-react";
 import SideBar from "../components/SideBar";
 import { Outlet } from "react-router-dom";
+import { AlertProvider } from "../components/alert-context/alert-context";
+
 
 const MainLayout = () => {
   return (
@@ -32,7 +34,9 @@ const MainLayout = () => {
           </div>
         </header>
         <main className="flex-1 p-6 overflow-y-auto">
-          <Outlet />
+            <AlertProvider>
+            <Outlet />
+          </AlertProvider>
         </main>
       </div>
     </div>
