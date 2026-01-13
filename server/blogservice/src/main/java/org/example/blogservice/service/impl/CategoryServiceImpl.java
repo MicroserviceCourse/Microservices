@@ -1,12 +1,15 @@
 package org.example.blogservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.blogservice.dto.request.CategoryRequest;
 import org.example.blogservice.dto.response.CategoryResponse;
 import org.example.blogservice.entity.Category;
 import org.example.blogservice.mapper.CategoryMapper;
 import org.example.blogservice.repository.CategoryRepository;
 import org.example.blogservice.service.CategoryService;
+import org.example.commonsecurity.SecurityUtils;
+import org.example.commonutils.util.GenericSpecBuilder;
 import org.example.commonutils.util.SearchHelper;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,15 +20,18 @@ import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
-
+    private final SecurityUtils securityUtils;
+    private static final List<String> SEARCH_FIELDS =
+            List.of("name");
     @Override
-    public CategoryResponse create(CategoryRequest request) {
-        Category category = categoryMapper.toEntity(request);
-        return categoryMapper.toResponse(categoryRepository.save(category));
+    public void create(CategoryRequest request) {
+        Category category = categoryMapper.toEntity(request,securityUtils.getCurrentUserId());
+        categoryRepository.save(category);
     }
 
     @Override
@@ -33,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Category not found: " + id));
 
-        categoryMapper.update(category, request);
+        categoryMapper.update(category, request,securityUtils.getCurrentUserId());
         categoryRepository.save(category);
     }
 
@@ -54,31 +60,25 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Page<CategoryResponse> getPage(int page, int size, String search, String sort) {
+    public Page<CategoryResponse> getPage(Integer page,
+                                          Integer size,
+                                          String sort,
+                                          String filter,
+                                          String searchField,
+                                          String searchValue,
+                                          boolean all) {
+        log.info("start get category Post");
 
-        Pageable pageable = buildPageable(page, size, sort);
+        Pageable pageable = all
+                ? Pageable.unpaged()
+                : PageRequest.of(page-1,size);
 
-        Specification<Category> spec =
-                SearchHelper.buildSearchSpec(null, search, List.of("name", "slug", "description"));
+        Specification<Category> spec = GenericSpecBuilder
+                .build(sort,filter,searchField,searchValue,SEARCH_FIELDS);
 
-
-        return categoryRepository.findAll(spec, pageable)
+        return categoryRepository.findAll(spec,pageable)
                 .map(categoryMapper::toResponse);
     }
 
 
-    private Pageable buildPageable(int page, int size, String sortStr) {
-        if (sortStr == null || sortStr.isBlank()) {
-            return PageRequest.of(page, size);
-        }
-
-        String[] parts = sortStr.split(",");
-        String field = parts[0];
-        Sort.Direction direction =
-                parts.length > 1 && "desc".equalsIgnoreCase(parts[1])
-                        ? Sort.Direction.DESC
-                        : Sort.Direction.ASC;
-
-        return PageRequest.of(page, size, Sort.by(direction, field));
-    }
 }

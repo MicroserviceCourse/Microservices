@@ -19,8 +19,6 @@ public class Tag {
     private Long id;
 
     private String name;
-    @Column(nullable = true, unique = true)
-    private String slug;
 
 
     @ManyToMany(mappedBy = "tags")

@@ -7,6 +7,4 @@ import lombok.Data;
 public class TagRequest {
     @NotBlank
     private String name;
-    @NotBlank
-    private String slug;
 }

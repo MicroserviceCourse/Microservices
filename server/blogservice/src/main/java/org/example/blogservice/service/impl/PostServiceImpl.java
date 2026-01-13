@@ -1,6 +1,7 @@
 package org.example.blogservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.blogservice.dto.request.PostRequest;
 import org.example.blogservice.dto.response.PostResponse;
 import org.example.blogservice.entity.Category;
@@ -11,8 +12,11 @@ import org.example.blogservice.repository.CategoryRepository;
 import org.example.blogservice.repository.PostRepository;
 import org.example.blogservice.repository.TagRepository;
 import org.example.blogservice.service.PostService;
+import org.example.commonutils.util.GenericSpecBuilder;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +27,7 @@ import java.util.NoSuchElementException;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
@@ -30,31 +35,22 @@ public class PostServiceImpl implements PostService {
     private final TagRepository tagRepository;
     private final PostMapper postMapper;
 
-    @Override
-    public PostResponse create(PostRequest request) {
-        Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new NoSuchElementException("Category not found: " + request.getCategoryId()));
+    private static final List<String> SEARCH_FIELDS =
+            List.of("title","slug");
 
-        List<Tag> tags = request.getTagIds() == null || request.getTagIds().isEmpty()
+    @Override
+    public void create(PostRequest request) {
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow(() -> new NoSuchElementException(
+                        "Category not found: " + request.getCategoryId()));
+
+        List<Tag> tags = request.getTagIds() == null
                 ? List.of()
                 : tagRepository.findAllById(request.getTagIds());
 
-        // 💡 MapStruct map các field cơ bản
-        Post post = postMapper.toEntity(request);
-        post.setCategory(category);
-        post.setTags(tags);
+        Post post = postMapper.toEntity(request,category,tags);
 
-        boolean publish = Boolean.TRUE.equals(request.getPublished());
-        post.setPublished(publish);
-        if (publish) {
-            post.setPublishedAt(LocalDateTime.now());
-        }
-
-        // TODO: generate slug nếu cần
-        // post.setSlug(slugUtils.toSlug(post.getTitle()));
-
-        post = postRepository.save(post);
-        return postMapper.toResponse(post);
+        postRepository.save(post);
     }
 
     // PostServiceImpl.java
@@ -64,23 +60,13 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(() -> new RuntimeException("Post not found"));
 
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(()->new RuntimeException("Post not found"));
 
         List<Tag> tags = request.getTagIds() == null
                 ? List.of()
                 : tagRepository.findAllById(request.getTagIds());
 
-        // dùng mapper để map field từ request vào entity
-        postMapper.update(post, request);
-
-        post.setCategory(category);
-        post.setTags(tags);
-
-        boolean publish = Boolean.TRUE.equals(request.getPublished());
-        post.setPublished(publish);
-        if (publish && post.getPublishedAt() == null) {
-            post.setPublishedAt(LocalDateTime.now());
-        }
+        postMapper.update(post,request,category,tags);
 
         postRepository.save(post);
     }
@@ -102,9 +88,25 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Page<PostResponse> getPage(Pageable pageable) {
-        return postRepository.findAll(pageable)
+    public Page<PostResponse> getPage(Integer page,
+                                      Integer size,
+                                      String sort,
+                                      String filter,
+                                      String searchField,
+                                      String searchValue,
+                                      boolean all) {
+        log.info("start get post");
+
+        Pageable pageable = all
+                ? Pageable.unpaged()
+                : PageRequest.of(page-1,size);
+
+        Specification<Post> spec = GenericSpecBuilder.
+                build(sort,filter,searchField,searchValue,SEARCH_FIELDS);
+
+        return postRepository.findAll(spec,pageable)
                 .map(postMapper::toResponse);
     }
+
+
 }

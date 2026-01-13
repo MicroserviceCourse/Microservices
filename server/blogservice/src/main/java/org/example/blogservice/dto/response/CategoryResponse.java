@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class CategoryResponse {
     private Long id;
+    private String blogCategoryCode;
     private String name;
-    private String slug;
-    private String description;
 }

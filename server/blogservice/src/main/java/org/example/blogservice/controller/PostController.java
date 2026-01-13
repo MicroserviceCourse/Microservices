@@ -9,6 +9,7 @@ import org.example.commonutils.api.ApiResponse;
 import org.example.commonutils.api.PageResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,10 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<PostResponse>> create(@Valid @RequestBody PostRequest request) {
-        PostResponse data = postService.create(request);
-        return ResponseEntity.ok(ApiResponse.success(data));
+        postService.create(request);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success("Post created successfully"));
     }
 
     // PostController.java
@@ -47,11 +50,28 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<PageResponse<PostResponse>>> getPage(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "5") Integer size,
+            @RequestParam(defaultValue = "id,desc") String sort,
+            @RequestParam(required = false) String filter,
+            @RequestParam(required = false) String searchField,
+            @RequestParam(required = false) String searchValue,
+            @RequestParam(defaultValue = "false") Boolean all
     ) {
-        Page<PostResponse> resultPage = postService.getPage(PageRequest.of(page, size));
-        PageResponse<PostResponse> body = new PageResponse<>(resultPage);
-        return ResponseEntity.ok(ApiResponse.success(body));
+        return ResponseEntity.ok(
+                ApiResponse.success(
+                        new PageResponse<>(
+                                postService.getPage(
+                                        page,
+                                        size,
+                                        sort,
+                                        searchField,
+                                        searchValue,
+                                        filter,
+                                        all
+                                )
+                        )
+                )
+        );
     }
 }

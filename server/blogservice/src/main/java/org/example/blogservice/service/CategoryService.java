@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface CategoryService {
 
-    CategoryResponse create(CategoryRequest request);
+    void create(CategoryRequest request);
 
     void update(Long id, CategoryRequest request);
 
@@ -15,5 +15,11 @@ public interface CategoryService {
 
     CategoryResponse getById(Long id);
 
-    Page<CategoryResponse> getPage(int page, int size, String search, String sort);
+    Page<CategoryResponse> getPage(Integer page,
+                                   Integer size,
+                                   String sort,
+                                   String filter,
+                                   String searchField,
+                                   String searchValue,
+                                   boolean all);
 }
