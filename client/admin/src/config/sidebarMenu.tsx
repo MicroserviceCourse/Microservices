@@ -24,6 +24,11 @@ export const sidebarMenu = [
         to: "/dashboard",
       },
       {
+        label: "Media",
+        icon: FileText,
+        to: "/media",
+      },
+      {
         label: "Products",
         icon: Shirt,
         children: [
