@@ -26,7 +26,7 @@ public class TagServiceImpl implements TagService {
     private final TagRepository tagRepository;
     private final TagMapper tagMapper;
     private static final List<String> SEARCH_FIELDS =
-            List.of("name");
+            List.of("name","code");
     @Override
     public void create(TagRequest request) {
         Tag tag = tagMapper.toEntity(request);
@@ -77,5 +77,12 @@ public class TagServiceImpl implements TagService {
 
         return tagRepository.findAll(spec,pageable)
                 .map(tagMapper::toResponse);
+    }
+
+    @Override
+    public void changeStatus(Long id, Boolean status) {
+        Tag tag = tagRepository.getReferenceById(id);
+        tag.setIsStatus(status);
+        tagRepository.save(tag);
     }
 }

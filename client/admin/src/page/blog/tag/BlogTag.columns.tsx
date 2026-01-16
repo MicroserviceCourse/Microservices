@@ -1,21 +1,20 @@
 import TableActions from "../../../components/ui/Table/TableActions";
 import type { Column } from "../../../types";
+import type { BlogTag, TagColumnProps } from "../../../types/blog/tag/tag.type";
 
-import type { BlogCategory, BlogCategoryColumnProps } from "../../../types/blog/category/category.type";
-
-export const categoryColumns = ({
+export const getBlogTagColumns = ({
   onToggleStatus,
   onEdit,
-}: BlogCategoryColumnProps): Column<BlogCategory>[] => [
+}: TagColumnProps): Column<BlogTag>[] => [
   {
-    key: "blogCategoryCode",
+    key: "code",
     title: "ID",
     sortable: true,
   },
   {
-    key:"name",
-    title:"Name",
-    sortable:true,
+    key: "name",
+    title: "Name",
+    sortable: true,
   },
   {
     key: "createdAt",

@@ -22,5 +22,5 @@ public interface PromotionService {
 
     PromotionResponse getById(Long id);
 
-    void changeStatus(Long id,Boolean status);
+    void changeStatus(Long id,Integer status);
 }

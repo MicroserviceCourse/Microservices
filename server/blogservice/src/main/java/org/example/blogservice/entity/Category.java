@@ -40,6 +40,9 @@ public class Category {
     @Column(name = "created_by")
     private String createdBy;
 
+    @Column(name = "isStatus")
+    private Boolean isStatus;
+
     @Column(name = "updated_by")
     private String updatedBy;
 
@@ -50,6 +53,9 @@ public class Category {
     public void prePersist(){
         if(this.blogCategoryCode == null || this.blogCategoryCode.isEmpty()){
             this.blogCategoryCode = "BC"+String.format("%04d",(int)(Math.random() * 9999));
+        }
+        if(this.isStatus == null){
+            this.isStatus=true;
         }
     }
 }

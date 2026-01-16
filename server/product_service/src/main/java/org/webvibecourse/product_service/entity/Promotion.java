@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.commonutils.Enum.PromotionStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,7 +12,25 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Promotion",schema = "product_service")
+@Table(
+        name = "promotion",
+        schema = "product_service",
+        indexes = {
+                @Index(
+                        name = "idx_promotion_status_time_priority",
+                        columnList = "status, start_at, end_at, priority"
+                ),
+                @Index(
+                        name = "idx_promotion_code",
+                        columnList = "code",
+                        unique = true
+                ),
+                @Index(
+                        name = "idx_promotion_status",
+                        columnList = "status"
+                )
+        }
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,7 +58,7 @@ public class Promotion {
     private OffsetDateTime endAt;
 
     @Column(nullable = false)
-    private Boolean active=true;
+    private Integer status;
 
     @CreationTimestamp
     private OffsetDateTime createdAt;
@@ -56,6 +75,9 @@ public class Promotion {
     public void prePersist(){
         if(this.code == null || this.code.isBlank()){
             this.code = UUID.randomUUID().toString();
+        }
+        if(this.status==null ){
+            this.status = PromotionStatus.DRAFT.getCode();
         }
     }
 
