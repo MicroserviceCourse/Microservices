@@ -63,14 +63,19 @@ public class CategoryController {
                                         page,
                                         size,
                                         sort,
+                                        filter,
                                         searchField,
                                         searchValue,
-                                        filter,
                                         all
                                 )
                         )
                 )
         );
+    }
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<ApiResponse<Void>>changeStatus(@PathVariable Long id,@RequestParam Boolean status){
+        categoryService.changeStatus(id,status);
+        return ResponseEntity.ok(ApiResponse.success("Change status successfully"));
     }
 
 }

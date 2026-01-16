@@ -22,4 +22,5 @@ public interface CategoryService {
                                    String searchField,
                                    String searchValue,
                                    boolean all);
+    void changeStatus(Long id,Boolean status);
 }

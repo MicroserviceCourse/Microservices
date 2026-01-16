@@ -27,7 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper categoryMapper;
     private final SecurityUtils securityUtils;
     private static final List<String> SEARCH_FIELDS =
-            List.of("name");
+            List.of("name","code");
     @Override
     public void create(CategoryRequest request) {
         Category category = categoryMapper.toEntity(request,securityUtils.getCurrentUserId());
@@ -78,6 +78,14 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryRepository.findAll(spec,pageable)
                 .map(categoryMapper::toResponse);
+    }
+
+    @Override
+    public void changeStatus(Long id, Boolean status) {
+        log.info("start change status");
+        Category category = categoryRepository.getReferenceById(id);
+        category.setIsStatus(status);
+        categoryRepository.save(category);
     }
 
 

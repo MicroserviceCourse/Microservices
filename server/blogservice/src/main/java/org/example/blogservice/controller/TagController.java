@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/tags")
+@RequestMapping("/api/blog/tags")
 @RequiredArgsConstructor
 public class TagController {
 
@@ -63,13 +63,18 @@ public class TagController {
                                         page,
                                         size,
                                         sort,
+                                        filter,
                                         searchField,
                                         searchValue,
-                                        filter,
                                         all
                                 )
                         )
                 )
         );
+    }
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<ApiResponse<Void>> changeStatus(@PathVariable Long id,@RequestParam Boolean status){
+        tagService.changeStatus(id,status);
+        return ResponseEntity.ok(ApiResponse.success("Change status successfully"));
     }
 }

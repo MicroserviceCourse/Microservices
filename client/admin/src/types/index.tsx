@@ -5,15 +5,27 @@ export interface Tokens {
   refreshTokenAt?: number;
 }
 export type Column<T> = {
-  key: string;
+  key: keyof T | string;
   title: string;
-  render?: (row: T) => React.ReactNode;
+  sortable?: boolean;
   className?: string;
+  render?: (row: T) => React.ReactNode;
+};
+export type SortOrder = "asc" | "desc";
+
+export type SortState<T> = {
+  key: keyof T;
+  order: SortOrder;
 };
 export interface TableProps<T> {
-  columns: Column<T>[];
+    columns: Column<T>[];
   data: T[];
   rowKey: (row: T) => string;
+
+  sort?: SortState<T>;
+  onSortChange?: (sort: SortState<T>) => void;
+
+  loading?: boolean;
 }
 export interface ApiResponse<T> {
   data: T;
@@ -29,12 +41,11 @@ export interface PageResponse<T> {
   last: boolean;
 }
 export type GetAllOptions = {
-    page?: number;
-    size?: number;
-    sort?: string;
-    filter?: string;
-    searchField?: string;
-    searchValue?: string
-    all?: boolean;
-  
+  page?: number;
+  size?: number;
+  sort?: string;
+  filter?: string;
+  searchField?: string;
+  searchValue?: string;
+  all?: boolean;
 };

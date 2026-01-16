@@ -29,6 +29,15 @@ export const sidebarMenu = [
         to: "/media",
       },
       {
+        label: "Blog",
+        icon: FileText,
+        to: "/blog",
+        children:[
+          {"label":"Blog Categories","to":"/blog/categories"},
+          {"label":"Blog Tags","to":"/blog/tags"},
+        ]
+      },
+      {
         label: "Products",
         icon: Shirt,
         children: [

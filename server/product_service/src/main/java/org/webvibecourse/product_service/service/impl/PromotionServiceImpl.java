@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.commonsecurity.SecurityUtils;
+import org.example.commonutils.Enum.PromotionStatus;
 import org.example.commonutils.util.GenericSpecBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -73,10 +74,10 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
-    public void changeStatus(Long id, Boolean status) {
+    public void changeStatus(Long id, Integer status) {
         Promotion promotion = repository.getReferenceById(id);
 
-        promotion.setActive(status);
+        promotion.setStatus(PromotionStatus.fromValue(status).getCode());
         repository.save(promotion);
     }
 }

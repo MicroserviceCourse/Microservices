@@ -1,44 +1,36 @@
 import { useCallback, useEffect, useState } from "react";
-
-import {
-  changeStatusBlogCategory,
-  getBlogCategories,
-} from "../../../service/api/Blog/BlogCategory";
-import { categoryColumns } from "./category.columns";
-import CreateBlogCategoryModal from "../../../components/blog/category/CreateBlogCategoryModal";
-import { Table } from "../../../components/ui/Table/TableIUI";
+import type { BlogTag } from "../../../types/blog/tag/tag.type";
+import { changeStatusBlogTag, getBlogTags } from "../../../service/api/Blog/BlogTag";
 import { useAlert } from "../../../components/alert-context/alert-context";
-import type { BlogCategory } from "../../../types/blog/category/category.type";
-import EditBlogCategoryModal from "../../../components/blog/category/EditBlogCategoryModal";
+import { getBlogTagColumns } from "./BlogTag.columns";
+import { Table } from "../../../components/ui/Table/TableIUI";
+import CreateBlogTagModal from "../../../components/blog/tag/CreateBlogTagModal";
+import EditBlogTagModal from "../../../components/blog/tag/EditBlogTagModal";
 import type { SortState } from "../../../types";
 
-export default function BlogCategoryPage() {
-  const [data, setData] = useState<BlogCategory[]>([]);
+const BlogTagPage = () => {
+  const [data, setData] = useState<BlogTag[]>([]);
   const [open, setOpen] = useState(false);
-  const [statusFilter, setStatusFilter] = useState("");
-  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<any | null>(null);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
   const [openUpdate, setOpenUpdate] = useState(false);
-  const [sort, setSort] = useState<SortState<BlogCategory>>({
-    key: "id",
-    order: "asc",
-  });
+  const [selectedBlogTag, setSelectedBlogTag] = useState<any | null>(null);
   const { showAlert } = useAlert();
-  const handleEdit = (row: any) => {
-    setOpenUpdate(true);
-    setSelectedCategory(row);
-  };
+  const [error, setError] = useState<string | null>(null);
+const [sort, setSort] = useState<SortState<BlogTag>>({
+  key: "id",
+  order: "asc",
+});
   const fetchData = useCallback(async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       let filters: string[] = [];
       if (statusFilter) {
         filters.push(`isStatus==${statusFilter}`);
       }
       const filterQuery = filters.join(" and ");
-      const data = await getBlogCategories({
+      const data = await getBlogTags({
         page: 1,
         size: 10,
         sort: `${sort.key},${sort.order}`,
@@ -62,7 +54,7 @@ export default function BlogCategoryPage() {
       list.map((item) => (item.id === id ? { ...item, isStatus: nextStatus } : item)),
     );
     try {
-      await changeStatusBlogCategory(id, nextStatus);
+      await changeStatusBlogTag(id, nextStatus);
     } catch (err) {
       setData(prev);
       showAlert({
@@ -72,25 +64,26 @@ export default function BlogCategoryPage() {
       });
     }
   };
-  const columns = categoryColumns({
+  const handleEdit = (row: any) => {
+    setOpenUpdate(true);
+    setSelectedBlogTag(row);
+  };
+  const columns = getBlogTagColumns({
     onToggleStatus: handleToggleStatus,
     onEdit: (row) => {
       handleEdit(row);
     },
   });
-
   return (
     <div className="space-y-4">
-      {/* HEADER */}
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-[#5d7186]">Manager Blog Categories</h1>
-
+        <h1 className="text-lg font-semibold text-[#5d7186]">Manager Blog Tags</h1>
         <div className="flex gap-2">
           <button
             onClick={() => setOpen(true)}
             className="rounded-xl bg-[#FF7A29] px-4 py-2 text-sm font-medium text-white hover:bg-[#FF6A14]"
           >
-            Add Blog Categories
+            Add Blog Tags
           </button>
         </div>
       </div>
@@ -114,22 +107,22 @@ export default function BlogCategoryPage() {
           <option value="false">InActive</option>
         </select>
       </div>
-
       <Table
         columns={columns}
+        data={data}
         loading={loading}
         sort={sort}
         onSortChange={setSort}
-        data={data}
         rowKey={(row) => row.id.toString()}
       />
-      <CreateBlogCategoryModal isOpen={open} onClose={() => setOpen(false)} onSuccess={fetchData} />
-      <EditBlogCategoryModal
+      <CreateBlogTagModal isOpen={open} onClose={() => setOpen(false)} onSuccess={fetchData} />
+        <EditBlogTagModal
         isOpen={openUpdate}
         onClose={() => setOpenUpdate(false)}
         onSuccess={fetchData}
-        blogCategoryId={selectedCategory?.id}
+        blogTagId={selectedBlogTag?.id}
       />
     </div>
   );
-}
+};
+export default BlogTagPage;

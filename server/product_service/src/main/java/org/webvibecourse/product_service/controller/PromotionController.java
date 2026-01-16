@@ -69,4 +69,13 @@ public class PromotionController {
     ){
         return ResponseEntity.ok(ApiResponse.success(service.getById(id)));
     }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<ApiResponse<Void>> changeStatus(
+            @PathVariable Long id,
+            @RequestParam Integer status
+    ){
+        service.changeStatus(id,status);
+        return ResponseEntity.ok(ApiResponse.success("Change status successfully"));
+    }
 }

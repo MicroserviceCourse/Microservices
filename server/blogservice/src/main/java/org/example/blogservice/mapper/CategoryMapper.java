@@ -14,12 +14,14 @@ public interface CategoryMapper {
     Category toEntity(CategoryRequest request,Long userId);
 
     // Từ entity -> response trả về API
-    @Mapping(target = "blogCategoryCode",source = "blogCategoryCode")
-    CategoryResponse toResponse(Category category);
+
 
     // Update entity cũ bằng dữ liệu mới trong request
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "createdBy", source = "userId")
     @Mapping(target = "updatedBy", source = "userId")
     void update(@MappingTarget Category category, CategoryRequest request,Long userId);
+
+    @Mapping(target = "blogCategoryCode",source = "blogCategoryCode")
+    CategoryResponse toResponse(Category category);
 }
