@@ -14,15 +14,20 @@ public interface VariantMapper {
     @Mapping(target = "name", source = "request.name")
     @Mapping(target = "sku", source = "request.sku")
     @Mapping(target = "price", source = "request.price")
+    @Mapping(target = "type",source = "request.type")
     ProductVariant toEntity(ProductVariantRequest request, Product product);
 
 
-    VariantResponse toResponse(ProductVariant entity);
+
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "product", ignore = true)
     @Mapping(target = "imageUrl", ignore = true)
+    @Mapping(target = "type",source = "request.type")
     void update(@MappingTarget ProductVariant entity, ProductVariantRequest request);
+
+
+    VariantResponse toResponse(ProductVariant entity);
 
 }

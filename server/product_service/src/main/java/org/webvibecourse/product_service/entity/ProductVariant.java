@@ -30,6 +30,8 @@ public class ProductVariant {
     @Schema(description = "Variant-specific price (can override the base product's price).")
     private BigDecimal price;
 
+    private Integer type;
+
     @Schema(
             description = "Image URL associated with the variant, typically for color or style preview.",
             example = "https://cdn.example.com/images/products/variant-red.png"

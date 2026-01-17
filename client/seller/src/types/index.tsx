@@ -59,6 +59,7 @@ export type Variant = {
   id: number | null;
   name: string;
   price: string;
+  type:string;
   sku: string;
   imagePreview?: string | null;
   imageFile?: File | null;
