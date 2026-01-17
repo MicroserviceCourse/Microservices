@@ -7,7 +7,7 @@ import org.webvibecourse.product_service.dto.response.ProductResponse;
 import org.webvibecourse.product_service.entity.Product;
 import org.webvibecourse.product_service.mapper.common.CommonMapper;
 
-@Mapper(componentModel = "spring",imports = {JsonUtils.class,CommonMapper.class},uses = {CategoryMapper.class})
+@Mapper(componentModel = "spring",imports = {JsonUtils.class,CommonMapper.class},uses = {CategoryMapper.class,VariantMapper.class})
 public interface ProductMapper extends CommonMapper {
 
     @Mapping(target = "createdBy", source = "userId")

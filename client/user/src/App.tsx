@@ -1,23 +1,28 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import BlogPage from "./pages/BlogPage";
-import PostDetail from './pages/PostDetail';
-import ProductPage from './pages/ProductPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-function App() {
+import BlogPage from './pages/BlogPage'
+import PostDetail from './pages/PostDetail'
+import ProductPage from './pages/ProductPage'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
+import Layout from './components/Layout'
+import LoginPage from './pages/LoginPage'
 
+function App() {
   return (
     <>
-    <Routes>
-      <Route path='/' element={<HomePage/>}/>
-      <Route path="/blog" element={<BlogPage />} />
-      <Route path="/blog/:id" element={<PostDetail />} />
-      <Route path='/contact' element={<ContactPage/>}/>
-      <Route path='/product' element={<ProductPage/>}/>
-      <Route path='/about-us' element={<AboutPage/>}/>
-    </Routes>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="blog/:id" element={<PostDetail />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="product" element={<ProductPage />} />
+          <Route path='login' element={<LoginPage />} />
+          <Route path="about-us" element={<AboutPage />} />
+        </Route>
+      </Routes>
     </>
   )
 }

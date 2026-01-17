@@ -24,4 +24,6 @@ public class ProductVariantRequest {
     private BigDecimal price;
 
     private String imageUrl;
+
+    private Integer type;
 }

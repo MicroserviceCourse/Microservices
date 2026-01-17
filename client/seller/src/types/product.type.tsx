@@ -13,3 +13,7 @@ export interface SelectedItem {
   productId: number;
   importQty: number | undefined;
 }
+export const VARIANT_TYPES: { label: string; value: string }[] = [
+  { label: "COLOR", value: "1" },
+  { label: "SIZE", value: "2" },
+];

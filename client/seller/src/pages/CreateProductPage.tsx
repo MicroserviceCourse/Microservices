@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { getCategories } from "../service/api/Categories";
 import CategoryParentSelect from "../components/category/CategoryParentSelect";
 import MediaLibraryModal from "../components/media/MediaLibraryModal";
+import { VARIANT_TYPES } from "../types/product.type";
 
 const inputBase =
   "w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 " +
@@ -33,7 +34,9 @@ const CreateProductPage = () => {
 
   const [galleryPreview, setGalleryPreview] = useState<string[]>([]);
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
-  const [variants, setVariants] = useState<Variant[]>([{ id: null, name: "", price: "", sku: "" }]);
+  const [variants, setVariants] = useState<Variant[]>([
+    { id: null, type: "", name: "", price: "", sku: "" },
+  ]);
   const removeThumbnail = () => {
     setIsRemovingThumb(true);
     setTimeout(() => {
@@ -49,7 +52,7 @@ const CreateProductPage = () => {
   const addVariant = () => {
     setVariants((prev) => [
       ...prev,
-      { id: null, name: "", price: "", sku: "", imagePreview: null, imageFile: null },
+      { id: null, type: "", name: "", price: "", sku: "", imagePreview: null, imageFile: null },
     ]);
   };
 
@@ -125,6 +128,7 @@ const CreateProductPage = () => {
         price: Number(v.price),
         sku: v.sku,
         imageUrl: v.imagePreview ?? "",
+        type: v.type,
       })),
     };
 
@@ -391,6 +395,7 @@ const CreateProductPage = () => {
             <thead>
               <tr className="bg-slate-50 text-slate-600 uppercase text-xs">
                 <th className="px-4 py-3 text-left">Variant</th>
+                <th className="px-4 py-3 text-left">Type</th>
                 <th className="px-4 py-3 text-left">Price</th>
                 <th className="px-4 py-3 text-left">SKU (optional)</th>
                 <th className="px-4 py-3 text-left">Image</th>
@@ -416,7 +421,23 @@ const CreateProductPage = () => {
                       placeholder="Red / Small"
                     />
                   </td>
+                  <td>
+                    <select
+                      className={inputBase}
+                      value={v.type}
+                      onChange={(e) => updateVariant(index, "type", e.target.value)}
+                    >
+                      <option value="" disabled>
+                        -- Select type --
+                      </option>
 
+                      {VARIANT_TYPES.map((t) => (
+                        <option key={t.value} value={t.value}>
+                          {t.label}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
                   {/* Price */}
                   <td className="px-4 py-3">
                     <input

@@ -31,4 +31,8 @@ public class VariantResponse {
             example = "https://cdn.example.com/images/products/variant-red.png"
     )
     private String imageUrl;
+
+    private Integer type;
+
+    private Integer quantity;
 }
