@@ -1,4 +1,4 @@
-name: Build Auth Service
+name: Build Microservices
 
 on:
   push:
@@ -7,6 +7,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service:
+          - authservice
+          - user-service
 
     steps:
       - uses: actions/checkout@v4
@@ -17,11 +23,10 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Build Spring Boot
+      - name: Build ${{ matrix.service }}
+        working-directory: server/${{ matrix.service }}
         env:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
-        run: |
-          cd server/auth-service
-          mvn clean package
+        run: mvn clean package
