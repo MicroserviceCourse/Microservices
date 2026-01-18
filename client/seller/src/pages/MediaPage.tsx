@@ -126,7 +126,6 @@ const MediaPage = () => {
   };
 
   const uploadFile = async (item: any) => {
-    const payload = { files: [item.file] };
 
     let fake = 0;
     const fakeInterval = setInterval(() => {
@@ -136,7 +135,7 @@ const MediaPage = () => {
     }, 120);
 
     try {
-      await createMedia(payload);
+      await createMedia(item.file);
       setMedia((prev) => [
         ...prev,
         {

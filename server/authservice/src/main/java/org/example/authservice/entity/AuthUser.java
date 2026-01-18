@@ -53,12 +53,10 @@ public class AuthUser implements UserDetails {
     private LocalDateTime updatedAt;
 
     @Size(max = 100)
-    @NotNull
     @Column(name = "created_by", nullable = false, length = 100)
     private String createdBy;
 
     @Size(max = 100)
-    @NotNull
     @Column(name = "updated_by", nullable = false, length = 100)
     private String updatedBy;
     @OneToMany(mappedBy = "auth", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

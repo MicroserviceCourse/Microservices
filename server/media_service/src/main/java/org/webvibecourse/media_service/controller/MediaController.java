@@ -40,10 +40,10 @@ public class MediaController {
                 service.getMedias(page, size, sort, searchField, searchValue, filter, all))));
   }
 
-  @DeleteMapping("/delete")
-  public ResponseEntity<ApiResponse<MediaResponse>> deleteMedia(@RequestParam("url") String url)
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<ApiResponse<MediaResponse>> deleteMedia(@PathVariable Long id)
       throws IOException {
-    service.deleteMedia(url);
+    service.deleteMedia(id);
     return ResponseEntity.ok(ApiResponse.success("Delete media successfully!"));
   }
 }

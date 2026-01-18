@@ -10,7 +10,7 @@ public interface MediaService {
 
   List<MediaResponse> uploadMedias(List<MultipartFile> files) throws IOException;
 
-  void deleteMedia(String url);
+  void deleteMedia(Long id);
 
   Page<MediaResponse> getMedias(
       Integer page,

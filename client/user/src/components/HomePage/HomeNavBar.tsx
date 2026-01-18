@@ -1,8 +1,5 @@
-import React from "react";
-import { FiChevronLeft, FiChevronRight, FiSearch, FiShoppingBag } from "react-icons/fi";
-import { BsGrid3X3Gap } from "react-icons/bs";
-import { Link } from "react-router-dom";
 
+import { FiChevronLeft, FiChevronRight, } from "react-icons/fi";
 const HomeNavBar = () => {
   return (
     <div
@@ -11,28 +8,7 @@ const HomeNavBar = () => {
         backgroundImage: "url('/h1-slider1-background-img.jpg')", // Ảnh nằm trong public/assets
       }}
     >
-      {/* Navbar */}
-      <div className="absolute top-0 left-0 w-full flex items-center justify-between px-10 py-6 z-20">
-        <h1 className="text-2xl font-bold">bazaar</h1>
-        <ul className="flex gap-6 text-lg font-medium">
-          <li>Home</li>
-          <li>Pages</li>
-          <li>Shop</li>
-          <li>
-              <Link to="/blog">Blog</Link>
-          </li>
-          <li>Lookbook</li>
-          <li>Elements</li>
-        </ul>
-        <div className="flex items-center gap-5 text-xl">
-          <span className="relative">
-            <FiShoppingBag />
-            <span className="absolute -top-2 -right-2 text-sm">0</span>
-          </span>
-          <FiSearch />
-          <BsGrid3X3Gap />
-        </div>
-      </div>
+
 
       {/* Center Text */}
       <div className="w-full h-full flex flex-col items-center justify-center text-black z-10 relative pt-80">
