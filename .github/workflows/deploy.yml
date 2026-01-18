@@ -23,4 +23,5 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
         run: |
+          cd auth-service
           mvn clean package
