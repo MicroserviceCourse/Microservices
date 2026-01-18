@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         service:
-          - commont-utils
+          - common-utils
           - common-security
           - authservice
           - user-service
