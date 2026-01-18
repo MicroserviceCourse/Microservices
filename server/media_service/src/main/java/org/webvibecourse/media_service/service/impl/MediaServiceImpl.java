@@ -118,15 +118,15 @@ public class MediaServiceImpl implements MediaService {
   }
 
   @Override
-  public void deleteMedia(String url) {
+  public void deleteMedia(Long id) {
     Media media =
-        repository.findByUrl(url).orElseThrow(() -> new RuntimeException("Media not found"));
+        repository.findById(id).orElseThrow(() -> new RuntimeException("Media not found"));
 
     try {
       cloudinary.uploader().destroy(media.getPublicId(), ObjectUtils.emptyMap());
 
       repository.delete(media);
-      log.info("Deleted media from Cloudinary & DB: {}", url);
+      log.info("Deleted media from Cloudinary & DB: {}", id);
 
     } catch (Exception e) {
       log.error("Error deleting Cloudinary file", e);

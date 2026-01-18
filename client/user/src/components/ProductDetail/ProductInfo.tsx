@@ -1,11 +1,13 @@
-const ProductInfo = () => {
+import type { ProductProps } from "../../types/product.type";
+
+const ProductInfo = ({product}:ProductProps) => {
   return (
     <div className="space-y-6 text-sm text-gray-600">
       <h1 className="text-3xl font-semibold text-black">
-        3-drawer chest
+        {product?.name}
       </h1>
 
-      <p className="text-xl text-black">$169</p>
+      <p className="text-xl text-black">${product?.price}</p>
 
       {/* RATING */}
       <div className="flex items-center gap-2">
@@ -40,8 +42,8 @@ const ProductInfo = () => {
 
       {/* META */}
       <div className="space-y-1 text-gray-500">
-        <p>SKU: 201</p>
-        <p>Category: Home Decor</p>
+        <p>SKU: {product?.slug}</p>
+        <p>Category: {product?.categories.join(",")}</p>
         <p>Tags: Catalog, Wood</p>
       </div>
     </div>

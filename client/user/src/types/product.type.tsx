@@ -5,10 +5,12 @@ export interface ProductProps {
 }
 export interface Product {
   id: number
-  name: string
+  name: string;
+  slug:string;
   price: number
   description: string
-  thumbnailUrl: string
+  thumbnailUrl: string,
+  galleryUrls:string[],
   categories: Category[]
 }
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const tabs = ["description", "additional information", "reviews (1)"];
 
-const ProductTabs = () => {
+const ProductTabs = ({description}:any) => {
   const [active, setActive] = useState(0);
 
   return (
@@ -25,9 +25,7 @@ const ProductTabs = () => {
 
       {/* TAB CONTENT */}
       <div className="mt-10 text-gray-600 leading-7 max-w-4xl">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut
-        ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus
-        et magnis dis parturient montes.
+        {description}
       </div>
     </div>
   );

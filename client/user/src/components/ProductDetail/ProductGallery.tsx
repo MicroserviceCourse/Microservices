@@ -1,16 +1,11 @@
-const images = [
-  "/images/p1.jpg",
-  "/images/p2.jpg",
-  "/images/p3.jpg",
-  "/images/p4.jpg",
-];
 
-const ProductGallery = () => {
+
+const ProductGallery = ({image,images}:any) => {
   return (
     <div className="flex gap-6">
       {/* THUMB */}
       <div className="flex flex-col gap-4">
-        {images.map((img, i) => (
+        {images?.map((img:any, i:any) => (
           <img
             key={i}
             src={img}
@@ -22,7 +17,7 @@ const ProductGallery = () => {
       {/* MAIN */}
       <div className="flex-1">
         <img
-          src={images[0]}
+          src={image}
           className="w-full h-[520px] object-cover"
         />
       </div>

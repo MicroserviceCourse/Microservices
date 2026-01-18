@@ -8,3 +8,8 @@ export const getProduct = async (options:GetAllOptions = {})=>{
         skipAuth:true,
     })
 }
+export const getProductById = async (id:number)=>{
+    return await Http.get<ApiResponse<Product>>(`/api/products/${id}`,{
+        skipAuth:true,
+    })
+}

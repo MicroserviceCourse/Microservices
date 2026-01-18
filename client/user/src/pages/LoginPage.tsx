@@ -3,6 +3,8 @@ import { login } from '../service/api/Authenticate'
 import { saveTokens } from '../util/auth'
 import { useAlert } from '../components/alert-context/alert-context'
 import { useNavigate } from 'react-router-dom'
+import { FaFacebookF, FaGoogle } from 'react-icons/fa'
+import { BASE_API } from '../constant/app'
 
 const LoginPage = () => {
   const [remember, setRemember] = useState(false)
@@ -40,6 +42,10 @@ const LoginPage = () => {
       setLoading(false)
     }
   }
+  const handleClick = (provider: 'google' | 'facebook') => {
+    window.location.href = `${BASE_API}/oauth2/authorization/${provider}`
+  }
+
   return (
     <div className="w-full">
       <section
@@ -143,6 +149,31 @@ const LoginPage = () => {
                 'log in'
               )}
             </button>
+            <div className="flex items-center gap-4">
+              <div className="flex-1 h-px bg-gray-200"></div>
+              <span className="text-gray-400 text-xs uppercase">or</span>
+              <div className="flex-1 h-px bg-gray-200"></div>
+            </div>
+            <div className="flex gap-4">
+              <button
+               onClick={() => handleClick("facebook")}
+                type="button"
+                className="flex items-center justify-center gap-3 w-full h-[50px]
+                border border-[#e1e1e1] text-sm hover:bg-[#f5f5f5] transition"
+              >
+                <FaFacebookF className="text-blue-600" />
+                <span>Login with Facebook</span>
+              </button>
+              <button
+                type="button"
+                 onClick={() => handleClick("google")}
+                className="flex items-center justify-center gap-3 w-full h-[50px]
+               border border-[#e1e1e1] text-sm hover:bg-[#f5f5f5] transition"
+              >
+                <FaGoogle className="text-red-500" />
+                <span>Login with Google</span>
+              </button>
+            </div>
             <div>
               <a
                 href="/forgot-password"

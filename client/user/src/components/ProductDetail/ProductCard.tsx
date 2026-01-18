@@ -1,34 +1,27 @@
 import { FiHeart } from "react-icons/fi";
+import type { Product } from "../../types/product.type";
 
-type Product = {
-  id?: number;
-  name: string;
-  price: number;
-  salePrice?: number;
-  image: string;
-  category?: string;
-  badge?: "sale" | "out-of-stock";
-};
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const { name, price, salePrice, image, category, badge } = product;
+  const { name, price, thumbnailUrl, categories } = product;
 
   return (
     <div className="group text-sm">
       {/* IMAGE */}
       <div className="relative overflow-hidden bg-gray-100">
         <img
-          src={image}
+          src={thumbnailUrl}
           alt={name}
           className="w-full h-[420px] object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
         {/* BADGE */}
-        {badge && (
-          <span className="absolute top-4 right-4 bg-black text-white text-xs px-4 py-1 uppercase">
-            {badge === "sale" ? "sale" : "out of stock"}
+        {/* {badge && (
+          
+        )} */}
+        <span className="absolute top-4 right-4 bg-black text-white text-xs px-4 py-1 uppercase">
+           sale
           </span>
-        )}
 
         {/* HOVER ACTION */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition">
@@ -57,13 +50,13 @@ const ProductCard = ({ product }: { product: Product }) => {
       <div className="mt-4 space-y-1">
         <h3 className="text-base font-medium text-black">{name}</h3>
 
-        {category && (
-          <p className="text-xs uppercase text-gray-400">{category}</p>
+        {categories && (
+          <p className="text-xs uppercase text-gray-400">{categories.join(",")}</p>
         )}
 
         {/* PRICE */}
         <div className="flex items-center gap-2 text-sm">
-          {salePrice ? (
+          {/* {salePrice ? (
             <>
               <span className="line-through text-gray-400">
                 ${price}
@@ -73,8 +66,9 @@ const ProductCard = ({ product }: { product: Product }) => {
               </span>
             </>
           ) : (
-            <span className="font-medium text-black">${price}</span>
-          )}
+            
+          )} */}
+          <span className="font-medium text-black">${price}</span>
         </div>
       </div>
     </div>

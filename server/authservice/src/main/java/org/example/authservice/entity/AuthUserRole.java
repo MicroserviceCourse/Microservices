@@ -30,7 +30,6 @@ public class AuthUserRole {
     @JoinColumn(name = "auth_id", nullable = false)
     private AuthUser auth;
 
-    @NotNull
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")
     @Column(name = "assigned_at", nullable = false)
