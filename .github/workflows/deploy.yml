@@ -11,8 +11,11 @@ jobs:
     strategy:
       matrix:
         service:
+          - commont-utils
+          - common-security
           - authservice
           - user-service
+        
 
     steps:
       - uses: actions/checkout@v4
