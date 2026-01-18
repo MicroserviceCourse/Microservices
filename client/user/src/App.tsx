@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage'
 import ProductDetailPage from './pages/ProductDetailPage'
 import OAuth2Success from './pages/OAuth2SuccessPage'
 import RegisterPage from './pages/RegisterPage'
+import CartPage from './pages/CartPage'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="product" element={<ProductPage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path='cart' element={<CartPage/>}/>
           <Route path="about-us" element={<AboutPage />} />
           <Route path="product/:id" element={<ProductDetailPage />} />
           <Route path="/oauth2/success" element={<OAuth2Success />} />
