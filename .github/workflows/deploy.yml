@@ -8,26 +8,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        service:
-          - common-utils
-          - common-security
-          - authservice
-          - user-service
-        
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 17
 
-      - name: Build ${{ matrix.service }}
-        working-directory: server/${{ matrix.service }}
+      # ===== BUILD & INSTALL COMMON =====
+      - name: Install common-utils
+        working-directory: server/common-utils
+        run: mvn clean install -DskipTests
+
+      - name: Install common-security
+        working-directory: server/common-security
+        run: mvn clean install -DskipTests
+
+      # ===== BUILD SERVICES =====
+      - name: Build authservice
+        working-directory: server/authservice
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+        run: mvn clean package
+
+      - name: Build user-service
+        working-directory: server/user-service
         env:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USER: ${{ secrets.DB_USER }}
