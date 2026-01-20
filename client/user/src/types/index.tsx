@@ -5,6 +5,10 @@ export interface ApiResponse<T> {
   data: T
   message?: string
 }
+export interface CartContextType{
+  cartCount:number;
+  refreshCartCount: () => Promise<void>;
+}
 
 export interface PageResponse<T> {
   content: T[]

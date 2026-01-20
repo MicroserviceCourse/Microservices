@@ -8,11 +8,11 @@
         <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.webvibecourse</groupId>
-    <artifactId>product_service</artifactId>
+    <groupId>org.webvibe</groupId>
+    <artifactId>cart_service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>product_service</name>
-    <description>product_service</description>
+    <name>cart_service</name>
+    <description>cart_service</description>
     <url/>
     <licenses>
         <license/>
@@ -153,9 +153,7 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
-
     </dependencies>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -167,7 +165,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
@@ -203,5 +200,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
