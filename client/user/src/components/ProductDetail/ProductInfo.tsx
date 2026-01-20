@@ -1,6 +1,41 @@
+import { useState } from "react";
 import type { ProductProps } from "../../types/product.type";
+import { useAlert } from "../alert-context/alert-context";
+import { addCart } from "../../service/api/Cart";
+import { useCart } from "../Cart/cart-context";
 
 const ProductInfo = ({product}:ProductProps) => {
+  const [quantity,setQuantity] = useState(1);
+  const [loading,setLoading] = useState(false);
+  const {showAlert} = useAlert();
+  const {refreshCartCount} = useCart();
+  const handleAddCart = async()=>{
+    if(!product?.id) return;
+
+    try{
+      setLoading(true);
+      const payload ={
+        productId:product.id,
+        quantity,
+      
+      }
+      await addCart(payload);
+      refreshCartCount();
+      showAlert({
+        title:"Add to cart success",
+        type:"success",
+        autoClose:3000,
+      })
+    }catch(error:any){
+      showAlert({
+        title:error?.response?.data?.message || "Add to cart failed",
+        type:"error",
+        autoClose:3000,
+      })
+    }finally{
+      setLoading(false)
+    }
+  }
   return (
     <div className="space-y-6 text-sm text-gray-600">
       <h1 className="text-3xl font-semibold text-black">
@@ -23,16 +58,21 @@ const ProductInfo = ({product}:ProductProps) => {
       {/* QUANTITY + BUTTON */}
       <div className="flex gap-4 items-center">
         <div className="flex border h-[48px]">
-          <button className="w-12">-</button>
+          <button className="w-12"  onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
           <input
             className="w-12 text-center outline-none"
-            defaultValue={1}
+             value={quantity}
+             readOnly
           />
-          <button className="w-12">+</button>
+          <button className="w-12"  onClick={() => setQuantity(q => q + 1)}>+</button>
         </div>
 
-        <button className="bg-black text-white px-8 h-[48px] uppercase text-sm">
-          add to cart
+       <button
+          onClick={handleAddCart}
+          disabled={loading}
+          className="bg-black text-white px-8 h-[48px] uppercase text-sm disabled:opacity-50"
+        >
+          {loading ? "adding..." : "add to cart"}
         </button>
       </div>
 
