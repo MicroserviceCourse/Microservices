@@ -10,6 +10,10 @@ import InventoryImportPage from "./pages/InventoryImportPage";
 import CreatePromotionPage from "./pages/CreatePromotionPage";
 import PromotionPage from "./pages/PromotionPage";
 import EditPromotionPage from "./pages/EditPromotionPage";
+import ShopRegistrationPage from "./pages/ShopRegistrationPage";
+import AddressInformation from "./pages/AddressInformation";
+import IdentityVerification from "./pages/IdentityVerification";
+import SelectBusinessCategories from "./pages/SelectBusinessCategories";
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
             <Route path="promotion/:id" element={<EditPromotionPage />} />
             <Route path="product/create" element={<CreateProductPage />} />
             <Route path="product/:id/edit" element={<EditProductPage />} />
+            <Route path="shop/register" element={<ShopRegistrationPage/>}/>
+            <Route path="shop/address" element={<AddressInformation/>}/>
+            <Route path="shop/identity" element={<IdentityVerification/>}/>
+            <Route path="shop/category" element={<SelectBusinessCategories/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -5,7 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85540db4-c907-4673-a630-aa8739a35986" name="Changes" comment="update backend blogservice by nghia">
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/config/AuthWebSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/config/OAuth2SuccessHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/service/OAuthAccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/service/impl/OAuthAccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/seller/src/components/media/MediaLibraryModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/seller/src/components/media/MediaLibraryModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/seller/src/pages/MediaPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/seller/src/pages/MediaPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/seller/src/service/api/Media.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/seller/src/service/api/Media.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/components/HomePage/HomeNavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/components/HomePage/HomeNavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/components/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/components/ProductDetail/ProductCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/components/ProductDetail/ProductCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/components/ProductDetail/ProductGallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/components/ProductDetail/ProductGallery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/components/ProductDetail/ProductInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/components/ProductDetail/ProductInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/components/ProductDetail/ProductTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/components/ProductDetail/ProductTabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/components/ProductDetail/RelatedProducts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/components/ProductDetail/RelatedProducts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/pages/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/pages/LoginPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/pages/ProductDetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/pages/ProductDetailPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/service/api/Authenticate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/service/api/Authenticate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/service/api/Product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/service/api/Product.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/user/src/types/product.type.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/user/src/types/product.type.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/data_source_mapping.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/AuthserviceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/AuthserviceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/entity/AuthUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/entity/AuthUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/entity/AuthUserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/entity/AuthUserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/repository/AuthRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/authservice/src/main/java/org/example/authservice/repository/AuthRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/common-utils/src/main/java/org/example/commonutils/util/GenerateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/common-utils/src/main/java/org/example/commonutils/util/GenerateUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/local-config/api-gateway.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/local-config/api-gateway.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/local-config/authservice.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/local-config/authservice.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/media_service/src/main/java/org/webvibecourse/media_service/controller/MediaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/media_service/src/main/java/org/webvibecourse/media_service/controller/MediaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/media_service/src/main/java/org/webvibecourse/media_service/service/MediaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/media_service/src/main/java/org/webvibecourse/media_service/service/MediaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/media_service/src/main/java/org/webvibecourse/media_service/service/impl/MediaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/media_service/src/main/java/org/webvibecourse/media_service/service/impl/MediaServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,22 +70,22 @@
     &quot;assignee&quot;: &quot;tranp6648&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MicroserviceCourse/Microservices.git",
-    "accountId": "12786aa2-d64b-4e97-aee7-f307cde58ec7"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MicroserviceCourse/Microservices.git&quot;,
+    &quot;accountId&quot;: &quot;a9e81fd1-5680-4e75-a9eb-de717fb3ea1b&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "tranp6648",
-    "repository": "Microservices"
+    &quot;owner&quot;: &quot;tranp6648&quot;,
+    &quot;repository&quot;: &quot;Microservices&quot;
   }
-}]]></component>
+}</component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
@@ -71,79 +105,80 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ApiGatewayApplication.executor": "Run",
-    "Application.AuthserviceApplication.executor": "Run",
-    "Application.BlogserviceApplication.executor": "Run",
-    "Application.CategoriesServiceApplication.executor": "Run",
-    "Application.CommonUtilsApplication.executor": "Run",
-    "Application.ConfigServerApplication.executor": "Run",
-    "Application.EurekaServerApplication.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "Maven.AuthserviceApplication.executor": "Run",
-    "Maven.EurekaServerApplication.executor": "Run",
-    "Maven.api-gateway [install,--non-recursive].executor": "Run",
-    "Maven.authservice [install,--non-recursive].executor": "Run",
-    "Maven.blogservice [install,--non-recursive].executor": "Run",
-    "Maven.common-security [install,--non-recursive].executor": "Run",
-    "Maven.common-utils [install,--non-recursive].executor": "Run",
-    "Maven.config-server [install,--non-recursive].executor": "Run",
-    "Maven.eureka-server [install,--non-recursive].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "Spring Boot.ApiGatewayApplication.executor": "Run",
-    "Spring Boot.AuthserviceApplication.executor": "Run",
-    "Spring Boot.BannerServiceApplication.executor": "Run",
-    "Spring Boot.CartServiceApplication.executor": "Run",
-    "Spring Boot.CartserviceApplication.executor": "Run",
-    "Spring Boot.ChatServiceApplication.executor": "Run",
-    "Spring Boot.ConfigServerApplication.executor": "Run",
-    "Spring Boot.EurekaServerApplication.executor": "Run",
-    "Spring Boot.FileServiceApplication.executor": "Run",
-    "Spring Boot.InventoryServiceApplication.executor": "Run",
-    "Spring Boot.OrderServiceApplication.executor": "Run",
-    "Spring Boot.PaymentServiceApplication.executor": "Run",
-    "Spring Boot.Product.executor": "Run",
-    "Spring Boot.ProductService.executor": "Run",
-    "Spring Boot.ProductServiceApplication.executor": "Run",
-    "Spring Boot.RatingReviewServiceApplication.executor": "Run",
-    "Spring Boot.SearchServiceApplication.executor": "Run",
-    "Spring Boot.UserApplication.executor": "Run",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "PhongTran",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Microservices",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AuthserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BlogserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CategoriesServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CommonUtilsApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.AuthserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway [install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.authservice [install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.blogservice [install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.common-security [install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.common-utils [install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-server [install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.eureka-server [install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.AuthserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.BannerServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.CartServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.CartserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ChatServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.FileServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.InventoryServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.OrderServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.PaymentServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.Product.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ProductService.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ProductServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.RatingReviewServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SearchServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.UserApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;PhongTran&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Microservices&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -294,12 +329,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.ApiGatewayApplication" />
-      <item itemvalue="Application.CommonUtilsApplication" />
       <item itemvalue="Application.AuthserviceApplication" />
-      <item itemvalue="Application.EurekaServerApplication" />
+      <item itemvalue="Application.CommonUtilsApplication" />
       <item itemvalue="Application.ConfigServerApplication" />
+      <item itemvalue="Application.EurekaServerApplication" />
+      <item itemvalue="Application.Unnamed" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.AuthserviceApplication" />
       <item itemvalue="Spring Boot.CommonSecurityApplication" />
@@ -321,6 +356,7 @@
     <attachedChunks>
       <set>
         <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
       </set>
     </attachedChunks>
   </component>
@@ -453,6 +489,10 @@
       <workItem from="1761716036369" duration="22000" />
       <workItem from="1762325689828" duration="265000" />
       <workItem from="1762503365192" duration="44000" />
+      <workItem from="1768709342052" duration="55000" />
+      <workItem from="1768709699829" duration="1000" />
+      <workItem from="1768710056868" duration="728000" />
+      <workItem from="1768743203284" duration="8000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <option name="closed" value="true" />
