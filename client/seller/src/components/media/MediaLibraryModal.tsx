@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { X, Check, Upload } from "lucide-react";
+import { X, Check, Upload, FileText, FileSpreadsheet, FileArchive, ImageIcon } from "lucide-react";
 import { createMedia, deleteMedia, getMedias } from "../../service/api/Media";
 import type { MediaItem, MediaLibraryProps } from "../../types";
 import { useAlert } from "../alert-context";
+import { BsFilePdf, BsFileWord } from "react-icons/bs";
 
-const MediaLibraryModal = ({ isOpen, onClose, onSelect, multiple = false }: MediaLibraryProps) => {
+const MediaLibraryModal = ({
+  isOpen,
+  onClose,
+  onSelect,
+  multiple = false,
+  mediaType,
+}: MediaLibraryProps) => {
   const [mediaList, setMediaList] = useState<MediaItem[]>([]);
   const [multiSelected, setMultiSelected] = useState<MediaItem[]>([]);
   const [selectedDetail, setSelectedDetail] = useState<MediaItem | null>(null);
@@ -36,10 +43,37 @@ const MediaLibraryModal = ({ isOpen, onClose, onSelect, multiple = false }: Medi
     return { start: f(start), end: f(now) };
   };
 
+  const renderFileIcon = (mimeType?: string, size = 40) => {
+    if (!mimeType) return <FileText size={size} className="text-gray-400" />;
+
+    if (mimeType.includes("pdf")) return <BsFilePdf size={size} className="text-red-500" />;
+
+    if (mimeType.includes("word")) return <BsFileWord size={size} className="text-blue-500" />;
+
+    if (mimeType.includes("excel") || mimeType.includes("spreadsheet"))
+      return <FileSpreadsheet size={size} className="text-green-600" />;
+
+    if (mimeType.includes("zip") || mimeType.includes("rar"))
+      return <FileArchive size={size} className="text-yellow-600" />;
+
+    if (mimeType.startsWith("image/")) return <ImageIcon size={size} className="text-gray-400" />;
+
+    return <FileText size={size} className="text-gray-400" />;
+  };
   const fetchData = async () => {
     const filters: string[] = [];
 
-    if (typeFilter !== "ALL") filters.push(`mediaType==${typeFilter}`);
+    if (mediaType !== undefined) {
+      if (Array.isArray(mediaType)) {
+        filters.push(mediaType.map((t) => `mediaType==${t}`).join(","));
+      } else {
+        filters.push(`mediaType==${mediaType}`);
+      }
+    }
+
+    if (mediaType === undefined && typeFilter !== "ALL") {
+      filters.push(`mediaType==${typeFilter}`);
+    }
 
     const range = getDateRange();
     if (range) filters.push(`createdAt>=${range.start} and createdAt<=${range.end}`);
@@ -242,11 +276,29 @@ const MediaLibraryModal = ({ isOpen, onClose, onSelect, multiple = false }: Medi
                           className="relative cursor-pointer group"
                         >
                           <div
-                            className={`w-full bg-center bg-no-repeat bg-cover border-2 rounded-lg aspect-square
-                                                    ${isSelected ? "border-blue-500" : "border-transparent group-hover:border-blue-500/50"}
-                                                `}
-                            style={{ backgroundImage: `url(${m.url})` }}
-                          ></div>
+                            className={`w-full border-2 rounded-lg aspect-square flex items-center justify-center
+    ${isSelected ? "border-blue-500" : "border-transparent group-hover:border-blue-500/50"}
+  `}
+                          >
+                            {m.mediaType === 1 ? (
+                              <img
+                                src={m.url}
+                                alt={m.fileName}
+                                className="w-full h-full object-cover rounded-lg"
+                              />
+                            ) : (
+                              <div className="flex flex-col items-center justify-center gap-2 px-2">
+                                {renderFileIcon(m.mimetype, 40)}
+
+                                <p
+                                  className="text-xs text-gray-600 text-center line-clamp-2 break-all"
+                                  title={m.fileName} // hover xem full
+                                >
+                                  {m.fileName}
+                                </p>
+                              </div>
+                            )}
+                          </div>
 
                           {/* Overlay */}
                           {isSelected && <div className="absolute inset-0  rounded-lg"></div>}
@@ -331,13 +383,10 @@ const MediaLibraryModal = ({ isOpen, onClose, onSelect, multiple = false }: Medi
                   {/* PROGRESS */}
                   {uploading && (
                     <div className="mt-6">
-                      {/* STATUS */}
                       <div className="flex items-center justify-between mb-2">
                         <p className="text-sm text-gray-600">Đang tải lên...</p>
                         <p className="text-sm font-medium text-gray-600">{progress}%</p>
                       </div>
-
-                      {/* PROGRESS BAR */}
                       <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div
                           className="h-full bg-blue-600 transition-all duration-200 ease-out"
@@ -369,10 +418,19 @@ const MediaLibraryModal = ({ isOpen, onClose, onSelect, multiple = false }: Medi
                   <>
                     {/* IMAGE PREVIEW */}
                     <div className="mb-6">
-                      <img
-                        src={selectedDetail.url}
-                        className="object-cover w-full border rounded-lg border-gray-300 aspect-video"
-                      />
+                      {selectedDetail.mediaType === 1 ? (
+                        <img
+                          src={selectedDetail.url}
+                          className="object-cover w-full border rounded-lg border-gray-300 aspect-video"
+                        />
+                      ) : (
+                        <div className="h-40 flex flex-col items-center justify-center border border-gray-300 rounded-lg bg-white">
+                          {renderFileIcon(selectedDetail.mimetype, 64)}
+                          <p className="text-sm text-gray-600 px-4 text-center line-clamp-2">
+                            {selectedDetail.fileName}
+                          </p>
+                        </div>
+                      )}
                     </div>
 
                     {/* FILE INFO */}

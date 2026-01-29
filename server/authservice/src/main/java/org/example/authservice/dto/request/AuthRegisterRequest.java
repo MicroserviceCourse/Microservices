@@ -16,5 +16,6 @@ public class AuthRegisterRequest {
     private List<Long>roleIds;
     private String fullName;
     private Integer gender;
+    private String phone;
     private LocalDate birthDate;
 }

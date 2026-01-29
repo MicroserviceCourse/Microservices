@@ -19,7 +19,7 @@ export type ReportItemProps = {
   amount: string;
   growth: string;
   color: string;
-  arrowIcon:any;
+  arrowIcon: any;
 };
 export type TableColumn<T> = {
   key: string;
@@ -59,7 +59,7 @@ export type Variant = {
   id: number | null;
   name: string;
   price: string;
-  type:string;
+  type: string;
   sku: string;
   imagePreview?: string | null;
   imageFile?: File | null;
@@ -164,6 +164,13 @@ export type MediaDetailsProps = {
     alt: string;
   };
 };
+export type BadgeVariant = "info" | "success" | "danger";
+export interface BadgeProps {
+  variant?: BadgeVariant;
+  icon?: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
+}
 export type MediaItem = {
   id: number;
   url: string;
@@ -171,7 +178,9 @@ export type MediaItem = {
   size: number;
   createdAt: string;
   alt: string;
+  mimetype:string;
   width: number;
+  mediaType:number;
   height: number;
 };
 export type MediaLibraryProps = {
@@ -179,4 +188,5 @@ export type MediaLibraryProps = {
   onClose: () => void;
   multiple?: boolean;
   onSelect: (url: string | string[]) => void;
+  mediaType?: number | number[];
 };

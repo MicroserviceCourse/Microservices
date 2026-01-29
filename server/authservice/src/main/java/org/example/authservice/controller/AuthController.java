@@ -17,6 +17,7 @@ import org.example.commonutils.api.PageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -126,6 +127,16 @@ public class AuthController {
                                                                                               ))));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.error("getAll failed"));
+        }
+    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/profile")
+    public ResponseEntity<ApiResponse<AuthUserResponse>> profileAccount(){
+        try {
+            return ResponseEntity.ok(ApiResponse.success(authService.getProfile()));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.
+                    error("load error profile account"));
         }
     }
 

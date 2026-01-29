@@ -3,6 +3,7 @@ package org.example.commonsecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -53,12 +54,11 @@ public class SecurityUtils {
      * 🔹 Lấy đối tượng Jwt từ SecurityContext hiện tại
      */
     private Jwt getJwtToken() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) return null;
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
 
-        Object principal = authentication.getPrincipal();
-        if (principal instanceof Jwt jwt) {
-            return jwt;
+        if (authentication instanceof JwtAuthenticationToken jwtAuth) {
+            return jwtAuth.getToken();
         }
         return null;
     }

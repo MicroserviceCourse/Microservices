@@ -8,3 +8,9 @@ export const login = async (email: string, password: string) => {
   );
   return response.data;
 };
+
+export const profileAccount =async()=>{
+  return await Http.get("/api/account/profile",{
+    withCredentials:true
+  })
+}

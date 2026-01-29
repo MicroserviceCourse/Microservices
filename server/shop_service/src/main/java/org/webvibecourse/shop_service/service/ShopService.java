@@ -1,6 +1,7 @@
 package org.webvibecourse.shop_service.service;
 
 import org.springframework.data.domain.Page;
+import org.webvibecourse.shop_service.dto.request.Shop.ShopRequest;
 import org.webvibecourse.shop_service.dto.response.ShopResponse;
 
 public interface ShopService {
@@ -27,5 +28,7 @@ public interface ShopService {
     void restoreShop(Long id);
 
     ShopResponse getShopByOwner(Long ownerId);
+
+    void save(ShopRequest request);
 
 }

@@ -14,4 +14,5 @@ public class UserRequest {
     private Integer gender;
     private LocalDate birthDate;
     private Long authId;
+    private String phone;
 }

@@ -21,8 +21,9 @@ public class ShopCategory {
     @JoinColumn(name = "shop_id",nullable = false)
     private Shop shop;
 
-    @Column(name = "category_id",nullable = false)
-    private Long categoryId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @CreationTimestamp
     @Column(name = "created_at",updatable = false)
