@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.commonsecurity.SecurityUtils;
+import org.example.commonutils.Enum.DocumentType;
 import org.example.commonutils.Enum.ShopStatus;
 import org.example.commonutils.util.SearchHelper;
 import org.springframework.data.domain.Page;
@@ -12,14 +13,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.webvibecourse.shop_service.dto.request.Shop.ShopRequest;
+import org.webvibecourse.shop_service.dto.request.Shop.ShopVerificationRequest;
 import org.webvibecourse.shop_service.dto.response.ShopResponse;
-import org.webvibecourse.shop_service.entity.Shop;
-import org.webvibecourse.shop_service.entity.ShopStatusHistory;
+import org.webvibecourse.shop_service.entity.*;
+import org.webvibecourse.shop_service.mapper.ShopAddressMapper;
 import org.webvibecourse.shop_service.mapper.ShopMapper;
+import org.webvibecourse.shop_service.mapper.ShopVerificationMapper;
+import org.webvibecourse.shop_service.repository.CategoryRepository;
 import org.webvibecourse.shop_service.repository.ShopRepository;
 import org.webvibecourse.shop_service.repository.ShopStatusHistoryRepository;
 import org.webvibecourse.shop_service.service.ShopService;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,8 +54,12 @@ public class ShopServiceImpl implements ShopService {
     private final ShopStatusHistoryRepository historyRepository;
     //Field utils security.Example:getCurrentUserId()
     private final SecurityUtils securityUtils;
+
+    private final ShopVerificationMapper shopVerificationMapper;
     //field Mapper
     private final ShopMapper shopMapper;
+    private final ShopAddressMapper shopAddressMapper;
+    private final CategoryRepository categoryRepository;
     //Fields allowed for searching
     private static final List<String> SEARCH_FIELDS =
             List.of("shopCode");
@@ -323,5 +334,45 @@ public class ShopServiceImpl implements ShopService {
         if(shop == null) return null;
 
         return shopMapper.toResponse(shop);
+    }
+
+    @Override
+    public void save(ShopRequest request) {
+        Shop shop =
+                shopMapper.toEntity(request,securityUtils.getCurrentUserId());
+        ShopAddress shopAddress = shopAddressMapper.toEntity(
+                request.getAddresses(),
+                securityUtils.getCurrentUserId()
+        );
+        shopAddress.setShop(shop);
+        ShopVerification shopVerification =
+            shopVerificationMapper.toEntity(request.getShopVerification(),
+                    securityUtils.getCurrentUserId());
+        shopVerification.setShop(shop);
+        shopVerification.setDocumentType(DocumentType.fromValue
+                (request.getShopVerification().getDocumentType()).getValue());
+        List<ShopCategory> shopCategories = saveCategories
+                (request.getCategoryIds(),shop);
+        shop.setAddresses(shopAddress);
+        shop.setCategories(shopCategories);
+        shop.setVerification(shopVerification);
+        shopRepository.save(shop);
+    }
+
+    private List<ShopCategory> saveCategories(List<Long> categoryIds, Shop shop) {
+        if (categoryIds == null || categoryIds.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<ShopCategory> shopCategories = new ArrayList<>();
+        for (Long category : categoryIds) {
+            ShopCategory shopCategory = new ShopCategory();
+            Category categoryEntity = categoryRepository.findById(category)
+                            .orElseThrow(()->new EntityNotFoundException("Category not found"));
+            shopCategory.setCategory(categoryEntity);
+            shopCategory.setShop(shop);
+            shopCategories.add(shopCategory);
+        }
+        return shopCategories;
     }
 }

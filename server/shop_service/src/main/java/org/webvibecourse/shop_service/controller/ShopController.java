@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.webvibecourse.shop_service.dto.request.Shop.RequestNote;
+import org.webvibecourse.shop_service.dto.request.Shop.ShopRequest;
+import org.webvibecourse.shop_service.dto.response.CategoryResponse;
 import org.webvibecourse.shop_service.dto.response.ShopResponse;
+import org.webvibecourse.shop_service.service.CategoryService;
 import org.webvibecourse.shop_service.service.ShopService;
 
 @RestController
@@ -16,13 +19,39 @@ import org.webvibecourse.shop_service.service.ShopService;
 public class ShopController {
 
     private final ShopService shopService;
-
+    private final CategoryService categoryService;
     @PatchMapping("/{id}/approve")
     public ResponseEntity<ApiResponse<Void>> approveShop
             (@PathVariable Long id) {
         shopService.approveShop(id);
         return ResponseEntity.ok(
                 ApiResponse.success("Approved shop successfully "));
+    }
+    @GetMapping("/categories")
+    public ResponseEntity<ApiResponse<PageResponse<CategoryResponse>>>getCategory(
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "5") Integer size,
+            @RequestParam(defaultValue = "id,desc") String sort,
+            @RequestParam(required = false) String filter,
+            @RequestParam(required = false) String searchField,
+            @RequestParam(required = false) String searchValue,
+            @RequestParam(defaultValue = "false") Boolean all
+    ){
+        return ResponseEntity.ok(
+                ApiResponse.success(
+                        new PageResponse<>(
+                            categoryService.getAll(
+                                    page,
+                                    size,
+                                    sort,
+                                    searchField,
+                                    searchValue,
+                                    filter,
+                                    all
+                            )
+                        )
+                )
+        );
     }
 
     @PatchMapping("/{id}/restore")
@@ -42,6 +71,16 @@ public class ShopController {
         shopService.rejectShop(id, requestNode.getNote());
         return ResponseEntity.ok(
                 ApiResponse.success("Rejected shop successfully "));
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<Void>> registerShop(
+            @RequestBody ShopRequest request
+    ) {
+        shopService.save(request);
+        return ResponseEntity.ok(
+                ApiResponse.success("register shop successfully")
+        );
     }
 
     @PatchMapping("/{id}/block")
@@ -81,7 +120,7 @@ public class ShopController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ShopResponse>>getShopById
+    public ResponseEntity<ApiResponse<ShopResponse>> getShopById
             (@PathVariable Long id) {
         return ResponseEntity.ok(
                 ApiResponse.success(shopService.getDetailShop(id)));
@@ -91,7 +130,7 @@ public class ShopController {
     public ResponseEntity<ApiResponse<ShopResponse>> getShopByOwner
             (
                     @PathVariable Long ownerId
-            ){
+            ) {
         ShopResponse shopResponse = shopService.getShopByOwner(ownerId);
 
         return ResponseEntity.ok(ApiResponse.success(shopResponse));

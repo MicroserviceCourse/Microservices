@@ -32,5 +32,5 @@ public class ShopResponse {
 
     private LocalDateTime updatedAt;
 
-    private List<ShopAddressResponse> addresses;
+    private ShopAddressResponse addresse;
 }

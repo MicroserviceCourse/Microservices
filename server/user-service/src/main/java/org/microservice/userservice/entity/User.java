@@ -26,6 +26,7 @@ public class User {
     private LocalDate birthDate;
     @Column(nullable = false)
     private Long authId;
+    private String phone;
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")

@@ -20,6 +20,7 @@ public class AuthUserResponse {
     private Integer status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String phone;
     private String fullName;
     private Integer gender;
     private LocalDate birthDate;

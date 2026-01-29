@@ -2,6 +2,7 @@ package org.webvibecourse.shop_service.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class ShopVerification {
     private Long id;
 
     @Column(name = "document_type",length = 50)
-    private String documentType;
+    private Integer documentType;
 
     @Column(name = "document_front")
     private String documentFront;
@@ -27,14 +28,21 @@ public class ShopVerification {
     @Column(name = "business_license")
     private String businessLicense;
 
-    @Column(nullable = false)
-    private Integer status = 0;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id",nullable = false)
+    private Shop shop;
 
-    @Column(name = "reject_reason",columnDefinition = "TEXT")
-    private String rejectReason;
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    @Column(name = "created_by",length = 50)
+    private String createdBy;
+
+    @Column(name = "updated_by",length = 50)
+    private String updatedBy;
 
 }

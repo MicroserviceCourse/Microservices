@@ -3,6 +3,7 @@ package org.webvibecourse.shop_service.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.example.commonutils.Enum.ShopStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -60,6 +61,21 @@ public class Shop {
     @Column(name = "updated_by",length = 50)
     private String updatedBy;
 
-    @OneToMany(mappedBy = "shop",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<ShopAddress> addresses;
+    @OneToOne(mappedBy = "shop",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ShopAddress addresses;
+    @OneToOne(mappedBy = "shop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ShopVerification verification;
+
+    @OneToMany(mappedBy = "shop",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ShopCategory>categories;
+
+    @PrePersist
+    public void prePersist(){
+        if(this.shopCode==null || this.shopCode.isBlank()){
+            this.shopCode ="S"+String.format("%04d", (int)(Math.random()*999));
+        }
+        if(this.status == null){
+            this.status = ShopStatus.PENDING.getCode();
+        }
+    }
 }

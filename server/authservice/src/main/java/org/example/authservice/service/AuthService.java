@@ -15,6 +15,8 @@ public interface AuthService extends UserDetailsService {
 
     Page<AuthUserResponse>getAll(Integer page, Integer size, String sort, String searchField, String SearchValue, String filter, boolean all, RelationModeFilterRequest filterNotIn);
 
+    AuthUserResponse getProfile();
+
     void assignUsersToRole(Long userId, List<Long> roleIds);
 
     List<Role>getUserRoles(Long userId);

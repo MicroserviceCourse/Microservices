@@ -3,6 +3,7 @@ package org.example.commonsecurity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
@@ -35,8 +36,10 @@ public class SecurityConfiguration {
     private String secret;
  
     @Bean
+    @Order(2)
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
+                .securityMatcher("/api/**")
                 .csrf(csrf->csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth->auth
@@ -45,10 +48,9 @@ public class SecurityConfiguration {
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 ->
-                        oauth2.jwt(jwtConfigurer ->
-                                jwtConfigurer
-                                        .decoder(jwtDecoder())
-                                        .jwtAuthenticationConverter(jwtAuthenticationConverter())
+                        oauth2.jwt(jwt -> jwt
+                                .decoder(jwtDecoder())
+                                .jwtAuthenticationConverter(jwtAuthenticationConverter())
                         )
                 );
         return httpSecurity.build();

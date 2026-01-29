@@ -2,6 +2,7 @@ package org.example.authservice.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import feign.FeignException;
 import io.github.perplexhub.rsql.RSQLJPASupport;
 import lombok.extern.slf4j.Slf4j;
 import org.example.authservice.client.UserClient;
@@ -9,6 +10,7 @@ import org.example.authservice.dto.request.AuthRegisterRequest;
 import org.example.authservice.dto.request.client.UserProfileRequest;
 import org.example.authservice.dto.response.AuthUserResponse;
 import org.example.authservice.dto.response.RelationModeFilterRequest;
+import org.example.authservice.dto.response.client.UserResponse;
 import org.example.authservice.entity.AuthUser;
 import org.example.authservice.entity.AuthUserRole;
 import org.example.authservice.entity.Role;
@@ -21,6 +23,7 @@ import org.example.commonsecurity.JwtService;
 import org.example.commonsecurity.SecurityUtils;
 import org.example.commonsecurity.redis.RedisKey;
 import org.example.commonsecurity.redis.RedisService;
+import org.example.commonutils.api.ApiResponse;
 import org.example.commonutils.util.SearchHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +32,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -64,7 +69,7 @@ public class AuthServiceImpl implements AuthService {
             PasswordEncoder passwordEncoder, SecurityUtils securityUtils, RoleRepository roleRepository,
             UserClient userClient, AuthUserRoleRepository authUserRoleRepository, ObjectMapper objectMapper,
             RedisService redisService
-                          ) {
+    ) {
         this.authRepository = authRepository;
         this.authMapper = authMapper;
         this.jwtService = jwtService;
@@ -124,13 +129,13 @@ public class AuthServiceImpl implements AuthService {
     public Page<AuthUserResponse> getAll(
             Integer page, Integer size, String sort, String searchField, String SearchValue, String filter, boolean all,
             RelationModeFilterRequest relationFilter
-                                        ) {
+    ) {
         try {
             log.info("start find all auth");
 
             // == CACHE KEY ==
             String key = RedisKey.ACCOUNT_INFORMATION + "|" + page + "|" + size + "|" + sort + "|" + searchField +
-                         "|" + SearchValue + "|" + filter + "|" + (
+                    "|" + SearchValue + "|" + filter + "|" + (
                     relationFilter != null ? relationFilter.toString() : ""
             );
 
@@ -139,13 +144,13 @@ public class AuthServiceImpl implements AuthService {
                 Map<String, Object> cache = objectMapper.convertValue(
                         redisService.get(key), new TypeReference<Map<String, Object>>() {
                         }
-                                                                     );
+                );
 
                 // Lấy content
                 List<AuthUserResponse> content = objectMapper.convertValue(
                         cache.get("content"), new TypeReference<List<AuthUserResponse>>() {
                         }
-                                                                          );
+                );
 
                 // lấy pageable info
                 Map<String, Object> pageableMap = (Map<String, Object>) cache.get("pageable");
@@ -181,7 +186,7 @@ public class AuthServiceImpl implements AuthService {
                         relationFilter.getField(),
                         relationFilter.getValues(),
                         isNotIn
-                                                                   ));
+                ));
             }
             Pageable pageable = all ? Pageable.unpaged() : PageRequest.of(page - 1, size);
 
@@ -196,6 +201,7 @@ public class AuthServiceImpl implements AuthService {
                         dto.setFullName(profile.getData().getFullName());
                         dto.setGender(profile.getData().getGender());
                         dto.setBirthDate(profile.getData().getBirthDate());
+                        dto.setPhone(profile.getData().getPhone());
                     }
                 } catch (Exception ignored) {
                 }
@@ -221,6 +227,34 @@ public class AuthServiceImpl implements AuthService {
             return finalPage;
         } catch (Exception e) {
             log.error(e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public AuthUserResponse getProfile() {
+        try {
+            AuthUserResponse authUser = authRepository.
+                    findById(securityUtils.getCurrentUserId())
+                    .map(authMapper::toResponse)
+                    .orElseThrow(() -> new UsernameNotFoundException("not found auth user"));
+            try {
+                ApiResponse<UserResponse> user = userClient.getUserByAuthId(
+                        securityUtils.getCurrentUserId()
+                );
+                authUser.setBirthDate(user.getData().getBirthDate());
+                authUser.setGender(user.getData().getGender());
+                authUser.setFullName(user.getData().getFullName());
+                authUser.setPhone(user.getData().getPhone());
+            } catch (FeignException.NotFound e) {
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "User not found with id: " + securityUtils.getCurrentUserId()
+                );
+            }
+            return authUser;
+        } catch (Exception e) {
+            log.info("cannot get profile account {}", e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -271,11 +305,11 @@ public class AuthServiceImpl implements AuthService {
             redisService.deleteByPrefix(RedisKey.ACCOUNT_INFORMATION);
 
             log.info("Cache cleared for prefix {}",
-                     RedisKey.ACCOUNT_INFORMATION);
+                    RedisKey.ACCOUNT_INFORMATION);
 
         } catch (Exception e) {
             log.error("Cannot change user status to {}:{}",
-                      userId, e.getMessage());
+                    userId, e.getMessage());
             throw new RuntimeException(
                     "Failed to change user status to " + userId);
         }
@@ -316,7 +350,7 @@ public class AuthServiceImpl implements AuthService {
                 comparator = Comparator.comparing(
                         AuthUserResponse::getFullName,
                         Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)
-                                                 );
+                );
                 break;
 
             case "gender":
@@ -327,7 +361,7 @@ public class AuthServiceImpl implements AuthService {
                 comparator = Comparator.comparing(
                         AuthUserResponse::getBirthDate,
                         Comparator.nullsLast(LocalDate::compareTo)
-                                                 );
+                );
                 break;
 
             default:

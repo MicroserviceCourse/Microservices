@@ -17,7 +17,7 @@ public class ShopAddress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id",nullable = false)
     private Shop shop;
 
@@ -37,8 +37,6 @@ public class ShopAddress {
 
     private Double lng;
 
-    @Column(name = "is_default")
-    private Boolean isDefault=true;
 
     @CreationTimestamp
     @Column(name = "created_at",updatable = false)
